@@ -6,17 +6,7 @@ Authors@R: c(
            family = "Van Dijk",
            role = c("aut", "cre"),
            email = "michiel.vandijk@wur.nl",
-           comment = c(ORCID = "0000-0002-5207-7304")),
-    person(given = "Esther",
-           family = "Boere",
-           role = c("ctb"),
-           email = "boere@iiasa.ac.at",
-           comment = c(ORCID = "0000-0003-3863-8731")),
-    person(given = "Amanda",
-           family = "Palazzo",
-           role = c("ctb"),
-           email = "palazzo@iiasa.ac.at",
-           comment = c(ORCID = "0000-0001-8167-9403"))
+           comment = c(ORCID = "0000-0002-5207-7304"))
            )
 Author: Michiel van Dijk
 Maintainer: Michiel van Dijk <Michiel.vandijk@wur.nl>
