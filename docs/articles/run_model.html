@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -127,8 +127,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/iiasa/mapspamc">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/michielvandijk/mapspamc">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -142,13 +142,13 @@
 
       
 
-      </header><script src="run_model_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="run_model_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Running the model</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/iiasa/mapspamc/blob/master/vignettes/run_model.Rmd"><code>vignettes/run_model.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/michielvandijk/mapspamc/blob/master/vignettes/run_model.Rmd"><code>vignettes/run_model.Rmd</code></a></small>
       <div class="hidden name"><code>run_model.Rmd</code></div>
 
     </div>
@@ -156,9 +156,11 @@
     
     
 <p><code>run_spam</code> runs the selected model (<code>min_entropy</code> or <code>max_score</code>) in GAMS. If <code>model_sel = 1</code>, the model is run for each individual administrative unit at level 1. If <code>model_sel = 0</code> the model is run only once for the total country. Selecting <code>out = TRUE</code> (default setting), the model log will be sent to the screen after the model run is finished. The log is as text file, whicn names starts with <code>model_log_</code> and is saved in the <code>processed_data/intermediate_output</code> folder. Note that, depending on the size of the country and the selected resolution, the model might take a lot of time to run. If the model is very large, there is a risk your computer runs out of memory and an error message will be printed in the model log.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="../reference/run_spam.html">run_spam</a></span>(<span class="no">param</span>, )</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/run_spam.html">run_spam</a></span><span class="op">(</span><span class="va">param</span>, <span class="op">)</span></code></pre></div>
 <p>SPAMc results are saved into one (<code>solve_level = 0</code>) or multiple (<code>solve_level = 1</code>) gdx files after the <code>run_spam</code> is executed. <code><a href="../reference/combine_results.html">combine_results()</a></code> combines the file(s) into a single rds file, that can be easily loaded into R and used for further inspection and further processing. The file is saved in the <code>processed_data/results</code> folder.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/combine_results.html">combine_results</a></span>(<span class="no">param</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/combine_results.html">combine_results</a></span><span class="op">(</span><span class="va">param</span><span class="op">)</span></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -174,7 +176,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

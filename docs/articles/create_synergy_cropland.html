@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -127,8 +127,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/iiasa/mapspamc">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/michielvandijk/mapspamc">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -142,13 +142,13 @@
 
       
 
-      </header><script src="create_synergy_cropland_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="create_synergy_cropland_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Create synergy cropland map</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/iiasa/mapspamc/blob/master/vignettes/create_synergy_cropland.Rmd"><code>vignettes/create_synergy_cropland.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/michielvandijk/mapspamc/blob/master/vignettes/create_synergy_cropland.Rmd"><code>vignettes/create_synergy_cropland.Rmd</code></a></small>
       <div class="hidden name"><code>create_synergy_cropland.Rmd</code></div>
 
     </div>
@@ -156,11 +156,11 @@
     
     
 <p>A key feature of SPAM-C is to allocate the crop statistics to areas identified as cropland on a map - the cropland extent. As described in the section on <a href="data.html">Input data</a>, we use a so-called synergy cropland map to account for the uncertainty in the location of cropland. The synergy cropland map combines different cropland products to construct one map that presents the mean and maximum available crop area per grid cell as well as a ranking that measures the agreement between the various cropland products. A ranking of 1 means that all sources agree there is cropland in a grid cell, while higher rankings signals more disagreement. The highest ranking depends on the number of cropland products that are compared.</p>
-<p><span class="citation">(<span class="citeproc-not-found" data-reference-id="TODO"><strong>???</strong></span>)</span> add illustration how to make a synergy cropland map. To create the cropland extent, we followed a comparable approach as was used to construct the global synergy cropland map for 2010. Only three global products with cropland information were available for 2000: GLC2000, ESA-CCI-LC and GlobeLand30. We combined the three maps to create the median, maximum and score maps for 2010. We considered the following order of increasing importance when creating the scoring table: (1) ESA-CCI-LC, (2) GlobeLand30, (3) 2010 cropland extent and (4) GLC2000. The ESA-CGI-LC receives the highest score because it is the only product with consistent information for both 2000 and 2010. GlobeLand30 is second because it has a much higher resolution (30x30 meter) than GLC2000 1x1 kilometer), which can be considered somewhat outdated. Grid cells that show cropland in all four layers receive the highest score.</p>
+<p><span class="citation">(<strong>TODO?</strong>)</span> add illustration how to make a synergy cropland map. To create the cropland extent, we followed a comparable approach as was used to construct the global synergy cropland map for 2010. Only three global products with cropland information were available for 2000: GLC2000, ESA-CCI-LC and GlobeLand30. We combined the three maps to create the median, maximum and score maps for 2010. We considered the following order of increasing importance when creating the scoring table: (1) ESA-CCI-LC, (2) GlobeLand30, (3) 2010 cropland extent and (4) GLC2000. The ESA-CGI-LC receives the highest score because it is the only product with consistent information for both 2000 and 2010. GlobeLand30 is second because it has a much higher resolution (30x30 meter) than GLC2000 1x1 kilometer), which can be considered somewhat outdated. Grid cells that show cropland in all four layers receive the highest score.</p>
 <p>For 2010, we can make use of SASAM, the global synergy map that was prepared for SPAM2010 <span class="citation">(Lu et al. 2020)</span>.</p>
-<div id="refs" class="references">
-<div id="ref-Lu2020">
-<p>Lu, Miao, Wenbin Wu, Liangzhi You, Linda See, Steffen Fritz, Qiangyi Yu, Yanbing Wei, Di Chen, Peng Yang, and Bing Xue. 2020. “A cultivated planet in 2010: 1. the global synergy cropland map.” <em>Earth System Science Data</em>. <a href="https://doi.org/doi.org/10.5194/essd-2020-12">https://doi.org/doi.org/10.5194/essd-2020-12</a>.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Lu2020" class="csl-entry">
+Lu, Miao, Wenbin Wu, Liangzhi You, Linda See, Steffen Fritz, Qiangyi Yu, Yanbing Wei, Di Chen, Peng Yang, and Bing Xue. 2020. <span>“<span class="nocase">A cultivated planet in 2010: 1. the global synergy cropland map</span>.”</span> <em>Earth System Science Data</em>. <a href="https://doi.org/doi.org/10.5194/essd-2020-12">https://doi.org/doi.org/10.5194/essd-2020-12</a>.
 </div>
 </div>
   </div>
@@ -178,7 +178,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

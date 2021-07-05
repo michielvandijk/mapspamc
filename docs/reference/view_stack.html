@@ -84,7 +84,7 @@ OpenStreetMap)." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -172,8 +172,8 @@ OpenStreetMap)." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/iiasa/mapspamc">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/michielvandijk/mapspamc">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -191,7 +191,7 @@ OpenStreetMap)." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Show crop distributions maps using a stack for each farming system</h1>
-    <small class="dont-index">Source: <a href='https://github.com/iiasa/mapspamc/blob/master/R/view_stack.R'><code>R/view_stack.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/michielvandijk/mapspamc/blob/master/R/view_stack.R'><code>R/view_stack.R</code></a></small>
     <div class="hidden name"><code>view_stack.Rd</code></div>
     </div>
 
@@ -203,14 +203,14 @@ which makes it possible to select a number of background tiles (e.g.
 OpenStreetMap).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>view_stack</span>(<span class='no'>crop</span>, <span class='no'>var</span>, <span class='no'>param</span>, <span class='kw'>viewer</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>polygon</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>view_stack</span><span class='op'>(</span><span class='va'>crp</span>, <span class='va'>var</span>, <span class='va'>param</span>, viewer <span class='op'>=</span> <span class='cn'>TRUE</span>, polygon <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>crop</th>
-      <td><p>Character. Crop for which the maps are shows. <code>crop</code>  has to be
+      <th>crp</th>
+      <td><p>Character. Crop for which the maps are shows. <code>crp</code>  has to be
 one of the SPAMc four letter crop codes.</p></td>
     </tr>
     <tr>
@@ -239,8 +239,10 @@ maps? <code>FALSE</code> will show the maps in the RStudio viewer pane.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>)  <span class='fu'>view_stack</span>(<span class='kw'>crop</span> <span class='kw'>=</span> <span class='st'>"maiz"</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"ha"</span>, <span class='kw'>viewer</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
- <span class='kw'>polygon</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span>  <span class='fu'>view_stack</span><span class='op'>(</span>crop <span class='op'>=</span> <span class='st'>"maiz"</span>, var <span class='op'>=</span> <span class='st'>"ha"</span>, viewer <span class='op'>=</span> <span class='cn'>FALSE</span>,
+ polygon <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> 
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -256,7 +258,7 @@ maps? <code>FALSE</code> will show the maps in the RStudio viewer pane.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -1,5 +1,5 @@
 home:
-  title: mapspam2globiom
+  title: mapspamc
   description: R package to create crop distribution maps as input for GLOBIOM.
 
 template:
@@ -7,7 +7,7 @@ template:
     bootswatch: flatly
 
 destination: docs
-url: https://iiasa.github.io/mapspam2globiom
+url: https://michielvandijk.github.io/mapspamc
 navbar:
   structure:
     left:
@@ -73,7 +73,7 @@ navbar:
       href: news/index.html
     github:
       icon: fab fa-github fa-lg
-      href: https://github.com/iiasa/mapspam2globiom
+      href: https://github.com/michielvandijk/mapspamc
 
 reference:
 - title: "Model setup"

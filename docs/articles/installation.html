@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -127,8 +127,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/iiasa/mapspamc">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/michielvandijk/mapspamc">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -142,13 +142,13 @@
 
       
 
-      </header><script src="installation_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="installation_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Installation</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/iiasa/mapspamc/blob/master/vignettes/installation.Rmd"><code>vignettes/installation.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/michielvandijk/mapspamc/blob/master/vignettes/installation.Rmd"><code>vignettes/installation.Rmd</code></a></small>
       <div class="hidden name"><code>installation.Rmd</code></div>
 
     </div>
@@ -201,9 +201,10 @@
 <a href="#installing-r-packages" class="anchor"></a>Installing R packages</h3>
 <p>R packages are pieces of bundled R code, frequently including scripts from other languages (e.g. C or C++) to speed up calculations or interface with other software (e.g. GAMS). Packages can be easily installed by using the command <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> in R or by clicking on the <strong>package</strong> tab in RStudio. Nearly all packages are directly downloaded from CRAN, the R package repository.</p>
 <p>To install mapspamc, which is not on CRAN, one first has to install the <strong>remotes</strong> package:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">remotes</span>)
-<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"iiasa/mapspamc"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org">remotes</a></span><span class="op">)</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"iiasa/mapspamc"</span><span class="op">)</span></code></pre></div>
 <p>To interface between R and GAMS the GDXRRW package is required. Unfortunately, this package is also not available or via Github and therefore has to be installed. The package can be found <a href="https://support.gams.com/gdxrrw:interfacing_gams_and_r">here</a></p>
 <p>To install GDXRRW:</p>
 <ol style="list-style-type: decimal">
@@ -236,21 +237,21 @@
 <div id="references" class="section level2 unnumbered">
 <h2 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h2>
-<div id="refs" class="references">
-<div id="ref-Greenberg2020">
-<p>Greenberg, Jonathan Asher, and Matteo Mattiuzzi. 2020. “gdalUtils: Wrappers for the Geospatial Data Abstraction Library (GDAL).” <a href="https://cran.r-project.org/package=gdalUtils">https://cran.r-project.org/package=gdalUtils</a>.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Greenberg2020" class="csl-entry">
+Greenberg, Jonathan Asher, and Matteo Mattiuzzi. 2020. <span>“<span class="nocase">gdalUtils: Wrappers for the Geospatial Data Abstraction Library (GDAL)</span>.”</span> <a href="https://cran.r-project.org/package=gdalUtils">https://cran.r-project.org/package=gdalUtils</a>.
 </div>
-<div id="ref-Hijmans2020">
-<p>Hijmans, Robert J. 2020. “raster: Geographic Data Analysis and Modeling.” <a href="https://cran.r-project.org/package=raster">https://cran.r-project.org/package=raster</a>.</p>
+<div id="ref-Hijmans2020" class="csl-entry">
+Hijmans, Robert J. 2020. <span>“<span class="nocase">raster: Geographic Data Analysis and Modeling</span>.”</span> <a href="https://cran.r-project.org/package=raster">https://cran.r-project.org/package=raster</a>.
 </div>
-<div id="ref-Pebesma2018">
-<p>Pebesma, Edzer. 2018. “Simple Features for R: Standardized Support for Spatial Vector Data.” <em>The R Journal</em> 10 (1): 439. <a href="https://doi.org/10.32614/RJ-2018-009">https://doi.org/10.32614/RJ-2018-009</a>.</p>
+<div id="ref-Pebesma2018" class="csl-entry">
+Pebesma, Edzer. 2018. <span>“<span class="nocase">Simple Features for R: Standardized Support for Spatial Vector Data</span>.”</span> <em>The R Journal</em> 10 (1): 439. <a href="https://doi.org/10.32614/RJ-2018-009">https://doi.org/10.32614/RJ-2018-009</a>.
 </div>
-<div id="ref-RCoreTeam2018">
-<p>R Core Team. 2018. “R: A Language and Environment for Statistical Computing.” R Foundation for Statistical Computing. <a href="https://www.r-project.org/">https://www.r-project.org/</a>.</p>
+<div id="ref-RCoreTeam2018" class="csl-entry">
+R Core Team. 2018. <span>“<span class="nocase">R: A Language and Environment for Statistical Computing</span>.”</span> R Foundation for Statistical Computing. <a href="https://www.r-project.org/">https://www.r-project.org/</a>.
 </div>
-<div id="ref-Wickham2019">
-<p>Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy McGowan, Romain François, Garrett Grolemund, et al. 2019. “Welcome to the Tidyverse.” <em>Journal of Open Source Software</em> 4 (43): 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>.</p>
+<div id="ref-Wickham2019" class="csl-entry">
+Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy McGowan, Romain François, Garrett Grolemund, et al. 2019. <span>“<span class="nocase">Welcome to the Tidyverse</span>.”</span> <em>Journal of Open Source Software</em> 4 (43): 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>.
 </div>
 </div>
 </div>
@@ -279,7 +280,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

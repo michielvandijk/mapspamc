@@ -84,7 +84,7 @@ You can save the template as csv file and use it as a basis to prepare the stati
 
 ```{r}
 # Create template for ha. Replace "ha" by "fs" or "ci" for other templates.
-create_statistics_template("ha", param)
+#create_statistics_template("ha", param)
 ```
 
 For processing it is easier to transform the data into the **long** format, which is similar to the [**tidy** data format](https://tidyr.tidyverse.org/) as implemented by the tidyverse packages. In our case this means that the 40 crop columns are squeezed into two columns, one with the crop code and another with the data. The `gather()` and `spread()` in the [tidyr](https://tidyr.tidyverse.org/) package were designed to help you switch between wide and long tables.^[Note that these functions have recently been replaced by `pivot_long()` and `pivot_wide()`. In a next update we will use these as well.] See below and the Malawi scripts for examples.

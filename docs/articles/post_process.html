@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -127,8 +127,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/iiasa/mapspamc">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/michielvandijk/mapspamc">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -142,13 +142,13 @@
 
       
 
-      </header><script src="post_process_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="post_process_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Post processing</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/iiasa/mapspamc/blob/master/vignettes/post_process.Rmd"><code>vignettes/post_process.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/michielvandijk/mapspamc/blob/master/vignettes/post_process.Rmd"><code>vignettes/post_process.Rmd</code></a></small>
       <div class="hidden name"><code>post_process.Rmd</code></div>
 
     </div>
@@ -159,10 +159,12 @@
 <h2 class="hasAnchor">
 <a href="#inspect-results-and-create-maps" class="anchor"></a>Inspect results and create maps</h2>
 <p>The package offers to functions to quickly inspect the results, after the model has been run. <code><a href="../reference/view_panel.html">view_panel()</a></code> shows crop distribution maps for a selected crop, using a different panel for each farming system. <code><a href="../reference/view_stack.html">view_stack()</a></code> shows the same information but stacking the various maps. Both functions plot the maps in the default browser overlaying the country polygon, unless specified otherwise. The visualization is done using <a href="https://leafletjs.com/">leafletjs</a>, which makes it possible to select different background tiles (e.g. OpenStreetMap) to put the data into perspective.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="../reference/view_panel.html">view_panel</a></span>(<span class="st">"rice"</span>, <span class="kw">var</span> <span class="kw">=</span> <span class="st">"ha"</span>, <span class="no">param</span>)
-<span class="fu"><a href="../reference/view_stack.html">view_stack</a></span>(<span class="st">"rice"</span>, <span class="kw">var</span> <span class="kw">=</span> <span class="st">"ha"</span>, <span class="no">param</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/view_panel.html">view_panel</a></span><span class="op">(</span><span class="st">"rice"</span>, var <span class="op">=</span> <span class="st">"ha"</span>, <span class="va">param</span><span class="op">)</span>
+<span class="fu"><a href="../reference/view_stack.html">view_stack</a></span><span class="op">(</span><span class="st">"rice"</span>, var <span class="op">=</span> <span class="st">"ha"</span>, <span class="va">param</span><span class="op">)</span></code></pre></div>
 <p>As it is easier to process and visualize geo-spatial data when the data is saved in tif format, <code><a href="../reference/create_all_tif.html">create_all_tif()</a></code> produces a tif file for each crop - farming-system combination. The tif files are also needed as input to aggregate the data in a format that can be used by GLOBIOM, which is described next.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/create_all_tif.html">create_all_tif</a></span>(<span class="no">param</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/create_all_tif.html">create_all_tif</a></span><span class="op">(</span><span class="va">param</span><span class="op">)</span></code></pre></div>
 </div>
   </div>
 
@@ -181,7 +183,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

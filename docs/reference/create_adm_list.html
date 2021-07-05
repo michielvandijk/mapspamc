@@ -85,7 +85,7 @@ data is available." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -173,8 +173,8 @@ data is available." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/iiasa/mapspamc">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/michielvandijk/mapspamc">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -192,7 +192,7 @@ data is available." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>create file with information on how administrative units are nested</h1>
-    <small class="dont-index">Source: <a href='https://github.com/iiasa/mapspamc/blob/master/R/create_adm_list.R'><code>R/create_adm_list.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/michielvandijk/mapspamc/blob/master/R/create_adm_list.R'><code>R/create_adm_list.R</code></a></small>
     <div class="hidden name"><code>create_adm_list.Rd</code></div>
     </div>
 
@@ -205,7 +205,7 @@ admX_code, where X corresponds with the administrative unit level for which
 data is available.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>create_adm_list</span>(<span class='no'>x</span>, <span class='no'>param</span>)</pre>
+    <pre class="usage"><span class='fu'>create_adm_list</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>param</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -234,9 +234,11 @@ strips the attribute table from the polygon file and saves it as
 documentation provides information on how to create the polygon file.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>create_adm_list</span>(<span class='no'>adm_map</span>, <span class='no'>param</span>)
-}</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>create_adm_list</span><span class='op'>(</span><span class='va'>adm_map</span>, <span class='va'>param</span><span class='op'>)</span>
+<span class='op'>}</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -252,7 +254,7 @@ documentation provides information on how to create the polygon file.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -127,8 +127,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/iiasa/mapspamc">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/michielvandijk/mapspamc">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -142,13 +142,13 @@
 
       
 
-      </header><script src="process_subnational_statistics_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="process_subnational_statistics_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Process subnational statistics</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/iiasa/mapspamc/blob/master/vignettes/process_subnational_statistics.Rmd"><code>vignettes/process_subnational_statistics.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/michielvandijk/mapspamc/blob/master/vignettes/process_subnational_statistics.Rmd"><code>vignettes/process_subnational_statistics.Rmd</code></a></small>
       <div class="hidden name"><code>process_subnational_statistics.Rmd</code></div>
 
     </div>
@@ -193,18 +193,9 @@
 <p>All crop statistics need to be stored in the <strong>wide</strong> format. With this we mean that the first four columns of the data table list the administrative unit code (<code>adm_code</code>), name (<code>adm_name</code>), level (<code>adm_level</code>) and in case of farming system shares or cropping intensity data, the farming system (<code>system</code>), followed by named columns, one for each crop, with harvested area, farming system shares or cropping intensity per subnational unit. <code>adm_name</code> and <code>adm_code</code> must be provided up to the most detailed administrative unit for which data is available. Hence, in case level 2 data is available, data should be supplied for level 0, 1 and 2. In case only level 1 data is available, data should be supplied for level 0 and level 1.</p>
 <p><code><a href="../reference/create_statistics_template.html">create_statistics_template()</a></code> will create templates for the ha, fs and ci data files - also see the Malawi ha, fs and ci files for examples. The number and depth of the administrative units will be determined by the model parameters stored in the <code>spam_par</code> object as well as the <code>adm_list</code> file that is created with <code><a href="../reference/create_adm_list.html">create_adm_list()</a></code>. By default, the template will have columns for all 40 SPAM-C crops.</p>
 <p>You can save the template as csv file and use it as a basis to prepare the statistics. Note that is is essential that you follow the template closely! Adding or removing administrative units will result in errors as the data no longer matches with the map that contains the location of the administrative units. See below for more information how to deal with missing crop information. In case of Malawi, most of the data was already in the right format so we did not use the templates.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># Create template for ha. Replace "ha" by "fs" or "ci" for other templates.</span>
-<span class="fu"><a href="../reference/create_statistics_template.html">create_statistics_template</a></span>(<span class="st">"ha"</span>, <span class="no">param</span>)
-<span class="co">#&gt; # A tibble: 1 x 43</span>
-<span class="co">#&gt;   adm_name adm_code adm_level whea  rice  maiz  barl  mill  sorg  ocer  pota </span>
-<span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;        &lt;dbl&gt; &lt;lgl&gt; &lt;lgl&gt; &lt;lgl&gt; &lt;lgl&gt; &lt;lgl&gt; &lt;lgl&gt; &lt;lgl&gt; &lt;lgl&gt;</span>
-<span class="co">#&gt; 1 Malawi   MWI              0 NA    NA    NA    NA    NA    NA    NA    NA   </span>
-<span class="co">#&gt; # ... with 32 more variables: swpo &lt;lgl&gt;, yams &lt;lgl&gt;, cass &lt;lgl&gt;, orts &lt;lgl&gt;,</span>
-<span class="co">#&gt; #   bean &lt;lgl&gt;, chic &lt;lgl&gt;, cowp &lt;lgl&gt;, pige &lt;lgl&gt;, lent &lt;lgl&gt;, opul &lt;lgl&gt;,</span>
-<span class="co">#&gt; #   soyb &lt;lgl&gt;, grou &lt;lgl&gt;, cnut &lt;lgl&gt;, oilp &lt;lgl&gt;, sunf &lt;lgl&gt;, rape &lt;lgl&gt;,</span>
-<span class="co">#&gt; #   sesa &lt;lgl&gt;, ooil &lt;lgl&gt;, sugc &lt;lgl&gt;, sugb &lt;lgl&gt;, cott &lt;lgl&gt;, ofib &lt;lgl&gt;,</span>
-<span class="co">#&gt; #   coff &lt;lgl&gt;, coco &lt;lgl&gt;, teas &lt;lgl&gt;, toba &lt;lgl&gt;, bana &lt;lgl&gt;, plnt &lt;lgl&gt;,</span>
-<span class="co">#&gt; #   trof &lt;lgl&gt;, temf &lt;lgl&gt;, vege &lt;lgl&gt;, rest &lt;lgl&gt;</span></pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Create template for ha. Replace "ha" by "fs" or "ci" for other templates.</span>
+<span class="co">#create_statistics_template("ha", param)</span></code></pre></div>
 <p>For processing it is easier to transform the data into the <strong>long</strong> format, which is similar to the <a href="https://tidyr.tidyverse.org/"><strong>tidy</strong> data format</a> as implemented by the tidyverse packages. In our case this means that the 40 crop columns are squeezed into two columns, one with the crop code and another with the data. The <code>gather()</code> and <code>spread()</code> in the <a href="https://tidyr.tidyverse.org/">tidyr</a> package were designed to help you switch between wide and long tables.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> See below and the Malawi scripts for examples.</p>
 </div>
 <div id="aggregating-to-spam-c-crop-classes" class="section level3">
@@ -213,22 +204,24 @@
 <p>The raw statistics need to be mapped to the 40 crop and crop groups used by SPAM-C. The list of crops can be found in <code>crop.csv</code>, which is automatically copied to the <code>mappings</code> folder after running <code><a href="../reference/create_spam_folders.html">create_spam_folders()</a></code>. In practice, almost none of the countries produces all 40 crops. To determine the set of relevant crops, you can use the list of crops for which FAOSTAT presents data. Running <code>01_process_faostat_crops.r</code> will save a <code>faostat_crop_list.csv</code> file in the <code>processed_data/lists folder</code>. Note that it is no problem to keep all the 40 crops in your database as long as you set their values to <code>NA</code> or <code>-999</code> (see below) so they are automatically removed in the next processing step.</p>
 <p>The easiest way to aggregate the raw subnational statistics to the FAOSTAT crop list is to create an <code>orig2crop</code> mapping table, which links the two crop lists. It might happen that the subnational statistics contain crops that are not present in FAOSTAT. In these cases you have to either exclude them or add them to one of the crops for which FAOSTAT presents data.</p>
 <p>The script below illustrates how to aggregate the raw statistics to the SPAM-C crops. Note that it important to use sum with <code>na.rm = FALSE</code> as otherwise <code>NA+NA</code> will result in <code>0</code> not <code>NA</code>. This is crucial as missing data in the statistics need to be set to <code>NA</code> for SPAM-C in order to process them correctly. If data for administrative units need to be aggregated a similar solution using a mapping table can be applied.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># NB: use sum with na.rm = F as we want NA+NA = NA, not NA+NA = 0!</span>
-<span class="no">stat</span> <span class="kw">&lt;-</span> <span class="no">stat</span> <span class="kw">%&gt;%</span>
-  <span class="fu">left_join</span>(<span class="no">orig2crop</span>) <span class="kw">%&gt;%</span>
-  <span class="fu">group_by</span>(<span class="no">crop</span>, <span class="no">adm_code</span>, <span class="no">adm_name</span>, <span class="no">adm_level</span>) <span class="kw">%&gt;%</span>
-  <span class="fu">summarize</span>(<span class="kw">value_ha</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">value_ha</span>, <span class="kw">na.rm</span> <span class="kw">=</span> <span class="no">F</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu">ungroup</span>()</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># NB: use sum with na.rm = F as we want NA+NA = NA, not NA+NA = 0!</span>
+<span class="va">stat</span> <span class="op">&lt;-</span> <span class="va">stat</span> <span class="op">%&gt;%</span>
+  <span class="fu">left_join</span><span class="op">(</span><span class="va">orig2crop</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">crop</span>, <span class="va">adm_code</span>, <span class="va">adm_name</span>, <span class="va">adm_level</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">summarize</span><span class="op">(</span>value_ha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">value_ha</span>, na.rm <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="treatment-of-missing-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#treatment-of-missing-data" class="anchor"></a>Treatment of missing data</h3>
 <p>It is unlikely that you will find subnational statistics for all relevant crops in a country. As a minimum requirement, SPAM-C needs full national level statistics for each crop. This is generally no problem as harvested area statistics can be taken from FAOSTAT. Farming system shares and cropping intensity data might be more difficult to obtain and often require making strong assumptions. At the subnational level, it is generally no problem to have missing values for harvested area as data will be allocated to the regions when the model is solved. Full information (harvest area statistics, farming system shares and cropping intensity) is only needed at administrative level 1 if the model is run at level 1 (solve level = 1) and never at administrative level 2.</p>
 <p>In case data on harvested area is missing for a certain administrative unit, you can indicate this by using <code>NA</code> or <code>-999</code>. We highly recommend using the latter, particularly if you are using Excel to process the data as it avoids potential errors that may result between an <code>NA</code> and an empty string <code>""</code> value. These are both displayed as empty cells in Excel but will be treated differently by R after loading the file. Replacing <code>NA</code> values by <code>-999</code> can be done simultaneously when putting the data in the wide format.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co"># Put in preferred mapspam format, adding -999 for missing values</span>
-<span class="no">stat_mapspam</span> <span class="kw">&lt;-</span> <span class="no">stat</span> <span class="kw">%&gt;%</span>
-  <span class="fu">spread</span>(<span class="no">crop</span>, <span class="no">value_ha</span>, <span class="kw">fill</span> <span class="kw">=</span> -<span class="fl">999</span>) <span class="kw">%&gt;%</span>
-  <span class="fu">arrange</span>(<span class="no">adm_code</span>, <span class="no">adm_code</span>, <span class="no">adm_level</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Put in preferred mapspam format, adding -999 for missing values</span>
+<span class="va">stat_mapspam</span> <span class="op">&lt;-</span> <span class="va">stat</span> <span class="op">%&gt;%</span>
+  <span class="fu">spread</span><span class="op">(</span><span class="va">crop</span>, <span class="va">value_ha</span>, fill <span class="op">=</span> <span class="op">-</span><span class="fl">999</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">arrange</span><span class="op">(</span><span class="va">adm_code</span>, <span class="va">adm_code</span>, <span class="va">adm_level</span><span class="op">)</span> </code></pre></div>
 <p>As pointed out above, it is safe to set all values for a crop to <code>NA</code> or <code>-999</code> when the crop is not relevant for the country. These will be filtered out in the script that is described in the next section.</p>
 </div>
 <div id="data-consistency" class="section level3">
@@ -241,8 +234,9 @@
 <h2 class="hasAnchor">
 <a href="#check-and-calibrate-subnational-statistics" class="anchor"></a>Check and calibrate subnational statistics</h2>
 <p>After most hard work is done, the ha, fs and cs files need to be checked for consistency and calibrated to the FAOSTAT national statistics. This is done in <code>03_check_and_calibrate_statistics.r</code>. The first step is to check if the data is consistent, which is done by <code><a href="../reference/check_statistics.html">check_statistics()</a></code>. If <code>out = TRUE</code> is set a report is returned which shows where the inconsistencies occur.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co"># Check the consistency of the ha statistics</span>
-<span class="fu"><a href="../reference/check_statistics.html">check_statistics</a></span>(<span class="no">ha_df</span>, <span class="no">param</span>, <span class="kw">out</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Check the consistency of the ha statistics</span>
+<span class="fu"><a href="../reference/check_statistics.html">check_statistics</a></span><span class="op">(</span><span class="va">ha_df</span>, <span class="va">param</span>, out <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; adm0 and adm1 are not equal!. Did you run rebalance_stat?</span>
 <span class="co">#&gt; # A tibble: 29 x 4</span>
 <span class="co">#&gt; # Groups:   crop [29]</span>
@@ -258,52 +252,55 @@
 <span class="co">#&gt;  8 grou   290092  290093         -1</span>
 <span class="co">#&gt;  9 lent     1904    1905         -1</span>
 <span class="co">#&gt; 10 maiz  1660214 1660044        170</span>
-<span class="co">#&gt; # ... with 19 more rows</span></pre></body></html></div>
+<span class="co">#&gt; # ... with 19 more rows</span></code></pre></div>
 <p>To reaggreate the statistics from the bottom up, use <code><a href="../reference/reaggregate_statistics.html">reaggregate_statistics()</a></code>.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># Reaggreate from the bottom up.</span>
-<span class="no">ha_df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/reaggregate_statistics.html">reaggregate_statistics</a></span>(<span class="no">ha_df</span>, <span class="no">param</span>)
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Reaggreate from the bottom up.</span>
+<span class="va">ha_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/reaggregate_statistics.html">reaggregate_statistics</a></span><span class="op">(</span><span class="va">ha_df</span>, <span class="va">param</span><span class="op">)</span>
 
 <span class="co"># Check again.</span>
-<span class="fu"><a href="../reference/check_statistics.html">check_statistics</a></span>(<span class="no">ha_df</span>, <span class="no">param</span>, <span class="kw">out</span> <span class="kw">=</span> <span class="no">T</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/check_statistics.html">check_statistics</a></span><span class="op">(</span><span class="va">ha_df</span>, <span class="va">param</span>, out <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
 <p>Next, the statistics are calibrated to the national FAOSTAT statistics. The code below shows how this is implemented. First, the code checks if there are still crops included which are not in the FAOSTAT data and removes them if needed. Next, crops are identified that are not present in the statisitics and the national total is added from the FAOSTAT database. Finally all the subnational statistics are proportionally scaled so the total is equal to the FAOSTAT figures.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="co"># Identify crops that are present in ha_df but not in fao and remove them from ha_df.</span>
-<span class="no">crop_rem</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sets.html">setdiff</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span>(<span class="no">ha_df</span>$<span class="no">crop</span>), <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span>(<span class="no">fao</span>$<span class="no">crop</span>))
-<span class="no">ha_df</span> <span class="kw">&lt;-</span> <span class="no">ha_df</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(!<span class="no">crop</span> <span class="kw">%in%</span> <span class="no">crop_rem</span>)
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Identify crops that are present in ha_df but not in fao and remove them from ha_df.</span>
+<span class="va">crop_rem</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sets.html">setdiff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">ha_df</span><span class="op">$</span><span class="va">crop</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">fao</span><span class="op">$</span><span class="va">crop</span><span class="op">)</span><span class="op">)</span>
+<span class="va">ha_df</span> <span class="op">&lt;-</span> <span class="va">ha_df</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">crop</span> <span class="op">%in%</span> <span class="va">crop_rem</span><span class="op">)</span>
 
 <span class="co"># Identify crops that are present in fao but not in ha_df.</span>
 <span class="co"># We will add then to ha_df</span>
-<span class="no">crop_add</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sets.html">setdiff</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span>(<span class="no">fao</span>$<span class="no">crop</span>), <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span>(<span class="no">ha_df</span>$<span class="no">crop</span>))
-<span class="no">ha_df</span> <span class="kw">&lt;-</span> <span class="no">ha_df</span> <span class="kw">%&gt;%</span>
-  <span class="fu">bind_rows</span>(
-    <span class="no">fao</span> <span class="kw">%&gt;%</span>
-      <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">crop</span> <span class="kw">%in%</span> <span class="no">crop_add</span>) <span class="kw">%&gt;%</span>
-      <span class="fu">mutate</span>(
-        <span class="kw">fips</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span>(<span class="no">ha_df</span>$<span class="no">adm_code</span>[<span class="no">ha_df</span>$<span class="no">adm_level</span><span class="kw">==</span><span class="fl">0</span>]),
-        <span class="kw">adm_level</span> <span class="kw">=</span> <span class="fl">0</span>,
-        <span class="kw">adm</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span>(<span class="no">ha_df</span>$<span class="no">adm_name</span>[<span class="no">ha_df</span>$<span class="no">adm_level</span><span class="kw">==</span><span class="fl">0</span>])))
+<span class="va">crop_add</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sets.html">setdiff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">fao</span><span class="op">$</span><span class="va">crop</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">ha_df</span><span class="op">$</span><span class="va">crop</span><span class="op">)</span><span class="op">)</span>
+<span class="va">ha_df</span> <span class="op">&lt;-</span> <span class="va">ha_df</span> <span class="op">%&gt;%</span>
+  <span class="fu">bind_rows</span><span class="op">(</span>
+    <span class="va">fao</span> <span class="op">%&gt;%</span>
+      <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">crop</span> <span class="op">%in%</span> <span class="va">crop_add</span><span class="op">)</span> <span class="op">%&gt;%</span>
+      <span class="fu">mutate</span><span class="op">(</span>
+        fips <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">ha_df</span><span class="op">$</span><span class="va">adm_code</span><span class="op">[</span><span class="va">ha_df</span><span class="op">$</span><span class="va">adm_level</span><span class="op">==</span><span class="fl">0</span><span class="op">]</span><span class="op">)</span>,
+        adm_level <span class="op">=</span> <span class="fl">0</span>,
+        adm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">ha_df</span><span class="op">$</span><span class="va">adm_name</span><span class="op">[</span><span class="va">ha_df</span><span class="op">$</span><span class="va">adm_level</span><span class="op">==</span><span class="fl">0</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># Calculate scaling factor</span>
-<span class="no">fao_stat_sf</span> <span class="kw">&lt;-</span><span class="fu">bind_rows</span>(
-  <span class="no">fao</span> <span class="kw">%&gt;%</span>
-    <span class="fu">mutate</span>(<span class="kw">source</span> <span class="kw">=</span> <span class="st">"fao"</span>),
-  <span class="no">ha_df</span> <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">adm_level</span> <span class="kw">==</span> <span class="fl">0</span>) <span class="kw">%&gt;%</span>
-    <span class="fu">mutate</span>(<span class="kw">source</span> <span class="kw">=</span> <span class="st">"ha_df"</span>)) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html">select</a></span>(<span class="no">crop</span>, <span class="no">source</span>, <span class="no">ha</span>) <span class="kw">%&gt;%</span>
-  <span class="fu">spread</span>(<span class="no">source</span>, <span class="no">ha</span>) <span class="kw">%&gt;%</span>
-  <span class="fu">mutate</span>(<span class="kw">sf</span> <span class="kw">=</span> <span class="no">fao</span>/<span class="no">ha_df</span>) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html">select</a></span>(<span class="no">crop</span>, <span class="no">sf</span>)
+<span class="va">fao_stat_sf</span> <span class="op">&lt;-</span><span class="fu">bind_rows</span><span class="op">(</span>
+  <span class="va">fao</span> <span class="op">%&gt;%</span>
+    <span class="fu">mutate</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"fao"</span><span class="op">)</span>,
+  <span class="va">ha_df</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">adm_level</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu">mutate</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"ha_df"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">crop</span>, <span class="va">source</span>, <span class="va">ha</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">spread</span><span class="op">(</span><span class="va">source</span>, <span class="va">ha</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>sf <span class="op">=</span> <span class="va">fao</span><span class="op">/</span><span class="va">ha_df</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">crop</span>, <span class="va">sf</span><span class="op">)</span>
 
 <span class="co"># rescale ha_df</span>
-<span class="no">ha_df</span> <span class="kw">&lt;-</span> <span class="no">ha_df</span> <span class="kw">%&gt;%</span>
-  <span class="fu">left_join</span>(<span class="no">fao_stat_sf</span>) <span class="kw">%&gt;%</span>
-  <span class="fu">mutate</span>(<span class="kw">ha</span> <span class="kw">=</span> <span class="no">ha</span> * <span class="no">sf</span>) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html">select</a></span>(-<span class="no">sf</span>)</pre></body></html></div>
+<span class="va">ha_df</span> <span class="op">&lt;-</span> <span class="va">ha_df</span> <span class="op">%&gt;%</span>
+  <span class="fu">left_join</span><span class="op">(</span><span class="va">fao_stat_sf</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>ha <span class="op">=</span> <span class="va">ha</span> <span class="op">*</span> <span class="va">sf</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">sf</span><span class="op">)</span></code></pre></div>
 <p>Finally the three files (ha, fs and ci), need to be saved in the `processed_data/agricultural_statistics folders. It is important to use the correct names otherwise other functions cannot find the data.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu">write_csv</span>(<span class="no">ha_df</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">param</span>$<span class="no">spam_path</span>, <span class="fu">glue</span>(<span class="st">"processed_data/agricultural_statistics/ha_adm_{param$year}_{param$iso3c}.csv"</span>)))
-<span class="fu">write_csv</span>(<span class="no">fs_df</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">param</span>$<span class="no">spam_path</span>, <span class="fu">glue</span>(<span class="st">"processed_data/agricultural_statistics/fs_adm_{param$year}_{param$iso3c}.csv"</span>)))
-<span class="fu">write_csv</span>(<span class="no">ci_df</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">param</span>$<span class="no">spam_path</span>, <span class="fu">glue</span>(<span class="st">"processed_data/agricultural_statistics/ci_adm_{param$year}_{param$iso3c}.csv"</span>)))</pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">write_csv</span><span class="op">(</span><span class="va">ha_df</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">spam_path</span>, <span class="fu">glue</span><span class="op">(</span><span class="st">"processed_data/agricultural_statistics/ha_adm_{param$year}_{param$iso3c}.csv"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="fu">write_csv</span><span class="op">(</span><span class="va">fs_df</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">spam_path</span>, <span class="fu">glue</span><span class="op">(</span><span class="st">"processed_data/agricultural_statistics/fs_adm_{param$year}_{param$iso3c}.csv"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="fu">write_csv</span><span class="op">(</span><span class="va">ci_df</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">spam_path</span>, <span class="fu">glue</span><span class="op">(</span><span class="st">"processed_data/agricultural_statistics/ci_adm_{param$year}_{param$iso3c}.csv"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>The next step is to <a href="process_spatial_data.html">process the spatial data</a>.</p>
 </div>
 <div class="footnotes">
@@ -329,7 +326,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

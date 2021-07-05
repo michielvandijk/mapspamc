@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -127,8 +127,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/iiasa/mapspamc">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/michielvandijk/mapspamc">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -142,13 +142,13 @@
 
       
 
-      </header><script src="process_spatial_data_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="process_spatial_data_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Process spatial data</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/iiasa/mapspamc/blob/master/vignettes/process_spatial_data.Rmd"><code>vignettes/process_spatial_data.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/michielvandijk/mapspamc/blob/master/vignettes/process_spatial_data.Rmd"><code>vignettes/process_spatial_data.Rmd</code></a></small>
       <div class="hidden name"><code>process_spatial_data.Rmd</code></div>
 
     </div>
@@ -158,25 +158,26 @@
 <p>As described in the section on <a href="data.html">Input data</a>, a variety of spatial datasets are needed to run the model. By now, we suppose you have collected all the datasets and saved them in the <code>raw_data</code> folder following the instructions in the <a href="input_data_collection.html">Input data collection</a> section. All the spatial data layers are taken from global datasets, which might not always be the best source for detailed country studies. Hence, you might want to replace some of them by more detailed country-level products (e.g. national land cover, accessibility or population maps.</p>
 <p>For this reason, we decided not to create specific functions to process the spatial data, which offer limited flexibility for user interaction. Instead we share the detailed scripts we used to process all the spatial datasets, which can be found in the <code>03_spatial_data</code> folder. To process raster data, we primarily used GDAL, a software library for reading and writing raster and vector geospatial data (see <a href="installation.html">Installation</a> for more information), which can be operated from R by means of the <a href="https://cran.r-project.org/web/packages/gdalUtils/index.html">gdalUtils</a> package. We mainly used two functions. <code>gdalwarp()</code> is a very powerful command that can be used to clip the country data from a global spatial layer using a shapefile and at the same time reproject the map to any desired extent, resolution and coordinate reference system. <code>align_rasters()</code> combines <code>gdalwarp</code> with a template raster to easily align different raster files.</p>
 <p>The code below illustrates the use of <code>align_rasters()</code> to clip the Malawi data from the global WorldPop map used in <code>select_worldpop.r</code>. Note that several data layers require additional or slightly different processing approach before they can be used. For example, the raw WorldPop dataset presents population density per grid cell at a resolution of 30 arcsec. If we want to run the model at a resolution of 5 arcmin, which has grid cells that are 100 times larger, the data needs to be summed when aggregating the grid cells. This is different from the standard options in <code>align_rasters()</code>, which uses a resampling approach when reprojecting the maps.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="no">grid</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">param</span>$<span class="no">spam_path</span>,
-                  <span class="fu">glue</span>(<span class="st">"processed_data/maps/grid/{param$res}/grid_{param$res}_{param$year}_{param$iso3c}.tif"</span>))
-<span class="no">mask</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">param</span>$<span class="no">spam_path</span>,
-                  <span class="fu">glue</span>(<span class="st">"processed_data/maps/adm/{param$res}/adm_map_{param$year}_{param$iso3c}.shp"</span>))
-<span class="no">input</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">param</span>$<span class="no">raw_path</span>, <span class="st">"worldpop/ppp_2010_1km_Aggregated.tif"</span>)
-<span class="no">output</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">param</span>$<span class="no">spam_path</span>,
-                  <span class="fu">glue</span>(<span class="st">"processed_data/maps/population/{param$res}/pop_{param$res}_{param$year}_{param$iso3c}.tif"</span>))
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">grid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">spam_path</span>,
+                  <span class="fu">glue</span><span class="op">(</span><span class="st">"processed_data/maps/grid/{param$res}/grid_{param$res}_{param$year}_{param$iso3c}.tif"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">mask</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">spam_path</span>,
+                  <span class="fu">glue</span><span class="op">(</span><span class="st">"processed_data/maps/adm/{param$res}/adm_map_{param$year}_{param$iso3c}.shp"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">raw_path</span>, <span class="st">"worldpop/ppp_2010_1km_Aggregated.tif"</span><span class="op">)</span>
+<span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">spam_path</span>,
+                  <span class="fu">glue</span><span class="op">(</span><span class="st">"processed_data/maps/population/{param$res}/pop_{param$res}_{param$year}_{param$iso3c}.tif"</span><span class="op">)</span><span class="op">)</span>
 
-<span class="kw">if</span>(<span class="no">param</span>$<span class="no">res</span> <span class="kw">==</span> <span class="st">"30sec"</span>) {
-
-  <span class="no">temp_path</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">param</span>$<span class="no">spam_path</span>, <span class="fu">glue</span>(<span class="st">"processed_data/maps/population/{param$res}"</span>))
-  <span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span>(<span class="no">temp_path</span>, <span class="kw">showWarnings</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">recursive</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-
+<span class="kw">if</span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">res</span> <span class="op">==</span> <span class="st">"30sec"</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="va">temp_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">spam_path</span>, <span class="fu">glue</span><span class="op">(</span><span class="st">"processed_data/maps/population/{param$res}"</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="va">temp_path</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  
   <span class="co"># Warp and mask</span>
-  <span class="no">output_map</span> <span class="kw">&lt;-</span> <span class="fu">align_rasters</span>(<span class="kw">unaligned</span> <span class="kw">=</span> <span class="no">input</span>, <span class="kw">reference</span> <span class="kw">=</span> <span class="no">grid</span>, <span class="kw">dstfile</span> <span class="kw">=</span> <span class="no">output</span>,
-                   <span class="kw">cutline</span> <span class="kw">=</span> <span class="no">mask</span>, <span class="kw">crop_to_cutline</span> <span class="kw">=</span> <span class="no">F</span>,
-                   <span class="kw">r</span> <span class="kw">=</span> <span class="st">"bilinear"</span>, <span class="kw">verbose</span> <span class="kw">=</span> <span class="no">F</span>, <span class="kw">output_Raster</span> <span class="kw">=</span> <span class="no">T</span>, <span class="kw">overwrite</span> <span class="kw">=</span> <span class="no">T</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">output_map</span>)
-}</pre></body></html></div>
+  <span class="va">output_map</span> <span class="op">&lt;-</span> <span class="fu">align_rasters</span><span class="op">(</span>unaligned <span class="op">=</span> <span class="va">input</span>, reference <span class="op">=</span> <span class="va">grid</span>, dstfile <span class="op">=</span> <span class="va">output</span>,
+                   cutline <span class="op">=</span> <span class="va">mask</span>, crop_to_cutline <span class="op">=</span> <span class="cn">F</span>, 
+                   r <span class="op">=</span> <span class="st">"bilinear"</span>, verbose <span class="op">=</span> <span class="cn">F</span>, output_Raster <span class="op">=</span> <span class="cn">T</span>, overwrite <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">output_map</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
 <p>To process the spatial data, simply run the various scripts in the <code>03_spatial_data</code> folder. As the scripts can be run in any order, they do not have a number such as most scripts in the other folders. Note that some of the scripts, in particular <code>select_gaez.r</code>, which processes more than 300 global maps, can take a long time to run!</p>
 <p>If you have processed all the spatial data you can continue with <a href="create_synergy_cropland.html">building the synergy cropland map</a>.</p>
 <div class="footnotes">
@@ -200,7 +201,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

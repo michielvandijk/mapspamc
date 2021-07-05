@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -127,8 +127,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/iiasa/mapspamc">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/michielvandijk/mapspamc">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -142,13 +142,13 @@
 
       
 
-      </header><script src="replace_globiom_land_cover_land_use_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="replace_globiom_land_cover_land_use_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Replace land cover and land use information in GLOBIOM</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/iiasa/mapspamc/blob/master/vignettes/replace_globiom_land_cover_land_use.Rmd"><code>vignettes/replace_globiom_land_cover_land_use.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/michielvandijk/mapspamc/blob/master/vignettes/replace_globiom_land_cover_land_use.Rmd"><code>vignettes/replace_globiom_land_cover_land_use.Rmd</code></a></small>
       <div class="hidden name"><code>replace_globiom_land_cover_land_use.Rmd</code></div>
 
     </div>
@@ -173,25 +173,26 @@
 <p>First, you need to collect a new country level land cover map. Any product can be used as long as it contains information on the six GLOBIOM land cover classes. The most obvious choice would be to take a national land cover map for the year 2000 or any other map that is close to the year for which the subnational statistics are available. If such map is not available it is also possible to use a global land cover product and use the country polygon to mask the relevant area. We illustrate this case for Malawi, where we used the <a href="https://www.esa-landcover-cci.org/2010">ESACCI</a> land cover map that was described in the section on <a href="input_data_collection.html">Input data collection</a>. We started by clipping the country area by running the script <code>03_spatial_data/select_esa.r</code> (see <a href="process_spatial_data.html">Process spatial data</a>).</p>
 <p>Second, we prepared a table (<code>mappings/esacci2globiom.csv</code>) that maps the ESACCI land cover classes to the six GLOBIOM land cover classes. This table will be used to aggregate the land cover classes in the new map to the GLOBIOM land cover classes. You will have to prepare a similar table for your land cover map.</p>
 <p>Finally, in case you want to add an additional crop, you have to update the table that maps the SPAMc crops to the 18 GLOBIOM crops (<code>mappings/crop2globiom.cvs</code>). Also see the <a href="add_new_crop_to_globiom.html">Adding a new crop to GLOBIOM</a>. In the example below, we will add coffee as a separate crop. The updated table will be loaded by <code><a href="../reference/create_globiom_input.html">create_globiom_input()</a></code> to aggregate the SPAMc crops to the GLOBIOM crop classification.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># Select the new land cover map, in this case ESACCI</span>
-<span class="no">lc_file</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">param</span>$<span class="no">spam_path</span>,
-  <span class="fu">glue</span>(<span class="st">"processed_data/maps/cropland/{param$res}/esa_raw_{param$year}_{param$iso3c}.tif"</span>))
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Select the new land cover map, in this case ESACCI</span>
+<span class="va">lc_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">spam_path</span>,
+  <span class="fu">glue</span><span class="op">(</span><span class="st">"processed_data/maps/cropland/{param$res}/esa_raw_{param$year}_{param$iso3c}.tif"</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># Load the map</span>
-<span class="no">lc_map</span> <span class="kw">&lt;-</span> <span class="fu">raster</span>(<span class="no">lc_file</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">lc_map</span>)
+<span class="va">lc_map</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="op">(</span><span class="va">lc_file</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lc_map</span><span class="op">)</span>
 
 <span class="co"># Update crop2globiom.csv and map coff to coff (instead of the rest category) and overwrite</span>
-<span class="fu"><a href="../reference/load_data.html">load_data</a></span>(<span class="st">"crop2globiom"</span>, <span class="no">param</span>)
-<span class="no">crop2globiom</span> <span class="kw">&lt;-</span> <span class="no">crop2globiom</span> <span class="kw">%&gt;%</span>
-  <span class="fu">mutate</span>(<span class="kw">globiom_crop</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">crop</span> <span class="kw">==</span> <span class="st">"coff"</span>, <span class="st">"Coff"</span>, <span class="no">globiom_crop</span>))
-<span class="fu">write_csv</span>(<span class="no">crop2globiom</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">param</span>$<span class="no">spam_path</span>, <span class="st">"mappings/crop2globiom.csv"</span>))
+<span class="fu"><a href="../reference/load_data.html">load_data</a></span><span class="op">(</span><span class="st">"crop2globiom"</span>, <span class="va">param</span><span class="op">)</span>
+<span class="va">crop2globiom</span> <span class="op">&lt;-</span> <span class="va">crop2globiom</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>globiom_crop <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">crop</span> <span class="op">==</span> <span class="st">"coff"</span>, <span class="st">"Coff"</span>, <span class="va">globiom_crop</span><span class="op">)</span><span class="op">)</span>
+<span class="fu">write_csv</span><span class="op">(</span><span class="va">crop2globiom</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">spam_path</span>, <span class="st">"mappings/crop2globiom.csv"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># Load mapping of lc classes to globiom lc classes</span>
-<span class="no">lc_class2globiom</span> <span class="kw">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">param</span>$<span class="no">spam_path</span>, <span class="st">"mappings/esacci2globiom.csv"</span>))
+<span class="va">lc_class2globiom</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">spam_path</span>, <span class="st">"mappings/esacci2globiom.csv"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># Aggregate land cover map to GLOBIOM land cover classes at simu level</span>
 <span class="co"># Not that the area will be expressed in 1000 ha, which is common in GLOBIOM!</span>
-<span class="fu"><a href="../reference/create_globiom_input.html">create_globiom_input</a></span>(<span class="no">lc_class2globiom</span>, <span class="no">lc_map</span>, <span class="no">param</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/create_globiom_input.html">create_globiom_input</a></span><span class="op">(</span><span class="va">lc_class2globiom</span>, <span class="va">lc_map</span>, <span class="va">param</span><span class="op">)</span></code></pre></div>
 <p>The existing land cover data in GLOBIOM can be found in the parameter <code>LANDCOVER_INIT</code> which defines the land cover classes at the simulation unit level and the existing crop specific land use data found in <code>CROP_DATA</code> parameter at the simulation unit level.</p>
 <p>The steps required to update the GLOBIOM land cover and land use maps with new maps are the following:</p>
 <ol style="list-style-type: decimal">
@@ -683,7 +684,7 @@ CROP_DATA(SIMU_COUNTRY,ALLCOLROW,ALTICLASS,SLPCLASS,SOILCLASS,AEZCLASS,CROP,'HI'
 <div id="step-8-harmonize-the-cropland-area-with-national-level-statistics-and-the-land-cover-with-the-national-level-statistics" class="section level2">
 <h2 class="hasAnchor">
 <a href="#step-8-harmonize-the-cropland-area-with-national-level-statistics-and-the-land-cover-with-the-national-level-statistics" class="anchor"></a>Step 8: Harmonize the cropland area with national level statistics and the land cover with the national level statistics</h2>
-<p>The purpose of this step is to harmonize the new base year crop area with the reported FAO statistics for crop area. The user can use any national crop area statistics but should take care to compare only physical area as the cropland use maps produced by mapspamc are in physical areas not harvested area. The following code should be added to the <code>.gms</code> file and used to calculate the differences in the crop areas with the national statistics.</p>
+<p>The purpose of this step is to harmonize the new base year crop area with the reported FAO statistics for crop area. The user can use any national crop area statistics but should take care to compare only physical area as the cropland use maps produced by mapspam2globiom are in physical areas not harvested area. The following code should be added to the <code>.gms</code> file and used to calculate the differences in the crop areas with the national statistics.</p>
 <pre><code>
 SET
 SOURCE
@@ -726,7 +727,7 @@ ACR_CHECK(SIMU_COUNTRY,CROP,'PCT%')
  $ (abs(ACR_CHECK(SIMU_COUNTRY,CROP,'PCT%')) lt 0.001)
  = 0;
 </code></pre>
-<p>The purpose of this step is to check the differences between the total cropland cover, the new cropland cover, and the aggregated cropland use. The mapspamc package uses the new cropland cover dataset as an input for the cropland use maps so this step is simply to check that all crops are included properly.</p>
+<p>The purpose of this step is to check the differences between the total cropland cover, the new cropland cover, and the aggregated cropland use. The mapspam2globiom package uses the new cropland cover dataset as an input for the cropland use maps so this step is simply to check that all crops are included properly.</p>
 <pre><code>PARAMETER
 LndCov_CHECK(ANYREGION,SOURCE) land cover check parameter in 1000 ha;
 
@@ -871,7 +872,7 @@ PUT ";";</code></pre>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

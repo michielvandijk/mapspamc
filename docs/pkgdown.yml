@@ -1,5 +1,5 @@
-pandoc: 2.7.3
-pkgdown: 1.5.1
+pandoc: 2.11.4
+pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   add_new_crop_to_globiom: add_new_crop_to_globiom.html
@@ -19,8 +19,8 @@ articles:
   replace_globiom_land_cover_land_use: replace_globiom_land_cover_land_use.html
   run_model: run_model.html
   template: template.html
-last_built: 2020-08-27T15:02Z
+last_built: 2021-07-05T19:05Z
 urls:
-  reference: https://iiasa.github.io/mapspamc/reference
-  article: https://iiasa.github.io/mapspamc/articles
+  reference: https://michielvandijk.github.io/mapspamc/reference
+  article: https://michielvandijk.github.io/mapspamc/articles
 

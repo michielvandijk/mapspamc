@@ -62,5 +62,5 @@ Suggests:
 Language: en-US
 Depends: 
     R (>= 2.10)
-URL: https://github.com/iiasa/mapspamc
-BugReports: https://github.com/iiasa/mapspamc/issues
+URL: https://github.com/michielvandijk/mapspamc
+BugReports: https://github.com/michielvandijk/mapspamc/issues

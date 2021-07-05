@@ -86,7 +86,7 @@ ci for cropping intensity.
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -174,8 +174,8 @@ ci for cropping intensity.
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/iiasa/mapspamc">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/michielvandijk/mapspamc">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -193,7 +193,7 @@ ci for cropping intensity.
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Create template for raw subnational crop statistics</h1>
-    <small class="dont-index">Source: <a href='https://github.com/iiasa/mapspamc/blob/master/R/create_statistics_template.R'><code>R/create_statistics_template.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/michielvandijk/mapspamc/blob/master/R/create_statistics_template.R'><code>R/create_statistics_template.R</code></a></small>
     <div class="hidden name"><code>create_statistics_template.Rd</code></div>
     </div>
 
@@ -207,7 +207,7 @@ ci for cropping intensity.
 
     </div>
 
-    <pre class="usage"><span class='fu'>create_statistics_template</span>(<span class='no'>type</span>, <span class='no'>param</span>)</pre>
+    <pre class="usage"><span class='fu'>create_statistics_template</span><span class='op'>(</span><span class='va'>type</span>, <span class='va'>param</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -237,7 +237,8 @@ levels are nested. This file needs to be created first by running
 identical) are determined by the solve level parameter.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>create_statistics_template</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"ha"</span>, <span class='no'>param</span>)</div><div class='output co'>#&gt; <span class='error'>Error in stopifnot(inherits(param, "spam_par")): object 'param' not found</span></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'>create_statistics_template</span><span class='op'>(</span>type <span class='op'>=</span> <span class='st'>"ha"</span>, <span class='va'>param</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in stopifnot(inherits(param, "spam_par")): object 'param' not found</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -254,7 +255,7 @@ identical) are determined by the solve level parameter.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

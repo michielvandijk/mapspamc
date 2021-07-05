@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -127,8 +127,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/iiasa/mapspamc">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/michielvandijk/mapspamc">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -142,13 +142,13 @@
 
       
 
-      </header><script src="data_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="data_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Input data</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/iiasa/mapspamc/blob/master/vignettes/data.Rmd"><code>vignettes/data.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/michielvandijk/mapspamc/blob/master/vignettes/data.Rmd"><code>vignettes/data.Rmd</code></a></small>
       <div class="hidden name"><code>data.Rmd</code></div>
 
     </div>
@@ -164,7 +164,7 @@
 <div id="cropland-extent" class="section level2">
 <h2 class="hasAnchor">
 <a href="#cropland-extent" class="anchor"></a>Cropland extent</h2>
-<p>To allocate the physical area statistics SPAMc requires a cropland extent, which shows the location of cropland in a country for the target year. There are several global cropland products and often countries produce their own land cover map, which includes a cropland class. Comparison between different cropland sources, shows a lot of variation and often disagreement <span class="citation">(<span class="citeproc-not-found" data-reference-id="ADD"><strong>???</strong></span>)</span>. To account for the uncertainty in the location of cropland, <span class="citation">(<span class="citeproc-not-found" data-reference-id="ADD"><strong>???</strong></span>)</span> combined several different products into one so-called synergy (or synergistic) cropland map. A more recent product was prepared by <span class="citation">Lu et al. (2020)</span> and used as input for the construction of SPAM2010.</p>
+<p>To allocate the physical area statistics SPAMc requires a cropland extent, which shows the location of cropland in a country for the target year. There are several global cropland products and often countries produce their own land cover map, which includes a cropland class. Comparison between different cropland sources, shows a lot of variation and often disagreement <span class="citation">(<strong>ADD?</strong>)</span>. To account for the uncertainty in the location of cropland, <span class="citation">(<strong>ADD?</strong>)</span> combined several different products into one so-called synergy (or synergistic) cropland map. A more recent product was prepared by <span class="citation">Lu et al. (2020)</span> and used as input for the construction of SPAM2010.</p>
 <p>The synergy cropland approach combines all available (global) cropland maps and creates a ranking for each grid cell that measures the level of agreement between the products. In the SPAMc data-preparation stage, the grid cells with the least uncertainty are selected first when allocating physical area of individual crops. Apart from the ranking, the synergy cropland approach also creates maps with the medium and maximum cropland area per grid cell. The medium area product is used as the base layer by SPAMc but in case this is not sufficient to allocate all the physical area, grid cells from the maximum cropland map can be used (see <a href="combine_input_data.html">Combine input data</a> for more information on how this is done).</p>
 </div>
 <div id="irrigation" class="section level2">
@@ -196,42 +196,42 @@
 <div id="references" class="section level2 unnumbered">
 <h2 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h2>
-<div id="refs" class="references">
-<div id="ref-CIESIN2011">
-<p>CIESIN, IFPRI, World Bank, and CIAT. 2011. “The Global Rural-Urban Mapping Project, Version 1 (GRUMPv1): Urban Extents Grid.” <a href="https://sedac.ciesin.columbia.edu/data/collection/grump-v1">https://sedac.ciesin.columbia.edu/data/collection/grump-v1</a>.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-CIESIN2011" class="csl-entry">
+CIESIN, IFPRI, World Bank, and CIAT. 2011. <span>“<span>The Global Rural-Urban Mapping Project, Version 1 (GRUMPv1): Urban Extents Grid</span>.”</span> <a href="https://sedac.ciesin.columbia.edu/data/collection/grump-v1">https://sedac.ciesin.columbia.edu/data/collection/grump-v1</a>.
 </div>
-<div id="ref-FAO2019">
-<p>FAO. 2019. “FAOSTAT.” <a href="http://www.fao.org/faostat">http://www.fao.org/faostat</a>.</p>
+<div id="ref-FAO2019" class="csl-entry">
+FAO. 2019. <span>“<span>FAOSTAT</span>.”</span> <a href="http://www.fao.org/faostat">http://www.fao.org/faostat</a>.
 </div>
-<div id="ref-IIASA2012">
-<p>IIASA, and FAO. 2012. <em>Global Agro‐ecological Zones (GAEZv3.0)</em>. Laxenburg; Rome: IIASA &amp; FAO.</p>
+<div id="ref-IIASA2012" class="csl-entry">
+IIASA, and FAO. 2012. <em><span class="nocase">Global Agro‐ecological Zones (GAEZv3.0)</span></em>. Laxenburg; Rome: IIASA <span>&amp;</span> FAO.
 </div>
-<div id="ref-Joglekar2019">
-<p>Joglekar, Alison K. B., Ulrike Wood-Sichra, and Philip G. Pardey. 2019. “Pixelating crop production: Consequences of methodological choices.” Edited by Krishna Prasad Vadrevu. <em>PLOS ONE</em> 14 (2): e0212281. <a href="https://doi.org/10.1371/journal.pone.0212281">https://doi.org/10.1371/journal.pone.0212281</a>.</p>
+<div id="ref-Joglekar2019" class="csl-entry">
+Joglekar, Alison K. B., Ulrike Wood-Sichra, and Philip G. Pardey. 2019. <span>“<span class="nocase">Pixelating crop production: Consequences of methodological choices</span>.”</span> Edited by Krishna Prasad Vadrevu. <em>PLOS ONE</em> 14 (2): e0212281. <a href="https://doi.org/10.1371/journal.pone.0212281">https://doi.org/10.1371/journal.pone.0212281</a>.
 </div>
-<div id="ref-Lu2020">
-<p>Lu, Miao, Wenbin Wu, Liangzhi You, Linda See, Steffen Fritz, Qiangyi Yu, Yanbing Wei, Di Chen, Peng Yang, and Bing Xue. 2020. “A cultivated planet in 2010: 1. the global synergy cropland map.” <em>Earth System Science Data</em>. <a href="https://doi.org/doi.org/10.5194/essd-2020-12">https://doi.org/doi.org/10.5194/essd-2020-12</a>.</p>
+<div id="ref-Lu2020" class="csl-entry">
+Lu, Miao, Wenbin Wu, Liangzhi You, Linda See, Steffen Fritz, Qiangyi Yu, Yanbing Wei, Di Chen, Peng Yang, and Bing Xue. 2020. <span>“<span class="nocase">A cultivated planet in 2010: 1. the global synergy cropland map</span>.”</span> <em>Earth System Science Data</em>. <a href="https://doi.org/doi.org/10.5194/essd-2020-12">https://doi.org/doi.org/10.5194/essd-2020-12</a>.
 </div>
-<div id="ref-Meier2018">
-<p>Meier, Jonas, Florian Zabel, and Wolfram Mauser. 2018. “A global approach to estimate irrigated areas – a comparison between different data and statistics.” <em>Hydrology and Earth System Sciences</em> 22 (2): 1119–33. <a href="https://doi.org/10.5194/hess-22-1119-2018">https://doi.org/10.5194/hess-22-1119-2018</a>.</p>
+<div id="ref-Meier2018" class="csl-entry">
+Meier, Jonas, Florian Zabel, and Wolfram Mauser. 2018. <span>“<span class="nocase">A global approach to estimate irrigated areas – a comparison between different data and statistics</span>.”</span> <em>Hydrology and Earth System Sciences</em> 22 (2): 1119–33. <a href="https://doi.org/10.5194/hess-22-1119-2018">https://doi.org/10.5194/hess-22-1119-2018</a>.
 </div>
-<div id="ref-Nelson2008">
-<p>Nelson, A. 2008. “Travel time to major cities: a global map of accessibility.” Global Environment Monitoring Unit, Joint Research Centre of the European Commission. <a href="http://forobs.jrc.ec.europa.eu/products/gam/">http://forobs.jrc.ec.europa.eu/products/gam/</a>.</p>
+<div id="ref-Nelson2008" class="csl-entry">
+Nelson, A. 2008. <span>“<span class="nocase">Travel time to major cities: a global map of accessibility</span>.”</span> Global Environment Monitoring Unit, Joint Research Centre of the European Commission. <a href="http://forobs.jrc.ec.europa.eu/products/gam/">http://forobs.jrc.ec.europa.eu/products/gam/</a>.
 </div>
-<div id="ref-Siebert2013">
-<p>Siebert, Stefan, Verena Henrich, Karen Frenken, and Jacob Burke. 2013. “Global Map of Irrigation Areas version 5.” Bonn, Germany: Rheinisch Friedrich-Wilhelms-University.</p>
+<div id="ref-Siebert2013" class="csl-entry">
+Siebert, Stefan, Verena Henrich, Karen Frenken, and Jacob Burke. 2013. <span>“<span class="nocase">Global Map of Irrigation Areas version 5</span>.”</span> Bonn, Germany: Rheinisch Friedrich-Wilhelms-University.
 </div>
-<div id="ref-Stevens2015a">
-<p>Stevens, Forrest R., Andrea E. Gaughan, Catherine Linard, and Andrew J. Tatem. 2015. “Disaggregating Census Data for Population Mapping Using Random Forests with Remotely-Sensed and Ancillary Data.” Edited by Luís A. Nunes Amaral. <em>PLOS ONE</em> 10 (2): e0107042. <a href="https://doi.org/10.1371/journal.pone.0107042">https://doi.org/10.1371/journal.pone.0107042</a>.</p>
+<div id="ref-Stevens2015a" class="csl-entry">
+Stevens, Forrest R., Andrea E. Gaughan, Catherine Linard, and Andrew J. Tatem. 2015. <span>“<span class="nocase">Disaggregating Census Data for Population Mapping Using Random Forests with Remotely-Sensed and Ancillary Data</span>.”</span> Edited by Luís A. Nunes Amaral. <em>PLOS ONE</em> 10 (2): e0107042. <a href="https://doi.org/10.1371/journal.pone.0107042">https://doi.org/10.1371/journal.pone.0107042</a>.
 </div>
-<div id="ref-Tatem2017">
-<p>Tatem, Andrew J. 2017. “WorldPop, open data for spatial demography.” Nature Publishing Groups. <a href="https://doi.org/10.1038/sdata.2017.4">https://doi.org/10.1038/sdata.2017.4</a>.</p>
+<div id="ref-Tatem2017" class="csl-entry">
+Tatem, Andrew J. 2017. <span>“<span class="nocase">WorldPop, open data for spatial demography</span>.”</span> Nature Publishing Groups. <a href="https://doi.org/10.1038/sdata.2017.4">https://doi.org/10.1038/sdata.2017.4</a>.
 </div>
-<div id="ref-Weiss2018">
-<p>Weiss, D. J., A. Nelson, H. S. Gibson, W. Temperley, S. Peedell, A. Lieber, M. Hancher, et al. 2018. “A global map of travel time to cities to assess inequalities in accessibility in 2015.” <em>Nature</em> 553 (7688): 333–36. <a href="https://doi.org/10.1038/nature25181">https://doi.org/10.1038/nature25181</a>.</p>
+<div id="ref-Weiss2018" class="csl-entry">
+Weiss, D. J., A. Nelson, H. S. Gibson, W. Temperley, S. Peedell, A. Lieber, M. Hancher, et al. 2018. <span>“<span class="nocase">A global map of travel time to cities to assess inequalities in accessibility in 2015</span>.”</span> <em>Nature</em> 553 (7688): 333–36. <a href="https://doi.org/10.1038/nature25181">https://doi.org/10.1038/nature25181</a>.
 </div>
-<div id="ref-Wood-Sichra2016">
-<p>Wood-Sichra, Ulrike, Alison B. Joglekar, and Liangzhi You. 2016. “Spatial Producion Allocation Model (SPAM) 2005: Technical Documentation.” Harvest Choice Working Paper. Washington, D.C.: International Food Policy Research (IFPRI).</p>
+<div id="ref-Wood-Sichra2016" class="csl-entry">
+Wood-Sichra, Ulrike, Alison B. Joglekar, and Liangzhi You. 2016. <span>“<span>Spatial Producion Allocation Model (SPAM) 2005: Technical Documentation</span>.”</span> Harvest Choice Working Paper. Washington, D.C.: International Food Policy Research (IFPRI).
 </div>
 </div>
 </div>
@@ -252,7 +252,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
