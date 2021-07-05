@@ -1,0 +1,41 @@
+---
+title: "Template"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Template}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+resource_files:
+  bib/mapspam.bib
+bibliography: bib/mapspam.bib
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Broadly speaking, running SPAMc can be divided into three phases:
+
+- Pre-processing subnational statistics and spatial information
+- Running the model
+- Post-processing model results to create maps and GLOBIOM input.
+
+mapspam2globiom facilitates this by providing several functions that take care of major components, such as the clipping and reprojection of spatial datasets, the harmonization of agricultural statistics and cropland, and the creation of data files that can be loaded by GLOBIOM. However, to fully run SPAMc much more data work needs to be done. The majority can be performed with standard R packages, such as [tidyverse](https://cran.r-project.org/web/packages/tidyverse/index.html), which were specifically designed 'tidy' messy information, and [sf](https://cran.r-project.org/web/packages/sf/index.html) and [raster](https://cran.r-project.org/web/packages/raster/index.html), which were built to perform spatial data operations. 
+
+For this purpose, mapspam2globiom is supplemented with examples of how to run the model for a particular country. These examples provide fully developed scripts to run SPAMc from start to finish and require only minimum user input to adapt them to other countries. In fact, most work for the user will be to collect the required subnational agricultural statistics and reshape them so that they can used as input for SPAMc (although some tools are provided to support the latter in the package). The examples, therefore, can be regarded as templates to run SPAMc for any country, assuming all raw input data is available. 
+
+The examples are stored in Github repositories with the following name: mapspam2GLOBIOM_ISO, where 'ISO' is the [ISO 3166-1 alpha-3 letter](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) country code in lowercase. At the moment only one example is provided: mapspam2globiom_mwi for Malawi but we hope to include an example for a larger country, which requires a slightly different approach soon.
+
+
+# Downloading country examples
+
+- Visit the [mapspam2globiom_mwi repository website](https://github.com/iiasa/mapspam2globiom_mwi).
+- Click on 'clone or download'.
+- clone the repository to your Github account.
+- Store the files in an RStudio project environment using the alpha-3 letter code of the country of interest, e.g. `mapspam2globiom_xxx, where xxx is the alpha-3 country code.^[Alternatively, if you are familiar with Gihub, you can also clone the repository to your own account, change the name and create a local copy.]
+
+Now you are ready to start working on your own model! The articles in the `Running SPAMc` section will go over the various steps to build the model following the Malawi example. Please read the article on how to [setup SPAMc](setup.html) to continue.
+

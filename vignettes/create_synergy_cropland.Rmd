@@ -1,0 +1,26 @@
+---
+title: "Create synergy cropland map"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Create synergy cropland map}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+resource_files:
+  bib/mapspam.bib
+bibliography: bib/mapspam.bib
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+A key feature of SPAM-C is to allocate the crop statistics to areas identified as cropland on a map - the cropland extent. As described in the section on [Input data](data.html), we use a so-called synergy cropland map to account for the uncertainty in the location of cropland. The synergy cropland map combines different cropland products to construct one map that presents the mean and maximum available crop area per grid cell as well as a ranking that measures the agreement between the various cropland products. A ranking of 1 means that all sources agree there is cropland in a grid cell, while higher rankings signals more disagreement. The highest ranking depends on the number of cropland products that are compared. 
+
+@TODO add illustration how to make a synergy cropland map.
+To create the cropland extent, we followed a comparable approach as was used to construct the global synergy cropland map for 2010. Only three global products with cropland information were available for 2000: GLC2000, ESA-CCI-LC and GlobeLand30. We combined the three maps to create the median, maximum and score maps for 2010. We considered the following order of increasing importance when creating the scoring table: (1) ESA-CCI-LC, (2) GlobeLand30, (3) 2010 cropland extent and (4) GLC2000. The ESA-CGI-LC receives the highest score because it is the only product with consistent information for both 2000 and 2010. GlobeLand30 is second because it has a much higher resolution (30x30 meter) than GLC2000 1x1 kilometer), which can be considered somewhat outdated. Grid cells that show cropland in all four layers receive the highest score. 
+
+For 2010, we can make use of SASAM, the global synergy map that was prepared for SPAM2010 [@Lu2020].  
+

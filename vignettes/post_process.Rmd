@@ -1,0 +1,36 @@
+---
+title: "Post processing"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Post processing}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+resource_files:
+  bib/mapspam.bib
+bibliography: bib/mapspam.bib
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+## Inspect results and create maps 
+
+The package offers to functions to quickly inspect the results, after the model has been run. `view_panel()` shows crop distribution maps for a selected crop, using a different panel for each farming system. `view_stack()` shows the same information but stacking the various maps. Both functions plot the maps in the default browser overlaying the country polygon, unless specified otherwise. The visualization is done using [leafletjs](https://leafletjs.com/), which makes it possible to select different background tiles (e.g. OpenStreetMap) to put the data into perspective. 
+
+```{r eval = FALSE}
+view_panel("rice", var = "ha", param)
+view_stack("rice", var = "ha", param)
+```
+
+As it is easier to process and visualize geo-spatial data when the data is saved in tif format, `create_all_tif()` produces a tif file for each crop - farming-system combination. The tif files are also needed as input to aggregate the data in a format that can be used by GLOBIOM, which is described next.
+
+```{r eval = FALSE}
+create_all_tif(param)
+```
+
+

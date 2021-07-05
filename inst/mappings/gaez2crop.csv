@@ -1,0 +1,161 @@
+ID,name,crop,system,gaez_name,gaez_code,gaez_crop,gaez_input,gaez_system,suit_variable,prod_variable
+1,Wheat,whea,S,wheat,whe,wheat,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+2,Rice,rice,S,"rice, dry",rcd,drylandrice,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+3,Maize,maiz,S,"maize, grain",mze,maize,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+4,Barley,barl,S,barley,brl,barley,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+,Millit,mill,S,millet,mil,millet,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+7,Sorghum,sorg,S,sorghum,srg,sorghum,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+8,Other Cereals,ocer,S,oat,oat,oat,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+9,Potato,pota,S,white potato,wpo,whitepotato,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+10,Sweet Potato,swpo,S,sweet potato,spo,sweetpotato,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+11,Yams,yams,S,yam,yam,yamandcocoyam,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+12,Cassava,cass,S,cassava,csv,cassava,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+13,Other Roots,orts,S,yam,yam,yamandcocoyam,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+14,Bean,bean,S,phas. Beans,phb,phaseolusbean,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+15,Chickpea,chic,S,chickpea,chk,chickpea,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+16,Cowpea,cowp,S,cowpea,cow,cowpea,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+17,Pigeon Pea,pige,S,pigeonpea,pig,pigeonpea,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+18,Lentil,lent,S,chickpea,chk,chickpea,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+19,Other Pulses,opul,S,chickpea,chk,chickpea,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+20,Soybean,soyb,S,soybean,soy,soybean,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+21,Groundnut,grou,S,groundnut,grd,groundnut,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+22,Coconut,cnut,S,coconut,con,coconut,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+23,Oilpalm,oilp,S,oil palm,olp,oilpalm,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+24,Sunflower,sunf,S,sunflower,sfl,sunflower,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+25,Rapeseed,rape,S,rapeseed,rsd,rapeseed,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+26,Sesame Seed,sesa,S,rapeseed,rsd,rapeseed,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+27,Other Oil Crops,ooil,S,olive,olv,olive,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+28,Sugarcane,sugc,S,sugarcane,suc,sugarcane,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+29,Sugarbeet,sugb,S,sugar beet,sub,sugarbeet,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+30,Cotton,cott,S,cotton,cot,cotton,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+31,Other Fibre Crops,ofib,S,flax,flx,flax,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+,Coffee,coff,S,coffee,cof,coffee,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+34,Cocoa,coco,S,cocoa,coc,cocoa,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+35,Tea,teas,S,teas,tea,tea,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+36,Tobacco,toba,S,tobacco,tob,tobacco,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+37,Banana,bana,S,banana,ban,banana,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+38,Plantain,plnt,S,banana,ban,banana,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+39,Tropical Fruit,trof,S,banana,ban,banana,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+40,Temperate Fruit,temf,S,"maize, grain",mze,maize,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+41,Vegetables,vege,S,onion,oni,onion,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+42,Rest Of Crops,rest,S,"maize, grain",mze,maize,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+1,Wheat,whea,L,wheat,whe,wheat,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+2,Rice,rice,L,"rice, dry",rcd,drylandrice,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+3,Maize,maiz,L,"maize, grain",mze,maize,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+4,Barley,barl,L,barley,brl,barley,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+,Millit,mill,L,millet,mil,millet,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+7,Sorghum,sorg,L,sorghum,srg,sorghum,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+8,Other Cereals,ocer,L,oat,oat,oat,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+9,Potato,pota,L,white potato,wpo,whitepotato,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+10,Sweet Potato,swpo,L,sweet potato,spo,sweetpotato,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+11,Yams,yams,L,yam,yam,yamandcocoyam,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+12,Cassava,cass,L,cassava,csv,cassava,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+13,Other Roots,orts,L,yam,yam,yamandcocoyam,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+14,Bean,bean,L,phas. Beans,phb,phaseolusbean,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+15,Chickpea,chic,L,chickpea,chk,chickpea,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+16,Cowpea,cowp,L,cowpea,cow,cowpea,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+17,Pigeon Pea,pige,L,pigeonpea,pig,pigeonpea,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+18,Lentil,lent,L,chickpea,chk,chickpea,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+19,Other Pulses,opul,L,chickpea,chk,chickpea,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+20,Soybean,soyb,L,soybean,soy,soybean,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+21,Groundnut,grou,L,groundnut,grd,groundnut,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+22,Coconut,cnut,L,coconut,con,coconut,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+23,Oilpalm,oilp,L,oil palm,olp,oilpalm,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+24,Sunflower,sunf,L,sunflower,sfl,sunflower,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+25,Rapeseed,rape,L,rapeseed,rsd,rapeseed,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+26,Sesame Seed,sesa,L,rapeseed,rsd,rapeseed,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+27,Other Oil Crops,ooil,L,olive,olv,olive,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+28,Sugarcane,sugc,L,sugarcane,suc,sugarcane,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+29,Sugarbeet,sugb,L,sugar beet,sub,sugarbeet,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+30,Cotton,cott,L,cotton,cot,cotton,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+31,Other Fibre Crops,ofib,L,flax,flx,flax,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+,Coffee,coff,L,coffee,cof,coffee,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+34,Cocoa,coco,L,cocoa,coc,cocoa,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+35,Tea,teas,L,teas,tea,tea,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+36,Tobacco,toba,L,tobacco,tob,tobacco,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+37,Banana,bana,L,banana,ban,banana,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+38,Plantain,plnt,L,banana,ban,banana,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+39,Tropical Fruit,trof,L,banana,ban,banana,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+40,Temperate Fruit,temf,L,"maize, grain",mze,maize,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+41,Vegetables,vege,L,onion,oni,onion,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+42,Rest Of Crops,rest,L,"maize, grain",mze,maize,low,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+1,Wheat,whea,H,wheat,whe,wheat,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+2,Rice,rice,H,"rice, dry",rcd,drylandrice,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+3,Maize,maiz,H,"maize, grain",mze,maize,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+4,Barley,barl,H,barley,brl,barley,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+,Millit,mill,H,millet,mil,millet,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+7,Sorghum,sorg,H,sorghum,srg,sorghum,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+8,Other Cereals,ocer,H,oat,oat,oat,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+9,Potato,pota,H,white potato,wpo,whitepotato,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+10,Sweet Potato,swpo,H,sweet potato,spo,sweetpotato,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+11,Yams,yams,H,yam,yam,yamandcocoyam,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+12,Cassava,cass,H,cassava,csv,cassava,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+13,Other Roots,orts,H,yam,yam,yamandcocoyam,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+14,Bean,bean,H,phas. Beans,phb,phaseolusbean,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+15,Chickpea,chic,H,chickpea,chk,chickpea,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+16,Cowpea,cowp,H,cowpea,cow,cowpea,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+17,Pigeon Pea,pige,H,pigeonpea,pig,pigeonpea,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+18,Lentil,lent,H,chickpea,chk,chickpea,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+19,Other Pulses,opul,H,chickpea,chk,chickpea,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+20,Soybean,soyb,H,soybean,soy,soybean,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+21,Groundnut,grou,H,groundnut,grd,groundnut,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+22,Coconut,cnut,H,coconut,con,coconut,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+23,Oilpalm,oilp,H,oil palm,olp,oilpalm,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+24,Sunflower,sunf,H,sunflower,sfl,sunflower,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+25,Rapeseed,rape,H,rapeseed,rsd,rapeseed,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+26,Sesame Seed,sesa,H,rapeseed,rsd,rapeseed,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+27,Other Oil Crops,ooil,H,olive,olv,olive,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+28,Sugarcane,sugc,H,sugarcane,suc,sugarcane,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+29,Sugarbeet,sugb,H,sugar beet,sub,sugarbeet,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+30,Cotton,cott,H,cotton,cot,cotton,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+31,Other Fibre Crops,ofib,H,flax,flx,flax,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+,Coffee,coff,H,coffee,cof,coffee,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+34,Cocoa,coco,H,cocoa,coc,cocoa,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+35,Tea,teas,H,teas,tea,tea,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+36,Tobacco,toba,H,tobacco,tob,tobacco,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+37,Banana,bana,H,banana,ban,banana,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+38,Plantain,plnt,H,banana,ban,banana,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+39,Tropical Fruit,trof,H,banana,ban,banana,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+40,Temperate Fruit,temf,H,"maize, grain",mze,maize,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+41,Vegetables,vege,H,onion,oni,onion,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+42,Rest Of Crops,rest,H,"maize, grain",mze,maize,high,rainfed,cropsuitabilityindexvalue,totalproductioncapacity
+1,Wheat,whea,I,wheat,whe,wheat,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+2,Rice,rice,I,"rice, dry",rcd,wetlandrice,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+3,Maize,maiz,I,"maize, grain",mze,maize,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+4,Barley,barl,I,barley,brl,barley,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+,Millit,mill,I,millet,mil,millet,high,irrigated,cropsuitabilityindexvalue,totalproductioncapacity
+7,Sorghum,sorg,I,sorghum,srg,sorghum,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+8,Other Cereals,ocer,I,oat,oat,oat,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+9,Potato,pota,I,white potato,wpo,whitepotato,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+10,Sweet Potato,swpo,I,sweet potato,spo,sweetpotato,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+11,Yams,yams,I,yam,yam,yamandcocoyam,mixed,irrigated,cropsuitabilityindexvalue,totalproductioncapacity
+12,Cassava,cass,I,cassava,csv,cassava,mixed,irrigated,cropsuitabilityindexvalue,totalproductioncapacity
+13,Other Roots,orts,I,yam,yam,yamandcocoyam,mixed,irrigated,cropsuitabilityindexvalue,totalproductioncapacity
+14,Bean,bean,I,phas. Beans,phb,phaseolusbean,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+15,Chickpea,chic,I,chickpea,chk,chickpea,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+16,Cowpea,cowp,I,cowpea,cow,cowpea,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+17,Pigeon Pea,pige,I,pigeonpea,pig,pigeonpea,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+18,Lentil,lent,I,chickpea,chk,chickpea,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+19,Other Pulses,opul,I,chickpea,chk,chickpea,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+20,Soybean,soyb,I,soybean,soy,soybean,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+21,Groundnut,grou,I,groundnut,grd,groundnut,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+22,Coconut,cnut,I,coconut,con,coconut,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+23,Oilpalm,oilp,I,oil palm,olp,oilpalm,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+24,Sunflower,sunf,I,sunflower,sfl,sunflower,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+25,Rapeseed,rape,I,rapeseed,rsd,rapeseed,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+26,Sesame Seed,sesa,I,rapeseed,rsd,rapeseed,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+27,Other Oil Crops,ooil,I,olive,olv,olive,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+28,Sugarcane,sugc,I,sugarcane,suc,sugarcane,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+29,Sugarbeet,sugb,I,sugar beet,sub,sugarbeet,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+30,Cotton,cott,I,cotton,cot,cotton,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+31,Other Fibre Crops,ofib,I,flax,flx,flax,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+,Coffee,coff,I,coffee,cof,coffee,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+34,Cocoa,coco,I,cocoa,coc,cocoa,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+35,Tea,teas,I,teas,tea,tea,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+36,Tobacco,toba,I,tobacco,tob,tobacco,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+37,Banana,bana,I,banana,ban,banana,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+38,Plantain,plnt,I,banana,ban,banana,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+39,Tropical Fruit,trof,I,banana,ban,banana,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+40,Temperate Fruit,temf,I,"maize, grain",mze,maize,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+41,Vegetables,vege,I,onion,oni,onion,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland
+42,Rest Of Crops,rest,I,"maize, grain",mze,maize,high,irrigated,cropsuitabilityindexvalueforcurrentcultivatedland,potentialproductioncapacityforcurrentcultivatedland

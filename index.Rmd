@@ -1,0 +1,65 @@
+---
+output: github_document
+resource_files:
+  vignettes/bib/mapspam.bib
+bibliography: vignettes/bib/mapspam.bib
+
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# mapspamc
+
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+<!-- badges: end -->
+
+The aim of the [mapspamc R package](https://iiasa.github.io/mapspamc) is to facilitate the creation of country level crop distribution maps, which can be used as input by the IIASA's [Global Biosphere Management Model (GLOBIOM)](https://www.globiom.org/). GLOBIOM is a spatially explicit partial equilibrium model that is used to analyze the competition for land use between agriculture, forestry, and bioenergy. The model can be used for global and national level analysis [@Valin2013b; @Leclere2014; @Havlik2014]. In the latter case, model output can be greatly improved by incorporating regionally specific information that is often provided by local stakeholders or can be taken from national statistics. Information on crop cover and the location of crops are a key driver of the model and it is therefore desirable to base these as much as possible on national sources of information. 
+
+mapspamc provides the necessary infrastructure to run the Spatial Production Allocation Model for Country level studies (SPAMc). The model builds on the global version of SPAM [@You2006; @You2009; @You2014a; @Yu2020], which uses an cross-entropy optimization approach to 'pixelate' national and subnational crop statistics on a spatial grid at a 5 arcmin resolution. SPAMc was specifically developed to support country level analysis and makes it possible to incorporate national sources of information and potentially create maps at a higher resolution of 30 arcsec [@VanDijk2020]. The articles in the Background section provide more information on [Crop distribution maps](articles/crop_distribution_maps.html) in general, the [model](articles/model_description.html), [input data](articles/data.html) and an [Appendix](articles/appendix.html) with additional information on specific topics. Apart from implementing SPAMc, mapspamc includes functions to aggregate the SPAMc output to the spatial (i.e. simulation units) and crop-level (18 major crops) format that is used by GLOBIOM.
+
+
+## Installation
+
+To install mapspamc:
+
+``` r
+install.packages("remotes")
+remotes::install_github("iiasa/mapspamc")
+```
+Apart from the mapspamc package, several other pieces of software are essential to run SPAMc, which are described in the [Installation](articles/software.html) section.
+
+## Preparation
+
+It takes some preparation before SPAMc can be run. Most important and probably most time consuming is the collection of input data. SPAMc is a data-driven model and therefore requires a large variety of input data, which can be grouped under two headers: (1) (Sub)national agricultural statistics and (2) spatial information. The availability of data strongly affects the structure of the model and how can be solved. We highly recommend to start collecting input data before running the model. The articles in the Preparation section give an overview of all the information that is requited by SPAMc and shows were to download country examples, which can be used as a template to implement SPAMc to other countries:
+
+- [Input data collection](articles/input_data_collection.html).
+- [Country examples/templates](articles/template.html)
+
+
+## Run SPAMc
+
+Running SPAMc can be divided into eight steps, which are described in the articles in the Run SPAMc section. The other two articlesdescribe how to update the land cover and land use maps in GLOBIOM and how to add a new crop in GLOBIOM, which both require SPAMc output:
+
+1. [Model setup](articles/model_structure.html)
+1. [Processing of subnational statistics](articles/process_subnational_statistics.html)
+1. [Processing of spatial data](articles/process_spatial_data.html)
+1. [Create synergy cropland map](articles/create_synergy_cropland.html)
+1. [Create synergy irrigated area map](articles/create_synergy_irrigated_area.html)
+1. [Combine input data](articles/combine_input_data.html)
+1. [Run model](articles/run_model.html)
+1. [Post-processing](articles/post_process.html)
+1. [Replace GLOBIOM land use and land cover](articles/replace_globiom_land_cover_land_use.html)
+1. [Adding a new crop to GLOBIOM](articles/add_new_crop_to_globiom.html)
+
+
+## References

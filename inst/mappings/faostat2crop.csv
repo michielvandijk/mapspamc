@@ -1,0 +1,157 @@
+name,crop,faostat_crop_code,group
+Wheat,whea,15,Cereals
+Rice,rice,27,Cereals
+Maize,maiz,56,Cereals
+Barley,barl,44,Cereals
+Millet,mill,79,Cereals
+Sorghum,sorg,83,Cereals
+Other Cereals,ocer,71,Cereals
+Other Cereals,ocer,75,Cereals
+Other Cereals,ocer,89,Cereals
+Other Cereals,ocer,92,Cereals
+Other Cereals,ocer,94,Cereals
+Other Cereals,ocer,97,Cereals
+Other Cereals,ocer,101,Cereals
+Other Cereals,ocer,103,Cereals
+Other Cereals,ocer,108,Cereals
+Potato,pota,116,Roots & Tubers
+Sweet Potato,swpo,122,Roots & Tubers
+Yams,yams,137,Roots & Tubers
+Cassava,cass,125,Roots & Tubers
+Other Roots,orts,135,Roots & Tubers
+Other Roots,orts,136,Roots & Tubers
+Other Roots,orts,149,Roots & Tubers
+Bean,bean,176,Pulses
+Chickpea,chic,191,Pulses
+Cowpea,cowp,195,Pulses
+Pigeon Pea,pige,197,Pulses
+Lentil,lent,201,Pulses
+Other Pulses,opul,181,Pulses
+Other Pulses,opul,187,Pulses
+Other Pulses,opul,203,Pulses
+Other Pulses,opul,205,Pulses
+Other Pulses,opul,210,Pulses
+Other Pulses,opul,211,Pulses
+Soybean,soyb,236,Oilcrops
+Groundnut,grou,242,Oilcrops
+Coconut,cnut,249,Oilcrops
+Oilpalm,oilp,254,Oilcrops
+Sunflower,sunf,267,Oilcrops
+Rapeseed,rape,270,Oilcrops
+Rapeseed,rape,292,Oilcrops
+Sesame Seed,sesa,289,Oilcrops
+Other Oil Crops,ooil,260,Oilcrops
+Other Oil Crops,ooil,263,Oilcrops
+Other Oil Crops,ooil,265,Oilcrops
+Other Oil Crops,ooil,275,Oilcrops
+Other Oil Crops,ooil,280,Oilcrops
+Other Oil Crops,ooil,296,Oilcrops
+Other Oil Crops,ooil,299,Oilcrops
+Other Oil Crops,ooil,333,Oilcrops
+Other Oil Crops,ooil,336,Oilcrops
+Other Oil Crops,ooil,339,Oilcrops
+Sugarcane,sugc,156,Sugar Crops
+Sugarbeet,sugb,157,Sugar Crops
+Cotton,cott,328,Fibres
+Other Fibre Crops,ofib,773,Fibres
+Other Fibre Crops,ofib,777,Fibres
+Other Fibre Crops,ofib,780,Fibres
+Other Fibre Crops,ofib,782,Fibres
+Other Fibre Crops,ofib,788,Fibres
+Other Fibre Crops,ofib,789,Fibres
+Other Fibre Crops,ofib,800,Fibres
+Other Fibre Crops,ofib,809,Fibres
+Other Fibre Crops,ofib,821,Fibres
+"Coffee, Green",coff,656,Stimulates
+Cocoa,coco,661,Stimulates
+Tea,teas,667,Stimulates
+Tobacco,toba,826,Stimulates
+Banana,bana,486,Fruits
+Plantain,plnt,489,Fruits
+Tropical Fruit,trof,490,Fruits
+Tropical Fruit,trof,495,Fruits
+Tropical Fruit,trof,497,Fruits
+Tropical Fruit,trof,507,Fruits
+Tropical Fruit,trof,512,Fruits
+Tropical Fruit,trof,567,Fruits
+Tropical Fruit,trof,568,Fruits
+Tropical Fruit,trof,569,Fruits
+Tropical Fruit,trof,571,Fruits
+Tropical Fruit,trof,572,Fruits
+Tropical Fruit,trof,574,Fruits
+Tropical Fruit,trof,577,Fruits
+Tropical Fruit,trof,587,Fruits
+Tropical Fruit,trof,591,Fruits
+Tropical Fruit,trof,600,Fruits
+Tropical Fruit,trof,603,Fruits
+Temperate Fruit,temf,515,Fruits
+Temperate Fruit,temf,521,Fruits
+Temperate Fruit,temf,523,Fruits
+Temperate Fruit,temf,526,Fruits
+Temperate Fruit,temf,530,Fruits
+Temperate Fruit,temf,531,Fruits
+Temperate Fruit,temf,534,Fruits
+Temperate Fruit,temf,536,Fruits
+Temperate Fruit,temf,541,Fruits
+Temperate Fruit,temf,542,Fruits
+Temperate Fruit,temf,544,Fruits
+Temperate Fruit,temf,547,Fruits
+Temperate Fruit,temf,549,Fruits
+Temperate Fruit,temf,550,Fruits
+Temperate Fruit,temf,552,Fruits
+Temperate Fruit,temf,554,Fruits
+Temperate Fruit,temf,558,Fruits
+Temperate Fruit,temf,560,Fruits
+Temperate Fruit,temf,592,Fruits
+Temperate Fruit,temf,619,Fruits
+Vegetables,vege,358,Vegetables
+Vegetables,vege,366,Vegetables
+Vegetables,vege,367,Vegetables
+Vegetables,vege,372,Vegetables
+Vegetables,vege,373,Vegetables
+Vegetables,vege,388,Vegetables
+Vegetables,vege,393,Vegetables
+Vegetables,vege,394,Vegetables
+Vegetables,vege,397,Vegetables
+Vegetables,vege,399,Vegetables
+Vegetables,vege,401,Vegetables
+Vegetables,vege,402,Vegetables
+Vegetables,vege,406,Vegetables
+Vegetables,vege,407,Vegetables
+Vegetables,vege,414,Vegetables
+Vegetables,vege,417,Vegetables
+Vegetables,vege,420,Vegetables
+Vegetables,vege,423,Vegetables
+Vegetables,vege,426,Vegetables
+Vegetables,vege,430,Vegetables
+Vegetables,vege,446,Vegetables
+Vegetables,vege,449,Vegetables
+Vegetables,vege,459,Vegetables
+Vegetables,vege,461,Vegetables
+Vegetables,vege,463,Vegetables
+Rest Of Crops,rest,161,Other
+Rest Of Crops,rest,216,Other
+Rest Of Crops,rest,217,Other
+Rest Of Crops,rest,220,Other
+Rest Of Crops,rest,221,Other
+Rest Of Crops,rest,222,Other
+Rest Of Crops,rest,223,Other
+Rest Of Crops,rest,224,Other
+Rest Of Crops,rest,225,Other
+Rest Of Crops,rest,226,Other
+Rest Of Crops,rest,234,Other
+Rest Of Crops,rest,671,Other
+Rest Of Crops,rest,677,Other
+Rest Of Crops,rest,687,Other
+Rest Of Crops,rest,689,Other
+Rest Of Crops,rest,692,Other
+Rest Of Crops,rest,693,Other
+Rest Of Crops,rest,698,Other
+Rest Of Crops,rest,702,Other
+Rest Of Crops,rest,711,Other
+Rest Of Crops,rest,720,Other
+Rest Of Crops,rest,723,Other
+Rest Of Crops,rest,748,Other
+Rest Of Crops,rest,754,Other
+Rest Of Crops,rest,836,Other
+Rest Of Crops,rest,839,Other

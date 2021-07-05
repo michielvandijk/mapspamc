@@ -1,0 +1,41 @@
+name,crop,group
+Wheat,whea,Cereals
+Rice,rice,Cereals
+Maize,maiz,Cereals
+Barley,barl,Cereals
+Millet,mill,Cereals
+Sorghum,sorg,Cereals
+Other Cereals,ocer,Cereals
+Potato,pota,Roots & Tubers
+Sweet Potato,swpo,Roots & Tubers
+Yams,yams,Roots & Tubers
+Cassava,cass,Roots & Tubers
+Other Roots,orts,Roots & Tubers
+Bean,bean,Pulses
+Chickpea,chic,Pulses
+Cowpea,cowp,Pulses
+Pigeon Pea,pige,Pulses
+Lentil,lent,Pulses
+Other Pulses,opul,Pulses
+Soybean,soyb,Oilcrops
+Groundnut,grou,Oilcrops
+Coconut,cnut,Oilcrops
+Oilpalm,oilp,Oilcrops
+Sunflower,sunf,Oilcrops
+Rapeseed,rape,Oilcrops
+Sesame Seed,sesa,Oilcrops
+Other Oil Crops,ooil,Oilcrops
+Sugarcane,sugc,Sugar Crops
+Sugarbeet,sugb,Sugar Crops
+Cotton,cott,Fibres
+Other Fibre Crops,ofib,Fibres
+Coffee,coff,Stimulates
+Cocoa,coco,Stimulates
+Tea,teas,Stimulates
+Tobacco,toba,Stimulates
+Banana,bana,Fruits
+Plantain,plnt,Fruits
+Tropical Fruit,trof,Fruits
+Temperate Fruit,temf,Fruits
+Vegetables,vege,Vegetables
+Rest Of Crops,rest,Other

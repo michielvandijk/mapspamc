@@ -1,0 +1,39 @@
+aquastat_crop,crop
+Wheat,whea
+Rice,rice
+Barley,barl
+Maize,maiz
+Vegetables,vege
+Sesame,sesa
+Sunflower,sunf
+Potatoes,pota
+Leguminous crops,bean
+Sugar beet,sugb
+Sugarcane,sugc
+Cotton,cott
+Other crops,rest
+Other cereals,ocer
+Fodder,REMOVE
+Tobacco,toba
+Citrus,trof
+Grapes,trof
+Other fruits,trof
+Olives,ooil
+Oil palm,oilp
+Grass and Fodder,REMOVE
+Groundnuts,grou
+Sweet potatoes,swpo
+Cassava,cass
+Sorghum,sorg
+Other roots and tubers,orts
+Flowers,rest
+Soybeans,soyb
+Tea,teas
+Millet,mill
+Bananas,bana
+Plantains,plnt
+Coffee,coff
+Cocoa beans,coco
+Coconuts,cnut
+Rubber,rest
+Total,total

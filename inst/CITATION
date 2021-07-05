@@ -1,0 +1,14 @@
+citHeader("To cite mapspamc in publications use:")
+
+
+citEntry(
+  entry    = "Article",
+  title    = "mapspamc: An R package to create crop distribution maps for GLOBIOM",
+  author   = "Michiel van Dijk, Esther Boere and Amanda Palazzo",
+  journal  = "not published",
+  year     = "2020",
+  url      = "",
+  textVersion = paste(
+
+  )
+)

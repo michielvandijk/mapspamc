@@ -1,0 +1,31 @@
+---
+title: "Crop distribution maps"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Crop distribution maps}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+resource_files:
+  bib/mapspam.bib
+bibliography: bib/mapspam.bib
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Comprehensive, detailed and spatially explicit information on the locations of crops is essential to inform agricultural and food policies. crop distribution maps are used to as crucial input for regional crop monitoring systems [@Fritz2019; @Becker-Reshef2019], to analyse national irrigation potential [@You2014a; @Xie2017] and to assess the impact of climate change and socioeconomic development on land use change and wider developmental trade-offs [@Ahmed2016].
+
+Currently, the only source of information that provide spatial information on the location of crops are a number of global products [@Monfreda2008; @Portmann2010; @You2014a; see @Anderson2015 for a comparison]. These products use spatial information on land cover, suitability and irrigation to 'grid' (sub)national agricultural statistics at 5 arcmin resolution (~10x10 kilometer at the equator). Apart from the Spatial Production Allocation Model, which latest version covers the year 2010 [@Yu2020], these datasets are rather outdated and cannot be used to track changes over time.
+
+Global crop distribution maps are a useful starting point for national analysis but are of limited use when more detailed information is required. National decision makers often want to zoom in on subnational regions (e.g. bread basket areas) and investigate the shift in crops over time, which requires high(er) resolution maps. Also global products cannot easily be adapted when better information is available from local sources, such as national inventories of large-scale plantations, geo-coded data of irrigation schemes and national land cover maps. 
+
+An interesting alternative and new approach to create high resolution crop distribution maps are machine learning techniques, which can be used to identify the location of specific crops on satellite imagery. Although promising, these techniques are still under active development and the available studies predominantly target large-scale crops (e.g. soy bean and palm oil), which are easier to identify using machine learning classification approaches [@Zhong2016; @Song2017; @Danylo2020]. 
+
+The Spatial Production Allocation Model for Country level analysis (SPAMc) provides an approach to create plausible spatial estimates of physical and harvested crop area at national scale. The model builds on the global version of (SPAM) described in @You2006, @You2009, @You2014a and @Yu2020, which uses a cross-entropy framework to allocate subnational land use information on a 5 arcmin  grid. We enhanced SPAM in several directions, including the possibility to increase the resolution of the maps to 30 arcsec (~1x1 kilometer at the equator). @VanDijk2020 provides an in-depth discussion of SPAMc including an example for Southern Africa.^[Note that the SPAMc version in mapspamc is simpler version than the one described in @VanDijk2020. It is not possible to blend in detailed information on the location of crops (e.g. OpenStreetMap information, large-farm surveys and machine learning products). It also does not include the approach to backcast crop distribution maps to earlier periods. These features might be added in an update of the package.]
+  
+
+## References

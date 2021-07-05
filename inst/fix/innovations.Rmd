@@ -1,0 +1,35 @@
+---
+title: "innovations"
+author: "Michiel van Dijk"
+date: "10/19/2020"
+output: pdf_document
+---
+
+# Create cropland extent
+
+## Problem
+
+At the moment the synergistic cropland extent that is created when the cells are ranked and compared to the subnational statistics is not consistent with the arable land as defined by FAOSTAT, which would be desirable.
+
+
+## Potential solution
+
+Prepare a simple model that optimizes sum of rank of synergistic cropland s.t.
+
+- Total cropland = FAOSTAT arable land
+- Subnational cropland = subnational statistics
+- All irrigated area where cropland > 0 is included AND/OR irrigated area crops should be allocated in irrigated areas.
+
+Somehow start with cl_med and expand to cl_max (or in between) to make it fit. Perhaps by adding variable alpha:
+
+cl_avail = alpha_i * cl_med where i = grid cell
+
+st
+
+alpha > = 1
+alpha < = cl_med/cl_max
+
+
+
+Questions
+- Does this imply that pa based on FAOSTAT = arable land FAOSTAT? See Ramankutty paper in ERL on balance between cropland and arable land and why it differs. If so, it might be possible to prepare a model that endogenizes CI for a selected crops, e.g. tries to minimize them or indicates where things go wrong.

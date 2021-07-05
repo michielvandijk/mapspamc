@@ -1,0 +1,157 @@
+---
+title: "Model description"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Model description}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+resource_files:
+  bib/mapspam.bib
+bibliography: bib/mapspam.bib
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+## Objective functions
+
+The spatial allocation model for Country-level analysis (SPAMc) includes two types of models: (1) Minimization of cross-entropy, which is used in the global SPAM [@You2006; @You2009; @You2014a; @Yu2020] and the maximization of fitness score, which was developed by @VanDijk2020.  
+
+### Minimization of cross-entropy
+
+The cross-entropy approach (`min_entropy`) is defined as a non-linear optimization problem in which the error between prior information on the location of crop area shares ($\pi_{ij}$) and model allocated area shares ($s_{ijl}$) is minimized subject to a number of constraints.^[More precisely, SPAM uses a relative entropy framework because it minimizes the difference between the cross-entropy of probability distribution $P$ with a reference probability distribution $Q$ and the cross entropy of $P$ with itself. This is also sometimes referred to as the the Kullback–Leibler divergence [@Kullback1951]] More precisely the cross-entropy objective function ($CE$) is specified as follows:
+
+\begin{equation}
+\min\ CE(s_{ijl}, \pi_{ijl})= \sum_{i} \sum_{j} \sum_{l}s_{ijl} \ lns_{ijl}- \sum_{i} \sum_{j} \sum_{l}s_{ijl} \ ln\pi_{ijl}
+\end{equation}
+
+
+### Maximization of 'fitness score'
+
+In the maximization of fitness score approach (`max_score`) the spatial allocation model is defined as a linear optimization problem in which the weighted 'fitness score' over all grid cells, crops and farming systems is maximized. The 'fitness' score, which ranges between 0 and 1, is a composite indicator of the economic and biophysical suitability for each crop-farming system combination at the grid cell level. The solution to the model implies that on average all crops will be allocated to locations, which are considered as most appropriate from both an economic and biophysical viewpoint. The objective function ($S$) is defined as follows:
+
+\begin{equation}
+\max\ S(s_{ijl}, score_{ijl})= \sum_{i} \sum_{j} \sum_{l}s_{ijl} \times score_{ijl}
+\end{equation}
+
+where, $s_{ijl}$ is the share of total physical area of crop $j$ and farming system $l$ allocated to grid cell $i$, and $score_{ijl}$ is the fitness score for all $j$ and $l$ combinations.
+
+
+### Comparison
+
+Cross entropy minimization is better suited for maps at a resolution of 5 arcmin as it results in a more fragmented allocation per grid cell. This is desirable when the resolution is relatively coarse (e.g. 5 arcmin) and the number of crops and farming systems that occur in a grid cell can be relatively large. In contrast, maximizing the fitness score results in a much more concentrated crop area allocation, where only a few crops and farming systems are allocated to a grid cell. This makes sense for relatively small grid cells (e.g. 30 arcsec) where one only expects a small number of crop and farming systems but is not realistic for large grid cells. Hence, we recommend to use the cross-entropy model for 5 arcmin resolution and the fitness score model for 30 arcsec resolution. 
+
+
+## Economic and biophysical determinants of crop location
+
+To solve SPAMc and depending on the model, fitness scores or prior area information are needed to allocate the statistics on the grid. The fitness scores and priors are informed by a combination of economic (e.g. market access and population density) and biophysical factors (e.g growing conditions determined by soil, temperature and precipitation) that jointly determine the location of crops.  As these factors will have different impact across farming systems, we define separate fitness scores and priors for each of them. 
+
+### Fitness scores
+
+For subsistence farmers, who mainly grow crops for their own consumption, we assume that rural population density can be used as proxy for the location of subsistence farming systems. We used min-max normalization to create an index of rural population density between 0 and 1:
+
+\begin{equation}
+score_{ijl} =  \frac{rpd_{ijl}-min(rpd_{ijl})}{max(rpd_{ijl})-min(rpd_{ijl})} \quad l = subsistence \quad \forall i\ \forall j
+\end{equation}
+
+where $rpd_{ijl}$ is the rural population density defined for each grid cell $i$, crop $j$ and farming system $l$, which is converted to the $score_{ijl}$ between 0 and 1. In contrast to the other three systems, the allocation of subsistence farmers is modeled by means of a constraint instead of maximizing its score by means of the objective function (see next section). In this way, it is ensured that the total subsistence crop area is allocated proportional to the rural population density. Distributing subsistence farming systems by means of maximizing the fitness score, might lead to a solution in which a large share of subsistence crop area will be allocated to grid cells with the highest rural population density. Such a concentrated allocation is not realistic for subsistence farming. 
+
+Low-input rainfed systems are characterized by smallholder farms that mostly sell their products on local markets. We assume that farmers will specialize in growing crops with the highest biophysical suitability, while other factors such as market access, plays a minor role for this farming system. The fitness score is defined as follows:
+
+\begin{equation}
+score_{ijl} = \frac{suit\_index_{ijl}-min(suit\_index_{ijl})}{max(suit\_index_{ijl})-min(suit\_index_{ijl})} \quad l = low\ input \quad \forall i\ \forall j
+\end{equation}
+
+where $score_{ijl}$ and $suit\_index_{ijl}$ are the fitness score and the biophysical suitability score for grid cell $i$, crop $j$ and farming system $l$, respectively. Similar to the fitness score for subsistence farming, we apply the min-max normalization approach to create an index in the range of 0-1. 
+
+We assume that high-input rainfed and irrigated farming systems mostly consist of medium to large commercial farms, which location is largely determined by profit maximization. To simulate this, the fitness core is defined as the square root of potential revenue and market access:
+
+\begin{equation}
+score_{ijl} =  \frac{\sqrt{access_{i} \times rev_{ijl}}-min(\sqrt{access_{i} \times rev_{ijl}})}{max(\sqrt{access_{i} \times rev_{ijl}})-min(\sqrt{access_{i} \times rev_{ijl}})} \quad l \in high\ input,\ irrigated \quad \forall i\ \forall j
+\end{equation}
+
+where $access_{ijl}$ is market access approximated by the inverse of travel time to large cities and $rev_{ijl}$ is potential revenue, calculated as the product of potential yield ($yield_{ijl}$) for grid cell $i$, crop $j$ and system $l$ and national level crop price ($price_j$): 
+
+\begin{equation}
+rev_{ijl} = pot\_yield_{ijl} \times price_{i}
+\end{equation}
+
+Again, we use the min-max normalization to create an index in the range of 0-1. 
+
+
+### Priors
+
+We use the fitness scores as a basis to estimate the priors. To priors for subsistence farming are calculated as follows: 
+
+\begin{equation}
+prior_{ijl} =\frac{score_{ijl}}{\sum_{j} \sum_{l}{score_{ijl}}} \times crop\_area_{jl}  \quad l = subsistence \quad \forall i\ \forall j
+\end{equation}
+
+where $prior_{ijl}$ is the prior crop area in ha for subsistence farming defined for each grid cell $i$ and crop $j$ and $crop\_area_{jl}$ is the total physical area for per crop for the subsistence farming system taken from the statistics.
+
+The prior areas for the other three systems are estimated by distributing the residual grid cell cropland (i.e. after subtracting the prior area for subsistence farming systems) using the scores as weights:
+
+\begin{equation}
+prior_{ijl} =  \frac{score_{ijl}}{\sum_{j} \sum_{l} score_{ijl}} \times residual\_cropland_{i}  \quad l \in low\ input,\ high\ input,\ irrigated \quad \forall i\ \forall j
+\end{equation}
+
+where $residual\_cropland_{i}$ is the grid cell cropland after subtracting the prior for subsistence farming. In case the prior area for subsistence farming is larger than than the cropland in the grid cell all the priors for the other farming systems are set to zero.
+
+Finally, the priors are converted in to crop area shares ($\pi_{ij}$), which are an input into the cross-entropy objective function:
+
+\begin{equation}
+\pi_{ij} = \frac{prior_{ijl}}{\sum_{i}{prior_{ijl}}}
+\end{equation}
+
+## Constraints
+
+The allocation of crop area is determined by either minimizing the cross-entropy function or maximizing the fitness score subject to a set of constraints:
+
+(i) A constraint defining the range of permitted physical area shares:
+
+\begin{equation}
+0 \leq s_{ijl} \leq 1
+\end{equation}
+
+(ii) A constraint, which forces that the sum of allocated physical area shares for each crop $j$ and farming system $l$ over all grid cells $i$ is equal to one. This ensures all physical crop area is allocated to grid cells. 
+
+\begin{equation}
+\sum_{i}s_{ij}=1 \qquad \forall j\ \forall l
+\end{equation}
+
+(iii) A constraint, which specifies that the total physical area allocated to a grid cell $i$ is lower or equal than the available cropland ($avail_{i}$) in grid cell $i$.     
+
+\begin{equation}
+\sum_{j} \sum_{l}crop\_area_{jl} \times s_{ijl} \leq avail_{i} \qquad \forall i
+\end{equation}
+
+\setlength\parindent{24pt} where $crop\_area_{jl}$ is total national-level physical area for crop $j$ and farming system $j$. 
+
+(iv) A constraint, which ensures that the allocated physical area is equal to the sub-national statistics ($sub\_crop\_area_{jk}$) that are available for statistical reporting unit $k$ (i.e. a region or province) and crops $J$. Crops for which only national level information is available are not affected by this constraint. 
+
+\begin{equation}
+\sum_{i \in k} \sum_{l}crop\_area_{jl} \times s_{ijl} = sub\_crop\_area_{jk} \qquad \forall j \in J\
+\forall k
+\end{equation}
+
+(v) A constraint, which specifies that the total allocated physical area for all irrigated crops $L$ in grid cell $i$ does not exceed the total available irrigated area ($irr\_area_{i}$) in that grid cell. 
+
+\begin{equation}
+\sum_{j \in L}crop\_area_{jl} \times s_{ijl} \leq irr\_area_{i} \qquad \forall i
+\end{equation}
+
+(iv) A constraint (only for the `max_score` model), that allocates the subsistence farming system crops proportional to rural population density. In cases, where the biophysical conditions are considered not suitable for a certain crop, we assume a zero allocation:
+
+\begin{equation}
+\bar{s}_{ijl} = \frac{rur\_pop_i}{\sum_{i}{rur\_pop_i}} \quad l = subsistence \quad \forall i\ \forall j
+\end{equation}
+
+where $\bar{s}_{ijl}$ is the share of physical area allocated to grid cell $i$ for crop $j$ and farming system $l$ and $Pop_i$ is the rural population density in grid cell $i$. 
+
+
+## References

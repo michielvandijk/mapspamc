@@ -1,0 +1,38 @@
+lc_code,class_long,class,R,G,B,lc,globiom_lc_code
+0,No data,No data,0,0,0,other,NotRel
+10,"Cropland, rainfed","Cropland, rainfed",255,255,100,crops,CrpLnd
+11,Herbaceous cover,"Cropland, rainfed",255,255,100,crops,CrpLnd
+12,Tree or shrub cover,"Cropland, rainfed",255,255,0,crops,CrpLnd
+20,"Cropland, irrigated or post-flooding",Cropland irrigated / post-flooding,170,240,240,crops,CrpLnd
+30,"Mosaic cropland (>50%) / natural vegetation (tree, shrub, herbaceous cover) (<50%)",Mosaic cropland,220,240,100,crops,CrpLnd
+40,"Mosaic natural vegetation (tree, shrub, herbaceous cover) (>50%) / cropland (<50%)",Mosaic natural vegetation,200,200,100,crops,CrpLnd
+50,"Tree cover, broadleaved, evergreen, closed to open (>15%)","Tree cover, broadleaved, evergreen",0,100,0,other,Forest
+60,"Tree cover, broadleaved, deciduous, closed to open (>15%)","Tree cover, broadleaved, deciduous",0,160,0,other,Forest
+61,"Tree cover, broadleaved, deciduous, closed (>40%)","Tree cover, broadleaved, deciduous",0,160,0,other,Forest
+62,"Tree cover, broadleaved, deciduous, open (15-40%)","Tree cover, broadleaved, deciduous",170,200,0,other,Forest
+70,"Tree cover, needleleaved, evergreen, closed to open (>15%)","Tree cover, needleleaved, evergreen",0,60,0,other,Forest
+71,"Tree cover, needleleaved, evergreen, closed (>40%)","Tree cover, needleleaved, evergreen",0,60,0,other,Forest
+72,"Tree cover, needleleaved, evergreen, open (15-40%)","Tree cover, needleleaved, evergreen",0,80,0,other,Forest
+80,"Tree cover, needleleaved, deciduous, closed to open (>15%)","Tree cover, needleleaved, deciduous",40,80,0,other,Forest
+81,"Tree cover, needleleaved, deciduous, closed (>40%)","Tree cover, needleleaved, deciduous",40,80,0,other,Forest
+82,"Tree cover, needleleaved, deciduous, open (15-40%)","Tree cover, needleleaved, deciduous",40,100,0,other,Forest
+90,"Tree cover, mixed leaf type (broadleaved and needleleaved)","Tree cover, mixed leaf type",120,130,0,other,Forest
+100,Mosaic tree and shrub (>50%) / herbaceous cover (<50%),"Mosaic tree, shrub/HC",140,160,0,other,Forest
+110,Mosaic herbaceous cover (>50%) / tree and shrub (<50%),"Mosaic HC/tree, shrub",190,150,0,other,OthNatLnd
+120,Shrubland,Shrubland,150,100,0,other,OthNatLnd
+121,Shrubland evergreen,Shrubland,120,75,0,other,OthNatLnd
+122,Shrubland deciduous,Shrubland,150,100,0,other,OthNatLnd
+130,Grassland,Grassland,255,180,50,other,Grass
+140,Lichens and mosses,Lichens and mosses,255,220,210,other,OthNatLnd
+150,"Sparse vegetation (tree, shrub, herbaceous cover) (<15%)",Sparse vegetation,255,235,175,other,OthNatLnd
+152,Sparse shrub (<15%),Sparse vegetation,255,210,120,other,OthNatLnd
+153,Sparse herbaceous cover (<15%),Sparse vegetation,255,235,175,other,OthNatLnd
+160,"Tree cover, flooded, fresh or brakish water","Tree flooded, saline water",0,120,90,other,WetLnd
+170,"Tree cover, flooded, saline water","Tree flooded, fresh water",0,150,120,other,WetLnd
+180,"Shrub or herbaceous cover, flooded, fresh/saline/brakish water",Shrub or herbaceous flooded,0,220,130,other,WetLnd
+190,Urban areas,Urban areas,195,20,0,other,NotRel
+200,Bare areas,Bare areas,255,245,215,other,NotRel
+201,Consolidated bare areas,Bare areas,220,220,220,other,NotRel
+202,Unconsolidated bare areas,Bare areas,255,245,215,other,NotRel
+210,Water bodies,Water bodies,0,70,200,other,NotRel
+220,Permanent snow and ice,Permanent snow and ice,255,255,255,other,NotRel

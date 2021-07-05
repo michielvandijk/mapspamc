@@ -1,0 +1,63 @@
+---
+title: "Create synergy irrigated area map"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Create synergy irrigated area map}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The `01_create_synergy_irrigated_area_map.r` script in the `synergy_irrigated_area` folder describes the process to create the synergy irrigated area components that are needed by SPAMc. The procedure is slightly different than that used to create a the synergy cropland map because we only have two sources of information, which also have a different resolution. Most problematic is the GMIA, which has a relatively course resolution of 5 arcmin. This poses a problem when running the model at 30 arcsec as we do not know which of 100 30 arcsec grid cells in the 5 arcmin cells are irrigated. Another limitation is that even the GIA, the other global irrigated area product, which has a resolution of 30 arcsec only indicates the if there is irrigation in a grid cell. It does not present the actual area of irrigated cropland in a grid cell. 
+
+To address these issues, we use the following procedure to prepare the irrigated area cropland. First, process the GMIA and GIA so that they present the share of irrigated area within a grid cell, which can be compared at any spatial resolution. This has been done already at this stage if you ran the scripts to [process the spatial data](process_spatial_data.html). Next we stack the GMIA and GIA information and set very small shares (<0.01) to zero. This small values are an anomaly as the are sometimes created when reprojecting the maps to a finer or coarser resolution and can safely be removed.   
+
+```{r eval = FALSE}
+ir_df <-   as.data.frame(rasterToPoints(stack(grid, grid_size, gmia, gia))) %>%
+  filter(!is.na(gridID)) %>%
+  dplyr::select(-x, -y) %>%
+  mutate(gia = ifelse(gia < 0.01, 0, gia),
+         gmia = ifelse(gmia < 0.01, 0, gmia))
+```
+
+To rank the irrigated grid cells, we first take the maximum of the GMIA and GIA irrigated area share, use this to calculate the total grid level irrigated area and then rank the grid cells from 1 to 10 where 1 refers to preferred grid cells. This approach ensures that the grid cells with the largest irrigated area always receive a higher ranking, no matter the spatial resolution. This is important because when the resolution of the model is 5 arcmin, we prefer GMIA over GIA unless the latter presents a very large irrigated area share when aggregated to the 5 arcmin grid as well. Similarly, when the resolution is 30 arcsec, we prefer GIA over GMIA. At the same time, the ranking ensures that the potential irrigated area is expanded with the GMIA grid cells that have the highest irrigated area share. 
+
+```{r eval = FALSE}
+ir_df <- ir_df %>%
+  dplyr::mutate(ir_max = pmax(gmia, gia, na.rm = T),
+                ir_rank = cut(ir_max, labels = c(1:10), breaks = seq(0, 1, 0.1),
+                              include.lowest = T),
+                ir_rank = dense_rank(desc(ir_rank)),
+                ir_max = ir_max * grid_size) %>%
+  filter(!is.na(ir_rank), ir_max > 0) %>%
+  dplyr::select(-gmia, -gia, -grid_size)
+```
+
+In a next step the maps for maximum irrigated area (see code example below) and the ranking are created. 
+
+```{r eval = FALSE}
+ir_max_map <- ir_df %>%
+  left_join(grid_df,.) %>%
+  dplyr::select(x, y, ir_max)
+ir_max_map <- rasterFromXYZ(ir_max_map)
+crs(ir_max_map) <- crs(param$crs)
+```
+
+Finally the maps are saved for further processing. Please do not change the folder location or the names. This will result in errors as the files cannot be loaded by follow up scripts. 
+
+```{r eval = FALSE}
+temp_path <- file.path(param$spam_path, glue("processed_data/maps/irrigated_area/{param$res}"))
+dir.create(temp_path, showWarnings = FALSE, recursive = TRUE)
+
+writeRaster(ir_max_map, file.path(temp_path,
+                                  glue::glue("ia_max_{param$res}_{param$year}_{param$iso3c}.tif")),overwrite = T)
+
+writeRaster(ir_rank_map, file.path(temp_path, 
+                                  glue::glue("ia_rank_{param$res}_{param$year}_{param$iso3c}.tif")),overwrite = T)
+```
