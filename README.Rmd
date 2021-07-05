@@ -21,6 +21,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![R-CMD-check](https://github.com/michielvandijk/mapspamc/workflows/R-CMD-check/badge.svg)](https://github.com/michielvandijk/mapspamc/actions)
 <!-- badges: end -->
 
 The aim of the [mapspamc R package](https://iiasa.github.io/mapspamc) is to facilitate the creation of country level crop distribution maps, which can be used as input by the IIASA's [Global Biosphere Management Model (GLOBIOM)](https://www.globiom.org/). GLOBIOM is a spatially explicit partial equilibrium model that is used to analyze the competition for land use between agriculture, forestry, and bioenergy. The model can be used for global and national level analysis [@Valin2013b; @Leclere2014; @Havlik2014]. In the latter case, model output can be greatly improved by incorporating regionally specific information that is often provided by local stakeholders or can be taken from national statistics. Information on crop cover and the location of crops are a key driver of the model and it is therefore desirable to base these as much as possible on national sources of information. 
