@@ -2,7 +2,6 @@ pandoc: 2.11.4
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
-  add_new_crop_to_globiom: add_new_crop_to_globiom.html
   appendix: appendix.html
   combine_input_data: combine_input_data.html
   create_synergy_cropland: create_synergy_cropland.html
@@ -16,10 +15,9 @@ articles:
   post_process: post_process.html
   process_spatial_data: process_spatial_data.html
   process_subnational_statistics: process_subnational_statistics.html
-  replace_globiom_land_cover_land_use: replace_globiom_land_cover_land_use.html
   run_model: run_model.html
   template: template.html
-last_built: 2021-07-05T19:05Z
+last_built: 2021-07-06T22:40Z
 urls:
   reference: https://michielvandijk.github.io/mapspamc/reference
   article: https://michielvandijk.github.io/mapspamc/articles
