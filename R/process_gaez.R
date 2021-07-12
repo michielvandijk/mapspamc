@@ -24,7 +24,7 @@ process_gaez <- function(file, var, lookup, ac, param) {
   cp_cnt <- 0
   no_rc <- FALSE
   crp_sys_rep <- crp_sys
-  target_rc <- crp
+  target_rc <- rep_crops[1]
 
   # Loop till gaez data are all non zero
   repeat{
@@ -66,7 +66,7 @@ process_gaez <- function(file, var, lookup, ac, param) {
     glue::glue("processed_data/intermediate_output/{ac}/{param$res}/log_{param$res}_{param$year}_{ac}_{param$iso3c}.log")))
   capture.output(file = log_file, append = TRUE, split = T,{
     if (no_rc) {
-      cat("\nThere is no replacement crop for: ", crop_sys, "! All values are zero.")
+      cat("\nThere is no replacement crop for: ", crp_sys, "! All values are zero.")
     } else {
       if(crp_sys != crp_sys_rep) {
         cat("\nAll values for ", crp_sys, " are zero, replaced by: ", crp_sys_rep)

@@ -14,7 +14,6 @@ run_gams_adm_level <- function(ac, param, out = TRUE){
   logf <- file.path(param$spam_path,
       glue::glue("processed_data/intermediate_output/{ac}/{param$res}/spamc_{param$model}_{param$res}_{param$year}_{ac}_{param$iso3c}.log"))
 
-  # change forward- into backslash. This only seems to be needed for model
   # Using system2 now as this should be more portable and flexible. Still need to test it on Mac or Linux
   model <- gsub("/", "\\\\", model)
   input <- gsub("/", "\\\\", input)
@@ -23,10 +22,10 @@ run_gams_adm_level <- function(ac, param, out = TRUE){
   logf <- gsub("/", "\\\\", logf)
 
   cmd_output <- system2(file.path(param$gams_path, "gams.exe"), args = c(model,
-                                glue::glue("--gdx_input={input}"),
-                                glue::glue("--gdx_output={output}"),
-                                glue::glue("lf={logf}"),
-                                glue::glue("o={lst}"), "logoption 4"),
+                                glue::glue('--gdx_input="{input}"'),
+                                glue::glue('--gdx_output="{output}"'),
+                                glue::glue('lf="{logf}"'),
+                                glue::glue('o="{lst}"'), "logoption 4"),
                stdout = TRUE, stderr = TRUE)
 
   # gams_system_call <- glue::glue("{param$gams_path}/gams.exe {model} --gdx_input={input} --gdx_output={output} lf={logf} o={lst} logOption 4")
