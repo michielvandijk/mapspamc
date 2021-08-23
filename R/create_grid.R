@@ -40,13 +40,13 @@ create_grid <- function(param = NULL){
   adm_map <- adm_map %>%
     sf::st_transform(crs = "+init=epsg:4326")
   grid <- raster::crop(grid, adm_map)
-  values(grid) <- 1:ncell(grid) # Add ID numbers
+  raster::values(grid) <- 1:raster::ncell(grid) # Add ID numbers
   grid <- raster::mask(grid, adm_map)
-  grid <- trim(grid)
+  grid <- raster::trim(grid)
   names(grid) <- "gridID"
 
   temp_path <- file.path(param$spam_path, glue::glue("processed_data/maps/grid/{param$res}"))
   dir.create(temp_path, showWarnings = F, recursive = T)
-  writeRaster(grid, file.path(temp_path, glue::glue("grid_{param$res}_{param$year}_{param$iso3c}.tif")),
+  raster::writeRaster(grid, file.path(temp_path, glue::glue("grid_{param$res}_{param$year}_{param$iso3c}.tif")),
               overwrite = T)
 }

@@ -5,6 +5,13 @@ date: "03/04/2020"
 output: html_document
 ---
 
+# Doi badge to paper and sticker
+https://github.com/GuangchuangYu/badger
+https://github.com/GuangchuangYu/hexSticker
+
+# Solver
+- ALlow possibility to use other solver than MOSEK
+- Perhaps run GAMS over https://www.gams.com/latest/docs/S_KESTREL.html
 
 # create spam folders
 - creates two folders in raw_path, adm and subnational statistics, do we want this?
