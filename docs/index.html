@@ -143,15 +143,14 @@
 <a href="#mapspamc" class="anchor"></a>mapspamc</h1></div>
 <!-- badges: start -->
 
-<p>The aim of the <a href="https://iiasa.github.io/mapspamc">mapspamc R package</a> is to facilitate the creation of country level crop distribution maps, which can be used as input by the IIASA’s <a href="https://www.globiom.org/">Global Biosphere Management Model (GLOBIOM)</a>. GLOBIOM is a spatially explicit partial equilibrium model that is used to analyze the competition for land use between agriculture, forestry, and bioenergy. The model can be used for global and national level analysis (Valin et al. 2013; Leclère et al. 2014; Havlik et al. 2014). In the latter case, model output can be greatly improved by incorporating regionally specific information that is often provided by local stakeholders or can be taken from national statistics. Information on crop cover and the location of crops are a key driver of the model and it is therefore desirable to base these as much as possible on national sources of information.</p>
-<p>mapspamc provides the necessary infrastructure to run the Spatial Production Allocation Model for Country level studies (SPAMc). The model builds on the global version of SPAM (You and Wood 2006; You, Wood, and Wood-Sichra 2009; You et al. 2014; Yu et al. 2020), which uses an cross-entropy optimization approach to ‘pixelate’ national and subnational crop statistics on a spatial grid at a 5 arcmin resolution. SPAMc was specifically developed to support country level analysis and makes it possible to incorporate national sources of information and potentially create maps at a higher resolution of 30 arcsec (Van Dijk et al. 2020). The articles in the Background section provide more information on <a href="articles/crop_distribution_maps.html">Crop distribution maps</a> in general, the <a href="articles/model_description.html">model</a>, <a href="articles/data.html">input data</a> and an <a href="articles/appendix.html">Appendix</a> with additional information on specific topics. Apart from implementing SPAMc, mapspamc includes functions to aggregate the SPAMc output to the spatial (i.e. simulation units) and crop-level (18 major crops) format that is used by GLOBIOM.</p>
+<p>The aim of the <a href="https://iiasa.github.io/mapspamc">mapspamc R package</a> is to facilitate the creation of country level crop distribution maps. mapspamc provides the necessary infrastructure to run the Spatial Production Allocation Model for Country level studies (SPAMc). The model builds on the global version of SPAM (You and Wood 2006; You, Wood, and Wood-Sichra 2009; You et al. 2014; Yu et al. 2020), which uses an cross-entropy optimization approach to ‘pixelate’ national and subnational crop statistics on a spatial grid at a 5 arcmin resolution. SPAMc was specifically developed to support country level analysis and makes it possible to incorporate national sources of information and potentially create maps at a higher resolution of 30 arcsec (Van Dijk et al. 2020). The articles in the Background section provide more information on <a href="articles/crop_distribution_maps.html">Crop distribution maps</a> in general, the <a href="articles/model_description.html">model</a>, <a href="articles/data.html">input data</a> and an <a href="articles/appendix.html">Appendix</a> with additional information on specific topics. Apart from implementing SPAMc, mapspamc includes functions to aggregate the SPAMc output to the spatial (i.e. simulation units) and crop-level (18 major crops) format that is used by GLOBIOM.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>To install mapspamc:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"iiasa/mapspamc"</span><span class="op">)</span></code></pre></div>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"michielvandijk/mapspamc"</span><span class="op">)</span></code></pre></div>
 <p>Apart from the mapspamc package, several other pieces of software are essential to run SPAMc, which are described in the <a href="articles/software.html">Installation</a> section.</p>
 </div>
 <div id="preparation" class="section level2">
@@ -184,30 +183,21 @@
 <div id="references" class="section level2">
 <h2 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h2>
-<div id="refs" class="references">
-<div id="ref-Havlik2014">
-<p>Havlik, Petr, Hugo Valin, Mario Herrero, Michael Obersteiner, Erwin Schmid, Mariana C Rufino, Aline Mosnier, et al. 2014. “Climate change mitigation through livestock system transitions.” <em>Proceedings of the National Academy of Sciences of the United States of America</em> 111 (10): 3709–14. <a href="https://doi.org/10.1073/pnas.1308044111" class="uri">https://doi.org/10.1073/pnas.1308044111</a>.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-VanDijk2020" class="csl-entry">
+Van Dijk, Michiel, Ulrike Wood-Sichra, Yating Ru, Amanda Palazzo, Petr Havlik, and Liangzhi You. 2020. “<span class="nocase">Mapping the change in crop distribution over time using a data fusion approach</span>.”
 </div>
-<div id="ref-Leclere2014">
-<p>Leclère, D, Petr Havlik, S Fuss, E Schmid, A Mosnier, B Walsh, H Valin, Mario Herrero, N Khabarov, and M Obersteiner. 2014. “Climate change induced transformations of agricultural systems: insights from a global model.” <em>Environmental Research Letters</em> 9 (12): 124018. <a href="https://doi.org/10.1088/1748-9326/9/12/124018" class="uri">https://doi.org/10.1088/1748-9326/9/12/124018</a>.</p>
+<div id="ref-You2006" class="csl-entry">
+You, Liangzhi, and Stanley Wood. 2006. “<span class="nocase">An entropy approach to spatial disaggregation of agricultural production</span>.” <em>Agricultural Systems</em> 90 (1): 329–47. <a href="https://doi.org/10.1016/j.agsy.2006.01.008" class="uri">https://doi.org/10.1016/j.agsy.2006.01.008</a>.
 </div>
-<div id="ref-Valin2013b">
-<p>Valin, H, Petr Havlik, A Mosnier, Mario Herrero, E Schmid, and M Obersteiner. 2013. “Agricultural productivity and greenhouse gas emissions: Trade-offs or synergies between mitigation and food security?” <em>Environmental Research Letters</em> 8 (3): 1–9. <a href="https://doi.org/10.1088/1748-9326/8/3/035019" class="uri">https://doi.org/10.1088/1748-9326/8/3/035019</a>.</p>
+<div id="ref-You2009" class="csl-entry">
+You, Liangzhi, Stanley Wood, and Ulrike Wood-Sichra. 2009. “<span class="nocase">Generating plausible crop distribution maps for Sub-Saharan Africa using a spatially disaggregated data fusion and optimization approach</span>.” <em>Agricultural Systems</em> 99 (2): 126–40. <a href="https://doi.org/10.1016/j.agsy.2008.11.003" class="uri">https://doi.org/10.1016/j.agsy.2008.11.003</a>.
 </div>
-<div id="ref-VanDijk2020">
-<p>Van Dijk, Michiel, Ulrike Wood-Sichra, Yating Ru, Amanda Palazzo, Petr Havlik, and Liangzhi You. 2020. “Mapping the change in crop distribution over time using a data fusion approach.”</p>
+<div id="ref-You2014a" class="csl-entry">
+You, Liangzhi, Stanley Wood, Ulrike Wood-Sichra, and Wenbin Wu. 2014. “<span class="nocase">Generating global crop distribution maps: From census to grid</span>.” <em>Agricultural Systems</em> 127: 53–60. <a href="https://doi.org/10.1016/j.agsy.2014.01.002" class="uri">https://doi.org/10.1016/j.agsy.2014.01.002</a>.
 </div>
-<div id="ref-You2006">
-<p>You, Liangzhi, and Stanley Wood. 2006. “An entropy approach to spatial disaggregation of agricultural production.” <em>Agricultural Systems</em> 90 (1): 329–47. <a href="https://doi.org/10.1016/j.agsy.2006.01.008" class="uri">https://doi.org/10.1016/j.agsy.2006.01.008</a>.</p>
-</div>
-<div id="ref-You2009">
-<p>You, Liangzhi, Stanley Wood, and Ulrike Wood-Sichra. 2009. “Generating plausible crop distribution maps for Sub-Saharan Africa using a spatially disaggregated data fusion and optimization approach.” <em>Agricultural Systems</em> 99 (2): 126–40. <a href="https://doi.org/10.1016/j.agsy.2008.11.003" class="uri">https://doi.org/10.1016/j.agsy.2008.11.003</a>.</p>
-</div>
-<div id="ref-You2014a">
-<p>You, Liangzhi, Stanley Wood, Ulrike Wood-Sichra, and Wenbin Wu. 2014. “Generating global crop distribution maps: From census to grid.” <em>Agricultural Systems</em> 127: 53–60. <a href="https://doi.org/10.1016/j.agsy.2014.01.002" class="uri">https://doi.org/10.1016/j.agsy.2014.01.002</a>.</p>
-</div>
-<div id="ref-Yu2020">
-<p>Yu, Qiangyi, Liangzhi You, Ulrike Wood-Sichra, Yating Ru, Alison K. B. Joglekar, Steffen Fritz, Wei Xiong, Wenbin Wu, and Peng Yang. 2020. “A cultivated planet in 2010: 2. the global gridded agricultural production maps.” <em>Earth System Science Data</em>. <a href="https://doi.org/https://doi.org/10.5194/essd-2020-11" class="uri">https://doi.org/https://doi.org/10.5194/essd-2020-11</a>.</p>
+<div id="ref-Yu2020" class="csl-entry">
+Yu, Qiangyi, Liangzhi You, Ulrike Wood-Sichra, Yating Ru, Alison K. B. Joglekar, Steffen Fritz, Wei Xiong, Wenbin Wu, and Peng Yang. 2020. “<span class="nocase">A cultivated planet in 2010: 2. the global gridded agricultural production maps</span>.” <em>Earth System Science Data</em>. <a href="https://doi.org/" class="uri">https://doi.org/</a><a href="https://doi.org/10.5194/essd-2020-11" class="uri">https://doi.org/10.5194/essd-2020-11</a>.
 </div>
 </div>
 </div>
