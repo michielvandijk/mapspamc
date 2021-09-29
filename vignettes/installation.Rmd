@@ -62,7 +62,7 @@ To install mapspamc, which is not on CRAN, one first has to install the **remote
 ```{r, eval=FALSE}
 install.packages("remotes")
 library(remotes)
-remotes::install_github("iiasa/mapspamc")
+remotes::install_github("michielvandijk/mapspamc")
 ```
 
 To interface between R and GAMS the GDXRRW package is required. Unfortunately, this package is also not available or via Github and therefore has to be installed. The package can be found [here](https://support.gams.com/gdxrrw:interfacing_gams_and_r)

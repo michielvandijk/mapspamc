@@ -32,7 +32,7 @@ To install mapspamc:
 
 ``` r
 install.packages("remotes")
-remotes::install_github("iiasa/mapspamc")
+remotes::install_github("michielvandijk/mapspamc")
 ```
 Apart from the mapspamc package, several other pieces of software are essential to run SPAMc, which are described in the [Installation](articles/software.html) section.
 
