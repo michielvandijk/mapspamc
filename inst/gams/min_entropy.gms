@@ -280,6 +280,6 @@ report('min_entropy', 'resusd') = min_ent.resusd;
 execute_unload "%gdx_output%",
 adm_area, cl crop_area, scalef, ir_crop, ir_area, entropy,
 alloc, palloc, report, sum_cl_slack_l, sum_adm_slack_l, sum_ir_slack_l, entropy_l,
-ir_slack_l, adm_slack_l, cl_slack_l;
+ir_slack_l, adm_slack_l, cl_slack_l, sum_all_slack_l;
 
 $onListing

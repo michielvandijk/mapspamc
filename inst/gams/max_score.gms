@@ -303,6 +303,6 @@ report('min_all_slack', 'sum_s_slack') = sum_s_slack_l;
 execute_unload "%gdx_output%",
 adm_area, cl crop_area, scalef, ir_crop, ir_area, scores, rur_pop_share,
 alloc, palloc, report, sum_cl_slack_l, sum_adm_slack_l, sum_ir_slack_l, sum_s_slack_l, sum_score_l,
-ir_slack_l, adm_slack_l, s_slack_l, cl_slack_l, rur_pop_alloc;
+ir_slack_l, adm_slack_l, s_slack_l, cl_slack_l, sum_all_slack_l, rur_pop_alloc;
 
 $onListing
