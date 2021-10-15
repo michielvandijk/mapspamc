@@ -53,8 +53,9 @@ combine_results <- function(param, cut = 0.0001, out = FALSE) {
    dplyr::mutate(ha = pa*ci) %>%
    dplyr::select(gridID, crop, system, ha, pa, everything(), pa, ha))
 
+ model_folder <- create_model_folder(param)
  temp_path <- file.path(param$spam_path,
-                        glue::glue("processed_data/results/{param$res}/{param$model}"))
+                        glue::glue("processed_data/results/{model_folder}"))
  dir.create(temp_path, showWarnings = F, recursive = T)
 
  # Remove pa values smaller than cut. Both pa and ha are removed for consistency

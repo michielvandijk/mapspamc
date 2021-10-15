@@ -181,8 +181,9 @@ combine_inputs_adm_level <- function(ac, param){
 
 
   ############### SAVE ###############
+  model_folder <- create_model_folder(param)
   temp_path <- file.path(param$spam_path,
-                         glue::glue("processed_data/intermediate_output/{ac}/{param$res}"))
+                         glue::glue("processed_data/intermediate_output/{model_folder}/{ac}"))
   dir.create(temp_path, recursive = T, showWarnings = F)
 
   # Prepare GDX

@@ -51,9 +51,11 @@ split_statistics <- function(ac, ha, fs, ci, param){
     tidyr::spread(crop, pa) %>%
     dplyr::arrange(adm_code, adm_name, adm_level)
 
+  model_folder <- create_model_folder(param)
   temp_path <- file.path(param$spam_path,
-                         glue::glue("processed_data/intermediate_output/{ac}/{param$res}"))
+                         glue::glue("processed_data/intermediate_output/{model_folder}/{ac}"))
   dir.create(temp_path, recursive = T, showWarnings = F)
+
   readr::write_csv(pa_adm, file.path(temp_path,
                               glue::glue("pa_{param$year}_{ac}_{param$iso3c}.csv")))
   readr::write_csv(pa_fs_adm, file.path(temp_path,

@@ -126,4 +126,8 @@ setup_gams <- function(param) {
     }
 }
 
+create_model_folder <- function(param){
+    model_folder <- glue::glue("{param$model}_{param$resolution}_adm_level_{param$adm_level}_solve_level_{param$solve_level}")
+    return(model_folder)
+}
 

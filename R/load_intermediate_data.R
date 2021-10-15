@@ -6,9 +6,10 @@ load_intermediate_data <- function(fl, adm_code, param, local = TRUE, mess = TRU
                   several.ok = TRUE)
   load_list <- list()
 
+  model_folder <- create_model_folder(param)
   if("cl" %in% fl) {
     file <- file.path(param$spam_path,
-      glue::glue("processed_data/intermediate_output/{adm_code}/{param$res}/cl_{param$res}_{param$year}_{adm_code}_{param$iso3c}.rds"))
+      glue::glue("processed_data/intermediate_output/{model_folder}/{adm_code}/cl_{param$res}_{param$year}_{adm_code}_{param$iso3c}.rds"))
     if(file.exists(file)) {
       load_list[["cl"]] <- readRDS(file)
     } else {
@@ -19,7 +20,7 @@ load_intermediate_data <- function(fl, adm_code, param, local = TRUE, mess = TRU
 
   if("ia" %in% fl) {
     file <- file.path(param$spam_path,
-      glue::glue("processed_data/intermediate_output/{adm_code}/{param$res}/ia_{param$res}_{param$year}_{adm_code}_{param$iso3c}.rds"))
+      glue::glue("processed_data/intermediate_output/{model_folder}/{adm_code}/ia_{param$res}_{param$year}_{adm_code}_{param$iso3c}.rds"))
     if(file.exists(file)) {
       load_list[["ia"]] <- readRDS(file)
     } else {
@@ -30,7 +31,7 @@ load_intermediate_data <- function(fl, adm_code, param, local = TRUE, mess = TRU
 
   if("pa" %in% fl) {
     file <- file.path(param$spam_path,
-      glue::glue("processed_data/intermediate_output/{adm_code}/{param$res}/pa_{param$year}_{adm_code}_{param$iso3c}.csv"))
+      glue::glue("processed_data/intermediate_output/{model_folder}/{adm_code}/pa_{param$year}_{adm_code}_{param$iso3c}.csv"))
     if(file.exists(file)) {
       load_list[["pa"]] <- suppressMessages(readr::read_csv(file))
     } else {
@@ -41,7 +42,7 @@ load_intermediate_data <- function(fl, adm_code, param, local = TRUE, mess = TRU
 
   if("pa_fs" %in% fl) {
     file <- file.path(param$spam_path,
-      glue::glue("processed_data/intermediate_output/{adm_code}/{param$res}/pa_fs_{param$year}_{adm_code}_{param$iso3c}.csv"))
+      glue::glue("processed_data/intermediate_output/{model_folder}/{adm_code}/pa_fs_{param$year}_{adm_code}_{param$iso3c}.csv"))
     if(file.exists(file)) {
       load_list[["pa_fs"]] <- suppressMessages(readr::read_csv(file))
     } else {
@@ -52,7 +53,7 @@ load_intermediate_data <- function(fl, adm_code, param, local = TRUE, mess = TRU
 
   if("bs" %in% fl) {
     file <- file.path(param$spam_path,
-                      glue::glue("processed_data/intermediate_output/{adm_code}/{param$res}/bs_{param$res}_{param$year}_{adm_code}_{param$iso3c}.rds"))
+                      glue::glue("processed_data/intermediate_output/{model_folder}/{adm_code}/bs_{param$res}_{param$year}_{adm_code}_{param$iso3c}.rds"))
     if(file.exists(file)) {
       load_list[["bs"]] <- readRDS(file)
     } else {
@@ -63,7 +64,7 @@ load_intermediate_data <- function(fl, adm_code, param, local = TRUE, mess = TRU
 
   if("py" %in% fl) {
     file <- file.path(param$spam_path,
-                      glue::glue("processed_data/intermediate_output/{adm_code}/{param$res}/py_{param$res}_{param$year}_{adm_code}_{param$iso3c}.rds"))
+                      glue::glue("processed_data/intermediate_output/{model_folder}/{adm_code}/py_{param$res}_{param$year}_{adm_code}_{param$iso3c}.rds"))
     if(file.exists(file)) {
       load_list[["py"]] <- readRDS(file)
     } else {
@@ -74,7 +75,7 @@ load_intermediate_data <- function(fl, adm_code, param, local = TRUE, mess = TRU
 
   if("cl_harm" %in% fl) {
     file <- file.path(param$spam_path,
-                      glue::glue("processed_data/intermediate_output/{adm_code}/{param$res}/cl_harm_{param$res}_{param$year}_{adm_code}_{param$iso3c}.rds"))
+                      glue::glue("processed_data/intermediate_output/{model_folder}/{adm_code}/cl_harm_{param$res}_{param$year}_{adm_code}_{param$iso3c}.rds"))
     if(file.exists(file)) {
       load_list[["cl_harm"]] <- readRDS(file)
     } else {
@@ -85,7 +86,7 @@ load_intermediate_data <- function(fl, adm_code, param, local = TRUE, mess = TRU
 
   if("ia_harm" %in% fl) {
     file <- file.path(param$spam_path,
-                      glue::glue("processed_data/intermediate_output/{adm_code}/{param$res}/ia_harm_{param$res}_{param$year}_{adm_code}_{param$iso3c}.rds"))
+                      glue::glue("processed_data/intermediate_output/{model_folder}/{adm_code}/ia_harm_{param$res}_{param$year}_{adm_code}_{param$iso3c}.rds"))
     if(file.exists(file)) {
       load_list[["ia_harm"]] <- readRDS(file)
     } else {
@@ -96,7 +97,7 @@ load_intermediate_data <- function(fl, adm_code, param, local = TRUE, mess = TRU
 
   if("rps" %in% fl) {
     file <- file.path(param$spam_path,
-                      glue::glue("processed_data/intermediate_output/{adm_code}/{param$res}/rps_{param$res}_{param$year}_{adm_code}_{param$iso3c}.rds"))
+                      glue::glue("processed_data/intermediate_output/{model_folder}/{adm_code}/rps_{param$res}_{param$year}_{adm_code}_{param$iso3c}.rds"))
     if(file.exists(file)) {
       load_list[["rps"]] <- readRDS(file)
     } else {
@@ -107,7 +108,7 @@ load_intermediate_data <- function(fl, adm_code, param, local = TRUE, mess = TRU
 
   if("scores" %in% fl) {
     file <- file.path(param$spam_path,
-                      glue::glue("processed_data/intermediate_output/{adm_code}/{param$res}/scores_{param$res}_{param$year}_{adm_code}_{param$iso3c}.rds"))
+                      glue::glue("processed_data/intermediate_output/{model_folder}/{adm_code}/scores_{param$res}_{param$year}_{adm_code}_{param$iso3c}.rds"))
     if(file.exists(file)) {
       load_list[["scores"]] <- readRDS(file)
     } else {
@@ -119,7 +120,7 @@ load_intermediate_data <- function(fl, adm_code, param, local = TRUE, mess = TRU
 
   if("priors" %in% fl) {
     file <- file.path(param$spam_path,
-                      glue::glue("processed_data/intermediate_output/{adm_code}/{param$res}/priors_{param$res}_{param$year}_{adm_code}_{param$iso3c}.rds"))
+                      glue::glue("processed_data/intermediate_output/{model_folder}/{adm_code}/priors_{param$res}_{param$year}_{adm_code}_{param$iso3c}.rds"))
     if(file.exists(file)) {
       load_list[["priors"]] <- readRDS(file)
     } else {

@@ -62,8 +62,9 @@ process_gaez <- function(file, var, lookup, ac, param) {
   }
 
   # Create log
+  model_folder <- create_model_folder(param)
   log_file = file(file.path(param$spam_path,
-    glue::glue("processed_data/intermediate_output/{ac}/{param$res}/log_{param$res}_{param$year}_{ac}_{param$iso3c}.log")))
+    glue::glue("processed_data/intermediate_output/{model_folder}/{ac}/log_{param$res}_{param$year}_{ac}_{param$iso3c}.log")))
   capture.output(file = log_file, append = TRUE, split = T,{
     if (no_rc) {
       cat("\nThere is no replacement crop for: ", crp_sys, "! All values are zero.")

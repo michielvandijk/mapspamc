@@ -5,6 +5,9 @@ date: "03/04/2020"
 output: html_document
 ---
 
+# Import of packages
+Only ggplot now but need to check what is really necessary
+
 # Doi badge to paper and sticker
 https://github.com/GuangchuangYu/badger
 https://github.com/GuangchuangYu/hexSticker
@@ -20,13 +23,19 @@ https://github.com/GuangchuangYu/hexSticker
 # Error messages
 create_statistics_template("ha", param) gives error if adm_list does not exist => need to improve message.
 
+- add check that compares adm_level = 2 with existence of e.g. adm2 level data in ha_stat . If this is not the case, the create_artificial_adm gives and error.
+
+- load_data and r functions include _tp1 instructions => need to be removed
+
 KEY!!
 Overlay of grid and acc shows that the extent is the same BUT actual selected cells are different on the edges (5 arcmin grid)!!! This means that allign rasters in combination with cutline does not select the same cells> Probably easiest solution is to use gdal to create the raster....perhaps create (1) create raster of ALL cellS touched by polygon and then run gdal...
 
 - need to illustrate the case when no subnational statistics are available. 
-
-
-
+- convert gather to pivot code and check if tidyr needs to be imported fully => function is better.
+- create function to wipe all model results
+- ensure that maps are deleted before the are created again. GDAL does not seem to overwrite!
+- note somewhere that all GAEZ maps are created to have substitute crops when data is NA throughout.
+- write all imported functions as dplyr::
 
 # Finish documentation and functions
 - load_data and add functions that load the data instead of repeating code.

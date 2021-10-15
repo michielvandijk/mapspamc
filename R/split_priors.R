@@ -29,7 +29,7 @@ split_priors <- function(ac, param){
   # Note that we normalize over adms to distribute the crops more evenly over adms.
   # If we would normalize over the whole country, crops for which we do not have adm information,
   # might be pushed to a very limited area.
-  pop_rural <- raster::mask(pop, urb, inverse = T) # Remove urban areas
+  pop_rural <- raster::mask(pop, sf::as_Spatial(urb), inverse = T) # Remove urban areas
   pop_rural <- as.data.frame(raster::rasterToPoints(raster::stack(grid, pop_rural))) %>%
     dplyr::select(gridID, pop) %>%
     dplyr::mutate(pop = ifelse(is.na(pop), 0, pop)) %>% # We assume zero population in case data is missing
@@ -42,6 +42,7 @@ split_priors <- function(ac, param){
     dplyr::ungroup() %>%
     dplyr::select(gridID, pop_norm) %>%
     dplyr::filter(gridID %in% unique(cl_harm$gridID))
+
 
 
   ## Accessibility
@@ -234,7 +235,8 @@ split_priors <- function(ac, param){
 
   ############### SAVE ###############
   # save
+  model_folder <- create_model_folder(param)
   saveRDS(prior_df, file.path(param$spam_path,
-    glue::glue("processed_data/intermediate_output/{ac}/{param$res}/priors_{param$res}_{param$year}_{ac}_{param$iso3c}.rds")))
+    glue::glue("processed_data/intermediate_output/{model_folder}/{ac}/priors_{param$res}_{param$year}_{ac}_{param$iso3c}.rds")))
 }
 

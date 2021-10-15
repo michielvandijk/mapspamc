@@ -13,19 +13,39 @@ param <- spam_par(spam_path = spamc_path,
                   year = 2010,
                   res = "5min",
                   adm_level = 2,
-                  solve_level = 0,
+                  solve_level = 1,
                   model = "min_entropy")
 
 # Show parameters
 print(param)
 
 library(gdxrrw)
+library(tidyverse)
 igdx(gams_path)
+library(glue)
 
-create_grid(param)
 
-ac <- "ZMB"
-var <- "biophysical_suitability"
-var <- "potential_yield"
-file <- cs_sel[1]
+
+# PREPARE PHYSICAL AREA ------------------------------------------------------------------
+prepare_physical_area(param)
+
+
+# CREATE SYNERGY CROPLAND INPUT ----------------------------------------------------------
+prepare_cropland(param)
+
+
+# PROCESS --------------------------------------------------------------------------------
+prepare_irrigated_area(param)
+
+
+# HARMONIZE INPUT DATA -------------------------------------------------------------------
+harmonize_inputs(param)
+
+# PREPARE SCORE --------------------------------------------------------------------------
+prepare_priors_and_scores(param)
+
+
+# COMBINE MODEL INPUTS -------------------------------------------------------------------
+combine_inputs(param)
+
 

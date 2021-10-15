@@ -28,7 +28,8 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 SystemRequirements: GAMS
 VignetteBuilder: knitr
-Imports: 
+Imports:
+    tidyr,
     dplyr,
     glue,
     countrycode,

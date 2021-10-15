@@ -4,13 +4,11 @@
 \name{mapspamc-package}
 \alias{mapspamc}
 \alias{mapspamc-package}
-\title{mapspamc: An R package to create crop distribution maps as input for GLOBIOM}
+\title{mapspamc: An R package to create crop distribution maps}
 \description{
 The aim of the mapspamc R package is to facilitate the
-    creation of country level crop distribution maps, which can be used as
-    input by the IIASA's Global Biosphere Management Model (GLOBIOM) for a
-    selected country. mapspamc provides the necessary
-    infrastructure to run the Spatial Production Allocation Model for
+    creation of country level crop distribution maps. mapspamc provides
+    the necessary infrastructure to run the Spatial Production Allocation Model for
     Country level studies (SPAMc). The model builds on the global version
     of SPAM (You et al., 2006; You et al., 2009 et al.; You et al., 2014
     and Yu et al., 2020), which use a cross-entropy optimization approach
@@ -18,25 +16,18 @@ The aim of the mapspamc R package is to facilitate the
     at a resolution of 5 arcmin. SPAMc was specifically developed to support
     country level analysis and makes it possible to incorporate national
     sources of information and create maps at a higher resolution of 30
-    arcsec. Van Dijk et al. (2020) provides an in-depth discussion of SPAMc
-    including an example for Southern Africa.
+    arcsec.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/iiasa/mapspamc}
-  \item Report bugs at \url{https://github.com/iiasa/mapspamc/issues}
+  \item \url{https://github.com/michielvandijk/mapspamc}
+  \item Report bugs at \url{https://github.com/michielvandijk/mapspamc/issues}
 }
 
 }
 \author{
 \strong{Maintainer}: Michiel Van Dijk \email{michiel.vandijk@wur.nl} (\href{https://orcid.org/0000-0002-5207-7304}{ORCID})
-
-Other contributors:
-\itemize{
-  \item Esther Boere \email{boere@iiasa.ac.at} (\href{https://orcid.org/0000-0003-3863-8731}{ORCID}) [contributor]
-  \item Amanda Palazzo \email{palazzo@iiasa.ac.at} (\href{https://orcid.org/0000-0001-8167-9403}{ORCID}) [contributor]
-}
 
 }
 \keyword{internal}

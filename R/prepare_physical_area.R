@@ -33,49 +33,49 @@ prepare_physical_area <- function(param){
 
     # wide to long format
     ha <- ha %>%
-        gather(crop, ha, -adm_name, -adm_code, -adm_level)
+        tidyr::gather(crop, ha, -adm_name, -adm_code, -adm_level)
 
     # Set -999 and empty string values
     ha <- ha %>%
-        mutate(ha = if_else(ha == -999, NA_real_, ha))
+        dplyr::mutate(ha = ifelse(ha == -999, NA_real_, ha))
 
     # filter out crops which values are all zero or NA
     crop_na_0 <- ha %>%
-        group_by(crop) %>%
-        filter(all(ha %in% c(0, NA))) %>%
+        dplyr::group_by(crop) %>%
+        dplyr::filter(all(ha %in% c(0, NA))) %>%
         dplyr::select(crop) %>%
         unique
 
     ha <- ha %>%
-        filter(!crop %in% crop_na_0$crop)
+        dplyr::filter(!crop %in% crop_na_0$crop)
 
     # Remove lower level adm data if it would somehow not be used
     ha <- ha %>%
-        filter(adm_level <= param$adm_level)
+        dplyr::filter(adm_level <= param$adm_level)
 
     # wide to long format
     fs <- fs %>%
-        gather(crop, fs, -adm_name, -adm_code, -adm_level, -system)
+        tidyr::gather(crop, fs, -adm_name, -adm_code, -adm_level, -system)
 
     # Set -999 and empty string values
     fs <- fs %>%
-        mutate(fs = if_else(fs == -999, NA_real_, fs))
+        dplyr::mutate(fs = ifelse(fs == -999, NA_real_, fs))
 
     # Select relevent crops using ha
     fs <- fs %>%
-        filter(crop %in% unique(ha$crop))
+        dplyr::filter(crop %in% unique(ha$crop))
 
     # wide to long format
     ci <- ci %>%
-        gather(crop, ci, -adm_name, -adm_code, -adm_level, -system)
+        tidyr::gather(crop, ci, -adm_name, -adm_code, -adm_level, -system)
 
     # Set -999 and empty string values
     ci <- ci %>%
-        mutate(ci = if_else(ci == -999, NA_real_, ci))
+        dplyr::mutate(ci = ifelse(ci == -999, NA_real_, ci))
 
     # Select relevent crops using ha
     ci <- ci %>%
-        filter(crop %in% unique(ha$crop))
+        dplyr::filter(crop %in% unique(ha$crop))
 
     # Save
     purrr::walk(adm_code_list, split_statistics, ha, fs, ci, param)

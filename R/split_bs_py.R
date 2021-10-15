@@ -1,8 +1,8 @@
 # Process_bs_py
 split_bs_py <- function(var, ac, param){
-
+  model_folder <- create_model_folder(param)
   temp_path <- file.path(param$spam_path,
-                         glue::glue("processed_data/intermediate_output/{ac}/{param$res}"))
+                         glue::glue("processed_data/intermediate_output/{model_folder}/{ac}"))
   dir.create(temp_path, showWarnings = FALSE, recursive = TRUE)
 
   if(var == "biophysical_suitability") {

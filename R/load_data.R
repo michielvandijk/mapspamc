@@ -63,6 +63,7 @@ load_data <- function(data, param, local = FALSE, mess = TRUE){
                         "gaez_replace",
                         "results", "results_tp1")))
 
+  model_folder <- create_model_folder(param)
   load_list <- list()
 
   if("grid" %in% data) {
@@ -249,7 +250,7 @@ load_data <- function(data, param, local = FALSE, mess = TRUE){
 
   if("results" %in% data) {
     file <- file.path(param$spam_path,
-                      glue::glue("processed_data/results/{param$res}/{param$model}/results_{param$res}_{param$year}_{param$iso3c}.rds"))
+                      glue::glue("processed_data/results/{model_folder}/results_{param$res}_{param$year}_{param$iso3c}.rds"))
     if(file.exists(file)) {
       load_list[["results"]] <-readRDS(file)
     } else {
