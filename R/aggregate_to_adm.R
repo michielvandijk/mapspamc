@@ -1,18 +1,21 @@
 #'@title Aggregate gridded SPAM-C results to administrative unit level
 #'
-#'@description `aggregate_to_adm` aggregates gridded results of the model specified by `alt_param` to the administrative
-#'unit level as specified by the `adm_level` parameter in `param`. The model described by `alt_param` must
-#'be identical to the `param` model apart from the `adm_level` parameter. By setting this value to a lower
-#'value a less constraint model is created. The output of `aggregate_to_adm` can be used as for a comparison
-#'the most detailed subnational information available as a way to validate the model.
+#'@description `aggregate_to_adm` aggregates gridded results of an alternative model specified by `alt_param`
+#' to the administrative unit level determined by `adm_level` of the target model specified by `param`.
+#' The model described by `alt_param` must be identical to the target model apart from the `adm_level`
+#' parameter, which is set to a less-detailed level. A comparison of the output of `aggregate_to_adm` with
+#' subnational information at the most detailed level available is a validation of the alternative model and,
+#' indirectly, also of the targer model.
 #'
 #'@param param
 #'@inheritParams create_spam_folders
 #'
-#'@param alt_param
-#'@inheritParams create_spam_folders
+#'@param alt_param Object of type spam_par that bundles all SPAM parameters, including core model folders,
+#'alpha-3 country code, year, spatial resolution, most detailed level at which subnational statistics are
+#'available, administrative unit level at which the model is solved and type of model.
 #'
-#'@return SPAM-C results aggregated to the administrative unit level specified in alt_param
+#'@return data.frame with SPAM-C results aggregated to the administrative unit level specified in
+#'`alt_param`.
 #'
 #'@examples
 #'\dontrun{
