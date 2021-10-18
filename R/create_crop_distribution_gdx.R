@@ -44,7 +44,7 @@ create_crop_distribution_gdx <- function(crop, param) {
     "Crop area (000 ha)"
   )
 
-  temp_path <- file.path(param$spam_path,
+  temp_path <- file.path(param$spamc_path,
                          glue::glue("processed_data/results/{param$res}/{param$model}"))
   dir.create(temp_path, showWarnings = F, recursive = T)
 

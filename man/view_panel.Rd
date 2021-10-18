@@ -13,7 +13,7 @@ one of the SPAMc four letter crop codes.}
 \item{var}{Character. The variable to be plotted. \code{var} has to be physical
 area (\code{"pa"}) or harvested area (\code{"ha"}).}
 
-\item{param}{Object of type \code{spam_par} that bundles all SPAM parameters,
+\item{param}{Object of type \code{spamc_par} that bundles all SPAM parameters,
 including core model folders, alpha-3 country code, year, spatial
 resolution, most detailed level at which subnational statistics are
 available, administrative unit level at which the model is solved and type of

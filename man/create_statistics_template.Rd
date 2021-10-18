@@ -10,7 +10,7 @@ create_statistics_template(type, param)
 \item{type}{Character vector that refers to the type of template that needs to
 be created. See details for allowed input.}
 
-\item{param}{Object of type \code{spam_par} that bundles all SPAM parameters,
+\item{param}{Object of type \code{spamc_par} that bundles all SPAM parameters,
 including core model folders, alpha-3 country code, year, spatial
 resolution, most detailed level at which subnational statistics are
 available, administrative unit level at which the model is solved and type of
@@ -31,7 +31,7 @@ levels are nested. This file needs to be created first by running
 \code{create_adm_list()}.
 
 The dimensions of the ha template are determined by adm level set by
-\code{spam_par()}, while the dimensions of the fs and cs templates (which are
+\code{spamc_par()}, while the dimensions of the fs and cs templates (which are
 identical) are determined by the solve level parameter.
 }
 \examples{

@@ -18,12 +18,12 @@
 #'
 #'@examples
 #'\dontrun{
-#'run_spam(param, out = FALSE)
+#'run_spamc(param, out = FALSE)
 #'}
 #'
 #'@export
-run_spam <- function(param, out = TRUE) {
-  stopifnot(inherits(param, "spam_par"))
+run_spamc <- function(param, out = TRUE) {
+  stopifnot(inherits(param, "spamc_par"))
   stopifnot(is.logical(out))
   cat("\n\n############### RUN SPAM ###############")
   load_data("adm_list", param, local = TRUE, mess = FALSE)

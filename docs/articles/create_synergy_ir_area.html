@@ -103,7 +103,7 @@
           <a href="../articles/harmonize_input_data.html">6. Harmonize input data</a>
         </li>
         <li>
-          <a href="../articles/run_model.html">7. Run model</a>
+          <a href="../articles/run_spamc.html">7. Run model</a>
         </li>
         <li>
           <a href="../articles/post_process.html">8. Post-processing</a>
@@ -180,7 +180,7 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">ir_max_map</span>)
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">adm_map</span>$<span class="no">geometry</span>, <span class="kw">add</span> <span class="kw">=</span> <span class="no">T</span>)</pre></body></html></div>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co">############### SAVE ###############</span>
-<span class="no">temp_path</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">param</span>$<span class="no">spam_path</span>, <span class="fu">glue</span>(<span class="st">"processed_data/maps/irrigated_area/{param$res}"</span>))
+<span class="no">temp_path</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">param</span>$<span class="no">spamc_path</span>, <span class="fu">glue</span>(<span class="st">"processed_data/maps/irrigated_area/{param$res}"</span>))
 <span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span>(<span class="no">temp_path</span>, <span class="kw">showWarnings</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">recursive</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
 
 <span class="fu">writeRaster</span>(<span class="no">ir_max_map</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">temp_path</span>,

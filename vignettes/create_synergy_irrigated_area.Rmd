@@ -52,7 +52,7 @@ crs(ir_max_map) <- crs(param$crs)
 Finally the maps are saved for further processing. Please do not change the folder location or the names. This will result in errors as the files cannot be loaded by follow up scripts. 
 
 ```{r eval = FALSE}
-temp_path <- file.path(param$spam_path, glue("processed_data/maps/irrigated_area/{param$res}"))
+temp_path <- file.path(param$spamc_path, glue("processed_data/maps/irrigated_area/{param$res}"))
 dir.create(temp_path, showWarnings = FALSE, recursive = TRUE)
 
 writeRaster(ir_max_map, file.path(temp_path,

@@ -103,7 +103,7 @@
           <a href="../articles/combine_input_data.html">6. Combine input data</a>
         </li>
         <li>
-          <a href="../articles/run_model.html">7. Run model</a>
+          <a href="../articles/run_spamc.html">7. Run model</a>
         </li>
         <li>
           <a href="../articles/post_process.html">8. Post-processing</a>
@@ -176,7 +176,7 @@
 <span class="fu">crs</span><span class="op">(</span><span class="va">ir_max_map</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu">crs</span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">crs</span><span class="op">)</span></code></pre></div>
 <p>Finally the maps are saved for further processing. Please do not change the folder location or the names. This will result in errors as the files cannot be loaded by follow up scripts.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">temp_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">spam_path</span>, <span class="fu">glue</span><span class="op">(</span><span class="st">"processed_data/maps/irrigated_area/{param$res}"</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">temp_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">spamc_path</span>, <span class="fu">glue</span><span class="op">(</span><span class="st">"processed_data/maps/irrigated_area/{param$res}"</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="va">temp_path</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="fu">writeRaster</span><span class="op">(</span><span class="va">ir_max_map</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">temp_path</span>,

@@ -7,13 +7,13 @@
 aggregate_to_adm(param, alt_param)
 }
 \arguments{
-\item{param}{Object of type \code{spam_par} that bundles all SPAM parameters,
+\item{param}{Object of type \code{spamc_par} that bundles all SPAM parameters,
 including core model folders, alpha-3 country code, year, spatial
 resolution, most detailed level at which subnational statistics are
 available, administrative unit level at which the model is solved and type of
 model.}
 
-\item{alt_param}{Object of type spam_par that bundles all SPAM parameters, including core model folders,
+\item{alt_param}{Object of type spamc_par that bundles all SPAM parameters, including core model folders,
 alpha-3 country code, year, spatial resolution, most detailed level at which subnational statistics are
 available, administrative unit level at which the model is solved and type of model.}
 }

@@ -11,7 +11,7 @@
 #'`create_adm_list()`.
 #'
 #'The dimensions of the ha template are determined by adm level set by
-#'`spam_par()`, while the dimensions of the fs and cs templates (which are
+#'`spamc_par()`, while the dimensions of the fs and cs templates (which are
 #'identical) are determined by the solve level parameter.
 ##'
 #'@param type Character vector that refers to the type of template that needs to
@@ -24,7 +24,7 @@
 #'
 #'@export
 create_statistics_template <- function(type, param) {
-  stopifnot(inherits(param, "spam_par"))
+  stopifnot(inherits(param, "spamc_par"))
   stopifnot(type %in% c("ha", "fs", "ci"))
 
   load_data(c("adm_list", "crop"), param, mess = FALSE, local = TRUE)

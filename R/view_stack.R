@@ -21,7 +21,7 @@
 #'
 #'@export
 view_stack <- function(crp, var, param, viewer = TRUE, polygon = TRUE){
-  stopifnot(inherits(param, "spam_par"))
+  stopifnot(inherits(param, "spamc_par"))
   stopifnot(is.logical(viewer))
   stopifnot(is.logical(polygon))
   stopifnot(var %in% c("pa", "ha"))

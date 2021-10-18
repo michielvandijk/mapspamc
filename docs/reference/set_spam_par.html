@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sets spam parameters — set_spam_par • mapspamc</title>
+<title>Sets spam parameters — set_spamc_par • mapspamc</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Sets spam parameters — set_spam_par" />
-<meta property="og:description" content="set_spam_par sets all required parameters for spam to run, including: model
+<meta property="og:title" content="Sets spam parameters — set_spamc_par" />
+<meta property="og:description" content="set_spamc_par sets all required parameters for spam to run, including: model
 folders, country, year, resolution, administrative unit information, solve
 level and model type." />
 
@@ -137,7 +137,7 @@ level and model type." />
           <a href="../articles/process_spatial_data.html">3. Process spatial data</a>
         </li>
         <li>
-          <a href="../articles/run_model.html">4. Run model</a>
+          <a href="../articles/run_spamc.html">4. Run model</a>
         </li>
         <li>
           <a href="../articles/post_process.html">5. Post-processing</a>
@@ -175,17 +175,17 @@ level and model type." />
     <div class="page-header">
     <h1>Sets spam parameters</h1>
     
-    <div class="hidden name"><code>set_spam_par.Rd</code></div>
+    <div class="hidden name"><code>set_spamc_par.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>set_spam_par</code> sets all required parameters for spam to run, including: model
+    <p><code>set_spamc_par</code> sets all required parameters for spam to run, including: model
 folders, country, year, resolution, administrative unit information, solve
 level and model type.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>set_spam_par</span>(
-  <span class='kw'>spam_path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>set_spamc_par</span>(
+  <span class='kw'>spamc_path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>raw_path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>iso3c_sel</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>year_sel</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -199,7 +199,7 @@ level and model type.</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>spam_path</th>
+      <th>spamc_path</th>
       <td><p>character string with the main SPAM folder. Note that R uses
 forward slash or double backslash to separate folder names.</p></td>
     </tr>
@@ -249,16 +249,16 @@ for more information.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>spam_par object</p>
+    <p>spamc_par object</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>set_spam_par</code> creates an object of class <code>spam_par</code>, which bundles all
+    <p><code>set_spamc_par</code> creates an object of class <code>spamc_par</code>, which bundles all
 required spam parameters set by the user, including: core model folders,
 country, year, resolution, depth of administrative units for which subnational
 statistics are available, level at which the model is solved and type of
 model.</p>
 <p><code><a href='create_spam_folders.html'>create_spam_folders</a></code> needs to be run before as it creates all
-core folders, including the <code>parameters</code> folder where <code>set_spam_par</code> output is
+core folders, including the <code>parameters</code> folder where <code>set_spamc_par</code> output is
 stored. An error will be thrown if these essential folders do not exist when
 the function is run.</p>
 <p><code><a href='https://rdrr.io/pkg/countrycode/man/countrycode.html'>countrycode</a></code> is used to determine the full country
@@ -268,7 +268,7 @@ country specific information from several datasets.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>set_spam_par</span>(<span class='kw'>spam_path</span> <span class='kw'>=</span> <span class='st'>"C:/Users/dijk158/spam_mwi"</span>,
+<span class='fu'>set_spamc_par</span>(<span class='kw'>spamc_path</span> <span class='kw'>=</span> <span class='st'>"C:/Users/dijk158/spam_mwi"</span>,
  <span class='kw'>iso3c_sel</span> <span class='kw'>=</span> <span class='st'>"MWI"</span>, <span class='kw'>year_sel</span> <span class='kw'>=</span> <span class='fl'>2010</span>, <span class='kw'>grid_sel</span> <span class='kw'>=</span> <span class='st'>"5min"</span>, <span class='kw'>adm_sel</span> <span class='kw'>=</span> <span class='fl'>1</span>,
  <span class='kw'>solve_sel</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>model_sel</span> <span class='kw'>=</span> <span class='st'>"max_score"</span>)
 }</div></pre>

@@ -10,7 +10,7 @@
 #'@param param
 #'@inheritParams create_spam_folders
 #'
-#'@param alt_param Object of type spam_par that bundles all SPAM parameters, including core model folders,
+#'@param alt_param Object of type spamc_par that bundles all SPAM parameters, including core model folders,
 #'alpha-3 country code, year, spatial resolution, most detailed level at which subnational statistics are
 #'available, administrative unit level at which the model is solved and type of model.
 #'
@@ -22,8 +22,8 @@
 #'}
 #'@export
 aggregate_to_adm <- function(param, alt_param){
-    stopifnot(inherits(param, "spam_par"))
-    stopifnot(inherits(alt_param, "spam_par"))
+    stopifnot(inherits(param, "spamc_par"))
+    stopifnot(inherits(alt_param, "spamc_par"))
 
     load_data("results", alt_param)
     load_data("adm_map", param)
@@ -57,5 +57,10 @@ aggregate_to_adm <- function(param, alt_param){
         return(df)
     }
     df_ag <- map_df(unique(results$crop),  aggregate_crop_adm)
+    model_folder <- create_model_folder(alt_param)
+    temp_path <- file.path(param$spamc_path,
+                           glue::glue("processed_data/results/{model_folder}"))
+    dir.create(temp_path, showWarnings = F, recursive = T)
+    saveRDS(df_ag, file.path(temp_path, glue::glue("results_aggregated to_adm{param$adm_level}_{param$year}_{param$iso3c}.rds")))
     return(df_ag)
 }

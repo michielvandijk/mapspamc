@@ -24,7 +24,7 @@ spamc_path <- "C:/Users/dijk158/Dropbox/mapspamc_mwi"
 create_spam_folders(spamc_path)
 
 # Set SPAMc parameters
-param <- spam_par(spam_path = spamc_path,
+param <- spamc_par(spamc_path = spamc_path,
                 iso3c = "MWI",
                 year = 2010,
                 res = "5min",

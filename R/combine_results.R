@@ -14,7 +14,7 @@
 #'}#'
 #'@export
 combine_results <- function(param, cut = 0.0001, out = FALSE) {
-   stopifnot(inherits(param, "spam_par"))
+   stopifnot(inherits(param, "spamc_par"))
    stopifnot(is.logical(out))
 
    # Test if gdxrrw and gams are installed.
@@ -54,7 +54,7 @@ combine_results <- function(param, cut = 0.0001, out = FALSE) {
    dplyr::select(gridID, crop, system, ha, pa, everything(), pa, ha))
 
  model_folder <- create_model_folder(param)
- temp_path <- file.path(param$spam_path,
+ temp_path <- file.path(param$spamc_path,
                         glue::glue("processed_data/results/{model_folder}"))
  dir.create(temp_path, showWarnings = F, recursive = T)
 

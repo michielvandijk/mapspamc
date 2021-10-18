@@ -28,7 +28,7 @@
 #'@export
 create_adm_map_pdf <- function(param, font_size = 3) {
 
-  stopifnot(inherits(param, "spam_par"))
+  stopifnot(inherits(param, "spamc_par"))
   cat("\n############### Create pdf with the location of administrative units ############### ")
   load_data("adm_map", param, mess = FALSE, local = TRUE)
 
@@ -89,7 +89,7 @@ create_adm_map_pdf <- function(param, font_size = 3) {
 
 
   ############### SAVE ###############
-  temp_path <- file.path(param$spam_path, glue::glue("processed_data/maps/adm/{param$res}" ))
+  temp_path <- file.path(param$spamc_path, glue::glue("processed_data/maps/adm/{param$res}" ))
   dir.create(temp_path, recursive = T, showWarnings = F)
 
   pdf(file = file.path(temp_path, glue::glue("adm_map_{param$res}_{param$yea}_{param$iso3c}.pdf")),

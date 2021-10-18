@@ -186,7 +186,7 @@ combine_model_input <- function(ac, param){
 
 
   ############### SAVE ###############
-  temp_path <- file.path(param$spam_path,
+  temp_path <- file.path(param$spamc_path,
                          glue::glue("processed_data/intermediate_output/{ac}"))
   dir.create(temp_path, recursive = T, showWarnings = F)
 

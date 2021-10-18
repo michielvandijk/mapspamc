@@ -72,7 +72,7 @@ Overlay of grid and acc shows that the extent is the same BUT actual selected ce
 - Also has FAO-spam concordance. Add those tables to the mappings Excel file!
 - Remove x, y from results file
 - CHeck allocations. E.g vege_L seems to be allocated to only two grid cells using max_score? Is this the same as on SPAM??
-- Add checks to all input, eg. Param has to be of class spam_par, etc.
+- Add checks to all input, eg. Param has to be of class spamc_par, etc.
 - Check if creation of temporary folders when clipping spatial data can be made more easy. Perhaps create at teh same time as folder structure?
 - Remove WSG84 adm maps
 - Need to put model type and solve level in results file and tifs so they can be distinguished!

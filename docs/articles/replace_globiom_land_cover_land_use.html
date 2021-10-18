@@ -103,7 +103,7 @@
           <a href="../articles/combine_input_data.html">6. Combine input data</a>
         </li>
         <li>
-          <a href="../articles/run_model.html">7. Run model</a>
+          <a href="../articles/run_spamc.html">7. Run model</a>
         </li>
         <li>
           <a href="../articles/post_process.html">8. Post-processing</a>
@@ -175,7 +175,7 @@
 <p>Finally, in case you want to add an additional crop, you have to update the table that maps the SPAMc crops to the 18 GLOBIOM crops (<code>mappings/crop2globiom.cvs</code>). Also see the <a href="add_new_crop_to_globiom.html">Adding a new crop to GLOBIOM</a>. In the example below, we will add coffee as a separate crop. The updated table will be loaded by <code><a href="../reference/create_globiom_input.html">create_globiom_input()</a></code> to aggregate the SPAMc crops to the GLOBIOM crop classification.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Select the new land cover map, in this case ESACCI</span>
-<span class="va">lc_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">spam_path</span>,
+<span class="va">lc_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">spamc_path</span>,
   <span class="fu">glue</span><span class="op">(</span><span class="st">"processed_data/maps/cropland/{param$res}/esa_raw_{param$year}_{param$iso3c}.tif"</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># Load the map</span>
 <span class="va">lc_map</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="op">(</span><span class="va">lc_file</span><span class="op">)</span>
@@ -185,10 +185,10 @@
 <span class="fu"><a href="../reference/load_data.html">load_data</a></span><span class="op">(</span><span class="st">"crop2globiom"</span>, <span class="va">param</span><span class="op">)</span>
 <span class="va">crop2globiom</span> <span class="op">&lt;-</span> <span class="va">crop2globiom</span> <span class="op">%&gt;%</span>
   <span class="fu">mutate</span><span class="op">(</span>globiom_crop <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">crop</span> <span class="op">==</span> <span class="st">"coff"</span>, <span class="st">"Coff"</span>, <span class="va">globiom_crop</span><span class="op">)</span><span class="op">)</span>
-<span class="fu">write_csv</span><span class="op">(</span><span class="va">crop2globiom</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">spam_path</span>, <span class="st">"mappings/crop2globiom.csv"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu">write_csv</span><span class="op">(</span><span class="va">crop2globiom</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">spamc_path</span>, <span class="st">"mappings/crop2globiom.csv"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># Load mapping of lc classes to globiom lc classes</span>
-<span class="va">lc_class2globiom</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">spam_path</span>, <span class="st">"mappings/esacci2globiom.csv"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">lc_class2globiom</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">spamc_path</span>, <span class="st">"mappings/esacci2globiom.csv"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># Aggregate land cover map to GLOBIOM land cover classes at simu level</span>
 <span class="co"># Not that the area will be expressed in 1000 ha, which is common in GLOBIOM!</span>

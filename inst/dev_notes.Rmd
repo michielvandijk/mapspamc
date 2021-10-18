@@ -24,7 +24,7 @@ https://github.com/GuangchuangYu/hexSticker
 create_statistics_template("ha", param) gives error if adm_list does not exist => need to improve message.
 
 - add check that compares adm_level = 2 with existence of e.g. adm2 level data in ha_stat . If this is not the case, the create_artificial_adm gives and error.
-
+- remove res from names as this is only one parameter of the model
 - load_data and r functions include _tp1 instructions => need to be removed
 
 KEY!!
@@ -97,7 +97,7 @@ Overlay of grid and acc shows that the extent is the same BUT actual selected ce
 - Also has FAO-spam concordance. Add those tables to the mappings Excel file!
 - Remove x, y from results file
 - CHeck allocations. E.g vege_L seems to be allocated to only two grid cells using max_score? Is this the same as on SPAM??
-- Add checks to all input, eg. Param has to be of class spam_par, etc.
+- Add checks to all input, eg. Param has to be of class spamc_par, etc.
 - Check if creation of temporary folders when clipping spatial data can be made more easy. Perhaps create at teh same time as folder structure?
 - Remove WSG84 adm maps
 - Need to put model type and solve level in results file and tifs so they can be distinguished!

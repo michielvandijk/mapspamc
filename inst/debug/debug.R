@@ -6,7 +6,7 @@ raw_path <- "C:/Users/dijk158/OneDrive - Wageningen University & Research/data/m
 gams_path <- "C:/MyPrograms/GAMS/win64/24.6"
 
 # Set SPAMc parameters
-param <- spam_par(spam_path = spamc_path,
+param <- spamc_par(spamc_path = spamc_path,
                   raw_path = raw_path,
                   gams_path = gams_path,
                   iso3c = "MWI",

@@ -20,7 +20,7 @@
 #'
 #'@export
 prepare_physical_area <- function(param){
-    stopifnot(inherits(param, "spam_par"))
+    stopifnot(inherits(param, "spamc_par"))
     cat("\n\n############### PREPARE PHYSICAL AREA ###############")
     load_data(c("adm_list", "ha", "fs", "ci"), param, local = TRUE, mess = FALSE)
 

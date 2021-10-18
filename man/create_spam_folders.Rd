@@ -7,7 +7,7 @@
 create_spam_folders(param = NULL)
 }
 \arguments{
-\item{param}{Object of type \code{spam_par} that bundles all SPAM parameters,
+\item{param}{Object of type \code{spamc_par} that bundles all SPAM parameters,
 including core model folders, alpha-3 country code, year, spatial
 resolution, most detailed level at which subnational statistics are
 available, administrative unit level at which the model is solved and type of
@@ -18,9 +18,9 @@ model.}
 data, processed data and parameters for SPAM.
 }
 \details{
-\code{create_spam_folders} creates two folders in the \code{spam_path} set by the user:
+\code{create_spam_folders} creates two folders in the \code{spamc_path} set by the user:
 mappings and processed_data, and creates a \code{raw_data} folder in the location
-as set in \code{spam_par}. In addition, it copies a number of cvs files into the
+as set in \code{spamc_par}. In addition, it copies a number of cvs files into the
 mappings folder, which contain several data tables that are needed to run the
 model and, if needed can be adjusted by the user.
 }

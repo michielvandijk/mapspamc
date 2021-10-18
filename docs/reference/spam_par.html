@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sets spam parameters — spam_par • mapspamc</title>
+<title>Sets spam parameters — spamc_par • mapspamc</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Sets spam parameters — spam_par" />
-<meta property="og:description" content="spam_par sets all required parameters for spam to run, including core model
+<meta property="og:title" content="Sets spam parameters — spamc_par" />
+<meta property="og:description" content="spamc_par sets all required parameters for spam to run, including core model
 folders, country code, year, spatial resolution, availability of subnational
 statistics, solve level, type of model and location of GAMS." />
 
@@ -146,7 +146,7 @@ statistics, solve level, type of model and location of GAMS." />
           <a href="../articles/combine_input_data.html">6. Combine input data</a>
         </li>
         <li>
-          <a href="../articles/run_model.html">7. Run model</a>
+          <a href="../articles/run_spamc.html">7. Run model</a>
         </li>
         <li>
           <a href="../articles/post_process.html">8. Post-processing</a>
@@ -183,18 +183,18 @@ statistics, solve level, type of model and location of GAMS." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Sets spam parameters</h1>
-    <small class="dont-index">Source: <a href='https://github.com/michielvandijk/mapspamc/blob/master/R/spam_par.R'><code>R/spam_par.R</code></a></small>
-    <div class="hidden name"><code>spam_par.Rd</code></div>
+    <small class="dont-index">Source: <a href='https://github.com/michielvandijk/mapspamc/blob/master/R/spamc_par.R'><code>R/spamc_par.R</code></a></small>
+    <div class="hidden name"><code>spamc_par.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>spam_par</code> sets all required parameters for spam to run, including core model
+    <p><code>spamc_par</code> sets all required parameters for spam to run, including core model
 folders, country code, year, spatial resolution, availability of subnational
 statistics, solve level, type of model and location of GAMS.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>spam_par</span><span class='op'>(</span>
-  spam_path <span class='op'>=</span> <span class='cn'>NULL</span>,
+    <pre class="usage"><span class='fu'>spamc_par</span><span class='op'>(</span>
+  spamc_path <span class='op'>=</span> <span class='cn'>NULL</span>,
   raw_path <span class='op'>=</span> <span class='cn'>NULL</span>,
   iso3c <span class='op'>=</span> <span class='cn'>NULL</span>,
   year <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -209,7 +209,7 @@ statistics, solve level, type of model and location of GAMS.</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>spam_path</th>
+      <th>spamc_path</th>
       <td><p>character string with the main SPAM folder. Note that R uses
 forward slash or double backslash to separate folder names.</p></td>
     </tr>
@@ -259,10 +259,10 @@ information.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>spam_par object</p>
+    <p>spamc_par object</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>spam_par</code> creates an object of class <code>spam_par</code>, which bundles all required
+    <p><code>spamc_par</code> creates an object of class <code>spamc_par</code>, which bundles all required
 spam parameters set by the user: SPAM folder, raw data folder, country alpha-3
 code and name, year, spatial resolution, most detailed level at which
 subnational statistics are available, administrative unit level at which the
@@ -279,7 +279,7 @@ country specific information from several datasets.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'>spam_par</span><span class='op'>(</span>spam_path <span class='op'>=</span> <span class='st'>"C:/Users/dijk158/Dropbox/mapspamc_mwi"</span>,
+<span class='fu'>spamc_par</span><span class='op'>(</span>spamc_path <span class='op'>=</span> <span class='st'>"C:/Users/dijk158/Dropbox/mapspamc_mwi"</span>,
 iso3c <span class='op'>=</span> <span class='st'>"MWI"</span>, year <span class='op'>=</span> <span class='fl'>2010</span>, res <span class='op'>=</span> <span class='st'>"5min"</span>, adm_level <span class='op'>=</span> <span class='fl'>1</span>,
 solve_level <span class='op'>=</span> <span class='fl'>0</span>, model <span class='op'>=</span> <span class='st'>"max_score"</span>, gams_path <span class='op'>=</span> <span class='st'>"C:/GAMS"</span><span class='op'>)</span>
 <span class='op'>}</span>

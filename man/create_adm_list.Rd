@@ -10,7 +10,7 @@ create_adm_list(x, param)
 \item{x}{object of class sf with the location of the administrative units
 including an attribute table with information on how they are nested}
 
-\item{param}{Object of type \code{spam_par} that bundles all SPAM parameters,
+\item{param}{Object of type \code{spamc_par} that bundles all SPAM parameters,
 including core model folders, alpha-3 country code, year, spatial
 resolution, most detailed level at which subnational statistics are
 available, administrative unit level at which the model is solved and type of

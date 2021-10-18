@@ -27,7 +27,7 @@
 #'}
 #'@export
 combine_inputs <- function(param) {
-  stopifnot(inherits(param, "spam_par"))
+  stopifnot(inherits(param, "spamc_par"))
 
   # Test if gdxrrw and gams are installed.
   setup_gams(param)

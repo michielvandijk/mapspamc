@@ -103,7 +103,7 @@
           <a href="../articles/combine_input_data.html">6. Combine input data</a>
         </li>
         <li>
-          <a href="../articles/run_model.html">7. Run model</a>
+          <a href="../articles/run_spamc.html">7. Run model</a>
         </li>
         <li>
           <a href="../articles/post_process.html">8. Post-processing</a>
@@ -153,7 +153,7 @@
 <div id="set-model-parameters-and-location-of-files" class="section level2">
 <h2 class="hasAnchor">
 <a href="#set-model-parameters-and-location-of-files" class="anchor"></a>Set model parameters and location of files</h2>
-<p>Nearly all functions in <code>mapspamc</code> need input on (1) key parameters that determine the design of the model and how it will be solved and (2) the location of raw and intermediate data, which will be further processed. Both pieces of information are bundled in a <code>spam_par</code> object that is created by the function <code>set_spam_par()</code>. Another piece of information that is also stored in the <code>spam_par</code> object is the coordinate reference system of the maps. This is automatically set to WSG84 (epsg:4326).</p>
+<p>Nearly all functions in <code>mapspamc</code> need input on (1) key parameters that determine the design of the model and how it will be solved and (2) the location of raw and intermediate data, which will be further processed. Both pieces of information are bundled in a <code>spamc_par</code> object that is created by the function <code>set_spamc_par()</code>. Another piece of information that is also stored in the <code>spamc_par</code> object is the coordinate reference system of the maps. This is automatically set to WSG84 (epsg:4326).</p>
 <p>The following model parameters need to be set before SPAM-C can be run:</p>
 <ul>
 <li><p><strong>iso3c country code (<code>iso3c</code>).</strong> The three letter ISO 3166-1 alpha-3 country code, also referred to as iso3c is used to extract national statistics from global datasets. A list of country codes can be found in <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3">Wikipedia</a>.</p></li>
@@ -165,7 +165,7 @@
 </ul>
 <p>Similarly, the following two folders need to be defined when setting up the model:</p>
 <ul>
-<li><p><strong>SPAM main folder location (<code>spam_path</code>).</strong> This folder will be used to store all model related data, including processed data, mapping tables, intermediate output, final results and, unless specified otherwise by the user, the raw data.</p></li>
+<li><p><strong>SPAM main folder location (<code>spamc_path</code>).</strong> This folder will be used to store all model related data, including processed data, mapping tables, intermediate output, final results and, unless specified otherwise by the user, the raw data.</p></li>
 <li><p><strong>Raw data folder (<code>raw_path</code>).</strong> Optionally the user can set a folder for the raw data. This might be convenient if hard disk capacity is insufficient to store the several gigabyte of data that are needed to store the global spatial datasets. In this case, a data server could be used to store the data.</p></li>
 </ul>
 <p>The example below sets the SPAM-C parameters for Malawi and stores them in an object called <code>param</code>. Param is an arbitrary name but we recommend not to change it as we refer to <code>param</code> in the documentation of most functions.</p>
@@ -178,7 +178,7 @@
 <span class="va">spamc_path</span> <span class="op">&lt;-</span> <span class="st">"C:/Users/dijk158/Dropbox/mapspamc_mwi"</span>
 
 <span class="co"># Set SPAM-C parameters</span>
-<span class="va">param</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spam_par.html">spam_par</a></span><span class="op">(</span>spam_path <span class="op">=</span> <span class="va">spamc_path</span>,
+<span class="va">param</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spamc_par.html">spamc_par</a></span><span class="op">(</span>spamc_path <span class="op">=</span> <span class="va">spamc_path</span>,
  iso3c <span class="op">=</span> <span class="st">"MWI"</span>,
  year <span class="op">=</span> <span class="fl">2010</span>,
  res <span class="op">=</span> <span class="st">"5min"</span>,
@@ -189,25 +189,26 @@
 
 <span class="co"># Show parameters</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">param</span><span class="op">)</span>
+<span class="co">#&gt; country name:  Malawi </span>
+<span class="co">#&gt; iso3n:  454 </span>
 <span class="co">#&gt; iso3c:  MWI </span>
+<span class="co">#&gt; fao code:  130 </span>
+<span class="co">#&gt; continent:  Africa </span>
 <span class="co">#&gt; year:  2010 </span>
+<span class="co">#&gt; model:  max_score </span>
 <span class="co">#&gt; resolution:  5min </span>
 <span class="co">#&gt; adm level:  1 </span>
 <span class="co">#&gt; solve level:  0 </span>
-<span class="co">#&gt; model:  max_score </span>
 <span class="co">#&gt; spam path:  C:/Users/dijk158/Dropbox/mapspamc_mwi </span>
 <span class="co">#&gt; raw data path:  C:/Users/dijk158/Dropbox/mapspamc_mwi/raw_data </span>
-<span class="co">#&gt; country name:  Malawi </span>
-<span class="co">#&gt; iso3n:  454 </span>
-<span class="co">#&gt; fao code:  130 </span>
-<span class="co">#&gt; continent:  Africa </span>
-<span class="co">#&gt; crs:  +init=epsg:4326 </span>
-<span class="co">#&gt; gams_path:</span></code></pre></div>
+<span class="co">#&gt; gams_path:  </span>
+<span class="co">#&gt; model folder:  max_score_5min_adm_level_1_solve_level_0 </span>
+<span class="co">#&gt; crs:  +init=epsg:4326</span></code></pre></div>
 </div>
 <div id="create-spam-c-folder-structure" class="section level2">
 <h2 class="hasAnchor">
 <a href="#create-spam-c-folder-structure" class="anchor"></a>Create SPAM-C folder structure</h2>
-<p><code>mapspamc</code> includes a function to create all necessary folders <code><a href="../reference/create_spam_folders.html">create_spam_folders()</a></code>. The only input required is <code>param</code> which contains all the model parameters. The function will create three folders: (1) <code>raw_data</code> is created in the main <code>spam_path</code> unless indicated otherwise by the user and serves to store all the raw input data, (2) <code>processed_data</code> will be created in the main <code>spam_path</code> and is used to save all the intermediary data products as well as the final results and (3) <code>mappings</code> will be created in the main <code>spam_path</code> and contains all the lists and mappings that are needed to define the model (e.g. number crops) and harmonize various data sources (concordance tables). All tables are in csv format and will be created automatically into the <code>mappings</code> folder. Note that it is possible to adjust some of these tables if needed (e.g. adding a new crop). <code><a href="../reference/create_spam_folders.html">create_spam_folders()</a></code> will only create csv files if the files do not exist. Hence, updated files will not be overwritten. If for some reason you want to recreate the original tables, simply remove the folder and/or files and they will be created again when <code>create_spam_folders</code> is run.</p>
+<p><code>mapspamc</code> includes a function to create all necessary folders <code><a href="../reference/create_spam_folders.html">create_spam_folders()</a></code>. The only input required is <code>param</code> which contains all the model parameters. The function will create three folders: (1) <code>raw_data</code> is created in the main <code>spamc_path</code> unless indicated otherwise by the user and serves to store all the raw input data, (2) <code>processed_data</code> will be created in the main <code>spamc_path</code> and is used to save all the intermediary data products as well as the final results and (3) <code>mappings</code> will be created in the main <code>spamc_path</code> and contains all the lists and mappings that are needed to define the model (e.g. number crops) and harmonize various data sources (concordance tables). All tables are in csv format and will be created automatically into the <code>mappings</code> folder. Note that it is possible to adjust some of these tables if needed (e.g. adding a new crop). <code><a href="../reference/create_spam_folders.html">create_spam_folders()</a></code> will only create csv files if the files do not exist. Hence, updated files will not be overwritten. If for some reason you want to recreate the original tables, simply remove the folder and/or files and they will be created again when <code>create_spam_folders</code> is run.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Create SPAM-C folder structure in the spamc_path</span>
 <span class="fu"><a href="../reference/create_spam_folders.html">create_spam_folders</a></span><span class="op">(</span><span class="va">param</span><span class="op">)</span></code></pre></div>
@@ -222,7 +223,7 @@
 <span class="va">iso3c_shp</span> <span class="op">&lt;-</span> <span class="st">"adm_2010_MWI.shp"</span>
 
 <span class="co"># load shapefile</span>
-<span class="va">adm_map_raw</span> <span class="op">&lt;-</span> <span class="fu">read_sf</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">spam_path</span>, <span class="fu">glue</span><span class="op">(</span><span class="st">"raw_data/adm/{iso3c_shp}"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">adm_map_raw</span> <span class="op">&lt;-</span> <span class="fu">read_sf</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">spamc_path</span>, <span class="fu">glue</span><span class="op">(</span><span class="st">"raw_data/adm/{iso3c_shp}"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># plot</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">adm_map_raw</span><span class="op">$</span><span class="va">geometry</span><span class="op">)</span>
@@ -286,7 +287,7 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># Save adm maps</span>
-<span class="va">temp_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">spam_path</span>, <span class="fu">glue</span><span class="op">(</span><span class="st">"processed_data/maps/adm/{param$res}"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">temp_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">spamc_path</span>, <span class="fu">glue</span><span class="op">(</span><span class="st">"processed_data/maps/adm/{param$res}"</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="va">temp_path</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">adm_map</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">temp_path</span>, <span class="fu">glue</span><span class="op">(</span><span class="st">"adm_map_{param$year}_{param$iso3c}.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>

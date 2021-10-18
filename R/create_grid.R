@@ -24,7 +24,7 @@
 create_grid <- function(param = NULL){
 
   load_data("adm_map", param, mess = FALSE, local = TRUE)
-  stopifnot(inherits(param, "spam_par"))
+  stopifnot(inherits(param, "spamc_par"))
   if(param$res == "5min") {
     grid_fact <- 12
     cat("\nResolution is", param$res)
@@ -45,7 +45,7 @@ create_grid <- function(param = NULL){
   grid <- raster::trim(grid)
   names(grid) <- "gridID"
 
-  temp_path <- file.path(param$spam_path, glue::glue("processed_data/maps/grid/{param$res}"))
+  temp_path <- file.path(param$spamc_path, glue::glue("processed_data/maps/grid/{param$res}"))
   dir.create(temp_path, showWarnings = F, recursive = T)
   raster::writeRaster(grid, file.path(temp_path, glue::glue("grid_{param$res}_{param$year}_{param$iso3c}.tif")),
               overwrite = T)

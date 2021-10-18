@@ -15,9 +15,9 @@ articles:
   post_process: post_process.html
   process_spatial_data: process_spatial_data.html
   process_subnational_statistics: process_subnational_statistics.html
-  run_model: run_model.html
+  run_spamc: run_spamc.html
   template: template.html
-last_built: 2021-09-29T14:19Z
+last_built: 2021-10-18T11:34Z
 urls:
   reference: https://michielvandijk.github.io/mapspamc/reference
   article: https://michielvandijk.github.io/mapspamc/articles

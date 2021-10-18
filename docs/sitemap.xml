@@ -4,6 +4,9 @@
     <loc>https://michielvandijk.github.io/mapspamc/index.html</loc>
   </url>
   <url>
+    <loc>https://michielvandijk.github.io/mapspamc/reference/aggregate_to_adm.html</loc>
+  </url>
+  <url>
     <loc>https://michielvandijk.github.io/mapspamc/reference/check_statistics.html</loc>
   </url>
   <url>
@@ -43,7 +46,7 @@
     <loc>https://michielvandijk.github.io/mapspamc/reference/load_data.html</loc>
   </url>
   <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/mapspam2globiom-package.html</loc>
+    <loc>https://michielvandijk.github.io/mapspamc/reference/mapspamc-package.html</loc>
   </url>
   <url>
     <loc>https://michielvandijk.github.io/mapspamc/reference/plus.html</loc>
@@ -70,10 +73,10 @@
     <loc>https://michielvandijk.github.io/mapspamc/reference/reaggregate_statistics.html</loc>
   </url>
   <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/run_spam.html</loc>
+    <loc>https://michielvandijk.github.io/mapspamc/reference/run_spamc.html</loc>
   </url>
   <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/spam_par.html</loc>
+    <loc>https://michielvandijk.github.io/mapspamc/reference/spamc_par.html</loc>
   </url>
   <url>
     <loc>https://michielvandijk.github.io/mapspamc/reference/view_panel.html</loc>
@@ -121,7 +124,7 @@
     <loc>https://michielvandijk.github.io/mapspamc/articles/process_subnational_statistics.html</loc>
   </url>
   <url>
-    <loc>https://michielvandijk.github.io/mapspamc/articles/run_model.html</loc>
+    <loc>https://michielvandijk.github.io/mapspamc/articles/run_spamc.html</loc>
   </url>
   <url>
     <loc>https://michielvandijk.github.io/mapspamc/articles/template.html</loc>

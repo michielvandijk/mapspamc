@@ -10,7 +10,7 @@ load_data(data, param, local = FALSE, mess = TRUE)
 \item{data}{character vector that refers to the data that is loaded. See
 details for allowed input.}
 
-\item{param}{Object of type \code{spam_par} that bundles all SPAM parameters,
+\item{param}{Object of type \code{spamc_par} that bundles all SPAM parameters,
 including core model folders, alpha-3 country code, year, spatial
 resolution, most detailed level at which subnational statistics are
 available, administrative unit level at which the model is solved and type of

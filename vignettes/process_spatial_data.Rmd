@@ -24,17 +24,17 @@ For this reason, we decided not to create specific functions to process the spat
 The code below illustrates the use of `align_rasters()` to clip the Malawi data from the global WorldPop map used in `select_worldpop.r`. Note that several data layers require additional or slightly different processing approach before they can be used. For example, the raw WorldPop dataset presents population density per grid cell at a resolution of 30 arcsec. If we want to run the model at a resolution of 5 arcmin, which has grid cells that are 100 times larger, the data needs to be summed when aggregating the grid cells. This is different from the standard options in `align_rasters()`, which uses a resampling approach when reprojecting the maps.^[For more information see the resampling section in the `gdalwarp()` documentation.]    
 
 ```{r, eval = FALSE}
-grid <- file.path(param$spam_path,
+grid <- file.path(param$spamc_path,
                   glue("processed_data/maps/grid/{param$res}/grid_{param$res}_{param$year}_{param$iso3c}.tif"))
-mask <- file.path(param$spam_path,
+mask <- file.path(param$spamc_path,
                   glue("processed_data/maps/adm/{param$res}/adm_map_{param$year}_{param$iso3c}.shp"))
 input <- file.path(param$raw_path, "worldpop/ppp_2010_1km_Aggregated.tif")
-output <- file.path(param$spam_path,
+output <- file.path(param$spamc_path,
                   glue("processed_data/maps/population/{param$res}/pop_{param$res}_{param$year}_{param$iso3c}.tif"))
 
 if(param$res == "30sec") {
   
-  temp_path <- file.path(param$spam_path, glue("processed_data/maps/population/{param$res}"))
+  temp_path <- file.path(param$spamc_path, glue("processed_data/maps/population/{param$res}"))
   dir.create(temp_path, showWarnings = FALSE, recursive = TRUE)
   
   # Warp and mask

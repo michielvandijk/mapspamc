@@ -94,7 +94,7 @@
           <a href="../articles/process_spatial_data.html">3. Process spatial data</a>
         </li>
         <li>
-          <a href="../articles/run_model.html">4. Run model</a>
+          <a href="../articles/run_spamc.html">4. Run model</a>
         </li>
         <li>
           <a href="../articles/post_process.html">5. Post-processing</a>
@@ -158,9 +158,9 @@
 <div id="set-model-parameters-and-location-of-files" class="section level2">
 <h2 class="hasAnchor">
 <a href="#set-model-parameters-and-location-of-files" class="anchor"></a>Set model parameters and location of files</h2>
-<p>Nearly all functions in <code>mapspamc</code> need input on (1) key parameters that determine the design of the model and how will be solved and (2) the location of raw and intermediate data, which will be processed (see <a href="model_structure.html">model structure</a>. Both pieces of information are bundled and stored by the function <code><a href="../reference/set_spam_par.html">set_spam_par()</a></code> in a <code>spam_par</code> object.</p>
+<p>Nearly all functions in <code>mapspamc</code> need input on (1) key parameters that determine the design of the model and how will be solved and (2) the location of raw and intermediate data, which will be processed (see <a href="model_structure.html">model structure</a>. Both pieces of information are bundled and stored by the function <code><a href="../reference/set_spamc_par.html">set_spamc_par()</a></code> in a <code>spamc_par</code> object.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># Set SPAMc parameters</span>
-<span class="no">par</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/set_spam_par.html">set_spam_par</a></span>(<span class="kw">spam_path</span> <span class="kw">=</span> <span class="no">spamc_path</span>,
+<span class="no">par</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/set_spamc_par.html">set_spamc_par</a></span>(<span class="kw">spamc_path</span> <span class="kw">=</span> <span class="no">spamc_path</span>,
  <span class="kw">iso3c_sel</span> <span class="kw">=</span> <span class="st">"MWI"</span>,
  <span class="kw">year_sel</span> <span class="kw">=</span> <span class="fl">2010</span>,
  <span class="kw">grid_sel</span> <span class="kw">=</span> <span class="st">"5min"</span>,
@@ -170,7 +170,7 @@
 
 <span class="co"># check class</span>
 <span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span>(<span class="no">par</span>)
-<span class="co">#&gt; [1] "spam_par"</span>
+<span class="co">#&gt; [1] "spamc_par"</span>
 
 <span class="co"># Show parameters</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">par</span>)
@@ -188,9 +188,9 @@
 <span class="co">#&gt; iso3n:  454 </span>
 <span class="co">#&gt; fao code:  130 </span>
 <span class="co">#&gt; continent:</span></pre></body></html></div>
-<p>This object need to be saved in the <code>parameters</code> folder that was created together with all the other folders when running <code>create_spam_folders</code>. Elements in a <code>spam_par</code> object class can be extracted by using the dollar sign ($). This feature is used to save <code>par</code> the temporary object of class <code>spam_par</code> into the relevant folder.</p>
+<p>This object need to be saved in the <code>parameters</code> folder that was created together with all the other folders when running <code>create_spam_folders</code>. Elements in a <code>spamc_par</code> object class can be extracted by using the dollar sign ($). This feature is used to save <code>par</code> the temporary object of class <code>spamc_par</code> into the relevant folder.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co"># Save </span>
-<span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span>(<span class="no">par</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">par</span>$<span class="no">spam_path</span>, <span class="st">"parameters/spam_par.rds"</span>))</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span>(<span class="no">par</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">par</span>$<span class="no">spamc_path</span>, <span class="st">"parameters/spamc_par.rds"</span>))</pre></body></html></div>
 <p>That is all it takes to set up the SPAMc model! The next step is processing the <a href="process_subnat_stat.html">raw subnational statistics</a> and <a href="process_spatial_data.html">spatial data</a>.</p>
 </div>
   </div>

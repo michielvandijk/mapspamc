@@ -75,7 +75,7 @@ a new crop in GLOBIOM, which both require SPAMc output:
 5.  [Create synergy irrigated area
     map](articles/create_synergy_irrigated_area.html)
 6.  [Combine input data](articles/combine_input_data.html)
-7.  [Run model](articles/run_model.html)
+7.  [Run model](articles/run_spamc.html)
 8.  [Post-processing](articles/post_process.html)
 9.  [Replace GLOBIOM land use and land
     cover](articles/replace_globiom_land_cover_land_use.html)

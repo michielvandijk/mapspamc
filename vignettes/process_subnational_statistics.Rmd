@@ -27,7 +27,7 @@ library(magrittr)
 spamc_path <- "C:/Users/dijk158/Dropbox/mapspamc_mwi"
 
 # Set SPAM-C parameters
-param <- spam_par(spam_path = spamc_path,
+param <- spamc_par(spamc_path = spamc_path,
  iso3c = "MWI",
  year = 2010,
  res = "5min",
@@ -78,7 +78,7 @@ It is the best to start with processing the harvest area statistics and then wor
 
 All crop statistics need to be stored in the **wide** format. With this we mean that the first four columns of the data table list the administrative unit code (`adm_code`), name (`adm_name`), level (`adm_level`) and in case of farming system shares or cropping intensity data, the farming system (`system`), followed by named columns, one for each crop, with harvested area, farming system shares or cropping intensity per subnational unit. `adm_name` and `adm_code` must be provided up to the most detailed administrative unit for which data is available. Hence, in case level 2 data is available, data should be supplied for level 0, 1 and 2. In case only level 1 data is available, data should be supplied for level 0 and level 1.  
 
-`create_statistics_template()` will create templates for the ha, fs and ci data files - also see the Malawi ha, fs and ci files for examples.  The number and depth of the administrative units will be determined by the model parameters stored in the `spam_par` object as well as the `adm_list` file that is created with `create_adm_list()`. By default, the template will have columns for all 40 SPAM-C crops. 
+`create_statistics_template()` will create templates for the ha, fs and ci data files - also see the Malawi ha, fs and ci files for examples.  The number and depth of the administrative units will be determined by the model parameters stored in the `spamc_par` object as well as the `adm_list` file that is created with `create_adm_list()`. By default, the template will have columns for all 40 SPAM-C crops. 
 
 You can save the template as csv file and use it as a basis to prepare the statistics. Note that is is essential that you follow the template closely! Adding or removing administrative units will result in errors as the data no longer matches with the map that contains the location of the administrative units. See below for more information how to deal with missing crop information. In case of Malawi, most of the data was already in the right format so we did not use the templates.
 
@@ -190,9 +190,9 @@ ha_df <- ha_df %>%
 Finally the three files (ha, fs and ci), need to be saved in the `processed_data/agricultural_statistics folders. It is important to use the correct names otherwise other functions cannot find the data. 
 
 ```{r eval = FALSE}
-write_csv(ha_df, file.path(param$spam_path, glue("processed_data/agricultural_statistics/ha_adm_{param$year}_{param$iso3c}.csv")))
-write_csv(fs_df, file.path(param$spam_path, glue("processed_data/agricultural_statistics/fs_adm_{param$year}_{param$iso3c}.csv")))
-write_csv(ci_df, file.path(param$spam_path, glue("processed_data/agricultural_statistics/ci_adm_{param$year}_{param$iso3c}.csv")))
+write_csv(ha_df, file.path(param$spamc_path, glue("processed_data/agricultural_statistics/ha_adm_{param$year}_{param$iso3c}.csv")))
+write_csv(fs_df, file.path(param$spamc_path, glue("processed_data/agricultural_statistics/fs_adm_{param$year}_{param$iso3c}.csv")))
+write_csv(ci_df, file.path(param$spamc_path, glue("processed_data/agricultural_statistics/ci_adm_{param$year}_{param$iso3c}.csv")))
 
 ```
 

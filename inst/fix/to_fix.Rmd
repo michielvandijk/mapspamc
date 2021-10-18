@@ -14,7 +14,7 @@ output: pdf_document
 # Functions
 - replace_gaez: At the moment when a suitability or py is zero for an adm and no replacement crop is stated in replace_gaez.csv it returns an error. Need to add message and to set fixed replacements. Also perhaps develop a function that analyzes all areas and indicates where gaez replace needs to be set.
 
-- run_spam(): If combine_inputs() is not run it returns an error. Probably all functions return an error if the previous step is not run. Proper error warnings should be added
+- run_spamc(): If combine_inputs() is not run it returns an error. Probably all functions return an error if the previous step is not run. Proper error warnings should be added
 
 - view_stack("rice", var = "ha", param) does not work for GMB. Unknow error
 

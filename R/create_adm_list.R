@@ -26,11 +26,11 @@
 
 #'
 create_adm_list <- function(x, param) {
-  stopifnot(inherits(param, "spam_par"))
+  stopifnot(inherits(param, "spamc_par"))
   # Create adm_list
   adm_list <- x %>%
     sf::st_drop_geometry()
 
   readr::write_csv(adm_list,
-    file.path(param$spam_path, glue::glue("processed_data/lists/adm_list_{param$year}_{param$iso3c}.csv")))
+    file.path(param$spamc_path, glue::glue("processed_data/lists/adm_list_{param$year}_{param$iso3c}.csv")))
 }

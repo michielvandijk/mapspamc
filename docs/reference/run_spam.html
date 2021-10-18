@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Runs SPAMc at the set administrative unit level — run_spam • mapspamc</title>
+<title>Runs SPAMc at the set administrative unit level — run_spamc • mapspamc</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Runs SPAMc at the set administrative unit level — run_spam" />
+<meta property="og:title" content="Runs SPAMc at the set administrative unit level — run_spamc" />
 <meta property="og:description" content="Run the selected model (min_entropy or max_score) and runs it in
 GAMS. If model_sel = 1, the model is run for each individual
 administrative unit at level 1. If model_sel = 0 the model is run only
@@ -154,7 +154,7 @@ model log." />
           <a href="../articles/combine_input_data.html">6. Combine input data</a>
         </li>
         <li>
-          <a href="../articles/run_model.html">7. Run model</a>
+          <a href="../articles/run_spamc.html">7. Run model</a>
         </li>
         <li>
           <a href="../articles/post_process.html">8. Post-processing</a>
@@ -191,8 +191,8 @@ model log." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Runs SPAMc at the set administrative unit level</h1>
-    <small class="dont-index">Source: <a href='https://github.com/michielvandijk/mapspamc/blob/master/R/run_spam.R'><code>R/run_spam.R</code></a></small>
-    <div class="hidden name"><code>run_spam.Rd</code></div>
+    <small class="dont-index">Source: <a href='https://github.com/michielvandijk/mapspamc/blob/master/R/run_spamc.R'><code>R/run_spamc.R</code></a></small>
+    <div class="hidden name"><code>run_spamc.Rd</code></div>
     </div>
 
     <div class="ref-description">
@@ -209,14 +209,14 @@ computer runs out of memory and an error message will be printed in the
 model log.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>run_spam</span><span class='op'>(</span><span class='va'>param</span>, out <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>run_spamc</span><span class='op'>(</span><span class='va'>param</span>, out <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>param</th>
-      <td><p>Object of type <code>spam_par</code> that bundles all SPAM parameters,
+      <td><p>Object of type <code>spamc_par</code> that bundles all SPAM parameters,
 including core model folders, alpha-3 country code, year, spatial
 resolution, most detailed level at which subnational statistics are
 available, administrative unit level at which the model is solved and type of
@@ -231,7 +231,7 @@ model.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'>run_spam</span><span class='op'>(</span><span class='va'>param</span>, out <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='fu'>run_spamc</span><span class='op'>(</span><span class='va'>param</span>, out <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 <span class='op'>}</span>
 
 </div></pre>

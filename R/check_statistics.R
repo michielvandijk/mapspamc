@@ -13,7 +13,7 @@
 #'
 #'@export
 check_statistics <- function(df, param, out = FALSE){
-    stopifnot(inherits(param, "spam_par"))
+    stopifnot(inherits(param, "spamc_par"))
     stopifnot(is.logical(out))
 
     if(param$adm_level == 2) {
