@@ -4,6 +4,15 @@ author: "Michiel van Dijk"
 date: "03/04/2020"
 output: html_document
 ---
+# Negative artificial adm values
+- need to do a check if data is inconsistent when calculating artifiical adms.
+- EGY old file is an example, eg. EG24, where total maize ha in adm2 > adm1 total, while two adm2 have NAs...
+
+# all cropping systems irrigated gives warnings as some priors assume values. 
+- Add if statement to not calculate priors/scores when system is not present
+
+# Loading files, also when gdalwarp is called
+- Always need to add a file.exists statement and stop when it does not!
 
 # Import of packages
 Only ggplot now but need to check what is really necessary

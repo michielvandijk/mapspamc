@@ -61,7 +61,7 @@ statistics, solve level, type of model and location of GAMS.
 spam parameters set by the user: SPAM folder, raw data folder, country alpha-3
 code and name, year, spatial resolution, most detailed level at which
 subnational statistics are available, administrative unit level at which the
-model is solved, type of model, three digit country code, FAO country code and
+model is solved, type of model, three digit country code and
 continent. The coordinate reference system is automatically set to WGS84
 (epsg:4326).
 
@@ -70,7 +70,7 @@ which is required to load the libraries to create gdx files. In case this
 gives problems the location of GAMS can be added manually.
 
 \code{\link[countrycode]{countrycode}} is used to determine the full country
-name, three digit country code, three digit FAO country code and continent on
+name, three digit country code and continent on
 the basis of the alpha-3 country code. This information is required to extract
 country specific information from several datasets.
 }
