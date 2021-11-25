@@ -4,6 +4,9 @@ author: "Michiel van Dijk"
 date: "03/04/2020"
 output: html_document
 ---
+# Add citation
+https://www.r-bloggers.com/2021/11/cffr-create-a-citation-cff-file-for-your-r-package/?utm_source=phpList&utm_medium=email&utm_campaign=R-bloggers-daily&utm_content=HTML
+
 # Negative artificial adm values
 - need to do a check if data is inconsistent when calculating artifiical adms.
 - EGY old file is an example, eg. EG24, where total maize ha in adm2 > adm1 total, while two adm2 have NAs...
