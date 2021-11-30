@@ -5,8 +5,6 @@ prepare_artificial_adms <- function(ac, param) {
   load_intermediate_data(c("pa"), ac, param, local = TRUE, mess = FALSE)
   load_data(c("adm_list"), param, local = TRUE, mess = FALSE)
 
-  # Put statistics in long format and filter out crops where pa = 0
-  # These crops create artificial adms, which created conflicts
   pa <- pa %>%
     tidyr::gather(crop, pa, -adm_code, -adm_name, -adm_level)
 
