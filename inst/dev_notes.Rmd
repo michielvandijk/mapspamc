@@ -38,6 +38,8 @@ https://github.com/GuangchuangYu/hexSticker
 If data is zero, it cannot be written to a GAMS file. Added rough code to filter out set and data related to subsistence 
 but this check should be done for all. Most likely GAMS will not be able to read the file in case of fitness model as required data (e.g when subsistence is fully missing) is not present.
 
+# Compare polygon size with statistics and single out those where area > polygon size which seems unrealistic (apart from multi harvests)
+
 # Error messages
 create_statistics_template("ha", param) gives error if adm_list does not exist => need to improve message.
 
