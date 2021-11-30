@@ -22,7 +22,6 @@ $onempty
 sets
     i            grid cells
     j            crop system combinations
-    j_s(j)       subsistence system
     s            crop list
     k            adm list
 
@@ -79,7 +78,7 @@ equations
 *******************************************************************************
 
 $gdxin %gdx_input%
-$loaddc i j s k j_s
+$loaddc i j s k
 $loaddc n l m
 $loaddc adm_area cl crop_area scalef ir_crop ir_area priors
 
