@@ -27,11 +27,14 @@ combine_inputs_adm_level <- function(ac, param){
   # of the higher level adm because of internal precision to deal with fractions.
   # As a result artificial adms are created that are very small (e.g. 1e-10).
   # These are set to zero
-  # Put statistics in long format and filter out crops where pa = 0
-  # These crops create artificial adms, which created conflicts
+
   adm_art_raw <- adm_art_raw %>%
     dplyr::rename(pa = {{pa_rn}}) %>%
-    dplyr::mutate(pa = ifelse(abs(pa) < 1e-6, 0, pa))
+    dplyr::mutate(pa = ifelse(dplyr::near(pa, 0), 0, pa))
+  # Put statistics in long format and filter out crops where pa = 0
+  # These crops create artificial adms, which created conflicts.
+  # Removed this again because when all crops are zero in an area, total
+  # area is removed, which leads to conflicts.
   # %>%
   #   dplyr::filter(pa != 0)
 
