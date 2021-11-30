@@ -27,10 +27,13 @@ combine_inputs_adm_level <- function(ac, param){
   # of the higher level adm because of internal precision to deal with fractions.
   # As a result artificial adms are created that are very small (e.g. 1e-10).
   # These are set to zero
+  # Put statistics in long format and filter out crops where pa = 0
+  # These crops create artificial adms, which created conflicts
   adm_art_raw <- adm_art_raw %>%
     dplyr::rename(pa = {{pa_rn}}) %>%
-    dplyr::mutate(pa = ifelse(abs(pa) < 1e-6, 0, pa)) %>%
-    dplyr::filter(pa != 0)
+    dplyr::mutate(pa = ifelse(abs(pa) < 1e-6, 0, pa))
+  # %>%
+  #   dplyr::filter(pa != 0)
 
   adm_art <- adm_art_raw %>%
     dplyr::select(-{{ac_rn}}) %>%
@@ -99,7 +102,11 @@ combine_inputs_adm_level <- function(ac, param){
   scores_gdx <- para_gdx(scores, c("gridID", "crop_system"), "scores", "score per grid cell and crop_system")
 
   # rur_pop_s(i,j): Rural population share per grid cell
-  rps_gdx <- para_gdx(rps, c("gridID", "crop_system"), "rur_pop_share", "Rural population shares")
+  if(nrow(rps)==0){
+    rps_gdx <- numeric(0)
+  } else {
+    rps_gdx <- para_gdx(rps, c("gridID", "crop_system"), "rur_pop_share", "Rural population shares")
+  }
 
 
   ### CREATE GAMS SETS
@@ -137,7 +144,11 @@ combine_inputs_adm_level <- function(ac, param){
     dplyr::select(crop_system) %>%
     unique()
 
-  s_system_s_gdx <- set_gdx(s_system_s, c("crop_system"), "j_s", "Subsistence system combinations")
+  if(nrow(s_system_s)==0){
+    s_system_s_gdx <- numeric(0)
+  } else {
+    s_system_s_gdx <- set_gdx(s_system_s, c("crop_system"), "j_s", "Subsistence system combinations")
+  }
 
   # Adms with statistics (k)
   adm_s <- adm_area %>%
@@ -166,7 +177,7 @@ combine_inputs_adm_level <- function(ac, param){
   adm_grid_s_gdx <- set_gdx(adm_grid_s, c("adm_code","gridID"), "l", "adm with corresponding grid cells")
 
 
-  # Administrative regions with corresponding crops
+  # Administrative regions with corresponding crops (k,s)
   adm_crop_s <- adm_area %>%
     dplyr::select(adm_code, crop) %>%
     unique()
@@ -180,6 +191,16 @@ combine_inputs_adm_level <- function(ac, param){
   scalef_gdx <- scalar_gdx(scalef, "scalef", "Scaling factor")
 
 
+  ############### REMOVE ALL EMPTY GDX COMPONENTS AS THEY ARE NOT ALLOWED ###############
+  gdx_input <- list(cl_gdx, adm_area_gdx, ir_crop_gdx, ir_area_gdx, crop_area_gdx,
+    s_system_s_gdx,
+    scores_gdx, priors_gdx, grid_s_gdx, crop_system_s_gdx, adm_s_gdx, crop_crop_system_s_gdx,
+    adm_grid_s_gdx, adm_crop_s_gdx, crop_s_gdx,
+    rps_gdx,
+    scalef_gdx)
+
+  gdx_input <- gdx_input[lapply(gdx_input, length) > 0]
+
   ############### SAVE ###############
   model_folder <- create_model_folder(param)
   temp_path <- file.path(param$spamc_path,
@@ -188,21 +209,7 @@ combine_inputs_adm_level <- function(ac, param){
 
   # Prepare GDX
   gdxrrw::wgdx(file.path(temp_path, glue::glue("input_{param$res}_{param$year}_{ac}_{param$iso3c}.gdx")),
-       cl_gdx,
-       adm_area_gdx,
-       ir_crop_gdx,
-       ir_area_gdx,
-       crop_area_gdx,
-       s_system_s_gdx,
-       scores_gdx,
-       priors_gdx,
-       grid_s_gdx, crop_system_s_gdx,
-       adm_s_gdx,
-       crop_crop_system_s_gdx,
-       adm_grid_s_gdx,
-       adm_crop_s_gdx, crop_s_gdx,
-       rps_gdx,
-       scalef_gdx)
+               gdx_input)
   cat("\nGDX model input file saved for ", ac)
 }
 
