@@ -7,9 +7,12 @@ output: html_document
 # Add citation
 https://www.r-bloggers.com/2021/11/cffr-create-a-citation-cff-file-for-your-r-package/?utm_source=phpList&utm_medium=email&utm_campaign=R-bloggers-daily&utm_content=HTML
 
-# Negative artificial adm values
+# Artificial adm calculations
 - need to do a check if data is inconsistent when calculating artifiical adms.
 - EGY old file is an example, eg. EG24, where total maize ha in adm2 > adm1 total, while two adm2 have NAs...
+- Apparently I already checked for very small numbers. Perhaps issue warning if large negative numbers >2 are
+found?
+- Switched removing adms with 0 statistics when computing art_adm as this removed full adm when all statistics are zero. However, I added a note that having zeros might result in an error when calculating artificial adms. Need to investigate.
 
 # all cropping systems irrigated gives warnings as some priors assume values. 
 - Add if statement to not calculate priors/scores when system is not present
@@ -31,6 +34,9 @@ https://github.com/GuangchuangYu/hexSticker
 # create spam folders
 - creates two folders in raw_path, adm and subnational statistics, do we want this?
 
+# check if input is consistently zero (eg when there are no subsistence systems, rps is zero) in combine_inputs script.
+If data is zero, it cannot be written to a GAMS file. Added rough code to filter out set and data related to subsistence 
+but this check should be done for all. Most likely GAMS will not be able to read the file in case of fitness model as required data (e.g when subsistence is fully missing) is not present.
 
 # Error messages
 create_statistics_template("ha", param) gives error if adm_list does not exist => need to improve message.
