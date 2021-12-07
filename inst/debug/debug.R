@@ -13,7 +13,7 @@ param <- spamc_par(spamc_path = spamc_path,
                    gams_path = gams_path,
                    iso3c = "EGY",
                    year = 2018,
-                   res = "5min",
+                   res = "30sec",
                    adm_level = 2,
                    solve_level = 0,
                    model = "min_entropy")
@@ -29,6 +29,10 @@ library(glue)
 
 # PREPARE SCORE --------------------------------------------------------------------------
 prepare_priors_and_scores(param)
+
+
+# COMBINE MODEL INPUTS -------------------------------------------------------------------
+combine_inputs(param)
 
 
 # COMBINE MODEL INPUTS -------------------------------------------------------------------
