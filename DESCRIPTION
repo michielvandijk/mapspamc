@@ -8,8 +8,6 @@ Authors@R: c(
            email = "michiel.vandijk@wur.nl",
            comment = c(ORCID = "0000-0002-5207-7304"))
            )
-Author: Michiel van Dijk
-Maintainer: Michiel van Dijk <Michiel.vandijk@wur.nl>
 Description: The aim of the mapspamc R package is to facilitate the
     creation of country level crop distribution maps. mapspamc provides
     the necessary infrastructure to run the Spatial Production Allocation Model for

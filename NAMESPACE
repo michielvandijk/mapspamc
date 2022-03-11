@@ -2,6 +2,7 @@
 
 S3method(print,spamc_par)
 export(aggregate_to_adm)
+export(align_raster)
 export(calc_lc_area)
 export(check_statistics)
 export(combine_inputs)
