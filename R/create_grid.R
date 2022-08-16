@@ -13,7 +13,7 @@
 #'time to create. The file is saved in `/processed_data/maps/grid/`
 #'
 #'@param param
-#'@inheritParams create_spam_folders
+#'@inheritParams create_mapspamc_folders
 #'
 #'@examples
 #'\dontrun{
@@ -24,29 +24,29 @@
 create_grid <- function(param = NULL){
 
   load_data("adm_map", param, mess = FALSE, local = TRUE)
-  stopifnot(inherits(param, "spamc_par"))
+  stopifnot(inherits(param, "mapspamc_par"))
   if(param$res == "5min") {
     grid_fact <- 12
-    cat("\nResolution is", param$res)
+    cat("\n=> Resolution is", param$res)
   } else if (param$res == "30sec"){
     grid_fact <- 120
-    cat("Resolution is", param$res)
+    cat("\n=> Resolution is", param$res)
   }
 
   # Create grid masked to country using +init=epsg:4326 and then reproject to
   # user set crs
-  grid <- raster::raster() # 1 degree raster
-  grid <- raster::disaggregate(grid, fact = grid_fact)
+  grid <- terra::rast() # 1 degree raster
+  grid <- terra::disagg(grid, fact = grid_fact)
   adm_map <- adm_map %>%
-    sf::st_transform(crs = "+init=epsg:4326")
-  grid <- raster::crop(grid, adm_map)
-  raster::values(grid) <- 1:raster::ncell(grid) # Add ID numbers
-  grid <- raster::mask(grid, adm_map)
-  grid <- raster::trim(grid)
+    sf::st_transform(crs = "epsg:4326")
+  grid <- terra::crop(grid, adm_map)
+  terra::values(grid) <- 1:terra::ncell(grid) # Add ID numbers
+  grid <- terra::mask(grid, terra::vect(adm_map))
+  grid <- terra::trim(grid)
   names(grid) <- "gridID"
 
-  temp_path <- file.path(param$spamc_path, glue::glue("processed_data/maps/grid/{param$res}"))
+  temp_path <- file.path(param$mapspamc_path, glue::glue("processed_data/maps/grid/{param$res}"))
   dir.create(temp_path, showWarnings = F, recursive = T)
-  raster::writeRaster(grid, file.path(temp_path, glue::glue("grid_{param$res}_{param$year}_{param$iso3c}.tif")),
+  terra::writeRaster(grid, file.path(temp_path, glue::glue("grid_{param$res}_{param$year}_{param$iso3c}.tif")),
               overwrite = T)
 }

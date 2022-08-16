@@ -2,12 +2,12 @@
 #'Sets spam parameters
 #'
 #'@description
-#'`spamc_par` sets all required parameters for spam to run, including core model
+#'`mapspamc_par` sets all required parameters for spam to run, including core model
 #'folders, country code, year, spatial resolution, availability of subnational
 #'statistics, solve level, type of model and location of GAMS.
 #'
 #'@details
-#'`spamc_par` creates an object of class `spamc_par`, which bundles all required
+#'`mapspamc_par` creates an object of class `mapspamc_par`, which bundles all required
 #'spam parameters set by the user: SPAM folder, raw data folder, country alpha-3
 #'code and name, year, spatial resolution, most detailed level at which
 #'subnational statistics are available, administrative unit level at which the
@@ -19,12 +19,12 @@
 #'which is required to load the libraries to create gdx files. In case this
 #'gives problems the location of GAMS can be added manually.
 #'
-#'\code{\link[countrycode]{countrycode}} is used to determine the full country
+#'[countrycode::countrycode()] is used to determine the full country
 #'name, three digit country code and continent on
 #'the basis of the alpha-3 country code. This information is required to extract
 #'country specific information from several datasets.
 #'
-#'@param spamc_path character string with the main SPAM folder. Note that R uses
+#'@param mapspamc_path character string with the main SPAM folder. Note that R uses
 #'  forward slash or double backslash to separate folder names.
 #'@param raw_path character string with the raw data folder. This makes it
 #'  possible to store the raw data on a server. If `raw_path` is not specified
@@ -52,13 +52,13 @@
 #'
 #'@examples
 #'\dontrun{
-#'spamc_par(spamc_path = "C:/Users/dijk158/Dropbox/mapspamc_mwi",
+#'mapspamc_par(mapspamc_path = "C:/Users/dijk158/Dropbox/mapspamc_mwi",
 #'iso3c = "MWI", year = 2010, res = "5min", adm_level = 1,
 #'solve_level = 0, model = "max_score", gams_path = "C:/GAMS")
 #'}
 #'@export
-spamc_par <-
-    function(spamc_path = NULL,
+mapspamc_par <-
+    function(mapspamc_path = NULL,
              raw_path = NULL,
              iso3c = NULL,
              year = NULL,
@@ -70,7 +70,7 @@ spamc_par <-
 
         if (is.null(raw_path)) {
             message("raw_path is not defined, set to raw_data in main folder")
-            raw_path <- file.path(spamc_path, "raw_data")
+            raw_path <- file.path(mapspamc_path, "raw_data")
         }
 
         if (is.null(gams_path)) {
@@ -87,12 +87,12 @@ spamc_par <-
             adm_level = adm_level,
             solve_level = solve_level,
             model = model,
-            spamc_path = spamc_path,
+            mapspamc_path = mapspamc_path,
             raw_path = raw_path,
             gams_path = gams_path,
-            crs = "+init=epsg:4326")
-        class(param) <- "spamc_par"
-        validate_spamc_par(param)
+            crs = "epsg:4326")
+        class(param) <- "mapspamc_par"
+        validate_mapspamc_par(param)
         return(param)
     }
 

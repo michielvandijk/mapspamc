@@ -16,7 +16,7 @@ create_all_tif <- function(param) {
   model_folder <- create_model_folder(param)
   save_tif <- function(crp, sy, var, df) {
     r <- create_tif(crp, sy, var, df)
-    temp_path <- file.path(param$spamc_path,
+    temp_path <- file.path(param$mapspamc_path,
                            glue::glue("processed_data/results/{model_folder}/maps/{var}/"))
     dir.create(temp_path, showWarnings = F, recursive = T)
     raster::writeRaster(r,

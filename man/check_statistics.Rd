@@ -9,7 +9,7 @@ check_statistics(df, param, out = FALSE)
 \arguments{
 \item{df}{data.frame with subnational statistics at various levels in the long format}
 
-\item{param}{Object of type \code{spamc_par} that bundles all SPAM parameters,
+\item{param}{Object of type \code{mapspamc_par} that bundles all \code{mapspamc} parameters,
 including core model folders, alpha-3 country code, year, spatial
 resolution, most detailed level at which subnational statistics are
 available, administrative unit level at which the model is solved and type of

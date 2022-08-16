@@ -1,8 +1,8 @@
 ---
-title: "Process subnational statistics"
+title: "Pre-processing: Subnational statistics"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Process subnational statistics}
+  %\VignetteIndexEntry{Pre-processing Subnational statistics}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
@@ -190,9 +190,9 @@ ha_df <- ha_df %>%
 Finally the three files (ha, fs and ci), need to be saved in the `processed_data/agricultural_statistics folders. It is important to use the correct names otherwise other functions cannot find the data. 
 
 ```{r eval = FALSE}
-write_csv(ha_df, file.path(param$spamc_path, glue("processed_data/agricultural_statistics/ha_adm_{param$year}_{param$iso3c}.csv")))
-write_csv(fs_df, file.path(param$spamc_path, glue("processed_data/agricultural_statistics/fs_adm_{param$year}_{param$iso3c}.csv")))
-write_csv(ci_df, file.path(param$spamc_path, glue("processed_data/agricultural_statistics/ci_adm_{param$year}_{param$iso3c}.csv")))
+write_csv(ha_df, file.path(param$mapspamc_path, glue("processed_data/agricultural_statistics/ha_adm_{param$year}_{param$iso3c}.csv")))
+write_csv(fs_df, file.path(param$mapspamc_path, glue("processed_data/agricultural_statistics/fs_adm_{param$year}_{param$iso3c}.csv")))
+write_csv(ci_df, file.path(param$mapspamc_path, glue("processed_data/agricultural_statistics/ci_adm_{param$year}_{param$iso3c}.csv")))
 
 ```
 

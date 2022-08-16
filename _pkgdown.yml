@@ -43,11 +43,11 @@ navbar:
           href: articles/input_data_collection.html
         - text: Country examples/templates
           href: articles/template.html
-      - text: Run SPAMc
+      - text: Run mapspamc
         menu:
         - text: 1. Model setup
           href: articles/model_setup.html
-        - text: 2. Process subnational statistics
+        - text: 2. Pre-processing
           href: articles/process_subnational_statistics.html
         - text: 3. Process spatial data
           href: articles/process_spatial_data.html
@@ -77,7 +77,7 @@ reference:
   - create_adm_map_pdf
   - create_adm_list
   - create_grid
-  - create_spam_folders
+  - create_mapspamc_folders
   - rasterize_adm_map
   - spamc_par
 - title: "Proces subnational statistics"

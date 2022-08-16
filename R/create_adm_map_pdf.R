@@ -28,8 +28,8 @@
 #'@export
 create_adm_map_pdf <- function(param, font_size = 3) {
 
-  stopifnot(inherits(param, "spamc_par"))
-  cat("\n############### Create pdf with the location of administrative units ############### ")
+  stopifnot(inherits(param, "mapspamc_par"))
+  cat("\n=> Create pdf file with the location of administrative units")
   load_data("adm_map", param, mess = FALSE, local = TRUE)
 
   if(param$adm_level %in% c(1,2)){
@@ -57,7 +57,7 @@ create_adm_map_pdf <- function(param, font_size = 3) {
             panel.border = element_rect(colour = "black", fill = "transparent"), plot.title = element_text(hjust = 0.5)) +
       theme(panel.grid.major = element_line(colour = 'transparent')) +
       labs(fill = "", x = "", y = "", title = param$country) +
-      guides(fill = FALSE)
+      guides(fill = "none")
     }
 
 
@@ -67,7 +67,6 @@ create_adm_map_pdf <- function(param, font_size = 3) {
     adm2 <- adm_map
 
     # Labels at the centre of adm
-    #adm2_name <- sf::st_centroid(adm2)
     adm2_name <- suppressWarnings(cbind(adm2, sf::st_coordinates(sf::st_centroid(adm2$geometry))))
 
     # Increase number of colours in palette
@@ -78,18 +77,17 @@ create_adm_map_pdf <- function(param, font_size = 3) {
     adm2_plot <- ggplot() +
       geom_sf(data = adm2, colour = "grey30", aes(fill = adm2_name)) +
       scale_fill_manual(values = cols) +
-      geom_text(data= adm2_name, aes(x = X, y = Y, label = adm2_name), size = font_size,,
+      geom_text(data= adm2_name, aes(x = X, y = Y, label = adm2_name), size = font_size,
                 check_overlap = FALSE) +
       theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(),
             panel.border = element_rect(colour = "black", fill = "transparent"), plot.title = element_text(hjust = 0.5)) +
       theme(panel.grid.major = element_line(colour = 'transparent')) +
       labs(fill = "", x = "", y = "", title = param$country) +
-      guides(fill = FALSE)
+      guides(fill = "none")
   }
 
 
-  ############### SAVE ###############
-  temp_path <- file.path(param$spamc_path, glue::glue("processed_data/maps/adm/{param$res}" ))
+  temp_path <- file.path(param$mapspamc_path, glue::glue("processed_data/maps/adm/{param$res}" ))
   dir.create(temp_path, recursive = T, showWarnings = F)
 
   pdf(file = file.path(temp_path, glue::glue("adm_map_{param$res}_{param$yea}_{param$iso3c}.pdf")),
@@ -105,5 +103,5 @@ create_adm_map_pdf <- function(param, font_size = 3) {
       }
     }
     invisible(dev.off())
-    cat("\n pdf file created")
+    cat("\n=> pdf file created")
 }

@@ -144,7 +144,7 @@
 <div id="create-spamc-folder-structure" class="section level2">
 <h2 class="hasAnchor">
 <a href="#create-spamc-folder-structure" class="anchor"></a>Create SPAMc folder structure</h2>
-<p><code>mapspamc</code> includes a function to create all necessary folders <code><a href="../reference/create_spam_folders.html">create_spam_folders()</a></code>. The only input it requires is a path on your harddisk. We do not recommend using a server to store the model as the potential increase in file access time might seriously affect the time it takes to process some of the spatial datasets which can be very large. Note that it is perfectly fine to store large <em>raw data</em> files on a server (see below).</p>
+<p><code>mapspamc</code> includes a function to create all necessary folders <code><a href="../reference/create_mapspamc_folders.html">create_mapspamc_folders()</a></code>. The only input it requires is a path on your harddisk. We do not recommend using a server to store the model as the potential increase in file access time might seriously affect the time it takes to process some of the spatial datasets which can be very large. Note that it is perfectly fine to store large <em>raw data</em> files on a server (see below).</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># Load mapspamc</span>
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"mapspamc"</span>)
 
@@ -153,7 +153,7 @@
 <span class="no">spamc_path</span> <span class="kw">&lt;-</span> <span class="st">"C:/Users/dijk158/Dropbox/mapspamc_mwi"</span>
 
 <span class="co"># Create SPAMc folder structure in the spamc_path</span>
-<span class="fu"><a href="../reference/create_spam_folders.html">create_spam_folders</a></span>(<span class="no">spamc_path</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/create_mapspamc_folders.html">create_mapspamc_folders</a></span>(<span class="no">spamc_path</span>)</pre></body></html></div>
 </div>
 <div id="set-model-parameters-and-location-of-files" class="section level2">
 <h2 class="hasAnchor">
@@ -188,7 +188,7 @@
 <span class="co">#&gt; iso3n:  454 </span>
 <span class="co">#&gt; fao code:  130 </span>
 <span class="co">#&gt; continent:</span></pre></body></html></div>
-<p>This object need to be saved in the <code>parameters</code> folder that was created together with all the other folders when running <code>create_spam_folders</code>. Elements in a <code>spamc_par</code> object class can be extracted by using the dollar sign ($). This feature is used to save <code>par</code> the temporary object of class <code>spamc_par</code> into the relevant folder.</p>
+<p>This object need to be saved in the <code>parameters</code> folder that was created together with all the other folders when running <code>create_mapspamc_folders</code>. Elements in a <code>spamc_par</code> object class can be extracted by using the dollar sign ($). This feature is used to save <code>par</code> the temporary object of class <code>spamc_par</code> into the relevant folder.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co"># Save </span>
 <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span>(<span class="no">par</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">par</span>$<span class="no">spamc_path</span>, <span class="st">"parameters/spamc_par.rds"</span>))</pre></body></html></div>
 <p>That is all it takes to set up the SPAMc model! The next step is processing the <a href="process_subnat_stat.html">raw subnational statistics</a> and <a href="process_spatial_data.html">spatial data</a>.</p>

@@ -1,8 +1,8 @@
 # Function to validate spamc_par class
-validate_spamc_par <- function(param) {
-  stopifnot(inherits(param, "spamc_par"))
-  if (is.null(param$spamc_path))
-    stop("spamc_path is not defined",
+validate_mapspamc_par <- function(param) {
+  stopifnot(inherits(param, "mapspamc_par"))
+  if (is.null(param$mapspamc_path))
+    stop("mapspamc_path is not defined",
          call. = FALSE)
   if (is.na(param$iso3c)) {
     stop("iso3c not defined",

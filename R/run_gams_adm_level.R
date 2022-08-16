@@ -4,16 +4,16 @@ run_gams_adm_level <- function(ac, param, out = TRUE){
   gams_model <- system.file("gams", glue::glue("{param$model}.gms"), package = "mapspamc", mustWork = TRUE)
 
   model_folder <- create_model_folder(param)
-  input <- file.path(param$spamc_path,
+  input <- file.path(param$mapspamc_path,
       glue::glue("processed_data/intermediate_output/{model_folder}/{ac}/input_{param$res}_{param$year}_{ac}_{param$iso3c}.gdx"))
 
-  output <- file.path(param$spamc_path,
+  output <- file.path(param$mapspamc_path,
       glue::glue("processed_data/intermediate_output/{model_folder}/{ac}//spamc_{param$model}_{param$res}_{param$year}_{ac}_{param$iso3c}.gdx"))
 
-  lst <- file.path(param$spamc_path,
+  lst <- file.path(param$mapspamc_path,
       glue::glue("processed_data/intermediate_output/{model_folder}/{ac}//spamc_{param$model}_{param$res}_{param$year}_{ac}_{param$iso3c}.lst"))
 
-  logf <- file.path(param$spamc_path,
+  logf <- file.path(param$mapspamc_path,
       glue::glue("processed_data/intermediate_output/{model_folder}/{ac}/spamc_{param$model}_{param$res}_{param$year}_{ac}_{param$iso3c}.log"))
 
   # Using system2 now as this should be more portable and flexible. Still need to test it on Mac or Linux

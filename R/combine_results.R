@@ -5,7 +5,7 @@
 #'  easily loaded into R. The file is saved in the `processed_data/results` folder.
 #'
 #'@param param
-#'@inheritParams create_spam_folders
+#'@inheritParams create_mapspamc_folders
 #'@param cut numeric. Sets allocation smaller than a certain value to 0. The default is 0.0001 (1 m2).
 #'@param out logical; should the results be returned as output?
 #'@examples
@@ -14,7 +14,7 @@
 #'}#'
 #'@export
 combine_results <- function(param, cut = 0.0001, out = FALSE) {
-   stopifnot(inherits(param, "spamc_par"))
+   stopifnot(inherits(param, "mapspamc_par"))
    stopifnot(is.logical(out))
 
    # Test if gdxrrw and gams are installed.
@@ -54,7 +54,7 @@ combine_results <- function(param, cut = 0.0001, out = FALSE) {
    dplyr::select(gridID, crop, system, ha, pa, everything(), pa, ha))
 
  model_folder <- create_model_folder(param)
- temp_path <- file.path(param$spamc_path,
+ temp_path <- file.path(param$mapspamc_path,
                         glue::glue("processed_data/results/{model_folder}"))
  dir.create(temp_path, showWarnings = F, recursive = T)
 

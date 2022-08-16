@@ -10,7 +10,7 @@ create_adm_list(x, param)
 \item{x}{object of class sf with the location of the administrative units
 including an attribute table with information on how they are nested}
 
-\item{param}{Object of type \code{spamc_par} that bundles all SPAM parameters,
+\item{param}{Object of type \code{mapspamc_par} that bundles all \code{mapspamc} parameters,
 including core model folders, alpha-3 country code, year, spatial
 resolution, most detailed level at which subnational statistics are
 available, administrative unit level at which the model is solved and type of
@@ -25,7 +25,7 @@ admX_code, where X corresponds with the administrative unit level for which
 data is available.
 }
 \details{
-All the required information should be contained in the atribute table of the
+All the required information should be contained in the attribute table of the
 polygon file with the location of the administrative units. This function
 strips the attribute table from the polygon file and saves it as
 \code{adm_list.csv} in the \verb{processed_data/lists/} folder. The package

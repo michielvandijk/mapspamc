@@ -5,7 +5,7 @@ prepare_results_adm_level <- function(ac, param) {
   load_data(c("grid", "adm_map_r"), param, mess = F)
 
   model_folder <- create_model_folder(param)
-  results_file <- file.path(param$spamc_path,
+  results_file <- file.path(param$mapspamc_path,
     glue::glue("processed_data/intermediate_output/{model_folder}/{ac}/spamc_{param$model}_{param$res}_{param$year}_{ac}_{param$iso3c}"))
 
   grid_df <- as.data.frame(raster::rasterToPoints(grid)) %>%

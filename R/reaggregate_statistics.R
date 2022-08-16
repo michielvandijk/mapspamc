@@ -2,7 +2,7 @@
 #'
 #'@param df tbl or data.frame
 #'@param param
-#'@inheritParams create_spam_folders
+#'@inheritParams create_mapspamc_folders
 #'
 #'@return same class as `df`.
 #'

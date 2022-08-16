@@ -6,7 +6,7 @@ split_harmonized_inputs <- function(ac, param) {
 
   #https://stackoverflow.com/questions/7096989/how-to-save-all-console-output-to-file-in-r
   model_folder <- create_model_folder(param)
-  log_file = file(file.path(param$spamc_path,
+  log_file = file(file.path(param$mapspamc_path,
                        glue::glue("processed_data/intermediate_output/{model_folder}/{ac}/log_{param$res}_{param$year}_{ac}_{param$iso3c}.log")))
   capture.output(file = log_file, append = FALSE, split = T,{
   cat("\n\n--------------------------------------------------------------------------------------------------------------")
@@ -62,7 +62,7 @@ split_harmonized_inputs <- function(ac, param) {
 
 
   ############### STEP 7: SAVE ###############
-  temp_path <- file.path(param$spamc_path,
+  temp_path <- file.path(param$mapspamc_path,
                          glue::glue("processed_data/intermediate_output/{model_folder}/{ac}"))
   dir.create(temp_path, recursive = T, showWarnings = F)
 

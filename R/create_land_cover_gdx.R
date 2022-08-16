@@ -33,7 +33,7 @@ create_land_cover_gdx <- function(lc, param) {
       "Updated land cover (000 ha)"
     )
 
-  temp_path <- file.path(param$spamc_path,
+  temp_path <- file.path(param$mapspamc_path,
                          glue::glue("processed_data/results/{param$res}/{param$model}"))
   dir.create(temp_path, showWarnings = F, recursive = T)
 

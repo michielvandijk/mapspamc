@@ -52,7 +52,7 @@ split_statistics <- function(ac, ha, fs, ci, param){
     dplyr::arrange(adm_code, adm_name, adm_level)
 
   model_folder <- create_model_folder(param)
-  temp_path <- file.path(param$spamc_path,
+  temp_path <- file.path(param$mapspamc_path,
                          glue::glue("processed_data/intermediate_output/{model_folder}/{ac}"))
   dir.create(temp_path, recursive = T, showWarnings = F)
 

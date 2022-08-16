@@ -88,7 +88,7 @@ Before the shapefile can be processed you need to load it into R by setting the 
 iso3c_shp <- "adm_2010_MWI.shp"
 
 # load shapefile
-adm_map_raw <- read_sf(file.path(param$spamc_path, glue("raw_data/adm/{iso3c_shp}")))
+adm_map_raw <- read_sf(file.path(param$mapspamc_path, glue("raw_data/adm/{iso3c_shp}")))
 
 # plot
 plot(adm_map_raw$geometry)
@@ -158,7 +158,7 @@ plot(adm_map$geometry, main = "ADM polygons removed")
 par(mfrow=c(1,1))
 
 # Save adm maps
-temp_path <- file.path(param$spamc_path, glue("processed_data/maps/adm/{param$res}"))
+temp_path <- file.path(param$mapspamc_path, glue("processed_data/maps/adm/{param$res}"))
 dir.create(temp_path, showWarnings = FALSE, recursive = TRUE)
 
 saveRDS(adm_map, file.path(temp_path, glue("adm_map_{param$year}_{param$iso3c}.rds")))

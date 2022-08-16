@@ -13,7 +13,7 @@
 #'  model log.
 #'
 #'@param param
-#'@inheritParams create_spam_folders
+#'@inheritParams create_mapspamc_folders
 #'@param out logical; should the GAMS model log be send to the screen as output?
 #'
 #'@examples

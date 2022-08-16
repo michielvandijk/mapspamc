@@ -199,9 +199,9 @@ split_scores <- function(ac, param){
   ############### SAVE ###############
   # save
   model_folder <- create_model_folder(param)
-  saveRDS(rps, file.path(param$spamc_path,
+  saveRDS(rps, file.path(param$mapspamc_path,
     glue::glue("processed_data/intermediate_output/{model_folder}/{ac}/rps_{param$res}_{param$year}_{ac}_{param$iso3c}.rds")))
-  saveRDS(score_df, file.path(param$spamc_path,
+  saveRDS(score_df, file.path(param$mapspamc_path,
     glue::glue("processed_data/intermediate_output/{model_folder}/{ac}/scores_{param$res}_{param$year}_{ac}_{param$iso3c}.rds")))
 }
 

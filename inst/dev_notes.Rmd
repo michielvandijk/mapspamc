@@ -136,7 +136,8 @@ Overlay of grid and acc shows that the extent is the same BUT actual selected ce
 - add figure with folder tree
 - add table with all sources from paper
 
-
+# Subnational statistics
+- check_statistics() has in the help that the input should be of class subnat => still need to implement this.
 
 # TODO FABLE
 - COMMENT how country teams can create mapspam2globiom_iso3c github repository

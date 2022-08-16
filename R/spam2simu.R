@@ -2,7 +2,7 @@
 spam2simu <- function(var, param) {
   cat("\n##### Aggregate SPAM crop distribution maps to simu #####")
   load_data("crop2globiom", param, mess = F, local = T)
-  files <- list.files(file.path(param$spamc_path,
+  files <- list.files(file.path(param$mapspamc_path,
     glue::glue("processed_data/results/{param$res}/{param$model}/maps/{var}")), full.names = T, pattern = glob2rx("*.tif"))
 
   # function to aggregate mapspam raster output to simu

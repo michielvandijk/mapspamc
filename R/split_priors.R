@@ -236,7 +236,7 @@ split_priors <- function(ac, param){
   ############### SAVE ###############
   # save
   model_folder <- create_model_folder(param)
-  saveRDS(prior_df, file.path(param$spamc_path,
+  saveRDS(prior_df, file.path(param$mapspamc_path,
     glue::glue("processed_data/intermediate_output/{model_folder}/{ac}/priors_{param$res}_{param$year}_{ac}_{param$iso3c}.rds")))
 }
 

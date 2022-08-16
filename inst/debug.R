@@ -29,13 +29,13 @@ library(glue)
 
 
 # Set files
-reference <- file.path(param$spamc_path,
+reference <- file.path(param$mapspamc_path,
                   glue("processed_data/maps/grid/{param$res}/grid_{param$res}_{param$year}_{param$iso3c}.tif"))
-cutline <- file.path(param$spamc_path,
+cutline <- file.path(param$mapspamc_path,
                   glue("processed_data/maps/adm/{param$res}/adm_map_{param$year}_{param$iso3c}.shp"))
 unaligned <- file.path(param$raw_path,
                    glue("esacci/esacci_cropland_density.tif"))
-dstfile <- file.path(param$spamc_path,
+dstfile <- file.path(param$mapspamc_path,
                     glue("processed_data/maps/cropland/{param$res}/esacci_{param$year}_{param$iso3c}.tif"))
 
 library(sf)
@@ -49,7 +49,7 @@ a <- align_raster(unaligned = unaligned, reference = reference, dstfile = dstfil
 
 raster::plot(a)
 # Warp and mask
-dstfilea <- file.path(param$spamc_path,
+dstfilea <- file.path(param$mapspamc_path,
                      glue("processed_data/maps/cropland/{param$res}/esacci_{param$year}_{param$iso3c}a.tif"))
 
 a <- align_raster(unaligned = unaligned, reference = reference, dstfile = dstfilea,
@@ -57,14 +57,14 @@ a <- align_raster(unaligned = unaligned, reference = reference, dstfile = dstfil
                            r = "bilinear", overwrite = TRUE)
 
 
-dstfileb <- file.path(param$spamc_path,
+dstfileb <- file.path(param$mapspamc_path,
                       glue("processed_data/maps/cropland/{param$res}/esacci_{param$year}_{param$iso3c}b.tif"))
 
 b <- align_raster(unaligned = unaligned, reference = reference, dstfile = dstfileb,
                   cutline = cutline, crop_to_cutline = TRUE,
                   r = "bilinear", overwrite = TRUE)
 
-dstfilec <- file.path(param$spamc_path,
+dstfilec <- file.path(param$mapspamc_path,
                       glue("processed_data/maps/cropland/{param$res}/esacci_{param$year}_{param$iso3c}c.tif"))
 c <- align_raster(unaligned = unaligned, reference = reference, dstfile = dstfilec,
                   cutline = cutline, crop_to_cutline = FALSE,

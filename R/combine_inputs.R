@@ -19,7 +19,7 @@
 #'  ending with the crop for which data is not available.
 #'
 #'@param param
-#'@inheritParams create_spam_folders
+#'@inheritParams create_mapspamc_folders
 #'
 #'@examples
 #'\dontrun{
@@ -27,7 +27,7 @@
 #'}
 #'@export
 combine_inputs <- function(param) {
-  stopifnot(inherits(param, "spamc_par"))
+  stopifnot(inherits(param, "mapspamc_par"))
 
   # Test if gdxrrw and gams are installed.
   setup_gams(param)

@@ -10,21 +10,22 @@
 #'levels are nested. This file needs to be created first by running
 #'`create_adm_list()`.
 #'
-#'The dimensions of the ha template are determined by adm level set by
-#'`spamc_par()`, while the dimensions of the fs and cs templates (which are
-#'identical) are determined by the solve level parameter.
-##'
+#'The dimensions of the templates are determined by the parameters set by means of
+#'`mapspamc_par()`. The ha template dimension is determined by adm level parameter,
+#'while the dimensions of the fs and cs templates (which are identical) are determined
+#'by the solve level parameter.
+#'
 #'@param type Character vector that refers to the type of template that needs to
 #'  be created. See details for allowed input.
 #'@param param
-#'@inheritParams create_spam_folders
+#'@inheritParams create_mapspamc_folders
 #'
 #'@examples
 #'create_statistics_template(type = "ha", param)
 #'
 #'@export
 create_statistics_template <- function(type, param) {
-  stopifnot(inherits(param, "spamc_par"))
+  stopifnot(inherits(param, "mapspamc_par"))
   stopifnot(type %in% c("ha", "fs", "ci"))
 
   load_data(c("adm_list", "crop"), param, mess = FALSE, local = TRUE)

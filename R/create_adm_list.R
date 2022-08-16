@@ -7,7 +7,7 @@
 #'admX_code, where X corresponds with the administrative unit level for which
 #'data is available.
 #'
-#'All the required information should be contained in the atribute table of the
+#'All the required information should be contained in the attribute table of the
 #'polygon file with the location of the administrative units. This function
 #'strips the attribute table from the polygon file and saves it as
 #'`adm_list.csv` in the `processed_data/lists/` folder. The package
@@ -15,7 +15,7 @@
 #'
 #'@param x	object of class sf with the location of the administrative units
 #'  including an attribute table with information on how they are nested
-#'@inheritParams create_spam_folders
+#'@inheritParams create_mapspamc_folders
 #'
 #'@examples
 #'\dontrun{
@@ -26,11 +26,11 @@
 
 #'
 create_adm_list <- function(x, param) {
-  stopifnot(inherits(param, "spamc_par"))
+  stopifnot(inherits(param, "mapspamc_par"))
   # Create adm_list
   adm_list <- x %>%
     sf::st_drop_geometry()
 
   readr::write_csv(adm_list,
-    file.path(param$spamc_path, glue::glue("processed_data/lists/adm_list_{param$year}_{param$iso3c}.csv")))
+    file.path(param$mapspamc_path, glue::glue("processed_data/lists/adm_list_{param$year}_{param$iso3c}.csv")))
 }

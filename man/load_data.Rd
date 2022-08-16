@@ -10,7 +10,7 @@ load_data(data, param, local = FALSE, mess = TRUE)
 \item{data}{character vector that refers to the data that is loaded. See
 details for allowed input.}
 
-\item{param}{Object of type \code{spamc_par} that bundles all SPAM parameters,
+\item{param}{Object of type \code{mapspamc_par} that bundles all \code{mapspamc} parameters,
 including core model folders, alpha-3 country code, year, spatial
 resolution, most detailed level at which subnational statistics are
 available, administrative unit level at which the model is solved and type of
@@ -27,7 +27,7 @@ which dataset is loaded?}
 \code{load_data()} can be used to quickly load input data (e.g. subnational
 statistics, maps and mappings). This can be useful to quickly inspect the
 statistics or visualize a map. Data can only be loaded after the
-\code{create_spam_folders()} has been run and data has been created by running
+\code{create_mapspamc_folders()} has been run and data has been created by running
 pre-processing steps. See details for allowed input.
 }
 \details{

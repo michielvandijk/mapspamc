@@ -1,15 +1,15 @@
-#'Create spam folder structure
+#'Create `mapspamc` folder structure
 #'
-#'`create_spam_folders` creates the folder structure that is needed store raw
-#'data, processed data and parameters for SPAM.
+#'`create_mapspamc_folders` creates the folder structure that is needed store raw
+#'data, processed data and parameters for `mapspamc`.
 #'
-#'`create_spam_folders` creates two folders in the `spamc_path` set by the user:
+#'`create_mapspamc_folders` creates two folders in the `mapspamc_path`, set by the user:
 #'mappings and processed_data, and creates a `raw_data` folder in the location
-#'as set in `spamc_par`. In addition, it copies a number of cvs files into the
+#'as set in `mapspamc_par`. In addition, it copies a number of cvs files into the
 #'mappings folder, which contain several data tables that are needed to run the
 #'model and, if needed can be adjusted by the user.
 #'
-#'@param param Object of type `spamc_par` that bundles all SPAM parameters,
+#'@param param Object of type `mapspamc_par` that bundles all `mapspamc` parameters,
 #'  including core model folders, alpha-3 country code, year, spatial
 #'  resolution, most detailed level at which subnational statistics are
 #'  available, administrative unit level at which the model is solved and type of
@@ -17,12 +17,12 @@
 #'
 #'@examples
 #'\dontrun{
-#'create_spam_folders(param)
+#'create_mapspamc_folders(param)
 #'}
 #'
 #'@export
-create_spam_folders <- function(param = NULL) {
-    stopifnot(inherits(param, "spamc_par"))
+create_mapspamc_folders <- function(param = NULL) {
+    stopifnot(inherits(param, "mapspamc_par"))
     if(!dir.exists(param$raw_path))
         dir.create(param$raw_path, showWarnings = TRUE, recursive = TRUE)
     raw_folders <-
@@ -49,8 +49,8 @@ create_spam_folders <- function(param = NULL) {
             }
     })
 
-    if(!dir.exists(file.path(param$spamc_path, "processed_data")))
-        dir.create(file.path(param$spamc_path, paste0("processed_data")),
+    if(!dir.exists(file.path(param$mapspamc_path, "processed_data")))
+        dir.create(file.path(param$mapspamc_path, paste0("processed_data")),
                    showWarnings = TRUE, recursive = TRUE)
     proc_folders <- c("lists",
                       "intermediate_output",
@@ -65,18 +65,18 @@ create_spam_folders <- function(param = NULL) {
                       "maps/cropland",
                       "results")
     purrr::walk(proc_folders, function(x) {
-        if(!dir.exists(file.path(param$spamc_path, paste0("processed_data/", x)))) {
-            dir.create(file.path(param$spamc_path, paste0("processed_data/", x)),
+        if(!dir.exists(file.path(param$mapspamc_path, paste0("processed_data/", x)))) {
+            dir.create(file.path(param$mapspamc_path, paste0("processed_data/", x)),
                        showWarnings = TRUE,
                        recursive = TRUE)
         }
     })
 
-    if(!dir.exists(file.path(param$spamc_path, "mappings")))
-        dir.create(file.path(param$spamc_path, "mappings"), showWarnings = TRUE, recursive = TRUE)
+    if(!dir.exists(file.path(param$mapspamc_path, "mappings")))
+        dir.create(file.path(param$mapspamc_path, "mappings"), showWarnings = TRUE, recursive = TRUE)
 
     copy_mapping_files(param)
 
-    cat("\nSPAMc folder structure created in", param$spamc_path,
-        "\nSPAMc raw_path created in", param$raw_path)
+    cat("\n=> mapspamc folder structure created in", param$mapspamc_path,
+        "\n=> mapspamc raw_path created in", param$raw_path)
 }

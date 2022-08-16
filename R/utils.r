@@ -100,7 +100,7 @@ gridID2raster <- function(df, var, param){
     return(r)
 }
 
-# Functio to calculate totals per adm level
+# Function to calculate totals per adm level
 filter_out_pa <- function(i, pa) {
 
     df <- pa %>%
@@ -112,6 +112,20 @@ filter_out_pa <- function(i, pa) {
     return(df)
 }
 
+
+# Function to copy mapping files
+copy_mapping_files <- function(param) {
+  mapping_files <- list.files(path = system.file("mappings", package = "mapspamc"), full.names = TRUE)
+
+  purrr::walk(mapping_files, function(x) {
+    if(!file.exists(file.path(param$mapspamc_path, paste0("mappings/", basename(x))))) {
+      file.copy(x, file.path(param$mapspamc_path, paste0("mappings/", basename(x))))
+    }
+  })
+
+}
+
+# Function to setup gams
 setup_gams <- function(param) {
     if (!requireNamespace("gdxrrw", quietly = TRUE)) {
         stop("Package gdxrrw is not installed!",
@@ -126,6 +140,7 @@ setup_gams <- function(param) {
     }
 }
 
+# Function to create folders
 create_model_folder <- function(param){
     model_folder <- glue::glue("{param$model}_{param$resolution}_adm_level_{param$adm_level}_solve_level_{param$solve_level}")
     return(model_folder)
