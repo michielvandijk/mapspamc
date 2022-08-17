@@ -41,13 +41,12 @@ param <- mapspamc_par(mapspamc_path = mapspamc_path,
                          solve_level = 0,
                          model = "min_entropy")
 
-# To run the max_score_30sec_adm_level_2_solve_level_0 model
-# use these settings:
+# # Set MAPSPAMC for the max_score_30sec_adm_level_2_solve_level_0 model model
 # param <- mapspamc_par(mapspamc_path = mapspamc_path,
 #                   raw_path = raw_path,
 #                   gams_path = gams_path,
-#                   iso3c = "MWI",
-#                   year = 2010,
+#                   iso3c = "THA",
+#                   year = 2020,
 #                   res = "30sec",
 #                   adm_level = 2,
 #                   solve_level = 0,

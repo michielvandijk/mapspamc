@@ -138,6 +138,7 @@ Overlay of grid and acc shows that the extent is the same BUT actual selected ce
 
 # Subnational statistics
 - check_statistics() has in the help that the input should be of class subnat => still need to implement this.
+- reaggregate statistics has limited documentation
 
 # TODO FABLE
 - COMMENT how country teams can create mapspam2globiom_iso3c github repository
@@ -217,3 +218,7 @@ Maybe better to add these to the parameters file
 
 # Check script
 In MOZ lc appeared to be negative in GDX file, giving error that log <0. Need to create a check file that also checks if all inputs are positive. Add to GAMS code as well like in original scripts
+
+# Create a function that prepares all GAEZ data, which also takes into account crops in country.
+
+# Add check if files exist before they are loaded!

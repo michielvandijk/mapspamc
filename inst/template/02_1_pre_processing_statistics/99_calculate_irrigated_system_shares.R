@@ -7,7 +7,7 @@
 
 
 ############### SOURCE PARAMETERS ###############
-source(here::here("scripts/01_model_setup/01_model_setup.r"))
+source(here::here("inst/template/01_model_setup/01_model_setup.r"))
 
 
 ############### LOAD DATA ###############
@@ -15,11 +15,11 @@ source(here::here("scripts/01_model_setup/01_model_setup.r"))
 load_data(c("ha"), param)
 
 # Faostat
-faostat_raw <- read_csv(file.path(param$spam_path,
+faostat_raw <- read_csv(file.path(param$mapspamc_path,
                           glue("processed_data/agricultural_statistics/faostat_crops_{param$year}_{param$iso3c}.csv")))
 
 # Faostat
-aquastat_raw <- read_csv(file.path(param$spam_path,
+aquastat_raw <- read_csv(file.path(param$mapspamc_path,
                           glue("processed_data/agricultural_statistics/aquastat_irrigated_crops_{param$year}_{param$iso3c}.csv")))
 
 
@@ -32,7 +32,7 @@ ha <- ha %>%
          adm_code = as.character(adm_code))
 
 aquastat <- aquastat_raw %>%
-  filter(crop != "total", 
+  filter(crop != "total",
          variable %in% c("Harvested irrigated permanent crop area", "Harvested irrigated temporary crop area")) %>%
   dplyr::select(adm_code, adm_name, adm_level, crop, ir_area = value, year)
 
@@ -50,5 +50,5 @@ ggplot(data = ir_share, aes(x = as.factor(year), y = ir_share, fill = crop)) +
   facet_wrap(~crop, scales = "free")
 
 # save
-write_csv(ir_share, file.path(param$spam_path, 
+write_csv(ir_share, file.path(param$mapspamc_path,
                               glue("processed_data/agricultural_statistics/share_of_irrigated_crops_{param$year}_{param$iso3c}.csv")))

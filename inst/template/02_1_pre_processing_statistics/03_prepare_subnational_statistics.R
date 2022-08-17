@@ -29,7 +29,7 @@ write_csv(ha_stat, file.path(param$raw_path,
                                 glue("subnational_statistics/subnational_harvested_area_{param$year}_{param$iso3c}.csv")))
 write_csv(ci_stat, file.path(param$raw_path,
                                 glue("subnational_statistics/cropping_intensity_{param$year}_{param$iso3c}.csv")))
-write_csv(sy_stat, file.path(param$raw_path,
+write_csv(fs_stat, file.path(param$raw_path,
                                 glue("subnational_statistics/farming_system_shares_{param$year}_{param$iso3c}.csv")))
 
 

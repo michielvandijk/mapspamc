@@ -9,12 +9,9 @@
 source(here::here("inst/template/01_model_setup/01_model_setup.r"))
 
 # LOAD DATA ------------------------------------------------------------------------------
-# Set FAOSTAT version
-faostat_crops_version <- "20200303"
 
 # Crop production
-prod <- read_csv(file.path(param$raw_path,
-  glue("faostat/{faostat_crops_version}_faostat_crops.csv")))
+prod <- read_csv(file.path(param$raw_path, "faostat/Production_Crops_Livestock_E_All_Data_(Normalized).csv"))
 
 # faostat2crop
 load_data("faostat2crop", param)
@@ -59,5 +56,5 @@ write_csv(faostat_crop_list, file.path(param$mapspamc_path,
                                        glue("processed_data/lists/faostat_crop_list_{param$year}_{param$iso3c}.csv")))
 
 # CLEAN UP -------------------------------------------------------------------------------
-rm(area, faostat_crop_list, faostat2crop, prod, faostat_crops_version)
+rm(area, faostat_crop_list, faostat2crop, prod)
 

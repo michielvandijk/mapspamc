@@ -6,24 +6,22 @@
 #'========================================================================================================================================
 
 ############### SOURCE PARAMETERS ###############
-source(here::here("scripts/01_model_setup/01_model_setup.r"))
+source(here::here("inst/template/01_model_setup/01_model_setup.r"))
 
 
 ############### LOAD DATA ###############
-# Set aquastat version
-aquastat_version <- "20200303"
-
 # Aquastat raw
-aquastat_raw <- read_excel(file.path(param$raw_path, glue("aquastat/{aquastat_version}_aquastat_irrigation.xlsx")), sheet = "data")
+aquastat_raw <- read_excel(file.path(param$raw_path, glue("aquastat/aquastat_irrigation_{param$iso3c}.xlsx")), sheet = "data")
 
 # Crop mapping
-aquastat2crop <-  read_csv(file.path(param$spam_path, "mappings/aquastat2crop.csv"))
+aquastat2crop <-  read_csv(file.path(param$mapspamc_path, "mappings/aquastat2crop.csv"))
 
 
 ############### PROCESS ###############
-# Clean up database
+# Clean up database, note that AQUATAT uses UN, not FAO countrycodes
 aquastat <- aquastat_raw %>%
-  filter(`Area Id` == param$fao) %>%
+  mutate(iso3c = countrycode(`Area Id`, "un", "iso3c")) %>%
+  filter(iso3c == param$iso3c) %>%
   mutate(adm_code = param$iso3c,
          adm_name = param$country,
          adm_level = 0) %>%
@@ -52,13 +50,13 @@ ir_area <- ir_area %>%
 
 
 ########## USER INPUT ##########
-# AQUASTAT uses "Other fruits" as a category, which can either be mapped to 
-# tropical fruits (trof) or temperate fruits (temf) in mapspam. 
+# AQUASTAT uses "Other fruits" as a category, which can either be mapped to
+# tropical fruits (trof) or temperate fruits (temf) in mapspam.
 # The standard is to map it to trof. If this is fine there is no need for any changes.
 # If temf is more appropriate change trof to temf below.
 
 # Check if the Other fruits category is present.
-other_fruits <- ir_area %>% 
+other_fruits <- ir_area %>%
   filter(crop %in% c("trof, temf"))
 if(NROW(other_fruits) == 0) {
   message("There is no Other fruits category")
@@ -72,9 +70,9 @@ ir_area <- ir_area %>%
 
 
 ############### SAVE ###############
-write_csv(ir_area, file.path(param$spam_path, 
+write_csv(ir_area, file.path(param$mapspamc_path,
   glue("processed_data/agricultural_statistics/aquastat_irrigated_crops_{param$year}_{param$iso3c}.csv")))
-        
+
 
 ############### CLEAN UP ###############
 rm(aquastat, aquastat_raw, aquastat_version, aquastat2crop, ir_area, other_fruits)

@@ -15,17 +15,17 @@ ha_df_raw <- read_csv(file.path(param$raw_path,
 
 # Farming systems shares
 fs_df_raw <- read_csv(file.path(param$raw_path,
-  glue("subnational_statistics/{param$iso3c}/farming_system_shares_{param$year}_{param$iso3c}.csv")))
+  glue("subnational_statistics/farming_system_shares_{param$year}_{param$iso3c}.csv")))
 
 # Cropping intensity
 ci_df_raw <- read_csv(file.path(param$raw_path,
-  glue("subnational_statistics/{param$iso3c}/cropping_intensity_{param$year}_{param$iso3c}.csv")))
+  glue("subnational_statistics/cropping_intensity_{param$year}_{param$iso3c}.csv")))
 
 # adm_list
 load_data("adm_list", param)
 
 # faostat
-fao_raw <- read_csv(file.path(param$spam_path,
+fao_raw <- read_csv(file.path(param$mapspamc_path,
   glue("processed_data/agricultural_statistics/faostat_crops_{param$year}_{param$iso3c}.csv")))
 
 
@@ -58,7 +58,8 @@ ha_df <- ha_df %>%
   mutate(ha = round(ha, 0))
 
 # Check if the statistics add up and show where this is not the case
-check_statistics(ha_df, param, out = T)
+check <- check_statistics(ha_df, param, out = T)
+check
 
 # Make sure the totals at higher levels are the same as subtotals
 # We start at the lowest level, assuming lower levels are preferred if more than one level
@@ -67,6 +68,7 @@ ha_df <- reaggregate_statistics(ha_df, param)
 
 # Check again
 check_statistics(ha_df, param, out = T)
+
 
 # HARMONIZE HA WITH FAOSTAT -------------------------------------------------------------
 # Compare with FAO
@@ -167,9 +169,9 @@ ci_df <- ci_df_raw
 # SAVE -------------------------------------------------------------------------------------
 # Save the ha, fs and ci csv files in the Processed_data/agricultural_statistics folder
 # Note that they have to be saved in this folder using the names below so do not change this!
-write_csv(ha_df, file.path(param$spam_path, glue("processed_data/agricultural_statistics/ha_adm_{param$year}_{param$iso3c}.csv")))
-write_csv(fs_df, file.path(param$spam_path, glue("processed_data/agricultural_statistics/fs_adm_{param$year}_{param$iso3c}.csv")))
-write_csv(ci_df, file.path(param$spam_path, glue("processed_data/agricultural_statistics/ci_adm_{param$year}_{param$iso3c}.csv")))
+write_csv(ha_df, file.path(param$mapspamc_path, glue("processed_data/agricultural_statistics/ha_adm_{param$year}_{param$iso3c}.csv")))
+write_csv(fs_df, file.path(param$mapspamc_path, glue("processed_data/agricultural_statistics/fs_adm_{param$year}_{param$iso3c}.csv")))
+write_csv(ci_df, file.path(param$mapspamc_path, glue("processed_data/agricultural_statistics/ci_adm_{param$year}_{param$iso3c}.csv")))
 
 
 # NOTE ------------------------------------------------------------------------------------

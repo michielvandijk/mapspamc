@@ -72,7 +72,7 @@ plot(adm_map$geometry, add = T)
 
 
 # SAVE -----------------------------------------------------------------------------------
-temp_path <- file.path(param$spam_path, glue("processed_data/maps/irrigated_area/{param$res}"))
+temp_path <- file.path(param$spamc_path, glue("processed_data/maps/irrigated_area/{param$res}"))
 dir.create(temp_path, showWarnings = FALSE, recursive = TRUE)
 
 writeRaster(ir_max_map, file.path(temp_path,

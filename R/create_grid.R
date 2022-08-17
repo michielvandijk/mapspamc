@@ -1,5 +1,5 @@
 #'@title
-#'Create spam country grid
+#'Create `mapspamc` country grid
 #'
 #'@description
 #'Creates the spatial grid that is used by SPAM to allocate physical area shares

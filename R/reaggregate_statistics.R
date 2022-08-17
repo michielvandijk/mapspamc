@@ -10,7 +10,7 @@
 #'
 #'@export
 reaggregate_statistics <- function(df, param){
-    stopifnot(inherits(param, "spamc_par"))
+    stopifnot(inherits(param, "mapspamc_par"))
     unit <- names(df)[names(df) %in% c("ha", "pa")]
     names(df)[names(df) %in% c("ha", "pa")] <- "value"
 

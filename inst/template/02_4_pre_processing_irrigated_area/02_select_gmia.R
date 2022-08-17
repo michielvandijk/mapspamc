@@ -31,16 +31,16 @@ if(!file.exists(file.path(param$raw_path, "gmia/gmia_v5_aei_ha_crs.tif"))){
 
 if(param$res == "5min") {
   # Set files
-  grid <- file.path(param$spam_path,
+  grid <- file.path(param$spamc_path,
                     glue("processed_data/maps/grid/{param$res}/grid_{param$res}_{param$year}_{param$iso3c}.tif"))
-  mask <- file.path(param$spam_path,
+  mask <- file.path(param$spamc_path,
                     glue("processed_data/maps/adm/{param$res}/adm_map_{param$year}_{param$iso3c}.shp"))
   input <- file.path(param$raw_path,
                      glue("gmia/gmia_v5_aei_ha_crs.tif"))
-  output <- file.path(param$spam_path,
+  output <- file.path(param$spamc_path,
                       glue("processed_data/maps/irrigated_area/{param$res}/gmia_temp_{param$res}_{param$year}_{param$iso3c}.tif"))
 
-  temp_path <- file.path(param$spam_path, glue("processed_data/maps/irrigated_area/{param$res}"))
+  temp_path <- file.path(param$spamc_path, glue("processed_data/maps/irrigated_area/{param$res}"))
   dir.create(temp_path, showWarnings = FALSE, recursive = TRUE)
 
   # Warp and mask
@@ -56,7 +56,7 @@ if(param$res == "5min") {
   plot(output_map)
 
   # save
-  writeRaster(output_map, file.path(param$spam_path,
+  writeRaster(output_map, file.path(param$spamc_path,
                                    glue("processed_data/maps/irrigated_area/{param$res}/gmia_{param$res}_{param$year}_{param$iso3c}.tif"))
               ,
   overwrite = T)
@@ -64,7 +64,7 @@ if(param$res == "5min") {
 
 if(param$res == "30sec") {
 
-  temp_path <- file.path(param$spam_path, glue("processed_data/maps/irrigated_area/{param$res}"))
+  temp_path <- file.path(param$spamc_path, glue("processed_data/maps/irrigated_area/{param$res}"))
   dir.create(temp_path, showWarnings = FALSE, recursive = TRUE)
 
   # Crop, making sure it also includes grid cells, which center is outside the polygon
@@ -79,18 +79,18 @@ if(param$res == "30sec") {
   plot(gmia_temp)
 
   # Save
-  writeRaster(gmia_temp, file.path(param$spam_path,
+  writeRaster(gmia_temp, file.path(param$spamc_path,
     glue("processed_data/maps/irrigated_area/{param$res}/gmia_temp_{param$year}_{param$iso3c}.tif")),
     overwrite = T)
 
   # Set files
-  grid <- file.path(param$spam_path,
+  grid <- file.path(param$spamc_path,
     glue("processed_data/maps/grid/{param$res}/grid_{param$res}_{param$year}_{param$iso3c}.tif"))
-  mask <- file.path(param$spam_path,
+  mask <- file.path(param$spamc_path,
     glue("processed_data/maps/adm/{param$res}/adm_map_{param$year}_{param$iso3c}.shp"))
-  input <- file.path(param$spam_path,
+  input <- file.path(param$spamc_path,
     glue("processed_data/maps/irrigated_area/{param$res}/gmia_temp_{param$year}_{param$iso3c}.tif"))
-  output <- file.path(param$spam_path,
+  output <- file.path(param$spamc_path,
     glue("processed_data/maps/irrigated_area/{param$res}/gmia_{param$res}_{param$year}_{param$iso3c}.tif"))
 
   # Warp and mask

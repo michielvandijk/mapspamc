@@ -24,7 +24,7 @@ compare_adm <- function(df, level_1, level_2, out = F){
     if(!isTRUE(all.equal(tot1$value[tot1$crop %in% inter],
                          tot2$value[tot2$crop %in% inter]))){
         message(
-            glue::glue("\nadm{level_1} and adm{level_2} are not equal!. Did you run rebalance_stat?")
+            glue::glue("\nadm{level_1} and adm{level_2} are not equal!. Did you run reaggregate_statistics()?")
         )
     } else {
         cat(glue::glue("\nadm{level_1} and adm{level_2} are equal"))

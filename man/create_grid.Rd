@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_grid.R
 \name{create_grid}
 \alias{create_grid}
-\title{Create spam country grid}
+\title{Create \code{mapspamc} country grid}
 \usage{
 create_grid(param = NULL)
 }

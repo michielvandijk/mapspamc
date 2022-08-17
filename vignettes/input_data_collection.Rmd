@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-To create crop distribution maps with SPAMc, various [sources of data](data.html) are required, including national and subnational agricultural statistics, cropland exent, map of irrigated areas and spatially explicit information on economic and bio-physical suitability. This section provides an overview of which raw data needs to be collected and where to store the datasets so the can be used by SPAMc as input. Details on how this data will be processed are discussed in the articles on [Processing subnational statistics](process_subnational_statistics.html) and [Processing spatial data](process_spatial_data.html). 
+To create crop distribution maps with `mapspamc`, various [sources of data](data.html) are required, including national and subnational agricultural statistics, cropland exent, map of irrigated areas and spatially explicit information on economic and bio-physical suitability. This section provides an overview of which raw data needs to be collected and where to store the datasets so they can be used by `mapspamc` as input. Details on how the data will be processed are discussed in the articles on [Processing subnational statistics](process_subnational_statistics.html) and [Processing spatial data](process_spatial_data.html). 
 
 
 ## Location of raw data
