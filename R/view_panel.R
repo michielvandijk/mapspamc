@@ -23,7 +23,7 @@
 #'
 #'@export
 view_panel <- function(crp, var, param, viewer = TRUE, polygon = TRUE){
-  stopifnot(inherits(param, "spamc_par"))
+  stopifnot(inherits(param, "mapspamc_par"))
   stopifnot(is.logical(viewer))
   stopifnot(is.logical(polygon))
   stopifnot(var %in% c("pa", "ha"))

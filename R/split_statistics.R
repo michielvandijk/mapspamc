@@ -1,9 +1,9 @@
-# Function to combine ha, fs and ci and split
-# Need to split first and then combine as in split version, adm specific fs and ci are used
+# Function to combine ha, fs and ci and split into submodels if solve_level = 1 is selected
+# Need to split first and then combine the data as in the ADM1 models, adm specific fs and ci data are used
 #'@importFrom magrittr %>%
 split_statistics <- function(ac, ha, fs, ci, param){
   load_data("adm_list", param, local = TRUE, mess = F)
-  cat("\nSave pa and pa_fs statistics for", ac)
+  cat("\n=> Save pa and pa_fs statistics for", ac)
 
   ha_adm <- dplyr::bind_rows(
     ha[ha$adm_code == ac,],
@@ -29,7 +29,8 @@ split_statistics <- function(ac, ha, fs, ci, param){
     dplyr::left_join(fs_adm, by = c("crop", "system")) %>%
     dplyr::mutate(pa = ha*fs/ci) %>%
     dplyr::group_by(adm_name, adm_code, crop, adm_level) %>%
-    dplyr::summarize(pa = plus(pa, na.rm = T)) %>%
+    dplyr::summarize(pa = plus(pa, na.rm = T),
+                     .groups = "drop") %>%
     ungroup()
 
   # Calculate physical area broken down by farming systems

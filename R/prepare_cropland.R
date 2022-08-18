@@ -9,7 +9,7 @@
 #'@importFrom magrittr %>%
 #'@export
 prepare_cropland <- function(param){
-  stopifnot(inherits(param, "spamc_par"))
+  stopifnot(inherits(param, "mapspamc_par"))
   cat("\n\n############### PREPARE CROPLAND ###############")
   load_data(c("adm_map_r", "adm_list","cl_med", "cl_max", "cl_rank", "grid"), param, local = TRUE, mess = FALSE)
 

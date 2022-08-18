@@ -1,8 +1,8 @@
 #'Prepares the physical area subnational statistics so they can be used as input
-#'for SPAM.
+#'for `mapspamc`.
 #'
 #'To estimate the physical crop area for each farming system harvest area (ha)
-#'statistics are combined with information on farmings sytem shares (fs) and
+#'statistics are combined with information on farmings system shares (fs) and
 #'cropping intensity (ci). Depending on how the model is solved, the physical
 #'area statistics are saved at the administrative unit level 0 (country) level
 #'(model solve level 0) or at the level 1 administrative unit level (model solve
@@ -20,8 +20,8 @@
 #'
 #'@export
 prepare_physical_area <- function(param){
-    stopifnot(inherits(param, "spamc_par"))
-    cat("\n\n############### PREPARE PHYSICAL AREA ###############")
+    stopifnot(inherits(param, "mapspamc_par"))
+    cat("\n=> Prepare physical area")
     load_data(c("adm_list", "ha", "fs", "ci"), param, local = TRUE, mess = FALSE)
 
     # Set adm_level
@@ -33,7 +33,7 @@ prepare_physical_area <- function(param){
 
     # wide to long format
     ha <- ha %>%
-        tidyr::gather(crop, ha, -adm_name, -adm_code, -adm_level)
+        tidyr::pivot_longer(-c(adm_name, adm_code, adm_level), names_to = "crop", values_to = "ha")
 
     # Set -999 and empty string values
     ha <- ha %>%
@@ -55,25 +55,25 @@ prepare_physical_area <- function(param){
 
     # wide to long format
     fs <- fs %>%
-        tidyr::gather(crop, fs, -adm_name, -adm_code, -adm_level, -system)
+      tidyr::pivot_longer(-c(adm_name, adm_code, adm_level, system), names_to = "crop", values_to = "fs")
 
     # Set -999 and empty string values
     fs <- fs %>%
         dplyr::mutate(fs = ifelse(fs == -999, NA_real_, fs))
 
-    # Select relevent crops using ha
+    # Select relevant crops using ha
     fs <- fs %>%
         dplyr::filter(crop %in% unique(ha$crop))
 
     # wide to long format
     ci <- ci %>%
-        tidyr::gather(crop, ci, -adm_name, -adm_code, -adm_level, -system)
+      tidyr::pivot_longer(-c(adm_name, adm_code, adm_level, system), names_to = "crop", values_to = "ci")
 
     # Set -999 and empty string values
     ci <- ci %>%
         dplyr::mutate(ci = ifelse(ci == -999, NA_real_, ci))
 
-    # Select relevent crops using ha
+    # Select relevant crops using ha
     ci <- ci %>%
         dplyr::filter(crop %in% unique(ha$crop))
 

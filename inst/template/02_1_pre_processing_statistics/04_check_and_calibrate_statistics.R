@@ -1,5 +1,5 @@
 #'========================================================================================
-#' Project:  MAPSPAMC
+#' Project:  mapspamc
 #' Subject:  Check and calibrate statistics
 #' Author:   Michiel van Dijk
 #' Contact:  michiel.vandijk@wur.nl

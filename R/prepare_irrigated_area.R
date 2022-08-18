@@ -8,7 +8,7 @@
 #'@export
 
 prepare_irrigated_area <- function(param){
-  stopifnot(inherits(param, "spamc_par"))
+  stopifnot(inherits(param, "mapspamc_par"))
   cat("\n\n############### PREPARE IRRIGATED AREA ###############")
   load_data(c("adm_map_r", "adm_list","ia_max", "ia_rank", "grid"), param, local = TRUE, mess = FALSE)
 

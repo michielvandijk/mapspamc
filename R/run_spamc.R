@@ -23,7 +23,7 @@
 #'
 #'@export
 run_spamc <- function(param, out = TRUE) {
-  stopifnot(inherits(param, "spamc_par"))
+  stopifnot(inherits(param, "mapspamc_par"))
   stopifnot(is.logical(out))
   cat("\n\n############### RUN SPAM ###############")
   load_data("adm_list", param, local = TRUE, mess = FALSE)

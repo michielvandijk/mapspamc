@@ -181,6 +181,8 @@ Balancing code is not correct as it does not replace, say ADM1 when there is mis
 Also replace cases when sum(ADM2) > ADM1 and is.na(ADM2)
 Set is.na(ADM2) to 0. 
 
+Also check if it has adm0, adm1 and adm2 (if specified) data. Sometimes adm0 data is not added by mistake, causing errors.
+
 # Introduce class subnat stat?!
 # Perhaps introduce a class subnat_stat, which always consists of subnatstat in wide format.
 # And has passed a number of checks so it is always consistent. 

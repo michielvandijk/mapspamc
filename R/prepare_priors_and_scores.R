@@ -3,7 +3,7 @@
 #'
 #'@export
 prepare_priors_and_scores <- function(param) {
-  stopifnot(inherits(param, "spamc_par"))
+  stopifnot(inherits(param, "mapspamc_par"))
   prepare_bs_yg("biophysical_suitability", param)
   prepare_bs_yg("potential_yield", param)
 

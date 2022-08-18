@@ -1,5 +1,5 @@
 #'========================================================================================
-#' Project:  MAPSPAMC
+#' Project:  mapspamc
 #' Subject:  Process adm shapefile
 #' Author:   Michiel van Dijk
 #' Contact:  michiel.vandijk@wur.nl
@@ -39,26 +39,29 @@ names(adm_map)
 # Add adm0_code and adm0_name of this is not part of attribute table
 # e.g. %>% mutate(adm0_name  = "COUNTRY.NAME)
 adm0_name_orig <- "name_cntr"
-adm0_code_orig <- "stat_code"
+#adm0_code_orig <- "stat_code"
 adm1_name_orig <- "adm1_name"
 adm1_code_orig <- "adm1_code"
 adm2_name_orig <- "O_NAME1"
 adm2_code_orig <- "Code"
 
 # EXTRA: create adm1 using adm2 code information
+# Note that we update the adm0_code so it matches with the statistics
 adm_map <- adm_map %>%
-  mutate(adm1_code = substr(Code, 1,4),
-         adm1_name = case_when(
-           adm1_code == "THZ1" ~ "Central",
-           adm1_code == "THZ2" ~ "Northeastern",
-           adm1_code == "THZ3" ~ "Northern",
-           adm1_code == "THZ4" ~ "Southern")
+  mutate(
+    adm0_code = "TH00",
+    adm1_code = substr(Code, 1,4),
+    adm1_name = case_when(
+      adm1_code == "THZ1" ~ "Central",
+      adm1_code == "THZ2" ~ "Northeastern",
+      adm1_code == "THZ3" ~ "Northern",
+      adm1_code == "THZ4" ~ "Southern")
   )
 
 
 # Replace the names
 names(adm_map)[names(adm_map) == adm0_name_orig] <- "adm0_name"
-names(adm_map)[names(adm_map) == adm0_code_orig] <- "adm0_code"
+#names(adm_map)[names(adm_map) == adm0_code_orig] <- "adm0_code"
 names(adm_map)[names(adm_map) == adm1_name_orig] <- "adm1_name"
 names(adm_map)[names(adm_map) == adm1_code_orig] <- "adm1_code"
 names(adm_map)[names(adm_map) == adm2_name_orig] <- "adm2_name"
@@ -77,9 +80,7 @@ adm_map <- adm_map %>%
   group_by(adm0_name, adm0_code, adm1_name, adm1_code, adm2_name, adm2_code) %>%
   summarize(geometry = st_union(geometry),
             .groups = "drop") %>%
-  ungroup() %>%
-  mutate(adm0_name = param$country,
-         adm0_code = param$iso3c)
+  ungroup()
 
 par(mfrow=c(1,2))
 plot(adm_map$geometry, main = "ADM all polygons")
@@ -129,3 +130,4 @@ rm(adm_map, adm_map_raw, iso3c_shp, temp_path)
 rm(list = ls()[grep("code_orig", ls())])
 rm(list = ls()[grep("name_orig", ls())])
 rm(list = ls()[grep("to_remove", ls())])
+

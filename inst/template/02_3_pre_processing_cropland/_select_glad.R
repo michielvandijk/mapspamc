@@ -21,6 +21,7 @@ dir.create(temp_path, showWarnings = FALSE, recursive = TRUE)
 # Warp and mask
 input <- file.path(param$raw_path, glue("glad/glad_2019.tif"))
 output <- align_raster(input, grid, adm_map, method = "bilinear")
+names(output) <- "glad"
 plot(output)
 writeRaster(output, file.path(temp_path, glue("cropmask_glad_{param$res}_{param$year}_{param$iso3c}.tif")),
             overwrite = TRUE)
