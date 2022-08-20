@@ -2,7 +2,7 @@
 % Please edit documentation in R/combine_results.R
 \name{combine_results}
 \alias{combine_results}
-\title{Combines SPAMc GAMS output into a single rds file}
+\title{Combines \code{mapspamc} GAMS output into a single R .rds file}
 \usage{
 combine_results(param, cut = 1e-04, out = FALSE)
 }

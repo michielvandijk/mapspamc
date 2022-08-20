@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_all_tif.R
 \name{create_all_tif}
 \alias{create_all_tif}
-\title{Create tif files of all SPAMc maps}
+\title{Create tif files for all crop distribution maps produced with \code{mapspamc}}
 \usage{
 create_all_tif(param)
 }
@@ -14,5 +14,5 @@ available, administrative unit level at which the model is solved and type of
 model.}
 }
 \description{
-Create tif files of all SPAMc maps
+Create tif files for all crop distribution maps produced with \code{mapspamc}
 }

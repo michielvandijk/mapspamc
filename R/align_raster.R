@@ -27,7 +27,7 @@
 #'\dontrun{
 #'align_raster(gaez_file, grid, adm_map, method = "bilinear")
 #'}
-#'@import terra
+#'@rawNamespace import(terra, except = arrow)
 #'@export
 align_raster <- function(r, ref_grid, clip, method = "bilinear"){
   r <- rast(r)

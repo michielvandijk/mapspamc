@@ -24,7 +24,7 @@
 #'create_adm_map_pdf(param)
 #'}
 #'
-#'@import ggplot2
+#'@rawNamespace import(ggplot2, except = arrow)
 #'@export
 create_adm_map_pdf <- function(param, font_size = 3) {
 

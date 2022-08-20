@@ -13,7 +13,7 @@
 #'\dontrun{
 #'rasterize_adm_map(param)
 #'}
-#'@import terra
+#'@rawNamespace import(terra, except = arrow)
 #'@importFrom magrittr %>%
 #'@export
 #'

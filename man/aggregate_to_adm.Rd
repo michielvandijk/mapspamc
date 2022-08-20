@@ -2,7 +2,7 @@
 % Please edit documentation in R/aggregate_to_adm.R
 \name{aggregate_to_adm}
 \alias{aggregate_to_adm}
-\title{Aggregate gridded SPAM-C results to administrative unit level}
+\title{Aggregate gridded \code{mapspamc} results to administrative unit level}
 \usage{
 aggregate_to_adm(param, alt_param)
 }
@@ -13,12 +13,12 @@ resolution, most detailed level at which subnational statistics are
 available, administrative unit level at which the model is solved and type of
 model.}
 
-\item{alt_param}{Object of type spamc_par that bundles all SPAM parameters, including core model folders,
+\item{alt_param}{Object of type spamc_par that bundles all \code{mapspamc} parameters, including core model folders,
 alpha-3 country code, year, spatial resolution, most detailed level at which subnational statistics are
 available, administrative unit level at which the model is solved and type of model.}
 }
 \value{
-data.frame with SPAM-C results aggregated to the administrative unit level specified in
+data.frame with \code{mapspamc} results aggregated to the administrative unit level specified in
 \code{alt_param}.
 }
 \description{
@@ -27,7 +27,7 @@ to the administrative unit level determined by \code{adm_level} of the target mo
 The model described by \code{alt_param} must be identical to the target model apart from the \code{adm_level}
 parameter, which is set to a less-detailed level. A comparison of the output of \code{aggregate_to_adm} with
 subnational information at the most detailed level available is a validation of the alternative model and,
-indirectly, also of the targer model.
+indirectly, also of the target model.
 }
 \examples{
 \dontrun{

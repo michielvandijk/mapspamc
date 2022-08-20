@@ -8,7 +8,7 @@ view_panel(crp, var, param, viewer = TRUE, polygon = TRUE)
 }
 \arguments{
 \item{crp}{Character. Crop for which the maps are shows. \code{crp}  has to be
-one of the SPAMc four letter crop codes.}
+one of the \code{mapspamc}  four letter crop codes.}
 
 \item{var}{Character. The variable to be plotted. \code{var} has to be physical
 area (\code{"pa"}) or harvested area (\code{"ha"}).}
@@ -25,7 +25,7 @@ maps? \code{FALSE} will show the maps in the RStudio viewer pane.}
 \item{polygon}{Logical; should the country polygon be overlayed?}
 }
 \description{
-To quickly inspect the SPAMc results, \code{view_panel} shows crop
+To quickly inspect the \code{mapspamc} results, \code{view_panel} shows crop
 distribution maps for a selected crop using a panel for each farming system.
 The maps are visualized using \href{https://leafletjs.com/}{leafletjs}, which
 makes it possible to select a number of background tiles (e.g.
