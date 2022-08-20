@@ -9,14 +9,14 @@
 
 prepare_irrigated_area <- function(param){
   stopifnot(inherits(param, "mapspamc_par"))
-  cat("\n\n############### PREPARE IRRIGATED AREA ###############")
+  cat("\n\n=> Prepare irrigated area")
   load_data(c("adm_map_r", "adm_list","ia_max", "ia_rank", "grid"), param, local = TRUE, mess = FALSE)
 
   # Grid size
   grid_size <- calc_grid_size(grid)
 
   # Combine and remove cells where gridID is missing
-  df <- as.data.frame(raster::rasterToPoints(raster::stack(grid, ia_rank, ia_max, grid_size))) %>%
+  df <- as.data.frame(c(grid, ia_rank, ia_max, grid_size), xy = TRUE) %>%
     dplyr::filter(!is.na(gridID))
 
   # Fix inconsistencies

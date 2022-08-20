@@ -10,11 +10,11 @@ split_scores <- function(ac, param){
   ############### PREPARATIONS ###############
   # Put statistics in long format
   pa <- pa %>%
-    tidyr::gather(crop, pa, -adm_code, -adm_name, -adm_level)
+    tidyr::pivot_longer(-c(adm_code, adm_name, adm_level), names_to = "crop", values_to = "pa")
 
   pa_fs <- pa_fs %>%
     dplyr::filter(adm_code == ac) %>%
-    tidyr::gather(crop, pa, -adm_code, -adm_name, -adm_level, -system) %>%
+    tidyr::pivot_longer(-c(adm_code, adm_name, adm_level, system), names_to = "crop", values_to = "pa") %>%
     dplyr::filter(!is.na(pa) & pa != 0) %>%
     dplyr::mutate(crop_system = paste(crop, system , sep = "_"))
 
@@ -23,14 +23,14 @@ split_scores <- function(ac, param){
     tidyr::separate(crop_system, into = c("crop", "system"), sep = "_", remove = F)
 
   # create gridID list
-  grid_df <- as.data.frame(raster::rasterToPoints(grid))
+  grid_df <- as.data.frame(grid, xy = TRUE)
 
   ## Rural population
   # Note that we normalize over adms to distribute the crops more evenly over adms.
   # If we would normalize over the whole country, crops for which we do not have adm information,
   # might be pushed to a very limited area.
-  pop_rural <- raster::mask(pop, urb, inverse = T) # Remove urban areas
-  pop_rural <- as.data.frame(raster::rasterToPoints(raster::stack(grid, pop_rural))) %>%
+  pop_rural <- terra::mask(pop, vect(urb), inverse = T) # Remove urban areas
+  pop_rural <- as.data.frame(c(grid, pop_rural)) %>%
     dplyr::select(gridID, pop) %>%
     dplyr::mutate(pop = ifelse(is.na(pop), 0, pop)) %>% # We assume zero population in case data is missing
     dplyr::left_join(adm_map_r, by = "gridID") %>%
@@ -49,7 +49,7 @@ split_scores <- function(ac, param){
   # NOTE that we normalize over the whole country as some cash crops are allocated at national level.
   # We expected these crops to be located a most accessible areas from a national (not adm) perspective
   # Hence we do not normalize using adm_sel as a basis.
-  acc <- as.data.frame(raster::rasterToPoints(raster::stack(grid, acc))) %>%
+  acc <- as.data.frame(c(grid, acc)) %>%
     dplyr::select(gridID, acc) %>%
     dplyr::left_join(adm_map_r, by = "gridID") %>%
     dplyr::rename(adm_code = glue::glue("adm{param$adm_level}_code")) %>%
@@ -98,7 +98,7 @@ split_scores <- function(ac, param){
     dplyr::filter(system == "S") %>%
     dplyr::left_join(adm_map_r, by = "gridID") %>%
     dplyr::select(-dplyr::ends_with("_name")) %>%
-    tidyr::gather(adm_code_level, adm_code, -gridID, -crop, -system, -crop_system) %>%
+    tidyr::pivot_longer(-c(gridID, crop, system, crop_system), names_to = "adm_code_level", values_to = "adm_code") %>%
     dplyr::mutate(adm_code_crop = paste(adm_code, crop, sep = "_")) %>%
     dplyr::filter(!adm_code_crop %in% adm_code_crop_s$adm_code_crop) %>%
     dplyr::select(gridID, crop, system, crop_system) %>%
@@ -193,7 +193,6 @@ split_scores <- function(ac, param){
     dplyr::left_join(scores_base,., by = c("gridID", "crop_system")) %>%
     dplyr::mutate(score = tidyr::replace_na(score, 0)) %>%
     tidyr::separate(crop_system, into = c("crop", "system"), sep = "_", remove = F)
-  summary(score_df)
 
 
   ############### SAVE ###############

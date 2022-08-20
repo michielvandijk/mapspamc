@@ -1,11 +1,11 @@
-#' Create tif files of all SPAMc maps
+#' Create tif files for all crop distribution maps produced with `mapspamc`
 #'
 #'@param param
 #'@inheritParams create_grid
 #'
 #'@export
 create_all_tif <- function(param) {
-  cat("\n\n############### CREATE TIF FILES FOR ALL CROP AND FARMING SYSTEM COMBINATIONS ###############")
+  cat("\n=> Create .tif files for all crop and farming system combinations")
   load_data("results", param, mess = F)
 
   # by crop and system
@@ -19,7 +19,7 @@ create_all_tif <- function(param) {
     temp_path <- file.path(param$mapspamc_path,
                            glue::glue("processed_data/results/{model_folder}/maps/{var}/"))
     dir.create(temp_path, showWarnings = F, recursive = T)
-    raster::writeRaster(r,
+    terra::writeRaster(r,
       file.path(temp_path, glue::glue("{var}_{crp}_{sy}_{param$res}_{param$year}_{param$iso3c}.tif")),
       overwrite = T)
     }

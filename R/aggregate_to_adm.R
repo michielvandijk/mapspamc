@@ -1,20 +1,20 @@
-#'@title Aggregate gridded SPAM-C results to administrative unit level
+#'@title Aggregate gridded `mapspamc` results to administrative unit level
 #'
 #'@description `aggregate_to_adm` aggregates gridded results of an alternative model specified by `alt_param`
 #' to the administrative unit level determined by `adm_level` of the target model specified by `param`.
 #' The model described by `alt_param` must be identical to the target model apart from the `adm_level`
 #' parameter, which is set to a less-detailed level. A comparison of the output of `aggregate_to_adm` with
 #' subnational information at the most detailed level available is a validation of the alternative model and,
-#' indirectly, also of the targer model.
+#' indirectly, also of the target model.
 #'
 #'@param param
 #'@inheritParams create_mapspamc_folders
 #'
-#'@param alt_param Object of type spamc_par that bundles all SPAM parameters, including core model folders,
+#'@param alt_param Object of type spamc_par that bundles all `mapspamc` parameters, including core model folders,
 #'alpha-3 country code, year, spatial resolution, most detailed level at which subnational statistics are
 #'available, administrative unit level at which the model is solved and type of model.
 #'
-#'@return data.frame with SPAM-C results aggregated to the administrative unit level specified in
+#'@return data.frame with `mapspamc` results aggregated to the administrative unit level specified in
 #'`alt_param`.
 #'
 #'@examples
@@ -23,14 +23,14 @@
 #'@export
 aggregate_to_adm <- function(param, alt_param){
     stopifnot(inherits(param, "mapspamc_par"))
-    stopifnot(inherits(alt_param, "spamc_par"))
+    stopifnot(inherits(alt_param, "mapspamc_par"))
 
     load_data("results", alt_param)
     load_data("adm_map", param)
     load_data("grid", param)
 
     aggregate_crop_adm <- function(cr){
-        grid_df <- as.data.frame(raster::rasterToPoints(grid))
+        grid_df <- as.data.frame(grid, xy = TRUE)
 
         df <-  dplyr::filter(results, crop %in% cr) %>%
             dplyr::group_by(gridID, crop) %>%
@@ -38,7 +38,7 @@ aggregate_to_adm <- function(param, alt_param){
             na.omit() %>%
             dplyr::left_join(grid_df)
 
-        crop_map_r <- raster::rasterFromXYZ(df %>% dplyr::select(x, y, value), crs = raster::crs(adm_map))
+        crop_map_r <- terra::rast(df %>% dplyr::select(x, y, value), crs = param$crs)
 
         message(glue("{cr}"))
 

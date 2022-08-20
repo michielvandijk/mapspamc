@@ -26,9 +26,9 @@ prepare_physical_area <- function(param){
 
     # Set adm_level
     if(param$solve_level == 0) {
-        adm_code_list <- unique(adm_list$adm0_code)
+        ac <- unique(adm_list$adm0_code)
     } else {
-        adm_code_list <- unique(adm_list$adm1_code)
+        ac <- unique(adm_list$adm1_code)
     }
 
     # wide to long format
@@ -78,6 +78,6 @@ prepare_physical_area <- function(param){
         dplyr::filter(crop %in% unique(ha$crop))
 
     # Save
-    purrr::walk(adm_code_list, split_statistics, ha, fs, ci, param)
+    purrr::walk(ac, split_statistics, ha, fs, ci, param)
 }
 

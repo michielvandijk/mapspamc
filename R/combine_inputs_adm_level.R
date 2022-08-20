@@ -11,7 +11,7 @@ combine_inputs_adm_level <- function(ac, param){
   ############### PREPARATIONS ###############
   # Put statistics in long format and filter out crops where pa = 0
   pa_fs <- pa_fs %>%
-    tidyr::gather(crop, pa, -adm_code, -adm_name, -adm_level, -system) %>%
+    tidyr::pivot_longer(-c(adm_code, adm_name, adm_level, system), names_to = "crop", values_to = "pa") %>%
     dplyr::filter(pa != 0)
 
 
@@ -213,6 +213,6 @@ combine_inputs_adm_level <- function(ac, param){
   # Prepare GDX
   gdxrrw::wgdx(file.path(temp_path, glue::glue("input_{param$res}_{param$year}_{ac}_{param$iso3c}.gdx")),
                gdx_input)
-  cat("\nGDX model input file saved for ", ac)
+  cat("\n=> GDX model input file saved for ", ac)
 }
 

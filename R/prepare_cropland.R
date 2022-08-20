@@ -10,14 +10,14 @@
 #'@export
 prepare_cropland <- function(param){
   stopifnot(inherits(param, "mapspamc_par"))
-  cat("\n\n############### PREPARE CROPLAND ###############")
+  cat("\n\n=> Prepare cropland")
   load_data(c("adm_map_r", "adm_list","cl_med", "cl_max", "cl_rank", "grid"), param, local = TRUE, mess = FALSE)
 
   # Grid size
   grid_size <- calc_grid_size(grid)
 
   # Combine and remove few cells where gridID is missing, caused by masking grid with country borders using gdal.
-  df <- as.data.frame(raster::rasterToPoints(raster::stack(grid, cl_med, cl_rank, cl_max, grid_size))) %>%
+  df <- as.data.frame(c(grid, cl_med, cl_rank, cl_max, grid_size),xy = TRUE) %>%
     dplyr::filter(!is.na(gridID))
 
   # Fix inconsistencies

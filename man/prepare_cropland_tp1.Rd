@@ -2,7 +2,7 @@
 % Please edit documentation in R/prepare_cropland_tp1.R
 \name{prepare_cropland_tp1}
 \alias{prepare_cropland_tp1}
-\title{Prepares the synergy cropland area for SPAM including tp1}
+\title{Prepares the synergy cropland area for `mapspamc}
 \usage{
 prepare_cropland_tp1(param)
 }
@@ -14,7 +14,7 @@ available, administrative unit level at which the model is solved and type of
 model.}
 }
 \description{
-Prepares the synergy cropland area for SPAM including tp1
+Prepares the synergy cropland area for `mapspamc
 }
 \examples{
 

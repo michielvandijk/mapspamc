@@ -32,12 +32,3 @@ prepare_priors_and_scores(param)
 # COMBINE MODEL INPUTS -------------------------------------------------------------------
 combine_inputs(param)
 
-
-# RUN MODEL -----------------------------------------------------------------------------
-run_spamc(param)
-
-
-# COMBINE ADM1 RESULTS ------------------------------------------------------------------
-combine_results(param)
-
-

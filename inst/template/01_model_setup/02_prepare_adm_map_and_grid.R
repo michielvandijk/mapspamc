@@ -30,13 +30,13 @@ head(adm_map)
 names(adm_map)
 
 # In order to use the country polygon as input, the column names of the attribute table need to have
-# the right names referring to the different adms.
+# the right names referring to the different adms, which correspond to the names in the crop statistics.
 # The names of the administrative units should be set to admX_name, where X is the adm level.
 # The codes of the administrative units should be set to admX_code, where X is the adm code.
 
-# Set the original names, i.e. the ones that will be replaced. Remove adm1
-# and/or adm2 entries if data at that administrative level is not available.
-# Add adm0_code and adm0_name of this is not part of attribute table
+# If the attribute table already contains all adm names and codes but with incorrect header names,
+# set the original names, i.e. the ones that will be replaced. below.
+# Add adm0_code and adm0_name of these are not not part of attribute table
 # e.g. %>% mutate(adm0_name  = "COUNTRY.NAME)
 adm0_name_orig <- "name_cntr"
 #adm0_code_orig <- "stat_code"

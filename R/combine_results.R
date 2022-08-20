@@ -1,4 +1,4 @@
-#'@title Combines SPAMc GAMS output into a single rds file
+#'@title Combines `mapspamc` GAMS output into a single R .rds file
 #'
 #'@description Combines the GAMs results that are saved in one (`solve_level =
 #'  0`)  or multiple (`solve_level = 1`) gdx files into a single rds file, that can be
@@ -20,17 +20,17 @@ combine_results <- function(param, cut = 0.0001, out = FALSE) {
    # Test if gdxrrw and gams are installed.
    setup_gams(param)
 
-   cat("\n\n############### COMBINE RESULTS ###############")
+   cat("\n=> Combine results")
    load_data(c("adm_list", "ci"), param, local = TRUE, mess = FALSE)
 
   # Set adm_level
   if(param$solve_level == 0) {
-    adm_code_list <- unique(adm_list$adm0_code)
+    ac <- unique(adm_list$adm0_code)
   } else {
-    adm_code_list <- unique(adm_list$adm1_code)
+    ac <- unique(adm_list$adm1_code)
   }
 
- df <- purrr::map_df(adm_code_list, prepare_results_adm_level, param) %>%
+ df <- purrr::map_df(ac, prepare_results_adm_level, param) %>%
    dplyr::mutate(year = param$year,
           resolution = param$res,
           model = param$model,

@@ -1,7 +1,7 @@
 # Process_bs_py
 split_priors <- function(ac, param){
 
-  cat("\nPrepare priors for", ac)
+  cat("\n=> Prepare priors for", ac)
 
   # Load data
   load_intermediate_data(c("pa", "pa_fs", "cl_harm", "ia_harm", "bs", "py"), ac, param, local = TRUE, mess = FALSE)
@@ -10,11 +10,11 @@ split_priors <- function(ac, param){
   ############### PREPARATIONS ###############
   # Put statistics in long format
   pa <- pa %>%
-    tidyr::gather(crop, pa, -adm_code, -adm_name, -adm_level)
+    tidyr::pivot_longer(-c(adm_code, adm_name, adm_level), names_to = "crop", values_to = "pa")
 
   pa_fs <- pa_fs %>%
     dplyr::filter(adm_code == ac) %>%
-    tidyr::gather(crop, pa, -adm_code, -adm_name, -adm_level, -system) %>%
+    tidyr::pivot_longer(-c(adm_code, adm_name, adm_level, system), names_to = "crop", values_to = "pa") %>%
     dplyr::filter(!is.na(pa) & pa != 0) %>%
     dplyr::mutate(crop_system = paste(crop, system , sep = "_"))
 
@@ -23,14 +23,14 @@ split_priors <- function(ac, param){
     tidyr::separate(crop_system, into = c("crop", "system"), sep = "_", remove = F)
 
   # create gridID list
-  grid_df <- as.data.frame(raster::rasterToPoints(grid))
+  grid_df <- as.data.frame(grid, xy = TRUE)
 
   ## Rural population
   # Note that we normalize over adms to distribute the crops more evenly over adms.
   # If we would normalize over the whole country, crops for which we do not have adm information,
   # might be pushed to a very limited area.
-  pop_rural <- raster::mask(pop, sf::as_Spatial(urb), inverse = T) # Remove urban areas
-  pop_rural <- as.data.frame(raster::rasterToPoints(raster::stack(grid, pop_rural))) %>%
+  pop_rural <- terra::mask(pop, terra::vect(urb), inverse = T) # Remove urban areas
+  pop_rural <- as.data.frame(c(grid, pop_rural)) %>%
     dplyr::select(gridID, pop) %>%
     dplyr::mutate(pop = ifelse(is.na(pop), 0, pop)) %>% # We assume zero population in case data is missing
     dplyr::left_join(adm_map_r, by = "gridID") %>%
@@ -43,14 +43,12 @@ split_priors <- function(ac, param){
     dplyr::select(gridID, pop_norm) %>%
     dplyr::filter(gridID %in% unique(cl_harm$gridID))
 
-
-
   ## Accessibility
   # NOTE that we normalize so that max = 0 and min = 1 as higher tt gives lower suitability
   # NOTE that we normalize over the whole country as some cash crops are allocated at national level.
   # We expected these crops to be located a most accessible areas from a national (not adm) perspective
   # Hence we do not normalize using adm_sel as a basis.
-  acc <- as.data.frame(raster::rasterToPoints(raster::stack(grid, acc))) %>%
+  acc <- as.data.frame(c(grid, acc)) %>%
     dplyr::select(gridID, acc) %>%
     dplyr::left_join(adm_map_r, by = "gridID") %>%
     dplyr::rename(adm_code = glue::glue("adm{param$adm_level}_code")) %>%
@@ -99,7 +97,7 @@ split_priors <- function(ac, param){
     dplyr::filter(system == "S") %>%
     dplyr::left_join(adm_map_r, by = "gridID") %>%
     dplyr::select(-dplyr::ends_with("_name")) %>%
-    tidyr::gather(adm_code_level, adm_code, -gridID, -crop, -system, -crop_system) %>%
+    tidyr::pivot_longer(-c(gridID, crop, system, crop_system), names_to = "adm_code_level", values_to = "adm_code") %>%
     dplyr::mutate(adm_code_crop = paste(adm_code, crop, sep = "_")) %>%
     dplyr::filter(!adm_code_crop %in% adm_code_crop_s$adm_code_crop) %>%
     dplyr::select(gridID, crop, system, crop_system) %>%
@@ -192,7 +190,8 @@ split_priors <- function(ac, param){
   # Residual grid area
   resid_area <- prior_s %>%
     dplyr::group_by(gridID) %>%
-    dplyr::summarize(prior_s = sum(prior, na.rm = T)) %>%
+    dplyr::summarize(prior_s = sum(prior, na.rm = T),
+                     .groups = "drop") %>%
     dplyr::ungroup() %>%
     dplyr::left_join(cl_harm,., by = "gridID") %>%
     dplyr::mutate(
@@ -203,8 +202,8 @@ split_priors <- function(ac, param){
 
   # Distribute residual area over I, L, H systems using score as weight.
   prior_i_l_h <- dplyr::bind_rows(prior_i, prior_l, prior_h) %>%
-    tidyr::spread(crop_system, prior, fill = 0) %>% # add 0 as fill
-    tidyr::gather(crop_system, prior, -gridID) %>%
+    tidyr::pivot_wider(names_from = crop_system, values_from = prior, values_fill = 0) %>% # add 0 as fill
+    tidyr::pivot_longer(-gridID, names_to = "crop_system", values_to = "prior") %>%
     dplyr::group_by(gridID) %>%
     dplyr::mutate(prior_share = prior/sum(prior, na.rm = T),
                   prior_share = ifelse(is.na(prior_share), 0, prior_share)) %>%

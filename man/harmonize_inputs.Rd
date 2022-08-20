@@ -4,7 +4,7 @@
 \alias{harmonize_inputs}
 \title{Harmonizes the subnational statistics, the cropland extent and the irrigated area}
 \usage{
-harmonize_inputs(param)
+harmonize_inputs(param, cl_slackp = 0.05, cl_slackn = 5, ia_slackp = 0.05)
 }
 \arguments{
 \item{param}{Object of type \code{mapspamc_par} that bundles all \code{mapspamc} parameters,

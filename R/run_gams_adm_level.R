@@ -1,6 +1,6 @@
 # Function to run mapspam in gams
 run_gams_adm_level <- function(ac, param, out = TRUE){
-  cat("\nRunning",  param$model, "model for", ac)
+  cat("\nSolving",  param$model, "model for", ac)
   gams_model <- system.file("gams", glue::glue("{param$model}.gms"), package = "mapspamc", mustWork = TRUE)
 
   model_folder <- create_model_folder(param)

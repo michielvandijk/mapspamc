@@ -1,21 +1,21 @@
 # Process gaez
-process_gaez <- function(file, var, lookup, ac, param) {
+process_gaez <- function(f, var, lookup, ac, param) {
 
   # Prepare
   load_intermediate_data(c("cl_harm"), ac, param, local = TRUE, mess = FALSE)
   load_data(c("grid"), param, local = TRUE, mess = FALSE)
 
-  crp_sys <- basename(file)
+  crp_sys <- basename(f)
   crp_sys <- unlist(lapply(strsplit(crp_sys, "_"), function(x) paste(x[1], x[2], sep="_")))
   crp <- strsplit(crp_sys, split = "_")[[1]][1]
   sys <- strsplit(crp_sys, split = "_")[[1]][2]
-  cat("\nProcessing: ", var, " ", crp_sys)
+  cat("\n=> Processing: ", var, " ", crp_sys)
 
   # Get replacement crops
   load_data("gaez_replace", param, local = TRUE, mess = FALSE)
 
   rep_crops <- gaez_replace %>%
-    tidyr::gather(number, rep_crop, -crop) %>%
+    tidyr::pivot_longer(-crop, names_to = "number", values_to = "rep_crop") %>%
     dplyr::mutate(number = as.integer(gsub("rc_", "", number))) %>%
     dplyr::filter(crop %in% crp)
   rep_crops <- rep_crops$rep_crop
@@ -28,12 +28,11 @@ process_gaez <- function(file, var, lookup, ac, param) {
 
   # Loop till gaez data are all non zero
   repeat{
-    r <- raster::raster(file)
+    r <- terra::rast(f)
     names(r) <- "value"
 
     # Combine with grid, select only relevant gridID and add crop_system
-    df <- as.data.frame(raster::rasterToPoints(raster::stack(grid, r))) %>%
-      dplyr::select(-x, -y) %>%
+    df <- as.data.frame(c(r, grid)) %>%
       dplyr::filter(gridID %in% cl_harm$gridID) %>%
       dplyr::mutate(crop_system = crp_sys)
 
@@ -58,7 +57,7 @@ process_gaez <- function(file, var, lookup, ac, param) {
     cp_cnt <- cp_cnt + 1
     target_rc <- rep_crops[cp_cnt]
     crp_sys_rep <- paste(target_rc, sys, sep = "_")
-    file <- lookup$files_full[lookup$crop_system == crp_sys_rep]
+    f <- lookup$files_full[lookup$crop_system == crp_sys_rep]
   }
 
   # Create log

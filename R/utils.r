@@ -72,8 +72,7 @@ fPaste <- function(vec) sub(",\\s+([^,]+)$", " and \\1", toString(vec))
 
 # Function to create grid area
 calc_grid_size <- function(grid) {
-    grid_size <- raster::area(grid)
-    grid_size <- grid_size * 100 # in ha
+    grid_size <- terra::cellSize(grid, unit = "ha")
     names(grid_size) <- "grid_size"
     return(grid_size)
 }
@@ -94,9 +93,9 @@ calculate_pa_tot <- function(adm_lvl, adm_code, param) {
 # Function to create a map from gridID dataframe
 gridID2raster <- function(df, var, param){
     load_data("grid", param, local = TRUE, mess = FALSE)
-    grid_df <- as.data.frame(raster::rasterToPoints(grid))
+    grid_df <- as.data.frame(grid, xy = TRUE)
     r <- dplyr::left_join(df, grid_df,  by = "gridID")
-    r <- raster::rasterFromXYZ(r[c("x", "y", var)], crs = param$crs)
+    r <- rast(r[c("x", "y", var)], crs = param$crs)
     return(r)
 }
 

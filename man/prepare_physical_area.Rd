@@ -3,7 +3,7 @@
 \name{prepare_physical_area}
 \alias{prepare_physical_area}
 \title{Prepares the physical area subnational statistics so they can be used as input
-for SPAM.}
+for \code{mapspamc}.}
 \usage{
 prepare_physical_area(param)
 }
@@ -16,7 +16,7 @@ model.}
 }
 \description{
 To estimate the physical crop area for each farming system harvest area (ha)
-statistics are combined with information on farmings sytem shares (fs) and
+statistics are combined with information on farmings system shares (fs) and
 cropping intensity (ci). Depending on how the model is solved, the physical
 area statistics are saved at the administrative unit level 0 (country) level
 (model solve level 0) or at the level 1 administrative unit level (model solve

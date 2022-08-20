@@ -10,7 +10,7 @@ source(here::here("inst/template/01_model_setup/01_model_setup.r"))
 
 
 # RUN MODEL -----------------------------------------------------------------------------
-run_spamc(param)
+run_mapspamc(param)
 
 
 # COMBINE ADM1 RESULTS ------------------------------------------------------------------

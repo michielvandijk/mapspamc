@@ -2,7 +2,7 @@
 #
 #'@importFrom magrittr %>%
 #'
-split_harmonized_inputs <- function(ac, param) {
+split_harmonized_inputs <- function(ac, param, cl_slackp, cl_slackn, ia_slackp) {
 
   #https://stackoverflow.com/questions/7096989/how-to-save-all-console-output-to-file-in-r
   model_folder <- create_model_folder(param)
@@ -18,7 +18,7 @@ split_harmonized_inputs <- function(ac, param) {
   load_intermediate_data(c("cl"), ac, param, local = T, mess = F)
 
   ############### STEP 2: SET CL TO MEDIAN CROPLAND ###############
-    # Create df of cl map,  set cl to median cropland
+  # Create df of cl map,  set cl to median cropland
   # Remove few cells where gridID is missing, caused by masking grid with country borders using gdal.
   cl_df <- cl %>%
     dplyr::mutate(cl = cl_med)
@@ -32,12 +32,12 @@ split_harmonized_inputs <- function(ac, param) {
 
 
   ############### STEP 4: HARMONIZE IA ###############
-  cl_df <- harmonize_ia(cl_df, ac, param, ia_slackp = 0.05) %>%
+  cl_df <- harmonize_ia(cl_df, ac, param, ia_slackp = ia_slackp) %>%
     dplyr::mutate(ia = ifelse(is.na(ia), 0, ia),
            ia_max = ifelse(is.na(ia_max), 0, ia_max))
 
   ############### STEP 5: PREPARE FINAL CL MAP BY RANKING CELLS PER ADM ###############
-  cl_df <- select_grid_cells(cl_df, ac, param, cl_slackp = 0.05, cl_slackn = 5)
+  cl_df <- select_grid_cells(cl_df, ac, param, cl_slackp = cl_slackp, cl_slackn = cl_slackn)
 
 
   ############### STEP 6: PREPARE FILES ###############
@@ -68,13 +68,13 @@ split_harmonized_inputs <- function(ac, param) {
 
   saveRDS(cl_harm_df, file.path(temp_path,
     glue::glue("cl_harm_{param$res}_{param$year}_{ac}_{param$iso3c}.rds")))
-  raster::writeRaster(cl_harm_r, file.path(temp_path,
+  terra::writeRaster(cl_harm_r, file.path(temp_path,
     glue::glue("cl_harm_r_{param$res}_{param$year}_{ac}_{param$iso3c}.tif")), overwrite = T)
 
   # ia_harm
   saveRDS(ia_harm_df, file.path(temp_path,
     glue::glue("ia_harm_{param$res}_{param$year}_{ac}_{param$iso3c}.rds")))
-  raster::writeRaster(ia_harm_r, file.path(temp_path,
+  terra::writeRaster(ia_harm_r, file.path(temp_path,
     glue::glue("ia_harm_r_{param$res}_{param$year}_{ac}_{param$iso3c}.tif")), overwrite = T)
   })
 }

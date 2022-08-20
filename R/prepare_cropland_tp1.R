@@ -1,5 +1,5 @@
 #'@title
-#'Prepares the synergy cropland area for SPAM including tp1
+#'Prepares the synergy cropland area for `mapspamc
 #'
 #'@param param
 #'@inheritParams create_grid
@@ -10,7 +10,7 @@
 #'@export
 prepare_cropland_tp1 <- function(param){
   stopifnot(inherits(param, "mapspamc_par"))
-  cat("\n\n############### PREPARE CROPLAND ###############")
+  cat("\n\n=> Prepare cropland")
   load_data(c("adm_map_r", "adm_list","cl_med", "cl_max", "cl_rank", "grid", "results_tp1"), param, local = TRUE, mess = FALSE)
 
   # Grid size

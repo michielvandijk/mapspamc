@@ -19,48 +19,18 @@ param <- mapspamc_par(mapspamc_path = mapspamc_path,
 
 ac <- "TH00"
 
-compare_adm2(pa_adm, pa_fs_adm, param$solve_level)
-
-df1 <- pa_adm
-df2 <- pa_fs_adm
-level <- param$solve_level
-
-compare_adm2 <- function(df1, df2, level, out = F){
-  tot1 <- sum_adm_total(df1, level) %>%
-    na.omit
-  tot2 <- sum_adm_total(df2, level) %>%
-    na.omit
-  inter <- intersect(tot1$crop, tot2$crop)
-  if(!isTRUE(all.equal(tot1$value[tot1$crop %in% inter],
-                       tot2$value[tot2$crop %in% inter]))){
-    stop(glue::glue("\ndf1 and df2 are not equal!",
-                    call. = FALSE)
-    )
-  } else {
-    cat("\ndf1 and df2 are equal")
-  }
-
-  out_df <- dplyr::bind_rows(
-    sum_adm_total(df1, level) %>%
-      mutate(source = "df1"),
-    sum_adm_total(df2, level) %>%
-      mutate(source = "df2")) %>%
-    tidyr::spread(source, value) %>%
-    mutate(difference = round(df1 - df2, 6)) %>%
-    dplyr::select(-adm_level)
-  if(out) return(out_df)
-}
+ia_slackp = 0.05
 
 
-df <- df1
+# Function to calculate total at given adm level
+calculate_pa_tot <- function(adm_lvl, ac, param) {
+  load_intermediate_data(c("pa"), ac, param, local = T,mess = F)
 
-sum_adm_total <- function(df, level){
-  unit <- names(df)[names(df) %in% c("ha", "pa")]
-  names(df)[names(df) %in% c("ha", "pa")] <- "value"
-  df <- df %>%
-    dplyr::filter(adm_level == level) %>%
-    dplyr::group_by(crop, adm_level) %>%
-    dplyr::summarize(value = plus(value, na.rm = F)) %>%
-    dplyr::arrange(crop)
+  df <- pa %>%
+    tidyr::gather(crop, pa, -adm_code, -adm_name, -adm_level) %>%
+    dplyr::filter(adm_level == adm_lvl) %>%
+    dplyr::group_by(adm_code, adm_name, adm_level) %>%
+    dplyr::summarise(pa = sum(pa, na.rm = T)) %>%
+    dplyr::ungroup()
   return(df)
 }

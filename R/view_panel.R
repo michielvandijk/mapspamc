@@ -1,13 +1,13 @@
 #'@title Show crop distributions maps using a panel for each farming system
 #'
-#'@description To quickly inspect the SPAMc results, `view_panel` shows crop
+#'@description To quickly inspect the `mapspamc` results, `view_panel` shows crop
 #'  distribution maps for a selected crop using a panel for each farming system.
 #'  The maps are visualized using [leafletjs](https://leafletjs.com/), which
 #'  makes it possible to select a number of background tiles (e.g.
 #'  OpenStreetMap).
 #'
 #'@param crp Character. Crop for which the maps are shows. `crp`  has to be
-#'  one of the SPAMc four letter crop codes.
+#'  one of the `mapspamc`  four letter crop codes.
 #'@param var Character. The variable to be plotted. `var` has to be physical
 #'  area (`"pa"`) or harvested area (`"ha"`).
 #'@param param
@@ -48,12 +48,14 @@ view_panel <- function(crp, var, param, viewer = TRUE, polygon = TRUE){
 
 
   load_data(c("grid", "results", "adm_map"), param, mess = FALSE, local = TRUE)
-  ext <- raster::extent(grid)
-  grid_df <- as.data.frame(raster::rasterToPoints(grid))
+  ext <- raster::extent(raster::raster(grid))
+  grid_df <- as.data.frame(grid, xy = TRUE)
 
   df <- results %>%
     dplyr::filter(crop == crp, {var} != 0)
   sys <- unique(df$system)
+
+  # Note that mapview does not support terra yet so we convert to raster
   st <- lapply(sys, function(x) raster::rasterFromXYZ(df[df$system == x, c("x", "y", var)], crs = raster::crs(grid)))
   st <- lapply(st, function(x) raster::extend(x, ext)) # Harmonize exent for stacking
   st <- lapply(seq(length(st)), function(i){

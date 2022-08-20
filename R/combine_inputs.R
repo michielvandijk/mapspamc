@@ -1,9 +1,9 @@
-#'@title Combines all inputs into a GAMS gdx file that can be used by SPAMc as
+#'@title Combines all inputs into a GAMS gdx file that can be used by `mapspamc` as
 #'  input
 #'
 #'@description Combines all inputs, including the harmonized cropland, irrigated
 #'  area and statistics, and the scores/priors into a GAMS gdx file that can be
-#'  used by SPAMc as input. If solve_level = 1, a gdx file for each
+#'  used by `mapspamc` as input. If solve_level = 1, a gdx file for each
 #'  administrative level 1 unit is created.'
 #'
 #'@details The gdx file contains a number of sets and parameter tables that
@@ -32,17 +32,17 @@ combine_inputs <- function(param) {
   # Test if gdxrrw and gams are installed.
   setup_gams(param)
 
-  cat("\n\n############### COMBINE INPUTS ###############")
+  cat("\n=> Combine inputs")
   load_data("adm_list", param, local = TRUE, mess = FALSE)
 
   # Set adm_level
   if(param$solve_level == 0) {
-    adm_code_list <- unique(adm_list$adm0_code)
+    ac <- unique(adm_list$adm0_code)
   } else {
-    adm_code_list <- unique(adm_list$adm1_code)
+    ac <- unique(adm_list$adm1_code)
   }
 
-  purrr::walk(adm_code_list, combine_inputs_adm_level, param)
+  purrr::walk(ac, combine_inputs_adm_level, param)
 }
 
 

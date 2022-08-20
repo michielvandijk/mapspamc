@@ -6,7 +6,7 @@
 #'========================================================================================
 
 # SOURCE PARAMETERS ----------------------------------------------------------------------
-source(here::here("scripts/05_validation/01_alternative_model_setup.r"))
+source(here::here("inst/template/06_validation/01_alternative_model_setup.r"))
 
 
 # PREPARE PHYSICAL AREA ------------------------------------------------------------------
@@ -34,7 +34,7 @@ combine_inputs(alt_param)
 
 
 # RUN MODEL -----------------------------------------------------------------------------
-run_spamc(alt_param)
+run_mapspamc(alt_param)
 
 
 # COMBINE ADM1 RESULTS ------------------------------------------------------------------

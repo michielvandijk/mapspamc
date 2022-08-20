@@ -7,29 +7,20 @@ prepare_priors_and_scores <- function(param) {
   prepare_bs_yg("biophysical_suitability", param)
   prepare_bs_yg("potential_yield", param)
 
-  cat("\n\n############### PREPARE PRIORS ###############")
-  load_data("adm_list", param, local = TRUE, mess = FALSE)
-
   # Set adm_level
   if(param$solve_level == 0) {
-    adm_code_list <- unique(adm_list$adm0_code)
+    ac <- unique(adm_list$adm0_code)
   } else {
-    adm_code_list <- unique(adm_list$adm1_code)
+    ac <- unique(adm_list$adm1_code)
   }
 
-  purrr::walk(adm_code_list, split_priors, param = param)
-
-  cat("\n\n############### PREPARE SCORES ###############")
+  cat("\n=> Prepare priors")
   load_data("adm_list", param, local = TRUE, mess = FALSE)
+  purrr::walk(ac, split_priors, param = param)
 
-  # Set adm_level
-  if(param$solve_level == 0) {
-    adm_code_list <- unique(adm_list$adm0_code)
-  } else {
-    adm_code_list <- unique(adm_list$adm1_code)
-  }
-
-  purrr::walk(adm_code_list, split_scores, param = param)
+  cat("\n=> Prepare scores")
+  load_data("adm_list", param, local = TRUE, mess = FALSE)
+  purrr::walk(ac, split_scores, param = param)
 }
 
 

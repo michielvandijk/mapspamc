@@ -2,7 +2,7 @@
 % Please edit documentation in R/combine_inputs.R
 \name{combine_inputs}
 \alias{combine_inputs}
-\title{Combines all inputs into a GAMS gdx file that can be used by SPAMc as
+\title{Combines all inputs into a GAMS gdx file that can be used by \code{mapspamc} as
 input}
 \usage{
 combine_inputs(param)
@@ -17,7 +17,7 @@ model.}
 \description{
 Combines all inputs, including the harmonized cropland, irrigated
 area and statistics, and the scores/priors into a GAMS gdx file that can be
-used by SPAMc as input. If solve_level = 1, a gdx file for each
+used by \code{mapspamc} as input. If solve_level = 1, a gdx file for each
 administrative level 1 unit is created.'
 }
 \details{

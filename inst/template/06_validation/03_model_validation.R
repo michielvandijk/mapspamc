@@ -6,7 +6,7 @@
 #'========================================================================================
 
 # SOURCE PARAMETERS ----------------------------------------------------------------------
-source(here::here("scripts/05_validation/01_alternative_model_setup.r"))
+source(here::here("inst/template/06_validation/01_alternative_model_setup.r"))
 
 
 # COMPARE ALTERNATIVE MODEL WITH STATISTICS -----------------------------------------------------------------
@@ -36,7 +36,7 @@ bind_rows(ha, results_alt_ag)  %>%
     stat_cor(p.accuracy = 0.001, r.accuracy = 0.01, label.x = 3, label.y = 2) +
     facet_wrap(~crop) +
     geom_abline(slope = 1, linetype = "dashed") +
-    labs(x = "SPAM-C (log)", y = "Statistics (log)") +
+    labs(x = "mapspamc (log)", y = "Statistics (log)") +
     theme(legend.position = "none",
           strip.background = element_blank(),
           panel.border = element_rect(colour = "black", fill = "transparent"),
@@ -79,7 +79,7 @@ bind_rows(ha, results_ag)  %>%
   stat_cor(p.accuracy = 0.001, r.accuracy = 0.01, label.x = 3, label.y = 2) +
   facet_wrap(~crop) +
   geom_abline(slope = 1, linetype = "dashed") +
-  labs(x = "SPAM-C (log)", y = "Statistics (log)") +
+  labs(x = "mapspamc (log)", y = "Statistics (log)") +
   theme(legend.position = "none",
         strip.background = element_blank(),
         panel.border = element_rect(colour = "black", fill = "transparent"),

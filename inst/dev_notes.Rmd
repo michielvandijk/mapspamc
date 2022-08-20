@@ -183,6 +183,8 @@ Set is.na(ADM2) to 0.
 
 Also check if it has adm0, adm1 and adm2 (if specified) data. Sometimes adm0 data is not added by mistake, causing errors.
 
+Check if adm0, adm1, adm adm2 are consistent cross ha, ci and fs!
+
 # Introduce class subnat stat?!
 # Perhaps introduce a class subnat_stat, which always consists of subnatstat in wide format.
 # And has passed a number of checks so it is always consistent. 
@@ -224,3 +226,5 @@ In MOZ lc appeared to be negative in GDX file, giving error that log <0. Need to
 # Create a function that prepares all GAEZ data, which also takes into account crops in country.
 
 # Add check if files exist before they are loaded!
+
+# Help information in prepare model functions
