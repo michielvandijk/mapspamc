@@ -1,10 +1,15 @@
-#' Create tif files for all crop distribution maps produced with `mapspamc`
+#'@title Creates tif files for all crop distribution maps produced by the model
+#'
+#'The function creates tif files with maps for all crop and system combinations for which area information
+#'was allocated by the model. Maps are both created for harvested (ha) and physical (pa) area. Files are
+#'saved in the `/processed_data/results/{model}/maps` folder.
 #'
 #'@param param
 #'@inheritParams create_grid
 #'
 #'@export
 create_all_tif <- function(param) {
+  stopifnot(inherits(param, "mapspamc_par"))
   cat("\n=> Create .tif files for all crop and farming system combinations")
   load_data("results", param, mess = F)
 

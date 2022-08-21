@@ -2,7 +2,7 @@
 #
 #'@importFrom magrittr %>%
 #'
-split_harmonized_inputs <- function(ac, param, cl_slackp, cl_slackn, ia_slackp) {
+split_harmonized_inputs <- function(ac, param, cl_slackp, cl_slackn, ia_slackp, ia_slackn) {
 
   #https://stackoverflow.com/questions/7096989/how-to-save-all-console-output-to-file-in-r
   model_folder <- create_model_folder(param)
@@ -32,7 +32,7 @@ split_harmonized_inputs <- function(ac, param, cl_slackp, cl_slackn, ia_slackp) 
 
 
   ############### STEP 4: HARMONIZE IA ###############
-  cl_df <- harmonize_ia(cl_df, ac, param, ia_slackp = ia_slackp) %>%
+  cl_df <- harmonize_ia(cl_df, ac, param, ia_slackp = ia_slackp, ia_slackn = ia_slackn) %>%
     dplyr::mutate(ia = ifelse(is.na(ia), 0, ia),
            ia_max = ifelse(is.na(ia_max), 0, ia_max))
 

@@ -1,5 +1,7 @@
+#'@title
 #'Rasterizes the map with the location of the subnational administrative units
 #'
+#'@description
 #'For several internal operations, `mapspamc` needs a rasterized version of the map
 #'with locations of the subnational administrative units. This function creates
 #'this map and saves it into the `/processed_data/maps/adm/` folder.

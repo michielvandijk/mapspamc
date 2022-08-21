@@ -79,7 +79,7 @@ reference:
   - create_grid
   - create_mapspamc_folders
   - rasterize_adm_map
-  - spamc_par
+  - mapspamc_par
 - title: "Proces subnational statistics"
 - contents:
   - check_statistics

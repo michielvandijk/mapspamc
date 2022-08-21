@@ -1,4 +1,4 @@
-#'create file with information on how administrative units are nested
+#'@title Creates a file with information on how administrative units are nested
 #'
 #'To organize and process the subnational statistics, a data.frame is needed
 #'that lists all administrative units at all available levels and how they are

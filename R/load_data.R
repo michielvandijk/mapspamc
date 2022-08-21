@@ -1,11 +1,10 @@
-#'@title
-#'Load model input data for further processing
+#'@title Load model input data for further processing
 #'
 #'@description
 #'`load_data()` can be used to quickly load input data (e.g. subnational
 #'statistics, maps and mappings). This can be useful to quickly inspect the
 #'statistics or visualize a map. Data can only be loaded after the
-#'`create_mapspamc_folders()` has been run and data has been created by running
+#'`create_mapspamc_folders()` has been run and data has been created by running the
 #'pre-processing steps. See details for allowed input.
 #'
 #'@details
@@ -47,6 +46,9 @@
 #'  relevant when the function is used in internal package functions.
 #'@param mess logical; should a message be printed to the screen that indicates
 #'  which dataset is loaded?
+#'
+#'@examples
+#'load_data(c("ha", "adm_map"), param)
 #'
 #'@export
 load_data <- function(data, param, local = FALSE, mess = TRUE){

@@ -57,6 +57,6 @@ param <- mapspamc_par(mapspamc_path = mapspamc_path,
 print(param)
 
 # Create MAPSPAMC folder structure in the mapspamc_path
-create_mapspamc_folders(param)
+create_folders(param)
 
 

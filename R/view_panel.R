@@ -1,4 +1,5 @@
-#'@title Show crop distributions maps using a panel for each farming system
+#'@title
+#'Compares crop distribution maps using a panel for each farming system
 #'
 #'@description To quickly inspect the `mapspamc` results, `view_panel` shows crop
 #'  distribution maps for a selected crop using a panel for each farming system.

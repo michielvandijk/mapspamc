@@ -1,7 +1,7 @@
-#'@title Combines `mapspamc` GAMS output into a single R .rds file
+#'@title Combines GAMS output into one R rds file
 #'
 #'@description Combines the GAMs results that are saved in one (`solve_level =
-#'  0`)  or multiple (`solve_level = 1`) gdx files into a single rds file, that can be
+#'  0`)  or multiple (`solve_level = 1`) gdx files into one single rds file, that can be
 #'  easily loaded into R. The file is saved in the `processed_data/results` folder.
 #'
 #'@param param

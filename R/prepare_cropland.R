@@ -1,5 +1,10 @@
 #'@title
-#'Prepares the synergy cropland area for SPAM
+#'Prepares synergy cropland extent
+#'
+#'@description
+#'Combines all elements of the synergy cropland extent (median and maximum cropland per grid cell and rank),
+#'with information on the location of the subnational units and fixes potential inconsistencies
+#'(e.g. cropland area larger than grid cell size).
 #'
 #'@param param
 #'@inheritParams create_grid

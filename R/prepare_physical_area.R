@@ -1,5 +1,5 @@
-#'Prepares the physical area subnational statistics so they can be used as input
-#'for `mapspamc`.
+#'@Title
+#'Calculates physical crop area at the subnational level
 #'
 #'To estimate the physical crop area for each farming system harvest area (ha)
 #'statistics are combined with information on farmings system shares (fs) and

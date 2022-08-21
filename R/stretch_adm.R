@@ -1,1 +1,0 @@
-#' Stretch administrative units list

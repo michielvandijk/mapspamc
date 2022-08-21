@@ -1,10 +1,10 @@
 #'@title
-#'align raster using a reference grid and polygon
+#'Both clips a raster to polygon and aligns it to reference grid
 #'
 #'@description
-#'`align_raster()` is used to clip raster data from global maps and align them with
-#'the country grid that is created by `create_grid()`. Aligning implies that the resulting
-#'map will have the same dimensions, resolution, extent and projection, and therefore
+#'`align_raster()` uses a polygon of a country to clip a raster and aligns the raster with a
+#' country grid that is created by `create_grid()`. Aligning implies that the resulting
+#'map will have the same dimensions, resolution, extent and projection as the country grid, and therefore
 #'can be stacked and combined with other spatial data.
 #'
 #' @details
@@ -18,23 +18,23 @@
 #'map.
 #'
 #' @param r SpatRaster or location of SpatRaster to be processed
-#' @param ref_grid SpatRaster or locationof SpatRaster with the geometry that r should be resampled to
-#' @param clip SpatVector or sf object that will be used to clip r
+#' @param ref_grid SpatRaster or location of SpatRaster with the geometry that r should be resampled to
+#' @param poly SpatVector or sf object that will be used to clip r
 #' @param method character. Method used for estimating the new cell values. See `terra::resample()`
 #' for options.
 #'
 #'@examples
 #'\dontrun{
-#'align_raster(gaez_file, grid, adm_map, method = "bilinear")
+#'align_raster(travel_time, grid, adm_map, method = "bilinear")
 #'}
 #'@rawNamespace import(terra, except = arrow)
 #'@export
-align_raster <- function(r, ref_grid, clip, method = "bilinear"){
-  r <- rast(r)
-  clip <- vect(adm_map)
-  ref_grid <- rast(grid)
-  r <- crop(r, clip, snap = "out")
-  r <- resample(r, ref_grid, method = method)
-  r <- mask(r, clip)
+align_raster <- function(r, ref_grid, poly, method = "bilinear"){
+  r <- terra::rast(r)
+  clip <- terra::vect(poly)
+  ref_grid <- terra::rast(ref_grid)
+  r <- terra::crop(r, poly, snap = "out")
+  r <- terra::resample(r, ref_grid, method = method)
+  r <- terra::mask(r, poly)
   return(r)
 }

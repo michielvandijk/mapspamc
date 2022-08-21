@@ -145,3 +145,53 @@ create_model_folder <- function(param){
     return(model_folder)
 }
 
+# Creates tif file from df
+create_tif <- function(crp, sy, var, df){
+  load_data("grid", param, mess = FALSE, local = TRUE)
+  grid_df <- as.data.frame(grid, xy = TRUE)
+  df <- df %>%
+    dplyr::select(-x, -y) %>%
+    dplyr::filter(crop == crp, system == sy) %>%
+    dplyr::left_join(grid_df,., by = "gridID") %>%
+    dplyr::select(x, y, {{var}})
+  name <- paste(crp, sy, sep = "_")
+  r <- terra::rast(df, crs = param$crs)
+  r <- extend(r, grid)
+  names(r) <- name
+  terra::plot(r, main = name)
+  cat("\n=> Tif file created for", var, name)
+  return(r)
+}
+
+#'@title
+#' Sum of vector elements but now NA + NA = NA not 0 as in sum
+#'
+#'@description
+#'`plus` Returns the sum of all values provided as arguments but ensures `NA` +
+#'`NA` = `NA`.
+#'
+#'@details
+#'This function is the same as `sum`() but if `na.rm` is `FALSE` and all input
+#'values are `NA`, it will return `NA` instead of 0.
+#'
+#'@param x numeric vector.
+#'@param na.rm logical. Should missing values be removed?
+#'
+#'@return The sum of `x`
+#'
+#'@examples
+#'plus(1:10)
+#'plus(c(NA, NA))
+#'plus(c(NA, NA), na.rm = T)
+plus <- function(x, na.rm = F){
+  if(all(is.na(x))){
+    c(x[0],NA)
+  } else {
+    if(na.rm == T){
+      sum(x, na.rm = TRUE)
+    } else {
+      sum(x, na.rm)
+    }
+  }
+}
+

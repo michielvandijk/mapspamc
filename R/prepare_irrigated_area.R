@@ -1,4 +1,10 @@
-#'Prepares the synergy irrigated area for SPAM
+#'@title
+#'Prepares synergy irrigated area extent
+#'
+#'@description
+#'Combines all elements of the synergy irrigated area extent (maximum irrigated area and rank),
+#'with information on the location of the subnational units and fixes potential inconsistencies
+#'(e.g. irrigated area larger than grid cell size).
 #'
 #'@param param
 #'@inheritParams create_grid

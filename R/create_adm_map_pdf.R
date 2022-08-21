@@ -1,9 +1,8 @@
-#'@title
-#'Creates a pdf file with maps of administrative unit locations
+#'@title Creates a pdf file with maps of administrative unit locations
 #'
 #'@description
-#'The function will create and save a pdf file with the location of the
-#'administrative units in the `/processed_data/maps/adm` folder. Depening on the
+#'The function creates and saves a pdf file with the location of the
+#'administrative units in the `/processed_data/maps/adm` folder. Depending on the
 #'adm level, maps are produced for level 1 and/or level 2 administrative units.
 #'The function will automatically load the file with the polygon information on
 #'the location of administrative units, that needs to be created first by the

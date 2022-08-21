@@ -7,7 +7,7 @@
 #'@examples
 #'
 #'@importFrom magrittr %>%
-#'@export
+#'#export
 prepare_cropland_tp1 <- function(param){
   stopifnot(inherits(param, "mapspamc_par"))
   cat("\n\n=> Prepare cropland")

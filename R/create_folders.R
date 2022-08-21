@@ -1,9 +1,10 @@
-#'Create `mapspamc` folder structure
+#'@title
+#'Creates `mapspamc` folder structure
 #'
 #'`create_mapspamc_folders` creates the folder structure that is needed store raw
 #'data, processed data and parameters for `mapspamc`.
 #'
-#'`create_mapspamc_folders` creates two folders in the `mapspamc_path`, set by the user:
+#'`create_folders` creates two folders in the `mapspamc_path`, set by the user:
 #'mappings and processed_data, and creates a `raw_data` folder in the location
 #'as set in `mapspamc_par`. In addition, it copies a number of cvs files into the
 #'mappings folder, which contain several data tables that are needed to run the
@@ -17,11 +18,11 @@
 #'
 #'@examples
 #'\dontrun{
-#'create_mapspamc_folders(param)
+#'create_folders(param)
 #'}
 #'
 #'@export
-create_mapspamc_folders <- function(param = NULL) {
+create_folders <- function(param = NULL) {
     stopifnot(inherits(param, "mapspamc_par"))
     if(!dir.exists(param$raw_path))
         dir.create(param$raw_path, showWarnings = TRUE, recursive = TRUE)

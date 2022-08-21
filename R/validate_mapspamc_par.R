@@ -1,4 +1,4 @@
-# Function to validate spamc_par class
+# Function to validate mapspamc_par class
 validate_mapspamc_par <- function(param) {
   stopifnot(inherits(param, "mapspamc_par"))
   if (is.null(param$mapspamc_path))

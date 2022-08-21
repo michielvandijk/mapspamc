@@ -228,3 +228,19 @@ In MOZ lc appeared to be negative in GDX file, giving error that log <0. Need to
 # Add check if files exist before they are loaded!
 
 # Help information in prepare model functions
+
+
+# Functions to fix
+
+NB: run all commands in backward order to see if errors are produced that show input data is missing.
+Add @title on top, then @decription and then @details (see mapspamc_par for example)
+
+aggregate_to_adm: ensure that param and alt_param are for the same model apart from adm_level
+align_raster: validate input format
+create_all_tif: check if results file exist.
+create_mapspamc_folders: check if all (too many) folders are created
+load_data: reprogram and check if data is available
+harmonize_inputs and split_harmonized_inputs: add much more help info, check all and in particular generation of log. Set maximim to slackp and slackn. Check why slack for ia= max and for cl = min
+prepare_cropland_tp1": Move to development branch
+prepare_priors_and_scores: add documentation
+reaggregate_statistics: add documentation

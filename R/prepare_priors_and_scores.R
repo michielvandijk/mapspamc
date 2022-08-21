@@ -1,5 +1,5 @@
 #'@title
-#' Prepares priors and scores for all farming systems, crops and grid cells
+#'Prepares grid cell priors and scores for all crops and farming system combinations
 #'
 #'@export
 prepare_priors_and_scores <- function(param) {

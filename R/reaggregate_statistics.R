@@ -1,3 +1,4 @@
+#'@title
 #'Reaggregates subnational statistics from the bottom up so they are consistent
 #'
 #'@param df tbl or data.frame

@@ -1,7 +1,7 @@
-#'Create template for raw subnational crop statistics
+#'@title Creates template for subnational crop statistics
 #'
 #'To support the preparation of the subnational statistics,
-#'`create_raw_statistics_template()` can create three types of data templates:
+#'`create_statistics_template()` can create three types of data templates:
 #'- ha for harvest area statistics
 #'- fs for farming system share
 #'- ci for cropping intensity.

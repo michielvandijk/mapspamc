@@ -1,4 +1,4 @@
-#'@title Aggregate gridded `mapspamc` results to administrative unit level
+#'@title Aggregates gridded results of alternative model to the administrative unit level of the target model
 #'
 #'@description `aggregate_to_adm` aggregates gridded results of an alternative model specified by `alt_param`
 #' to the administrative unit level determined by `adm_level` of the target model specified by `param`.
