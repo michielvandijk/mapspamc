@@ -1,9 +1,11 @@
 #'@title
 #'Creates `mapspamc` folder structure
 #'
+#'@description
 #'`create_mapspamc_folders` creates the folder structure that is needed store raw
 #'data, processed data and parameters for `mapspamc`.
 #'
+#'@details
 #'`create_folders` creates two folders in the `mapspamc_path`, set by the user:
 #'mappings and processed_data, and creates a `raw_data` folder in the location
 #'as set in `mapspamc_par`. In addition, it copies a number of cvs files into the

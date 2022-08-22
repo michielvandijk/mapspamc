@@ -2,17 +2,11 @@
 % Please edit documentation in R/aggregate_to_adm.R
 \name{aggregate_to_adm}
 \alias{aggregate_to_adm}
-\title{Aggregate gridded \code{mapspamc} results to administrative unit level}
+\title{Aggregates gridded results of alternative model to the administrative unit level of the target model}
 \usage{
 aggregate_to_adm(param, alt_param)
 }
 \arguments{
-\item{param}{Object of type \code{mapspamc_par} that bundles all \code{mapspamc} parameters,
-including core model folders, alpha-3 country code, year, spatial
-resolution, most detailed level at which subnational statistics are
-available, administrative unit level at which the model is solved and type of
-model.}
-
 \item{alt_param}{Object of type spamc_par that bundles all \code{mapspamc} parameters, including core model folders,
 alpha-3 country code, year, spatial resolution, most detailed level at which subnational statistics are
 available, administrative unit level at which the model is solved and type of model.}

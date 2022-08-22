@@ -2,7 +2,7 @@
 title: "Pre-processing: Subnational statistics"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Pre-processing Subnational statistics}
+  %\VignetteIndexEntry{Pre-processing: Subnational statistics}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
@@ -35,7 +35,7 @@ param <- mapspamc_par(mapspamc_path = mapspamc_path,
  solve_level = 0,
  model = "max_score")
 
-ha_df <- mapspamc:::ha_df
+#ha_df <- mapspamc:::ha_df
 ```
 
 Subnational statistics on harvested area are a key input for `mapspamc`. Before they can be used the data need to be put in the right format, made consistent and aggregated (or split) to the crops and farming systems that are used by `mapspamc`. Unfortunately, the level of detail (e.g. coverage of subnational level 1 and 2), coverage (full crop and administrative unit coverage or many missing values) and quality (do lower levels of administrative unit data add up to higher levels?) of these statistics may differ enormously between countries. Cleaning, harmonizing and preparing the subnational statistics is probably the most time consuming and difficult part of running `mapspamc`. In many cases the researcher has to make a value judgment on which statistics to keep and which to discard in order to make them consistent. Which data is more reliable if they do not add up? Administrative unit level 1 or 2? If, the harvested area for say vegetables seems exceptionally and perhaps unrealistically large in a certain administrative region, is this a data entry error or is it really that high? These are decisions that often need to be taken when preparing the data. There is no simple formula or function that makes it possible to (semi) automatically prepare the raw subnational statistics so that they can be used by `mapspamc`. Unfortunately it requires a substantial amount of user input and ad hoc coding to get the data ready. 
@@ -82,7 +82,7 @@ All crop statistics need to be stored in the **wide** format. With this we mean 
 
 You can save the template as csv file and use it as a basis to prepare the statistics. Note that is is essential that you follow the template closely! Adding or removing administrative units will result in errors as the data no longer matches with the map that contains the location of the administrative units. See below for more information how to deal with missing crop information. In case of Malawi, most of the data was already in the right format so we did not use the templates.
 
-```{r}
+```{r eval = FALSE}
 # Create template for ha. Replace "ha" by "fs" or "ci" for other templates.
 #create_statistics_template("ha", param)
 ```
@@ -133,7 +133,7 @@ Data should always be consistent and add up, meaning that the sum of harvested a
 
 After most hard work is done, the ha, fs and cs files need to be checked for consistency and calibrated to the FAOSTAT national statistics. This is done in `03_check_and_calibrate_statistics.r`. The first step is to check if the data is consistent, which is done by ` check_statistics()`. If `out = TRUE` is set a report is returned which shows where the inconsistencies occur.  
 
-```{r}
+```{r eval = FALSE}
 # Check the consistency of the ha statistics
 check_statistics(ha_df, param, out = TRUE)
 ```

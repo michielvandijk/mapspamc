@@ -2,23 +2,17 @@
 % Please edit documentation in R/combine_results.R
 \name{combine_results}
 \alias{combine_results}
-\title{Combines \code{mapspamc} GAMS output into a single R .rds file}
+\title{Combines GAMS output into one R rds file}
 \usage{
 combine_results(param, cut = 1e-04, out = FALSE)
 }
 \arguments{
-\item{param}{Object of type \code{mapspamc_par} that bundles all \code{mapspamc} parameters,
-including core model folders, alpha-3 country code, year, spatial
-resolution, most detailed level at which subnational statistics are
-available, administrative unit level at which the model is solved and type of
-model.}
-
 \item{cut}{numeric. Sets allocation smaller than a certain value to 0. The default is 0.0001 (1 m2).}
 
 \item{out}{logical; should the results be returned as output?}
 }
 \description{
-Combines the GAMs results that are saved in one (\code{solve_level = 0})  or multiple (\code{solve_level = 1}) gdx files into a single rds file, that can be
+Combines the GAMs results that are saved in one (\code{solve_level = 0})  or multiple (\code{solve_level = 1}) gdx files into one single rds file, that can be
 easily loaded into R. The file is saved in the \code{processed_data/results} folder.
 }
 \examples{

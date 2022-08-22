@@ -1,5 +1,7 @@
-#'@title Harmonizes crop statistics, cropland and irrigated area extent
+#'@title
+#'Harmonizes crop statistics, cropland and irrigated area extent
 #'
+#'@description
 #' Function that compares and harmonizes the subnational physical area with gridded information on the
 #' location and extend of cropland and irrigated area.
 #'

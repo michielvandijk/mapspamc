@@ -1,11 +1,13 @@
 #'@title Creates template for subnational crop statistics
 #'
+#'@description
 #'To support the preparation of the subnational statistics,
 #'`create_statistics_template()` can create three types of data templates:
 #'- ha for harvest area statistics
 #'- fs for farming system share
 #'- ci for cropping intensity.
 #'
+#'@details
 #'The function requires information on how the different administrative unit
 #'levels are nested. This file needs to be created first by running
 #'`create_adm_list()`.

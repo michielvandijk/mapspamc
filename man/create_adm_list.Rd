@@ -2,19 +2,13 @@
 % Please edit documentation in R/create_adm_list.R
 \name{create_adm_list}
 \alias{create_adm_list}
-\title{create file with information on how administrative units are nested}
+\title{Creates a file with information on how administrative units are nested}
 \usage{
 create_adm_list(x, param)
 }
 \arguments{
 \item{x}{object of class sf with the location of the administrative units
 including an attribute table with information on how they are nested}
-
-\item{param}{Object of type \code{mapspamc_par} that bundles all \code{mapspamc} parameters,
-including core model folders, alpha-3 country code, year, spatial
-resolution, most detailed level at which subnational statistics are
-available, administrative unit level at which the model is solved and type of
-model.}
 }
 \description{
 To organize and process the subnational statistics, a data.frame is needed

@@ -6,13 +6,6 @@
 \usage{
 rasterize_adm_map(param)
 }
-\arguments{
-\item{param}{Object of type \code{mapspamc_par} that bundles all \code{mapspamc} parameters,
-including core model folders, alpha-3 country code, year, spatial
-resolution, most detailed level at which subnational statistics are
-available, administrative unit level at which the model is solved and type of
-model.}
-}
 \value{
 RasterLayer
 }

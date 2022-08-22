@@ -1,5 +1,7 @@
-#'@title Creates tif files for all crop distribution maps produced by the model
+#'@title
+#'Creates tif files for all crop distribution maps produced by the model
 #'
+#'@description
 #'The function creates tif files with maps for all crop and system combinations for which area information
 #'was allocated by the model. Maps are both created for harvested (ha) and physical (pa) area. Files are
 #'saved in the `/processed_data/results/{model}/maps` folder.

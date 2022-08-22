@@ -2,7 +2,7 @@
 % Please edit documentation in R/view_panel.R
 \name{view_panel}
 \alias{view_panel}
-\title{Show crop distributions maps using a panel for each farming system}
+\title{Compares crop distribution maps using a panel for each farming system}
 \usage{
 view_panel(crp, var, param, viewer = TRUE, polygon = TRUE)
 }
@@ -12,12 +12,6 @@ one of the \code{mapspamc}  four letter crop codes.}
 
 \item{var}{Character. The variable to be plotted. \code{var} has to be physical
 area (\code{"pa"}) or harvested area (\code{"ha"}).}
-
-\item{param}{Object of type \code{mapspamc_par} that bundles all \code{mapspamc} parameters,
-including core model folders, alpha-3 country code, year, spatial
-resolution, most detailed level at which subnational statistics are
-available, administrative unit level at which the model is solved and type of
-model.}
 
 \item{viewer}{Logical. Should the default web browers be used to show the
 maps? \code{FALSE} will show the maps in the RStudio viewer pane.}

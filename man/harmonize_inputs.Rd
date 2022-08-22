@@ -2,20 +2,34 @@
 % Please edit documentation in R/harmonize_inputs.R
 \name{harmonize_inputs}
 \alias{harmonize_inputs}
-\title{Harmonizes the subnational statistics, the cropland extent and the irrigated area}
+\title{Harmonizes crop statistics, cropland and irrigated area extent}
 \usage{
-harmonize_inputs(param, cl_slackp = 0.05, cl_slackn = 5, ia_slackp = 0.05)
+harmonize_inputs(
+  param,
+  cl_slackp = 0.05,
+  cl_slackn = 5,
+  ia_slackp = 0.05,
+  ia_slackn = 5
+)
 }
 \arguments{
-\item{param}{Object of type \code{mapspamc_par} that bundles all \code{mapspamc} parameters,
-including core model folders, alpha-3 country code, year, spatial
-resolution, most detailed level at which subnational statistics are
-available, administrative unit level at which the model is solved and type of
-model.}
+\item{cl_slackp}{percentage of total cropland that will be added when comparing
+physical area statistics to cropland extent.}
+
+\item{cl_slackn}{times the area of the largest grid cell will be added when comparing
+physical area statistics to cropland extent.}
+
+\item{ia_slackp}{percentage of total irrigated area that will be added when comparing
+irrigated area statistics to irrigated area extent.}
+
+\item{ia_slackn}{times the area of the largest grid cell will be added when comparing
+physical area statistics to irrigated area extent.}
 }
 \description{
-Harmonizes the subnational statistics, the cropland extent and the irrigated area
+Function that compares and harmonizes the subnational physical area with gridded information on the
+location and extend of cropland and irrigated area.
 }
 \examples{
+harmonize_inputs(param, cl_slackp = 0.05, cl_slackn = 5, ia_slackp = 0.05, ia_slackn = 5)
 
 }

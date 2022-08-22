@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mapspamc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9000</span>
       </span>
     </div>
 
@@ -47,14 +49,14 @@
   <a href="../articles/installation.html">Installation</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Background</a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Background</a>
       <ul class="dropdown-menu" role="menu">
 <li>
           <a href="../articles/crop_distribution_maps.html">Crop distribution maps</a>
@@ -71,7 +73,7 @@
       </ul>
 </li>
     <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Preparation</a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Preparation</a>
       <ul class="dropdown-menu" role="menu">
 <li>
           <a href="../articles/input_data_collection.html">Input data collection</a>
@@ -82,13 +84,13 @@
       </ul>
 </li>
     <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Run SPAMc</a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Run mapspamc</a>
       <ul class="dropdown-menu" role="menu">
 <li>
           <a href="../articles/model_setup.html">1. Model setup</a>
         </li>
         <li>
-          <a href="../articles/process_subnational_statistics.html">2. Process subnational statistics</a>
+          <a href="../articles/process_subnational_statistics.html">2. Pre-processing</a>
         </li>
         <li>
           <a href="../articles/process_spatial_data.html">3. Process spatial data</a>
@@ -103,7 +105,7 @@
           <a href="../articles/combine_input_data.html">6. Combine input data</a>
         </li>
         <li>
-          <a href="../articles/run_spamc.html">7. Run model</a>
+          <a href="../articles/run_model.html">7. Run model</a>
         </li>
         <li>
           <a href="../articles/post_process.html">8. Post-processing</a>
@@ -121,7 +123,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/michielvandijk/mapspamc">
+  <a href="https://github.com/michielvandijk/mapspamc" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -136,29 +138,41 @@
 
       
 
-      </header><script src="post_process_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Post processing</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/michielvandijk/mapspamc/blob/master/vignettes/post_process.Rmd"><code>vignettes/post_process.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/michielvandijk/mapspamc/blob/HEAD/vignettes/post_process.Rmd" class="external-link"><code>vignettes/post_process.Rmd</code></a></small>
       <div class="hidden name"><code>post_process.Rmd</code></div>
 
     </div>
 
     
     
-<div id="inspect-results-and-create-maps" class="section level2">
-<h2 class="hasAnchor">
-<a href="#inspect-results-and-create-maps" class="anchor"></a>Inspect results and create maps</h2>
-<p>The package offers to functions to quickly inspect the results, after the model has been run. <code><a href="../reference/view_panel.html">view_panel()</a></code> shows crop distribution maps for a selected crop, using a different panel for each farming system. <code><a href="../reference/view_stack.html">view_stack()</a></code> shows the same information but stacking the various maps. Both functions plot the maps in the default browser overlaying the country polygon, unless specified otherwise. The visualization is done using <a href="https://leafletjs.com/">leafletjs</a>, which makes it possible to select different background tiles (e.g. OpenStreetMap) to put the data into perspective.</p>
+<div class="section level2">
+<h2 id="inspect-results-and-create-maps">Inspect results and create maps<a class="anchor" aria-label="anchor" href="#inspect-results-and-create-maps"></a>
+</h2>
+<p>The package offers to functions to quickly inspect the results, after
+the model has been run. <code><a href="../reference/view_panel.html">view_panel()</a></code> shows crop
+distribution maps for a selected crop, using a different panel for each
+farming system. <code>view_stack()</code> shows the same information but
+stacking the various maps. Both functions plot the maps in the default
+browser overlaying the country polygon, unless specified otherwise. The
+visualization is done using <a href="https://leafletjs.com/" class="external-link">leafletjs</a>, which makes it possible to
+select different background tiles (e.g. OpenStreetMap) to put the data
+into perspective.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/view_panel.html">view_panel</a></span><span class="op">(</span><span class="st">"rice"</span>, var <span class="op">=</span> <span class="st">"ha"</span>, <span class="va">param</span><span class="op">)</span>
-<span class="fu"><a href="../reference/view_stack.html">view_stack</a></span><span class="op">(</span><span class="st">"rice"</span>, var <span class="op">=</span> <span class="st">"ha"</span>, <span class="va">param</span><span class="op">)</span></code></pre></div>
-<p>As it is easier to process and visualize geo-spatial data when the data is saved in tif format, <code><a href="../reference/create_all_tif.html">create_all_tif()</a></code> produces a tif file for each crop - farming-system combination. The tif files are also needed as input to aggregate the data in a format that can be used by GLOBIOM, which is described next.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/view_panel.html">view_panel</a></span><span class="op">(</span><span class="st">"rice"</span>, var <span class="op">=</span> <span class="st">"ha"</span>, <span class="va">param</span><span class="op">)</span></span>
+<span><span class="fu">view_stack</span><span class="op">(</span><span class="st">"rice"</span>, var <span class="op">=</span> <span class="st">"ha"</span>, <span class="va">param</span><span class="op">)</span></span></code></pre></div>
+<p>As it is easier to process and visualize geo-spatial data when the
+data is saved in tif format, <code><a href="../reference/create_all_tif.html">create_all_tif()</a></code> produces a
+tif file for each crop - farming-system combination. The tif files are
+also needed as input to aggregate the data in a format that can be used
+by GLOBIOM, which is described next.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/create_all_tif.html">create_all_tif</a></span><span class="op">(</span><span class="va">param</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/create_all_tif.html">create_all_tif</a></span><span class="op">(</span><span class="va">param</span><span class="op">)</span></span></code></pre></div>
 </div>
   </div>
 
@@ -173,11 +187,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Michiel Van Dijk.</p>
+  <p></p>
+<p>Developed by Michiel Van Dijk.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer>
@@ -185,6 +201,8 @@
 
   
 
+
+  
 
   </body>
 </html>

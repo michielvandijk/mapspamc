@@ -2,21 +2,13 @@
 % Please edit documentation in R/combine_inputs.R
 \name{combine_inputs}
 \alias{combine_inputs}
-\title{Combines all inputs into a GAMS gdx file that can be used by \code{mapspamc} as
-input}
+\title{Combines all inputs into one GAMS gdx file}
 \usage{
 combine_inputs(param)
 }
-\arguments{
-\item{param}{Object of type \code{mapspamc_par} that bundles all \code{mapspamc} parameters,
-including core model folders, alpha-3 country code, year, spatial
-resolution, most detailed level at which subnational statistics are
-available, administrative unit level at which the model is solved and type of
-model.}
-}
 \description{
 Combines all inputs, including the harmonized cropland, irrigated
-area and statistics, and the scores/priors into a GAMS gdx file that can be
+area and statistics, and the scores/priors into one GAMS gdx file that can be
 used by \code{mapspamc} as input. If solve_level = 1, a gdx file for each
 administrative level 1 unit is created.'
 }

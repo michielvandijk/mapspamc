@@ -2,23 +2,17 @@
 % Please edit documentation in R/create_statistics_template.R
 \name{create_statistics_template}
 \alias{create_statistics_template}
-\title{Create template for raw subnational crop statistics}
+\title{Creates template for subnational crop statistics}
 \usage{
 create_statistics_template(type, param)
 }
 \arguments{
 \item{type}{Character vector that refers to the type of template that needs to
 be created. See details for allowed input.}
-
-\item{param}{Object of type \code{mapspamc_par} that bundles all \code{mapspamc} parameters,
-including core model folders, alpha-3 country code, year, spatial
-resolution, most detailed level at which subnational statistics are
-available, administrative unit level at which the model is solved and type of
-model.}
 }
 \description{
 To support the preparation of the subnational statistics,
-\code{create_raw_statistics_template()} can create three types of data templates:
+\code{create_statistics_template()} can create three types of data templates:
 \itemize{
 \item ha for harvest area statistics
 \item fs for farming system share

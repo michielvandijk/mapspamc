@@ -1,5 +1,7 @@
-#'@title Creates a file with information on how administrative units are nested
+#'@title
+#'Creates a file with information on how administrative units are nested
 #'
+#'@description
 #'To organize and process the subnational statistics, a data.frame is needed
 #'that lists all administrative units at all available levels and how they are
 #'nested. The data.frame should have columns with the name and code for each
@@ -7,6 +9,7 @@
 #'admX_code, where X corresponds with the administrative unit level for which
 #'data is available.
 #'
+#'@details
 #'All the required information should be contained in the attribute table of the
 #'polygon file with the location of the administrative units. This function
 #'strips the attribute table from the polygon file and saves it as

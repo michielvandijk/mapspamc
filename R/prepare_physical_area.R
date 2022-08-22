@@ -1,6 +1,7 @@
-#'@Title
+#'@title
 #'Calculates physical crop area at the subnational level
 #'
+#'@description
 #'To estimate the physical crop area for each farming system harvest area (ha)
 #'statistics are combined with information on farmings system shares (fs) and
 #'cropping intensity (ci). Depending on how the model is solved, the physical
@@ -8,6 +9,7 @@
 #'(model solve level 0) or at the level 1 administrative unit level (model solve
 #'level 1).
 #'
+#'@details
 #'`prepare_physical_area` combines ha, fs and ci statistics and saves two files in csv
 #'format: (1) physical area (pa) and (2) physical area broken down by farming
 #'systems (pa_fs). Results are saved in the subfolders that are located in the

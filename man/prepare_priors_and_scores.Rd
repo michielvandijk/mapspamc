@@ -2,10 +2,10 @@
 % Please edit documentation in R/prepare_priors_and_scores.R
 \name{prepare_priors_and_scores}
 \alias{prepare_priors_and_scores}
-\title{Prepares priors and scores for all farming systems, crops and grid cells}
+\title{Prepares grid cell priors and scores for all crops and farming system combinations}
 \usage{
 prepare_priors_and_scores(param)
 }
 \description{
-Prepares priors and scores for all farming systems, crops and grid cells
+Prepares grid cell priors and scores for all crops and farming system combinations
 }

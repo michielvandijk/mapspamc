@@ -10,12 +10,6 @@ load_data(data, param, local = FALSE, mess = TRUE)
 \item{data}{character vector that refers to the data that is loaded. See
 details for allowed input.}
 
-\item{param}{Object of type \code{mapspamc_par} that bundles all \code{mapspamc} parameters,
-including core model folders, alpha-3 country code, year, spatial
-resolution, most detailed level at which subnational statistics are
-available, administrative unit level at which the model is solved and type of
-model.}
-
 \item{local}{logical; should the data be loaded into the global (\code{TRUE}) or
 local environment (`FALSE). Loading data into the local environment is only
 relevant when the function is used in internal package functions.}
@@ -27,7 +21,7 @@ which dataset is loaded?}
 \code{load_data()} can be used to quickly load input data (e.g. subnational
 statistics, maps and mappings). This can be useful to quickly inspect the
 statistics or visualize a map. Data can only be loaded after the
-\code{create_mapspamc_folders()} has been run and data has been created by running
+\code{create_mapspamc_folders()} has been run and data has been created by running the
 pre-processing steps. See details for allowed input.
 }
 \details{
@@ -60,4 +54,8 @@ The following inputs are allowed:
 \item faostat2crop:
 \item results:
 }
+}
+\examples{
+load_data(c("ha", "adm_map"), param)
+
 }

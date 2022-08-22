@@ -77,15 +77,16 @@ reference:
   - create_adm_map_pdf
   - create_adm_list
   - create_grid
-  - create_mapspamc_folders
-  - rasterize_adm_map
+  - create_folders
   - mapspamc_par
-- title: "Proces subnational statistics"
+  - rasterize_adm_map
+- title: "Pre-processing"
 - contents:
+  - align_raster
   - check_statistics
   - create_statistics_template
   - reaggregate_statistics
-- title: "Prepare input data"
+- title: "Model preparation"
 - contents:
   - combine_inputs
   - harmonize_inputs
@@ -93,17 +94,17 @@ reference:
   - prepare_irrigated_area
   - prepare_physical_area
   - prepare_priors_and_scores
-- title: "Run model"
+- title: "Running the model"
 - contents:
   - combine_results
-  - run_spam
-- title: "Post processing"
+  - run_mapspamc
+- title: "Post-processing"
 - contents:
   - create_all_tif
-  - create_globiom_input
   - view_panel
-  - view_stack
+- title: "Model validation"
+- contents:
+  - aggregate_to_adm
 - title: "General"
 - contents:
   - load_data
-  - plus

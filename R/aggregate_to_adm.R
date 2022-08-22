@@ -1,6 +1,8 @@
-#'@title Aggregates gridded results of alternative model to the administrative unit level of the target model
+#'@title
+#'Aggregates gridded results of alternative model to the administrative unit level of the target model
 #'
-#'@description `aggregate_to_adm` aggregates gridded results of an alternative model specified by `alt_param`
+#'@description
+#' `aggregate_to_adm` aggregates gridded results of an alternative model specified by `alt_param`
 #' to the administrative unit level determined by `adm_level` of the target model specified by `param`.
 #' The model described by `alt_param` must be identical to the target model apart from the `adm_level`
 #' parameter, which is set to a less-detailed level. A comparison of the output of `aggregate_to_adm` with

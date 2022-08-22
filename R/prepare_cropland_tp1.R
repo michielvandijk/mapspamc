@@ -1,13 +1,4 @@
-#'@title
-#'Prepares the synergy cropland area for `mapspamc
-#'
-#'@param param
-#'@inheritParams create_grid
-#'
-#'@examples
-#'
-#'@importFrom magrittr %>%
-#'#export
+
 prepare_cropland_tp1 <- function(param){
   stopifnot(inherits(param, "mapspamc_par"))
   cat("\n\n=> Prepare cropland")

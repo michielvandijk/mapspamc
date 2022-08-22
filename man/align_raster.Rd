@@ -2,24 +2,24 @@
 % Please edit documentation in R/align_raster.R
 \name{align_raster}
 \alias{align_raster}
-\title{align raster using a reference grid and polygon}
+\title{Both clips a raster to polygon and aligns it to reference grid}
 \usage{
-align_raster(r, ref_grid, clip, method = "bilinear")
+align_raster(r, ref_grid, poly, method = "bilinear")
 }
 \arguments{
 \item{r}{SpatRaster or location of SpatRaster to be processed}
 
-\item{ref_grid}{SpatRaster or locationof SpatRaster with the geometry that r should be resampled to}
+\item{ref_grid}{SpatRaster or location of SpatRaster with the geometry that r should be resampled to}
 
-\item{clip}{SpatVector or sf object that will be used to clip r}
+\item{poly}{SpatVector or sf object that will be used to clip r}
 
 \item{method}{character. Method used for estimating the new cell values. See \code{terra::resample()}
 for options.}
 }
 \description{
-\code{align_raster()} is used to clip raster data from global maps and align them with
-the country grid that is created by \code{create_grid()}. Aligning implies that the resulting
-map will have the same dimensions, resolution, extent and projection, and therefore
+\code{align_raster()} uses a polygon of a country to clip a raster and aligns the raster with a
+country grid that is created by \code{create_grid()}. Aligning implies that the resulting
+map will have the same dimensions, resolution, extent and projection as the country grid, and therefore
 can be stacked and combined with other spatial data.
 }
 \details{
@@ -34,6 +34,6 @@ map.
 }
 \examples{
 \dontrun{
-align_raster(gaez_file, grid, adm_map, method = "bilinear")
+align_raster(travel_time, grid, adm_map, method = "bilinear")
 }
 }

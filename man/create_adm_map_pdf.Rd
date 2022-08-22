@@ -7,12 +7,6 @@
 create_adm_map_pdf(param, font_size = 3)
 }
 \arguments{
-\item{param}{Object of type \code{mapspamc_par} that bundles all \code{mapspamc} parameters,
-including core model folders, alpha-3 country code, year, spatial
-resolution, most detailed level at which subnational statistics are
-available, administrative unit level at which the model is solved and type of
-model.}
-
 \item{font_size}{Parameter to specify the font size of administrative unit
 name that is plotted on the map (default size = 3). If names are long or
 administrative unit polygons are small, the labels may get cluttered. Better
@@ -22,8 +16,8 @@ results can be obtained by decreasing the font size.}
 An rds file with the created grid is saved in the \code{processed_data/maps/grid} folder.
 }
 \description{
-The function will create and save a pdf file with the location of the
-administrative units in the \verb{/processed_data/maps/adm} folder. Depening on the
+The function creates and saves a pdf file with the location of the
+administrative units in the \verb{/processed_data/maps/adm} folder. Depending on the
 adm level, maps are produced for level 1 and/or level 2 administrative units.
 The function will automatically load the file with the polygon information on
 the location of administrative units, that needs to be created first by the
