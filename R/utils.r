@@ -117,8 +117,8 @@ copy_mapping_files <- function(param) {
   mapping_files <- list.files(path = system.file("mappings", package = "mapspamc"), full.names = TRUE)
 
   purrr::walk(mapping_files, function(x) {
-    if(!file.exists(file.path(param$mapspamc_path, paste0("mappings/", basename(x))))) {
-      file.copy(x, file.path(param$mapspamc_path, paste0("mappings/", basename(x))))
+    if(!file.exists(file.path(param$model_path, paste0("mappings/", basename(x))))) {
+      file.copy(x, file.path(param$model_path, paste0("mappings/", basename(x))))
     }
   })
 

@@ -11,10 +11,10 @@ source(here::here("inst/template/01_model_setup/01_model_setup.r"))
 
 ############### LOAD DATA ###############
 # Aquastat raw
-aquastat_raw <- read_excel(file.path(param$raw_path, glue("aquastat/aquastat_irrigation_{param$iso3c}.xlsx")), sheet = "data")
+aquastat_raw <- read_excel(file.path(param$db_path, glue("aquastat/aquastat_irrigation_{param$iso3c}.xlsx")), sheet = "data")
 
 # Crop mapping
-aquastat2crop <-  read_csv(file.path(param$mapspamc_path, "mappings/aquastat2crop.csv"))
+aquastat2crop <-  read_csv(file.path(param$model_path, "mappings/aquastat2crop.csv"))
 
 
 ############### PROCESS ###############
@@ -70,7 +70,7 @@ ir_area <- ir_area %>%
 
 
 ############### SAVE ###############
-write_csv(ir_area, file.path(param$mapspamc_path,
+write_csv(ir_area, file.path(param$model_path,
   glue("processed_data/agricultural_statistics/aquastat_irrigated_crops_{param$year}_{param$iso3c}.csv")))
 
 

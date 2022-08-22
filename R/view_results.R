@@ -1,11 +1,12 @@
 #'@title
 #'Compares crop distribution maps using a panel for each farming system
 #'
-#'@description To quickly inspect the `mapspamc` results, `view_panel` shows crop
+#'@description To quickly inspect the `mapspamc` results, `view_results()` shows crop
 #'  distribution maps for a selected crop using a panel for each farming system.
-#'  The maps are visualized using [leafletjs](https://leafletjs.com/), which
-#'  makes it possible to select a number of background tiles (e.g.
-#'  OpenStreetMap).
+#'  This function works after `combine_results()` is run. There is no need to
+#'  run `create_all_tif()`. The maps are visualized using
+#'  [leafletjs](https://leafletjs.com/), which makes it possible to select a
+#'  number of background tiles (e.g. OpenStreetMap).
 #'
 #'@param crp Character. Crop for which the maps are shows. `crp`  has to be
 #'  one of the `mapspamc`  four letter crop codes.
@@ -19,11 +20,11 @@
 #'
 #'@examples
 #'\dontrun{
-#'view_panel(crop = "maiz", var = "ha", viewer = FALSE, polygon = FALSE)
+#'view_results(crop = "maiz", var = "ha", viewer = FALSE, polygon = FALSE)
 #'}
 #'
 #'@export
-view_panel <- function(crp, var, param, viewer = TRUE, polygon = TRUE){
+view_results <- function(crp, var, param, viewer = TRUE, polygon = TRUE){
   stopifnot(inherits(param, "mapspamc_par"))
   stopifnot(is.logical(viewer))
   stopifnot(is.logical(polygon))
@@ -46,7 +47,6 @@ view_panel <- function(crp, var, param, viewer = TRUE, polygon = TRUE){
       invisible(.Call("rs_viewer", url, height))
     })
   }
-
 
   load_data(c("grid", "results", "adm_map"), param, mess = FALSE, local = TRUE)
   ext <- raster::extent(raster::raster(grid))

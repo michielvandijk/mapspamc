@@ -18,11 +18,12 @@ model.}
 data, processed data and parameters for \code{mapspamc}.
 }
 \details{
-\code{create_folders} creates two folders in the \code{mapspamc_path}, set by the user:
-mappings and processed_data, and creates a \code{raw_data} folder in the location
-as set in \code{mapspamc_par}. In addition, it copies a number of cvs files into the
-mappings folder, which contain several data tables that are needed to run the
-model and, if needed can be adjusted by the user.
+\code{create_folders} creates two folders in the \code{model_path}, set by the user:
+mappings and processed_data (including subfolders). It copies a number of cvs files
+into the mappings folder, which contain several data tables that are needed to run
+the model and, if needed can be adjusted by the user. If set by the user a mapspamc_db
+folder (including subfolders) is created in  \code{db_path}. Otherwise the folder is
+created in the model folder.
 }
 \examples{
 \dontrun{

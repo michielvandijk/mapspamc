@@ -98,10 +98,10 @@ reference:
 - contents:
   - combine_results
   - run_mapspamc
+  - view_results
 - title: "Post-processing"
 - contents:
   - create_all_tif
-  - view_panel
 - title: "Model validation"
 - contents:
   - aggregate_to_adm

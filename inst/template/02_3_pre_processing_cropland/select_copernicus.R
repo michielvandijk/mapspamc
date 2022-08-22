@@ -1,6 +1,6 @@
 #'========================================================================================================================================
 #' Project:  mapspamc
-#' Subject:  Code to select GLAD cropland map
+#' Subject:  Code to select COPERNICUS cropland map
 #' Author:   Michiel van Dijk
 #' Contact:  michiel.vandijk@wur.nl
 #'========================================================================================================================================
@@ -14,16 +14,15 @@ load_data(c("adm_map", "grid"), param)
 
 
 # PROCESS --------------------------------------------------------------------------------
-
-temp_path <- file.path(param$mapspamc_path, glue("processed_data/maps/cropland/{param$res}"))
+temp_path <- file.path(param$model_path, glue("processed_data/maps/cropland/{param$res}"))
 dir.create(temp_path, showWarnings = FALSE, recursive = TRUE)
 
 # Warp and mask
-input <- file.path(param$raw_path, glue("glad/glad_2019.tif"))
+input <- file.path(param$db_path, glue("copernicus/copernicus_2019.tif"))
 output <- align_raster(input, grid, adm_map, method = "bilinear")
-names(output) <- "glad"
+names(output) <- "copernicus"
 plot(output)
-writeRaster(output, file.path(temp_path, glue("cropmask_glad_{param$res}_{param$year}_{param$iso3c}.tif")),
+writeRaster(output, file.path(temp_path, glue("cropmask_copernicus_{param$res}_{param$year}_{param$iso3c}.tif")),
             overwrite = TRUE)
 
 

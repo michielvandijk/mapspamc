@@ -44,7 +44,7 @@ create_grid <- function(param = NULL){
   grid <- terra::trim(grid)
   names(grid) <- "gridID"
 
-  temp_path <- file.path(param$mapspamc_path, glue::glue("processed_data/maps/grid/{param$res}"))
+  temp_path <- file.path(param$model_path, glue::glue("processed_data/maps/grid/{param$res}"))
   dir.create(temp_path, showWarnings = F, recursive = T)
   terra::writeRaster(grid, file.path(temp_path, glue::glue("grid_{param$res}_{param$year}_{param$iso3c}.tif")),
               overwrite = T)

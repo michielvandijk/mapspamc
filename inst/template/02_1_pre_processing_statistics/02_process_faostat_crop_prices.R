@@ -12,10 +12,10 @@ source(here::here("inst/template/01_model_setup/01_model_setup.r"))
 # LOAD DATA ------------------------------------------------------------------------------
 
 # Crop production
-prod_raw <- read_csv(file.path(param$raw_path, "faostat/Production_Crops_Livestock_E_All_Data_(Normalized).csv"))
+prod_raw <- read_csv(file.path(param$db_path, "faostat/Production_Crops_Livestock_E_All_Data_(Normalized).csv"))
 
 # price data
-price_raw <- read_csv(file.path(param$raw_path, "faostat/Prices_E_All_Data_(Normalized).csv"))
+price_raw <- read_csv(file.path(param$db_path, "faostat/Prices_E_All_Data_(Normalized).csv"))
 
 # faostat2crop
 load_data("faostat2crop", param)
@@ -75,7 +75,7 @@ miss_crop <- full_join(crop_list, price_iso3c) %>%
 
 
 # SAVE -----------------------------------------------------------------------------------
-write_csv(price_iso3c, file.path(param$mapspamc_path,
+write_csv(price_iso3c, file.path(param$model_path,
                                  glue("processed_data/agricultural_statistics/crop_prices_{param$year}_{param$iso3c}.csv")))
 
 

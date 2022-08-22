@@ -16,7 +16,7 @@ harmonize_cl <- function(df, ac, param) {
   return(df)
 }
 
-# functions to compare cl_med with pa and replace where needed.
+# functions to compare cl_mean with pa and replace where needed.
 check_cl <- function(df, adm_lvl, adm_code, param){
 
   cat("\nadm level: ", adm_lvl)

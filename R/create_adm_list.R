@@ -35,5 +35,5 @@ create_adm_list <- function(x, param) {
     sf::st_drop_geometry()
 
   readr::write_csv(adm_list,
-    file.path(param$mapspamc_path, glue::glue("processed_data/lists/adm_list_{param$year}_{param$iso3c}.csv")))
+    file.path(param$model_path, glue::glue("processed_data/lists/adm_list_{param$year}_{param$iso3c}.csv")))
 }

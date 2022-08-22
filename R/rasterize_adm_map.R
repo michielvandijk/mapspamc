@@ -35,7 +35,7 @@ rasterize_adm_map <- function(param) {
     dplyr::left_join(adm_list, by = field) %>%
     na.omit
 
-  temp_path <- file.path(param$mapspamc_path, glue::glue("processed_data/maps/adm/{param$res}"))
+  temp_path <- file.path(param$model_path, glue::glue("processed_data/maps/adm/{param$res}"))
   dir.create(temp_path, showWarnings = FALSE, recursive = TRUE)
   saveRDS(adm_map_r, file.path(temp_path,
                                glue::glue("adm_map_r_{param$res}_{param$year}_{param$iso3c}.rds")))

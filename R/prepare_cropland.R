@@ -16,21 +16,21 @@
 prepare_cropland <- function(param){
   stopifnot(inherits(param, "mapspamc_par"))
   cat("\n\n=> Prepare cropland")
-  load_data(c("adm_map_r", "adm_list","cl_med", "cl_max", "cl_rank", "grid"), param, local = TRUE, mess = FALSE)
+  load_data(c("adm_map_r", "adm_list","cl_mean", "cl_max", "cl_rank", "grid"), param, local = TRUE, mess = FALSE)
 
   # Grid size
   grid_size <- calc_grid_size(grid)
 
   # Combine and remove few cells where gridID is missing, caused by masking grid with country borders using gdal.
-  df <- as.data.frame(c(grid, cl_med, cl_rank, cl_max, grid_size),xy = TRUE) %>%
+  df <- as.data.frame(c(grid, cl_mean, cl_rank, cl_max, grid_size),xy = TRUE) %>%
     dplyr::filter(!is.na(gridID))
 
   # Fix inconsistencies
-  # Set cl_max to cl_med if cl > cl_max because of inconsistencies (when using SASAM)
-  # Set if cl_max or cl_med are larger than grid_size set to grid_size
+  # Set cl_max to cl_mean if cl > cl_max because of inconsistencies (when using SASAM)
+  # Set if cl_max or cl_mean are larger than grid_size set to grid_size
   df <- df %>%
-    dplyr::mutate(cl_max = ifelse(cl_med > cl_max, cl_med, cl_max),
-                  cl_med = ifelse(grid_size < cl_med, grid_size, cl_med),
+    dplyr::mutate(cl_max = ifelse(cl_mean > cl_max, cl_mean, cl_max),
+                  cl_mean = ifelse(grid_size < cl_mean, grid_size, cl_mean),
                   cl_max = ifelse(grid_size < cl_max, grid_size, cl_max))
 
 

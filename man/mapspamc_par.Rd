@@ -2,11 +2,11 @@
 % Please edit documentation in R/mapspamc_par.R
 \name{mapspamc_par}
 \alias{mapspamc_par}
-\title{Sets spam parameters}
+\title{Sets \code{mapspamc} parameters}
 \usage{
 mapspamc_par(
-  mapspamc_path = NULL,
-  raw_path = NULL,
+  model_path = NULL,
+  db_path = NULL,
   iso3c = NULL,
   year = NULL,
   res = "5min",
@@ -17,13 +17,12 @@ mapspamc_par(
 )
 }
 \arguments{
-\item{mapspamc_path}{character string with the main SPAM folder. Note that R uses
+\item{model_path}{character string with the main model folder. Note that R uses
 forward slash or double backslash to separate folder names.}
 
-\item{raw_path}{character string with the raw data folder. This makes it
-possible to store the raw data on a server. If \code{raw_path} is not specified
-it is automatically set to the default raw data folder in the main model
-folder.}
+\item{db_path}{character string with location of the mapspamc_db folder. This makes it
+possible to store the mapspamc_db on a server. If \code{db_path} is not specified the
+mapspamc_db folder is automatically created in the model folder.}
 
 \item{iso3c}{character string with the three letter ISO 3166-1 alpha-3 country
 code, also referred to as iso3c. A list of country codes can be found in
@@ -49,7 +48,7 @@ inputs are "max_score" and "min_entropy". See package documentation for more
 information.}
 }
 \value{
-spamc_par object
+mapspamc_par object
 }
 \description{
 \code{mapspamc_par} sets all required parameters for spam to run, including core model
@@ -58,8 +57,8 @@ statistics, solve level, type of model and location of GAMS.
 }
 \details{
 \code{mapspamc_par} creates an object of class \code{mapspamc_par}, which bundles all required
-spam parameters set by the user: SPAM folder, raw data folder, country alpha-3
-code and name, year, spatial resolution, most detailed level at which
+\code{mapspamc} parameters set by the user: model folder, location of the input database folder,
+country alpha-3 code and name, year, spatial resolution, most detailed level at which
 subnational statistics are available, administrative unit level at which the
 model is solved, type of model, three digit country code and
 continent. The coordinate reference system is automatically set to WGS84
@@ -67,7 +66,8 @@ continent. The coordinate reference system is automatically set to WGS84
 
 If GAMS is properly installed, the GAMS executable is automatically found,
 which is required to load the libraries to create gdx files. In case this
-gives problems the location of GAMS can be added manually.
+gives problems (e.g. because multiple versions of GAMS are installed, the
+location of GAMS can be added manually.
 
 \code{\link[countrycode:countrycode]{countrycode::countrycode()}} is used to determine the full country
 name, three digit country code and continent on
@@ -76,7 +76,7 @@ country specific information from several datasets.
 }
 \examples{
 \dontrun{
-mapspamc_par(mapspamc_path = "C:/Users/dijk158/Dropbox/mapspamc_mwi",
+mapspamc_par(model_path = "C:/temp/mapspamc_mwi",
 iso3c = "MWI", year = 2010, res = "5min", adm_level = 1,
 solve_level = 0, model = "max_score", gams_path = "C:/GAMS")
 }

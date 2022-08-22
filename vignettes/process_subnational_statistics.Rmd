@@ -24,10 +24,10 @@ library(magrittr)
 
 # Set the folder where the model will be stored
 # Note that R uses forward slashes even in Windows!!
-mapspamc_path <- "C:/Users/dijk158/Dropbox/mapspamc_mwi"
+model_path <- "C:/Users/dijk158/Dropbox/mapspamc_mwi"
 
 # Set `mapspamc` parameters
-param <- mapspamc_par(mapspamc_path = mapspamc_path,
+param <- mapspamc_par(model_path = model_path,
  iso3c = "MWI",
  year = 2010,
  res = "5min",

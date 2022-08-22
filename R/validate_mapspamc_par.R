@@ -1,8 +1,8 @@
 # Function to validate mapspamc_par class
 validate_mapspamc_par <- function(param) {
   stopifnot(inherits(param, "mapspamc_par"))
-  if (is.null(param$mapspamc_path))
-    stop("mapspamc_path is not defined",
+  if (is.null(param$model_path))
+    stop("model_path is not defined",
          call. = FALSE)
   if (is.na(param$iso3c)) {
     stop("iso3c not defined",
@@ -21,7 +21,7 @@ validate_mapspamc_par <- function(param) {
       stop("year is not a value",
            call. = FALSE)
     } else {
-      if(param$year < 1000 | param$year > 2300) {
+      if(param$year < 2000 | param$year > 2030) {
         message("year seems to have an unrealistic value")
       }
     }

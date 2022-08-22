@@ -1,17 +1,26 @@
 #'========================================================================================
-#' Project:  MAPSPAMC
+#' Project:  mapspamc
 #' Subject:  Code process SASAM global synergy cropland map
 #' Author:   Michiel van Dijk
 #' Contact:  michiel.vandijk@wur.nl
 #'========================================================================================
 
 # SOURCE PARAMETERS ----------------------------------------------------------------------
-source(here::here("scripts/01_model_setup/01_model_setup.r"))
+source(here::here("inst/template/01_model_setup/01_model_setup.r"))
 
 
 # PROCESS CROPRATIO (MEDIAN AREA) --------------------------------------------------------
-temp_path <- file.path(param$mapspamc_path, glue("processed_data/maps/cropland/{param$res}"))
+temp_path <- file.path(param$model_path, glue("processed_data/maps/cropland/{param$res}"))
 dir.create(temp_path, showWarnings = FALSE, recursive = TRUE)
+
+
+# Warp and mask
+input <- file.path(param$db_path,  glue("sasam/{param$continent}/cropland_ratio_{param$continent}.tif"))
+output <- align_raster(input, grid, adm_map, method = "bilinear")
+names(output) <- "esri"
+plot(output)
+writeRaster(output, file.path(temp_path, glue("cropmask_esri_{param$res}_{param$year}_{param$iso3c}.tif")),
+            overwrite = TRUE)
 
 
 # Set files
@@ -19,7 +28,7 @@ grid <- file.path(param$mapspamc_path,
                   glue("processed_data/maps/grid/{param$res}/grid_{param$res}_{param$year}_{param$iso3c}.tif"))
 mask <- file.path(param$mapspamc_path,
                   glue("processed_data/maps/adm/{param$res}/adm_map_{param$year}_{param$iso3c}.shp"))
-input <- file.path(param$raw_path,
+input <- file.path(param$db_path,
                    glue("sasam/{param$continent}/cropland_ratio_{param$continent}.tif"))
 output <- file.path(param$mapspamc_path,
                     glue("processed_data/maps/cropland/{param$res}/cl_med_share_{param$res}_{param$year}_{param$iso3c}.tif"))
@@ -45,7 +54,7 @@ grid <- file.path(param$spam_path,
                   glue("processed_data/maps/grid/{param$res}/grid_{param$res}_{param$year}_{param$iso3c}.tif"))
 mask <- file.path(param$spam_path,
                   glue("processed_data/maps/adm/{param$res}/adm_map_{param$year}_{param$iso3c}.shp"))
-input <- file.path(param$raw_path,
+input <- file.path(param$db_path,
                    glue("sasam/{param$continent}/cropland_max_{param$continent}.tif"))
 output <- file.path(param$spam_path,
                     glue("processed_data/maps/cropland/{param$res}/cl_share_{param$res}_{param$year}_{param$iso3c}.tif"))
@@ -71,7 +80,7 @@ grid <- file.path(param$spam_path,
                       glue("processed_data/maps/grid/{param$res}/grid_{param$res}_{param$year}_{param$iso3c}.tif"))
 mask <- file.path(param$spam_path,
                   glue("processed_data/maps/adm/{param$res}/adm_map_{param$year}_{param$iso3c}.shp"))
-input <- file.path(param$raw_path,
+input <- file.path(param$db_path,
                    glue("sasam/{param$continent}/cropland_confidence_level_{param$continent}.tif"))
 output <- file.path(param$spam_path,
                     glue("processed_data/maps/cropland/{param$res}/cl_rank_{param$res}_{param$year}_{param$iso3c}.tif"))

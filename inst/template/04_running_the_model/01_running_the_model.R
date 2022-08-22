@@ -17,3 +17,6 @@ run_mapspamc(param)
 combine_results(param)
 
 
+# INSPECT RESULTS ------------------------------------------------------------------------
+view_panel("rice", var = "ha", param)
+view_panel("maiz", var = "ha", param)

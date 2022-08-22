@@ -15,11 +15,11 @@ source(here::here("inst/template/01_model_setup/01_model_setup.r"))
 load_data(c("ha"), param)
 
 # Faostat
-faostat_raw <- read_csv(file.path(param$mapspamc_path,
+faostat_raw <- read_csv(file.path(param$model_path,
                           glue("processed_data/agricultural_statistics/faostat_crops_{param$year}_{param$iso3c}.csv")))
 
 # Faostat
-aquastat_raw <- read_csv(file.path(param$mapspamc_path,
+aquastat_raw <- read_csv(file.path(param$model_path,
                           glue("processed_data/agricultural_statistics/aquastat_irrigated_crops_{param$year}_{param$iso3c}.csv")))
 
 
@@ -50,5 +50,5 @@ ggplot(data = ir_share, aes(x = as.factor(year), y = ir_share, fill = crop)) +
   facet_wrap(~crop, scales = "free")
 
 # save
-write_csv(ir_share, file.path(param$mapspamc_path,
+write_csv(ir_share, file.path(param$model_path,
                               glue("processed_data/agricultural_statistics/share_of_irrigated_crops_{param$year}_{param$iso3c}.csv")))

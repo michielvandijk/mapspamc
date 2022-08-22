@@ -1,10 +1,9 @@
 #'========================================================================================================================================
-#' Project:  MAPSPAMC
+#' Project:  mapspamc
 #' Subject:  Code to prepare synergy irrigated map
 #' Author:   Michiel van Dijk
 #' Contact:  michiel.vandijk@wur.nl
 #'========================================================================================================================================
-
 
 # SOURCE PARAMETERS ----------------------------------------------------------------------
 source(here::here("inst/template/01_model_setup/01_model_setup.r"))
@@ -17,7 +16,6 @@ load_data(c("adm_map", "grid", "gmia", "gia"), param)
 # PREPARE --------------------------------------------------------------------------------
 # Create grid area
 grid_size <- cellSize(grid, unit = "ha")
-grid_size <- grid_size * 100 # in ha
 names(grid_size) <- "grid_size"
 
 # Grid df
@@ -57,7 +55,6 @@ ir_max_map <- extend(ir_max_map, grid)
 plot(ir_max_map)
 plot(adm_map$geometry, add = T)
 
-
 # ir_rank
 ir_rank_map <- ir_df %>%
   left_join(grid_df,.) %>%
@@ -69,7 +66,7 @@ plot(adm_map$geometry, add = T)
 
 
 # SAVE -----------------------------------------------------------------------------------
-temp_path <- file.path(param$mapspamc_path, glue("processed_data/maps/irrigated_area/{param$res}"))
+temp_path <- file.path(param$model_path, glue("processed_data/maps/irrigated_area/{param$res}"))
 dir.create(temp_path, showWarnings = FALSE, recursive = TRUE)
 
 writeRaster(ir_max_map, file.path(temp_path,
@@ -79,4 +76,4 @@ writeRaster(ir_rank_map, file.path(temp_path,
                                   glue::glue("ia_rank_{param$res}_{param$year}_{param$iso3c}.tif")),overwrite = T)
 
 # CLEAN UP -------------------------------------------------------------------------------
-rm(adm_map, gia, gmia, grid, grid_area, grid_df, grid_size, ir_df, ir_max_map, ir_rank_map, temp_path)
+rm(adm_map, gia, gmia, grid, grid_df, grid_size, ir_df, ir_max_map, ir_rank_map, temp_path)

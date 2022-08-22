@@ -1,12 +1,12 @@
 #'========================================================================================
-#' Project:  MAPSPAMC
-#' Subject:  Script to run validation model
+#' Project:  mapspamc
+#' Subject:  Script validate the model
 #' Author:   Michiel van Dijk
 #' Contact:  michiel.vandijk@wur.nl
 #'========================================================================================
 
 # SOURCE PARAMETERS ----------------------------------------------------------------------
-source(here::here("inst/template/06_validation/01_alternative_model_setup.r"))
+source(here::here("inst/template/06_model_validation/01_alternative_model_setup.r"))
 
 
 # COMPARE ALTERNATIVE MODEL WITH STATISTICS -----------------------------------------------------------------

@@ -20,9 +20,8 @@ which dataset is loaded?}
 \description{
 \code{load_data()} can be used to quickly load input data (e.g. subnational
 statistics, maps and mappings). This can be useful to quickly inspect the
-statistics or visualize a map. Data can only be loaded after the
-\code{create_mapspamc_folders()} has been run and data has been created by running the
-pre-processing steps. See details for allowed input.
+statistics or visualize a map. Data can only be loaded after data has been
+created by running the pre-processing steps. See details for allowed input.
 }
 \details{
 The following inputs are allowed:
@@ -30,7 +29,7 @@ The following inputs are allowed:
 \item adm_list:
 \item adm_map:
 \item adm_map_r:
-\item cl_med:
+\item cl_mean:
 \item cl_max:
 \item cl_rank:
 \item ia_max:

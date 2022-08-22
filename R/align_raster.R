@@ -31,7 +31,7 @@
 #'@export
 align_raster <- function(r, ref_grid, poly, method = "bilinear"){
   r <- terra::rast(r)
-  clip <- terra::vect(poly)
+  poly <- terra::vect(poly)
   ref_grid <- terra::rast(ref_grid)
   r <- terra::crop(r, poly, snap = "out")
   r <- terra::resample(r, ref_grid, method = method)

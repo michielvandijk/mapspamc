@@ -54,7 +54,7 @@ combine_results <- function(param, cut = 0.0001, out = FALSE) {
    dplyr::select(gridID, crop, system, ha, pa, everything(), pa, ha))
 
  model_folder <- create_model_folder(param)
- temp_path <- file.path(param$mapspamc_path,
+ temp_path <- file.path(param$model_path,
                         glue::glue("processed_data/results/{model_folder}"))
  dir.create(temp_path, showWarnings = F, recursive = T)
 

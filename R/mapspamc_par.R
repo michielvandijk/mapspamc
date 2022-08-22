@@ -1,5 +1,5 @@
 #'@title
-#'Sets spam parameters
+#'Sets `mapspamc` parameters
 #'
 #'@description
 #'`mapspamc_par` sets all required parameters for spam to run, including core model
@@ -8,8 +8,8 @@
 #'
 #'@details
 #'`mapspamc_par` creates an object of class `mapspamc_par`, which bundles all required
-#'spam parameters set by the user: SPAM folder, raw data folder, country alpha-3
-#'code and name, year, spatial resolution, most detailed level at which
+#'`mapspamc` parameters set by the user: model folder, location of the input database folder,
+#'country alpha-3 code and name, year, spatial resolution, most detailed level at which
 #'subnational statistics are available, administrative unit level at which the
 #'model is solved, type of model, three digit country code and
 #'continent. The coordinate reference system is automatically set to WGS84
@@ -17,19 +17,19 @@
 #'
 #'If GAMS is properly installed, the GAMS executable is automatically found,
 #'which is required to load the libraries to create gdx files. In case this
-#'gives problems the location of GAMS can be added manually.
+#'gives problems (e.g. because multiple versions of GAMS are installed, the
+#'location of GAMS can be added manually.
 #'
 #'[countrycode::countrycode()] is used to determine the full country
 #'name, three digit country code and continent on
 #'the basis of the alpha-3 country code. This information is required to extract
 #'country specific information from several datasets.
 #'
-#'@param mapspamc_path character string with the main SPAM folder. Note that R uses
+#'@param model_path character string with the main model folder. Note that R uses
 #'  forward slash or double backslash to separate folder names.
-#'@param raw_path character string with the raw data folder. This makes it
-#'  possible to store the raw data on a server. If `raw_path` is not specified
-#'  it is automatically set to the default raw data folder in the main model
-#'  folder.
+#'@param db_path character string with location of the mapspamc_db folder. This makes it
+#'  possible to store the mapspamc_db on a server. If `db_path` is not specified the
+#'  mapspamc_db folder is automatically created in the model folder.
 #'@param iso3c character string with the three letter ISO 3166-1 alpha-3 country
 #'  code, also referred to as iso3c. A list of country codes can be found in
 #'  [Wikipedia](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3).
@@ -48,18 +48,18 @@
 #'  inputs are "max_score" and "min_entropy". See package documentation for more
 #'  information.
 #'
-#'@return spamc_par object
+#'@return mapspamc_par object
 #'
 #'@examples
 #'\dontrun{
-#'mapspamc_par(mapspamc_path = "C:/Users/dijk158/Dropbox/mapspamc_mwi",
+#'mapspamc_par(model_path = "C:/temp/mapspamc_mwi",
 #'iso3c = "MWI", year = 2010, res = "5min", adm_level = 1,
 #'solve_level = 0, model = "max_score", gams_path = "C:/GAMS")
 #'}
 #'@export
 mapspamc_par <-
-    function(mapspamc_path = NULL,
-             raw_path = NULL,
+    function(model_path = NULL,
+             db_path = NULL,
              iso3c = NULL,
              year = NULL,
              res = "5min",
@@ -68,12 +68,13 @@ mapspamc_par <-
              model = "max_score",
              gams_path = NULL) {
 
-        if (is.null(raw_path)) {
-            message("raw_path is not defined, set to raw_data in main folder")
-            raw_path <- file.path(mapspamc_path, "raw_data")
+      if (is.null(db_path)) {
+        message("db_path is not defined, set to mapspamc_db in the model folder")
+        db_path <- file.path(model_path, "mapspamc_db")
+      } else {
+        db_path <- file.path(db_path, "mapspamc_db")
         }
-
-        if (is.null(gams_path)) {
+      if (is.null(gams_path)) {
             gams_path <- ""
         }
 
@@ -87,8 +88,8 @@ mapspamc_par <-
             adm_level = adm_level,
             solve_level = solve_level,
             model = model,
-            mapspamc_path = mapspamc_path,
-            raw_path = raw_path,
+            model_path = model_path,
+            db_path = db_path,
             gams_path = gams_path,
             crs = "epsg:4326")
         class(param) <- "mapspamc_par"

@@ -6,7 +6,7 @@ split_harmonized_inputs <- function(ac, param, cl_slackp, cl_slackn, ia_slackp, 
 
   #https://stackoverflow.com/questions/7096989/how-to-save-all-console-output-to-file-in-r
   model_folder <- create_model_folder(param)
-  log_file = file(file.path(param$mapspamc_path,
+  log_file = file(file.path(param$model_path,
                        glue::glue("processed_data/intermediate_output/{model_folder}/{ac}/log_{param$res}_{param$year}_{ac}_{param$iso3c}.log")))
   capture.output(file = log_file, append = FALSE, split = T,{
   cat("\n\n--------------------------------------------------------------------------------------------------------------")
@@ -21,7 +21,7 @@ split_harmonized_inputs <- function(ac, param, cl_slackp, cl_slackn, ia_slackp, 
   # Create df of cl map,  set cl to median cropland
   # Remove few cells where gridID is missing, caused by masking grid with country borders using gdal.
   cl_df <- cl %>%
-    dplyr::mutate(cl = cl_med)
+    dplyr::mutate(cl = cl_mean)
 
   # Remove gridID where cl_rank is NA
   cl_df <- cl_df %>%
@@ -62,7 +62,7 @@ split_harmonized_inputs <- function(ac, param, cl_slackp, cl_slackn, ia_slackp, 
 
 
   ############### STEP 7: SAVE ###############
-  temp_path <- file.path(param$mapspamc_path,
+  temp_path <- file.path(param$model_path,
                          glue::glue("processed_data/intermediate_output/{model_folder}/{ac}"))
   dir.create(temp_path, recursive = T, showWarnings = F)
 

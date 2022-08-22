@@ -1,6 +1,6 @@
 #'========================================================================================
 #' Project:  mapspamc
-#' Subject:  Process adm shapefile
+#' Subject:  Prepare adm map and grid
 #' Author:   Michiel van Dijk
 #' Contact:  michiel.vandijk@wur.nl
 #'========================================================================================
@@ -14,7 +14,7 @@ source(here::here("inst/template/01_model_setup/01_model_setup.r"))
 iso3c_shp <- "Thailland_stat_area.shp"
 
 # load shapefile
-adm_map_raw <- read_sf(file.path(param$raw_path, glue("adm/{iso3c_shp}")))
+adm_map_raw <- read_sf(file.path(param$db_path, glue("adm/{iso3c_shp}")))
 
 # plot
 plot(adm_map_raw$geometry)
@@ -35,9 +35,10 @@ names(adm_map)
 # The codes of the administrative units should be set to admX_code, where X is the adm code.
 
 # If the attribute table already contains all adm names and codes but with incorrect header names,
-# set the original names, i.e. the ones that will be replaced. below.
+# set the original names, i.e. the ones that will be replaced, below.
 # Add adm0_code and adm0_name of these are not not part of attribute table
 # e.g. %>% mutate(adm0_name  = "COUNTRY.NAME)
+
 adm0_name_orig <- "name_cntr"
 #adm0_code_orig <- "stat_code"
 adm1_name_orig <- "adm1_name"
@@ -57,7 +58,6 @@ adm_map <- adm_map %>%
       adm1_code == "THZ3" ~ "Northern",
       adm1_code == "THZ4" ~ "Southern")
   )
-
 
 # Replace the names
 names(adm_map)[names(adm_map) == adm0_name_orig] <- "adm0_name"
@@ -105,7 +105,7 @@ create_adm_list(adm_map, param)
 
 
 # SAVE -----------------------------------------------------------------------------------
-temp_path <- file.path(param$mapspamc_path, glue("processed_data/maps/adm/{param$res}"))
+temp_path <- file.path(param$model_path, glue("processed_data/maps/adm/{param$res}"))
 dir.create(temp_path, showWarnings = FALSE, recursive = TRUE)
 
 saveRDS(adm_map, file.path(temp_path, glue("adm_map_{param$year}_{param$iso3c}.rds")))

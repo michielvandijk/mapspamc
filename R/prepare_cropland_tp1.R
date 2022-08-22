@@ -2,21 +2,21 @@
 prepare_cropland_tp1 <- function(param){
   stopifnot(inherits(param, "mapspamc_par"))
   cat("\n\n=> Prepare cropland")
-  load_data(c("adm_map_r", "adm_list","cl_med", "cl_max", "cl_rank", "grid", "results_tp1"), param, local = TRUE, mess = FALSE)
+  load_data(c("adm_map_r", "adm_list","cl_mean", "cl_max", "cl_rank", "grid", "results_tp1"), param, local = TRUE, mess = FALSE)
 
   # Grid size
   grid_size <- calc_grid_size(grid)
 
   # Combine and remove few cells where gridID is missing, caused by masking grid with country borders using gdal.
-  df <- as.data.frame(raster::rasterToPoints(raster::stack(grid, cl_med, cl_rank, cl_max, grid_size))) %>%
+  df <- as.data.frame(raster::rasterToPoints(raster::stack(grid, cl_mean, cl_rank, cl_max, grid_size))) %>%
     dplyr::filter(!is.na(gridID))
 
   # Fix inconsistencies
-  # Set cl_max to cl_med if cl > cl_max because of inconsistencies (when using SASAM)
-  # Set if cl_max or cl_med are larger than grid_size set to grid_size
+  # Set cl_max to cl_mean if cl > cl_max because of inconsistencies (when using SASAM)
+  # Set if cl_max or cl_mean are larger than grid_size set to grid_size
   df <- df %>%
-    dplyr::mutate(cl_max = ifelse(cl_med > cl_max, cl_med, cl_max),
-                  cl_med = ifelse(grid_size < cl_med, grid_size, cl_med),
+    dplyr::mutate(cl_max = ifelse(cl_mean > cl_max, cl_mean, cl_max),
+                  cl_mean = ifelse(grid_size < cl_mean, grid_size, cl_mean),
                   cl_max = ifelse(grid_size < cl_max, grid_size, cl_max))
 
   # To harmonize with tp1 data we use the following rules:
@@ -35,11 +35,11 @@ prepare_cropland_tp1 <- function(param){
   df <- df %>%
     dplyr::left_join(cl_tp1) %>%
     dplyr::mutate(
-      cl_med = dplyr::case_when(
+      cl_mean = dplyr::case_when(
         cl_max < cl_tp1 ~ cl_max,
-        cl_med <= cl_tp1 & cl_tp1 <= cl_max ~ cl_tp1,
-        cl_med > cl_tp1 ~ cl_tp1,
-        is.na(cl_tp1) ~ cl_med
+        cl_mean <= cl_tp1 & cl_tp1 <= cl_max ~ cl_tp1,
+        cl_mean > cl_tp1 ~ cl_tp1,
+        is.na(cl_tp1) ~ cl_mean
       )
     ) %>%
     dplyr::select(-cl_tp1)

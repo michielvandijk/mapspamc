@@ -55,7 +55,7 @@ create_adm_map_pdf <- function(param, font_size = 3) {
       theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(),
             panel.border = element_rect(colour = "black", fill = "transparent"), plot.title = element_text(hjust = 0.5)) +
       theme(panel.grid.major = element_line(colour = 'transparent')) +
-      labs(fill = "", x = "", y = "", title = param$country) +
+      labs(fill = "", x = "", y = "", title = glue::glue("{param$country} ADM1")) +
       guides(fill = "none")
     }
 
@@ -81,12 +81,12 @@ create_adm_map_pdf <- function(param, font_size = 3) {
       theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(),
             panel.border = element_rect(colour = "black", fill = "transparent"), plot.title = element_text(hjust = 0.5)) +
       theme(panel.grid.major = element_line(colour = 'transparent')) +
-      labs(fill = "", x = "", y = "", title = param$country) +
+      labs(fill = "", x = "", y = "", title = glue::glue("{param$country} ADM2")) +
       guides(fill = "none")
   }
 
 
-  temp_path <- file.path(param$mapspamc_path, glue::glue("processed_data/maps/adm/{param$res}" ))
+  temp_path <- file.path(param$model_path, glue::glue("processed_data/maps/adm/{param$res}" ))
   dir.create(temp_path, recursive = T, showWarnings = F)
 
   pdf(file = file.path(temp_path, glue::glue("adm_map_{param$res}_{param$yea}_{param$iso3c}.pdf")),
@@ -102,5 +102,5 @@ create_adm_map_pdf <- function(param, font_size = 3) {
       }
     }
     invisible(dev.off())
-    cat("\n=> pdf file created")
+    cat("\n=> Done")
 }

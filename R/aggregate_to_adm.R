@@ -60,7 +60,7 @@ aggregate_to_adm <- function(param, alt_param){
     }
     df_ag <- map_df(unique(results$crop),  aggregate_crop_adm)
     model_folder <- create_model_folder(alt_param)
-    temp_path <- file.path(param$mapspamc_path,
+    temp_path <- file.path(param$model_path,
                            glue::glue("processed_data/results/{model_folder}"))
     dir.create(temp_path, showWarnings = F, recursive = T)
     saveRDS(df_ag, file.path(temp_path, glue::glue("results_aggregated to_adm{param$adm_level}_{param$year}_{param$iso3c}.rds")))

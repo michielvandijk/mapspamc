@@ -11,7 +11,7 @@ source(here::here("inst/template/01_model_setup/01_model_setup.r"))
 # LOAD DATA ------------------------------------------------------------------------------
 
 # Crop production
-prod <- read_csv(file.path(param$raw_path, "faostat/Production_Crops_Livestock_E_All_Data_(Normalized).csv"))
+prod <- read_csv(file.path(param$db_path, "faostat/Production_Crops_Livestock_E_All_Data_(Normalized).csv"))
 
 # faostat2crop
 load_data("faostat2crop", param)
@@ -43,7 +43,7 @@ str(area)
 
 
 # SAVE -----------------------------------------------------------------------------------
-write_csv(area, file.path(param$mapspamc_path,
+write_csv(area, file.path(param$model_path,
                           glue("processed_data/agricultural_statistics/faostat_crops_{param$year}_{param$iso3c}.csv")))
 
 # CREATE FAOSTAT CROP LIST ---------------------------------------------------------------
@@ -52,7 +52,7 @@ faostat_crop_list <- area %>%
   unique() %>%
   arrange(crop)
 
-write_csv(faostat_crop_list, file.path(param$mapspamc_path,
+write_csv(faostat_crop_list, file.path(param$model_path,
                                        glue("processed_data/lists/faostat_crop_list_{param$year}_{param$iso3c}.csv")))
 
 # CLEAN UP -------------------------------------------------------------------------------

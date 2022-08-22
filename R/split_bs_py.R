@@ -1,7 +1,7 @@
 # Process_bs_py
 split_bs_py <- function(var, ac, param){
   model_folder <- create_model_folder(param)
-  temp_path <- file.path(param$mapspamc_path,
+  temp_path <- file.path(param$model_path,
                          glue::glue("processed_data/intermediate_output/{model_folder}/{ac}"))
   dir.create(temp_path, showWarnings = FALSE, recursive = TRUE)
 
@@ -34,9 +34,9 @@ split_bs_py <- function(var, ac, param){
 
     # Process bs_py
     lookup <- dplyr::bind_rows(
-      data.frame(files_full = list.files(file.path(param$mapspamc_path,
+      data.frame(files_full = list.files(file.path(param$model_path,
                                                    glue::glue("processed_data/maps/{var}/{param$res}")), full.names = TRUE, pattern = glob2rx("*.tif")),
-                 files = list.files(file.path(param$mapspamc_path,
+                 files = list.files(file.path(param$model_path,
                                               glue::glue("processed_data/maps/{var}/{param$res}")), full.names = FALSE, pattern = glob2rx("*.tif")),
                  stringsAsFactors = FALSE)
     ) %>%
