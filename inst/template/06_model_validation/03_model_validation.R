@@ -6,7 +6,7 @@
 #'========================================================================================
 
 # SOURCE PARAMETERS ----------------------------------------------------------------------
-source(here::here("inst/template/06_model_validation/01_alternative_model_setup.r"))
+source(here::here("06_model_validation/01_alternative_model_setup.r"))
 
 
 # COMPARE ALTERNATIVE MODEL WITH STATISTICS -----------------------------------------------------------------
@@ -31,7 +31,7 @@ bind_rows(ha, results_alt_ag)  %>%
   pivot_wider(names_from = source, values_from = value) %>%
   na.omit() %>%
   ggplot(aes(x = log(model+1), y = log(statistics+1), color = crop)) +
-  scale_colour_viridis_d(option = "plasma") +
+  scale_colour_viridis_d(option = "viridis") +
     geom_point(alpha = 0.5, size = 1.5) +
     stat_cor(p.accuracy = 0.001, r.accuracy = 0.01, label.x = 3, label.y = 2) +
     facet_wrap(~crop) +
@@ -74,7 +74,7 @@ bind_rows(ha, results_ag)  %>%
   pivot_wider(names_from = source, values_from = value) %>%
   na.omit() %>%
   ggplot(aes(x = log(model+1), y = log(statistics+1), color = crop)) +
-  scale_colour_viridis_d(option = "plasma") +
+  scale_colour_viridis_d(option = "viridis") +
   geom_point(alpha = 0.5, size = 1.5) +
   stat_cor(p.accuracy = 0.001, r.accuracy = 0.01, label.x = 3, label.y = 2) +
   facet_wrap(~crop) +

@@ -6,7 +6,7 @@
 #'========================================================================================
 
 # SOURCE PARAMETERS ----------------------------------------------------------------------
-source(here::here("inst/template/01_model_setup/01_model_setup.r"))
+source(here::here("01_model_setup/01_model_setup.r"))
 
 # In this script the raw subnational statistics are processed. In order to prevent errors
 # when running the model, it is essential to put the statistics in the right

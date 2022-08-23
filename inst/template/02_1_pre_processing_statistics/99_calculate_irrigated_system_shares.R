@@ -1,5 +1,5 @@
 #'========================================================================================================================================
-#' Project:  mapspam
+#' Project:  mapspamc
 #' Subject:  Script to calculate irrigated system shares
 #' Author:   Michiel van Dijk
 #' Contact:  michiel.vandijk@wur.nl
@@ -7,7 +7,7 @@
 
 
 ############### SOURCE PARAMETERS ###############
-source(here::here("inst/template/01_model_setup/01_model_setup.r"))
+source(here::here("01_model_setup/01_model_setup.r"))
 
 
 ############### LOAD DATA ###############

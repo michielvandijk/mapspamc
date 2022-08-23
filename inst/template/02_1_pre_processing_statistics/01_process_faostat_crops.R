@@ -1,12 +1,12 @@
 #'========================================================================================
-#' Project:  MAPSPAMC
+#' Project:  mapspamc
 #' Subject:  Script to process FAOSTAT crops data
 #' Author:   Michiel van Dijk
 #' Contact:  michiel.vandijk@wur.nl
 #'========================================================================================
 
 # SOURCE PARAMETERS ----------------------------------------------------------------------
-source(here::here("inst/template/01_model_setup/01_model_setup.r"))
+source(here::here("01_model_setup/01_model_setup.r"))
 
 # LOAD DATA ------------------------------------------------------------------------------
 

@@ -14,7 +14,7 @@ available, administrative unit level at which the model is solved and type of
 model.}
 }
 \description{
-\code{create_mapspamc_folders} creates the folder structure that is needed store raw
+\code{create_folders} creates the folder structure that is needed store raw
 data, processed data and parameters for \code{mapspamc}.
 }
 \details{

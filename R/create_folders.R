@@ -2,7 +2,7 @@
 #'Creates `mapspamc` folder structure
 #'
 #'@description
-#'`create_mapspamc_folders` creates the folder structure that is needed store raw
+#'`create_folders` creates the folder structure that is needed store raw
 #'data, processed data and parameters for `mapspamc`.
 #'
 #'@details
@@ -66,6 +66,15 @@ create_folders <- function(param = NULL) {
     if(!dir.exists(file.path(param$model_path, "mappings")))
         dir.create(file.path(param$model_path, "mappings"), showWarnings = TRUE, recursive = TRUE)
 
+    copy_mapping_files <- function(param) {
+      mapping_files <- list.files(system.file("mappings", package = "mapspamc"), full.names = TRUE)
+
+      purrr::walk(mapping_files, function(x) {
+        if(!file.exists(file.path(param$model_path, paste0("mappings/", basename(x))))) {
+          file.copy(x, file.path(param$model_path, paste0("mappings/", basename(x))))
+        }
+      })
+    }
     copy_mapping_files(param)
 
     cat("\n=> mapspamc folder structure created in", param$model_path,

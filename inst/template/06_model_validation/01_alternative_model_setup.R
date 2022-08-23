@@ -1,12 +1,12 @@
 #'========================================================================================
-#' Project:  MAPSPAMC
+#' Project:  mapspamc
 #' Subject:  Setup model
 #' Author:   Michiel van Dijk
 #' Contact:  michiel.vandijk@wur.nl
 #'========================================================================================
 
 # SOURCE PARAMETERS ----------------------------------------------------------------------
-source(here::here("inst/template/01_model_setup/01_model_setup.r"))
+source(here::here("01_model_setup/01_model_setup.r"))
 
 # NOTE -----------------------------------------------------------------------------------
 # The scripts in the post-processing step are specific for the model resolution (i.e. 5min or
@@ -37,10 +37,10 @@ alt_param <- mapspamc_par(
 #   gams_path = gams_path,
 #   iso3c = "THA",
 #   year = 2020,
-#   res = "5min",
+#   res = "30sec",
 #   adm_level = 1,
 #   solve_level = 0,
-#   model = "min_entropy")
+#   model = "max_score")
 
 # Show parameters
 print(alt_param)

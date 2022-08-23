@@ -6,12 +6,12 @@
 #'========================================================================================
 
 # SOURCE PARAMETERS ----------------------------------------------------------------------
-source(here::here("inst/template/01_model_setup/01_model_setup.r"))
+source(here::here("01_model_setup/01_model_setup.r"))
 
 
 # LOAD DATA ------------------------------------------------------------------------------
 # replace the name of the shapefile with that of your own country.
-iso3c_shp <- "Thailland_stat_area.shp"
+iso3c_shp <- "country.shp"
 
 # load shapefile
 adm_map_raw <- read_sf(file.path(param$db_path, glue("adm/{iso3c_shp}")))
@@ -39,29 +39,16 @@ names(adm_map)
 # Add adm0_code and adm0_name of these are not not part of attribute table
 # e.g. %>% mutate(adm0_name  = "COUNTRY.NAME)
 
-adm0_name_orig <- "name_cntr"
-#adm0_code_orig <- "stat_code"
-adm1_name_orig <- "adm1_name"
-adm1_code_orig <- "adm1_code"
-adm2_name_orig <- "O_NAME1"
-adm2_code_orig <- "Code"
-
-# EXTRA: create adm1 using adm2 code information
-# Note that we update the adm0_code so it matches with the statistics
-adm_map <- adm_map %>%
-  mutate(
-    adm0_code = "TH00",
-    adm1_code = substr(Code, 1,4),
-    adm1_name = case_when(
-      adm1_code == "THZ1" ~ "Central",
-      adm1_code == "THZ2" ~ "Northeastern",
-      adm1_code == "THZ3" ~ "Northern",
-      adm1_code == "THZ4" ~ "Southern")
-  )
+adm0_name_orig <- "ADM0_NAME"
+adm0_code_orig <- "FIPS0"
+adm1_name_orig <- "ADM1_NAME"
+adm1_code_orig <- "FIPS1"
+adm2_name_orig <- "ADM2_NAME"
+adm2_code_orig <- "FIPS2"
 
 # Replace the names
 names(adm_map)[names(adm_map) == adm0_name_orig] <- "adm0_name"
-#names(adm_map)[names(adm_map) == adm0_code_orig] <- "adm0_code"
+names(adm_map)[names(adm_map) == adm0_code_orig] <- "adm0_code"
 names(adm_map)[names(adm_map) == adm1_name_orig] <- "adm1_name"
 names(adm_map)[names(adm_map) == adm1_code_orig] <- "adm1_code"
 names(adm_map)[names(adm_map) == adm2_name_orig] <- "adm2_name"
