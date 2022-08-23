@@ -14,7 +14,7 @@ source(here::here("01_model_setup/01_model_setup.r"))
 iso3c_shp <- "country.shp"
 
 # load shapefile
-adm_map_raw <- read_sf(file.path(param$db_path, glue("adm/{iso3c_shp}")))
+adm_map_raw <- read_sf(file.path(param$db_path, glue("adm/{param$iso3c}/{iso3c_shp}")))
 
 # plot
 plot(adm_map_raw$geometry)
@@ -81,8 +81,8 @@ adm2_to_remove <- c("")
 
 # Remove ADMs
 adm_map <- adm_map %>%
-  filter(adm1_name != adm1_to_remove) %>%
-  filter(adm2_name != adm2_to_remove)
+  filter(!adm1_name %in% adm1_to_remove) %>%
+  filter(!adm2_name %in% adm2_to_remove)
 
 plot(adm_map$geometry, main = "ADM polygons removed")
 par(mfrow=c(1,1))

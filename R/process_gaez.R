@@ -9,7 +9,7 @@ process_gaez <- function(f, var, lookup, ac, param) {
   crp_sys <- unlist(lapply(strsplit(crp_sys, "_"), function(x) paste(x[1], x[2], sep="_")))
   crp <- strsplit(crp_sys, split = "_")[[1]][1]
   sys <- strsplit(crp_sys, split = "_")[[1]][2]
-  cat("\n=> Processing: ", var, " ", crp_sys)
+  cat("\n=> Processing", var, crp_sys)
 
   # Get replacement crops
   load_data("gaez_replace", param, local = TRUE, mess = FALSE)
@@ -21,7 +21,7 @@ process_gaez <- function(f, var, lookup, ac, param) {
   rep_crops <- rep_crops$rep_crop
 
   # Set initial values for repeat loop
-  cp_cnt <- 0
+  cp_cnt <- 1
   no_rc <- FALSE
   crp_sys_rep <- crp_sys
   target_rc <- rep_crops[1]
@@ -54,10 +54,10 @@ process_gaez <- function(f, var, lookup, ac, param) {
     }
 
     # Update values for next repeat
-    cp_cnt <- cp_cnt + 1
-    target_rc <- rep_crops[cp_cnt]
     crp_sys_rep <- paste(target_rc, sys, sep = "_")
     f <- lookup$files_full[lookup$crop_system == crp_sys_rep]
+    cp_cnt <- cp_cnt + 1
+    target_rc <- rep_crops[cp_cnt]
   }
 
   # Create log
@@ -66,10 +66,10 @@ process_gaez <- function(f, var, lookup, ac, param) {
     glue::glue("processed_data/intermediate_output/{model_folder}/{ac}/log_{param$res}_{param$year}_{ac}_{param$iso3c}.log")))
   capture.output(file = log_file, append = TRUE, split = T,{
     if (no_rc) {
-      cat("\nThere is no replacement crop for: ", crp_sys, "! All values are zero.")
+      cat("\nThere is no replacement crop for: ", var, " ", crp_sys, ". All values are zero.", sep = "")
     } else {
       if(crp_sys != crp_sys_rep) {
-        cat("\nAll values for ", crp_sys, " are zero, replaced by: ", crp_sys_rep)
+        cat("\nAll values for ", var, " ", crp_sys, " are zero, replaced by: ", crp_sys_rep, sep = "")
       }
     }
   })

@@ -31,8 +31,8 @@ check_statistics <- function(df, param, out = FALSE){
     }
     if(out & param$adm_level %in% c(1,2)) {
         return(report)
-    } else {
-        cat("\nadm_level = 1, no report can be produced")
+    } else if(out & param$adm_level == 0){
+        cat("\nadm_level = 0, no report can be produced")
     }
 }
 

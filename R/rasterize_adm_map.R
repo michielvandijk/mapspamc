@@ -25,7 +25,6 @@ rasterize_adm_map <- function(param) {
   cat("\n=> Rasterize administrative unit map")
   field <- glue::glue("adm{param$adm_level}_code")
   adm_map_r <- terra::rasterize(terra::vect(adm_map), grid, field = field)
-  terra::plot(adm_map_r)
 
   # stack
   adm_map_r <- c(grid, adm_map_r)

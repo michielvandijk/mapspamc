@@ -16,7 +16,7 @@ if(!require(pacman)) install.packages("pacman")
 library(pacman)
 
 # Load required packages
-p_load(mapspamc, countrycode, here, glue, terra, readxl, tidyverse, sf, ggpubr, viridis)
+p_load(mapspamc, countrycode, here, glue, terra, readxl, tidyverse, sf, ggpubr, viridis, tictoc)
 
 # R options
 options(scipen=999) # Suppress scientific notation
@@ -26,10 +26,6 @@ options(digits=4) # limit display to four digits
 # SETUP MAPSPAMC -------------------------------------------------------------------------
 # Set the folders where the scripts, model and database will be stored.
 # Note that R uses forward slashes even in Windows!!
-
-# An RStudio project is required to run the model scripts. Create this first and use the path
-# of the project as template path to copy the scripts into the RStudio project.
-template_path <- "c:/RStudio_project/"
 
 # Creates a model folder structure in c:/temp/ with the name 'mapspamc_mwi'.
 # the user can replace mwi with the country code of the case-study country or
@@ -72,7 +68,4 @@ print(param)
 
 # Create folder structure in the mapspamc_path
 create_folders(param)
-
-# Create model template
-create_model_template(template_path)
 

@@ -1,36 +1,73 @@
-library(mapspamc)
+#'========================================================================================
+#' Project:  mapspamc
+#' Subject:  Setup model
+#' Author:   Michiel van Dijk
+#' Contact:  michiel.vandijk@wur.nl
+#'========================================================================================
+
+# NOTE -----------------------------------------------------------------------------------
+# This script below is sourced by all the other scripts in the data repository.
+# In this way, you only have to set the mapspamc parameters once.
+# It also ensures that the necessary packages (see below) are loaded.
+
+# SETUP R --------------------------------------------------------------------------------
+# Install and load pacman package that automatically installs R packages if not available
+if(!require(pacman)) install.packages("pacman")
+library(pacman)
+
+# Load required packages
+p_load(mapspamc, countrycode, here, glue, terra, readxl, tidyverse, sf, ggpubr, viridis)
+
+# R options
+options(scipen=999) # Suppress scientific notation
+options(digits=4) # limit display to four digits
+
 
 # SETUP MAPSPAMC -------------------------------------------------------------------------
-# Set the folder where the model will be stored
-mapspamc_path <- "C:/Users/dijk158/OneDrive - Wageningen University & Research/data/mapspamc_iso3c/mapspamc_tha_test"
-raw_path <- "C:/Users/dijk158/OneDrive - Wageningen University & Research/data/mapspamc_iso3c/mapspamc_tha_test/raw_data"
+# Set the folders where the scripts, model and database will be stored.
+# Note that R uses forward slashes even in Windows!!
+
+# Creates a model folder structure in c:/temp/ with the name 'mapspamc_mwi'.
+# the user can replace mwi with the country code of the case-study country or
+# choose a new name
+model_path <- "c:/temp/mapspamc_eth"
+
+# Creates a database folder with the name mapspamc_db in c:/temp
+db_path <- "c:/temp"
+
+# Sets the location of the version of GAMS that will be used to solve the model
 gams_path <- "C:/MyPrograms/GAMS/win64/24.6"
 
-# Set MAPSPAMC parameters for the min_entropy_5min_adm_level_2_solve_level_0 model
-param <- mapspamc_par(mapspamc_path = mapspamc_path,
-                      raw_path = raw_path,
-                      gams_path = gams_path,
-                      iso3c = "THA",
-                      year = 2020,
-                      res = "5min",
-                      adm_level = 2,
-                      solve_level = 0,
-                      model = "min_entropy")
+# Set mapspamc parameters for the min_entropy_5min_adm_level_2_solve_level_0 model
+param <- mapspamc_par(
+  model_path = model_path,
+  db_path = db_path,
+  gams_path = gams_path,
+  iso3c = "ETH",
+  year = 2015,
+  res = "5min",
+  adm_level = 2,
+  solve_level = 1,
+  model = "min_entropy")
 
-ac <- "TH00"
+# # Set mapspamc parameters for the max_score_30sec_adm_level_2_solve_level_0 model
+# param <- mapspamc_par(
+#   model_path = model_path,
+#   db_path = db_path,
+#   gams_path = gams_path,
+#   iso3c = "ETH",
+#   year = 2015,
+#   res = "30sec",
+#   adm_level = 2,
+#   solve_level = 0,
+#   model = "max_score")
 
-ia_slackp = 0.05
 
+# Show parameters
+print(param)
 
-# Function to calculate total at given adm level
-calculate_pa_tot <- function(adm_lvl, ac, param) {
-  load_intermediate_data(c("pa"), ac, param, local = T,mess = F)
+# Create folder structure in the mapspamc_path
+create_folders(param)
 
-  df <- pa %>%
-    tidyr::gather(crop, pa, -adm_code, -adm_name, -adm_level) %>%
-    dplyr::filter(adm_level == adm_lvl) %>%
-    dplyr::group_by(adm_code, adm_name, adm_level) %>%
-    dplyr::summarise(pa = sum(pa, na.rm = T)) %>%
-    dplyr::ungroup()
-  return(df)
-}
+ac <- ac[1]
+df <- ha_df

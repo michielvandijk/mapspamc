@@ -67,6 +67,10 @@ print(param)
 ```
 
 
+# An RStudio project is required to run the model scripts. Create this first and use the path
+# of the project as template path to copy the scripts into the RStudio project.
+template_path <- "c:/RStudio_project/"
+
 ## Create SPAM-C folder structure
 
 `mapspamc` includes a function to create all necessary folders `create_folders()`. The only input required is `param` which contains all the model parameters. The function will create three folders: (1) `raw_data` is created in the main `spamc_path` unless indicated otherwise by the user and serves to store all the raw input data, (2) `processed_data` will be created in the main `mapspamc_path` and is used to save all the intermediary data products as well as the final results and (3) `mappings` will be created in the main `mapspamc_path` and contains all the lists and mappings that are needed to define the model (e.g. number crops) and harmonize various data sources (concordance tables). All tables are in csv format and will be created automatically into the `mappings` folder. Note that it is possible to adjust some of these tables if needed (e.g. adding a new crop). `create_folders()` will only create csv files if the files do not exist. Hence, updated files will not be overwritten. If for some reason you want to recreate the original tables, simply remove the folder and/or files and they will be created again when `create_spam_folders` is run. 

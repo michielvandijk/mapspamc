@@ -223,7 +223,7 @@ Maybe better to add these to the parameters file
 # Check script
 In MOZ lc appeared to be negative in GDX file, giving error that log <0. Need to create a check file that also checks if all inputs are positive. Add to GAMS code as well like in original scripts
 
-# Create a function that prepares all GAEZ data, which also takes into account crops in country.
+# A the moment we are only using replacement crops for same system (e.g. teas_I for coff_I, which both might have 0). Perhaps use coff_H as replacement for coff_I)
 
 # Add check if files exist before they are loaded!
 
@@ -249,4 +249,14 @@ reaggregate_statistics: add documentation
 
 # Chick if all mapping files are relevant and complete
 
+# Calculation of priors
+In the present case it is possible that a warning shows up that something is divided by zero when calculating the priors/max score:  Problem while computing `prior = 100 * (prior - min(prior, na.rm = T)) / ...`. i no non-missing arguments to min; returning Inf. 
 
+This is produced by split_priors, the function where the priors are calculated. The calculation of the prior uses the minimum and maximum of the function to create the prior/score ranking. In case all values are zero (because GAEZ does not have values for this crop/region), there is a divide by zero resulting in NAN values, resulting in a warning. The NAN values are replaced by 0 so there is no real error but it does mean that prior/scores are zero for all crops of the system for which the prior/score is calculated, in turn, resulting in a somewhat random distribution, or at least one that does not take the prior/score into account.  The error has the most chance of occuring for irrigated crops and with model_solution 1 as it is possible that suitability is 0 for a certain region. Also suitability for irrigated crops is much often zero than for non-irrigated crops. An example when this happens is ooil_I in ETH6. We might need to add a warning for this in the log file so the user is aware. A solution for this would be the possibility to add more replace crops and also allow for example ooil_H to replace ooil_I. Having zero suitability for all grid cells for a crop that needs to be allocated in that area is a problem in any case so best would be the ensure that always suitability > 0 for a crop in a certain area. 
+
+Probably it would be better to create separate functions for each prior/score calculation so they can be easily updated.
+
+
+# Checking statistics
+
+In check and calibrate statistics, FAO is compared to subnat stat and if FAO has data for a crop, it is added add the national level. NOTE that now adm1 level data might have become incomplete resulting in errors when running soolution_model = 1. We NEED to add a function that checks if the data is complete at adm1 level (and gives a warning when model is run at ADM1!!

@@ -22,7 +22,8 @@ split_bs_py <- function(var, ac, param){
 
     # Select relevant crop_system combinations to process
     pa_fs <- pa_fs %>%
-      tidyr::gather(crop, pa, -adm_code, -adm_name, -adm_level, -system)
+      tidyr::pivot_longer(-c(adm_code, adm_name, adm_level, system), names_to = "crop", values_to = "pa") %>%
+      filter(pa != 0)
 
     cs_list <- pa_fs %>%
       dplyr::group_by(crop, system) %>%
@@ -45,6 +46,7 @@ split_bs_py <- function(var, ac, param){
       dplyr::select(-ext) %>%
       dplyr::mutate(crop_system = paste(crop, system, sep = "_"))
 
+    # We include only relevant crop system combinations
     cs_sel <- lookup$files_full[lookup$crop_system %in% cs_list$crop_system]
 
     # Process maps one-by-one

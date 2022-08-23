@@ -10,8 +10,9 @@ source(here::here("01_model_setup/01_model_setup.r"))
 
 
 # RUN MODEL -----------------------------------------------------------------------------
+tic()
 run_mapspamc(param)
-
+toc()
 
 # COMBINE ADM1 RESULTS ------------------------------------------------------------------
 combine_results(param)

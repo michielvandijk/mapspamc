@@ -10,17 +10,16 @@ source(here::here("01_model_setup/01_model_setup.r"))
 
 
 # LOAD DATA ------------------------------------------------------------------------------
-# harvest area statistics
 ha_df_raw <- read_csv(file.path(param$db_path,
-  glue("subnational_statistics/subnational_harvested_area_{param$year}_{param$iso3c}.csv")))
+  glue("subnational_statistics/{param$iso3c}/subnational_harvested_area_{param$year}_{param$iso3c}.csv")))
 
 # Farming systems shares
 fs_df_raw <- read_csv(file.path(param$db_path,
-  glue("subnational_statistics/farming_system_shares_{param$year}_{param$iso3c}.csv")))
+  glue("subnational_statistics/{param$iso3c}/farming_system_shares_{param$year}_{param$iso3c}.csv")))
 
 # Cropping intensity
 ci_df_raw <- read_csv(file.path(param$db_path,
-  glue("subnational_statistics/cropping_intensity_{param$year}_{param$iso3c}.csv")))
+  glue("subnational_statistics/{param$iso3c}/cropping_intensity_{param$year}_{param$iso3c}.csv")))
 
 # adm_list
 load_data("adm_list", param)
@@ -59,7 +58,7 @@ ha_df <- ha_df %>%
   mutate(ha = round(ha, 0))
 
 # Check if the statistics add up and show where this is not the case
-check <- check_statistics(ha_df, param, out = T)
+check <- check_statistics(ha_df, param, out = TRUE)
 check
 
 # Make sure the totals at higher levels are the same as subtotals
@@ -68,7 +67,7 @@ check
 ha_df <- reaggregate_statistics(ha_df, param)
 
 # Check again
-check_statistics(ha_df, param, out = T)
+check_statistics(ha_df, param, out = TRUE)
 
 
 # HARMONIZE HA WITH FAOSTAT -------------------------------------------------------------
@@ -77,7 +76,7 @@ check_statistics(ha_df, param, out = T)
 fao <- fao_raw %>%
   filter(year %in% c((param$year-1): (param$year+1))) %>%
   group_by(crop) %>%
-  summarize(ha = mean(value, na.rm = T),
+  summarize(ha = mean(value, na.rm = TRUE),
             .groups = "drop") %>%
   dplyr::select(crop, ha)
 
@@ -104,7 +103,13 @@ ha_df <- ha_df %>%
   filter(!crop %in% crop_rem)
 
 # Identify crops that are present in fao but not in ha_df.
-# We will add then to ha_df
+# We will add them to ha_df.
+
+# NOTE -----------------------------------------------------------------------------------
+# Be mindful that by adding national level data from FAOSTAT to the subnational statistics,
+# the data is no longer complete at ADM1 level resulting in errors when the model is run with
+# solve level = 1. So make sure if which factors are in crop_add and if needed manually allocate
+# the national statistics to the ADM1 level.
 crop_add <- setdiff(unique(fao$crop), unique(ha_df$crop))
 ha_df <- ha_df %>%
   bind_rows(
@@ -149,7 +154,7 @@ ggplot(data = fao_stat) +
 
 # FINALIZE HA -----------------------------------------------------------------------------
 # Consistency checks
-check_statistics(ha_df, param)
+check_statistics(ha_df, param, out = TRUE)
 
 # To wide format
 ha_df <- ha_df %>%
