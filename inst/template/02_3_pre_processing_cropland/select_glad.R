@@ -18,7 +18,8 @@ temp_path <- file.path(param$model_path, glue("processed_data/maps/cropland/{par
 dir.create(temp_path, showWarnings = FALSE, recursive = TRUE)
 
 # Warp and mask
-input <- file.path(param$db_path, glue("glad/glad_2019.tif"))
+# If needed change the year of the cropland map
+input <- file.path(param$db_path, glue("glad/glad_{param$year}.tif"))
 output <- align_raster(input, grid, adm_map, method = "bilinear")
 names(output) <- "glad"
 plot(output)

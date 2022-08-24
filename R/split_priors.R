@@ -149,7 +149,7 @@ split_priors <- function(ac, param){
   # crop_h
   crop_h <- unique(pa_fs$crop[pa_fs$system == "H"])
 
-  # prior table.  We use geometric average of rev and accessibility
+  # prior table.  We use geometric average of revenue and accessibility
   prior_h <- priors_base %>%
     dplyr::filter(system == "H") %>%
     dplyr::left_join(rev, by = c("gridID", "crop_system")) %>%
@@ -169,7 +169,7 @@ split_priors <- function(ac, param){
   # crop_i
   crop_i <- unique(pa_fs$crop[pa_fs$system == "I"])
 
-  # prior table.  We use geometric average of suitability and accessibility
+  # prior table.  We use geometric average of revenue and accessibility
   prior_i <- priors_base %>%
     dplyr::filter(system == "I") %>%
     dplyr::left_join(ia_harm, by = "gridID") %>%
