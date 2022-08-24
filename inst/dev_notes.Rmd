@@ -260,3 +260,7 @@ Probably it would be better to create separate functions for each prior/score ca
 # Checking statistics
 
 In check and calibrate statistics, FAO is compared to subnat stat and if FAO has data for a crop, it is added add the national level. NOTE that now adm1 level data might have become incomplete resulting in errors when running soolution_model = 1. We NEED to add a function that checks if the data is complete at adm1 level (and gives a warning when model is run at ADM1!!
+
+Need to add a function that checks if adm_list from polygon is identical to subnat stat! Again, I had a case in which adm0_name was ET in the polygon and ETH in the statistics resulting in problems.
+
+Also need a function that compares if adm_list is consistent between ci, fs and ha

@@ -4,7 +4,7 @@
 split_statistics <- function(ac, ha, fs, ci, param){
   cat("\n=> Prepare physical area")
   load_data("adm_list", param, local = TRUE, mess = F)
-  #cat("\n=> Save pa and pa_fs statistics for", ac)
+  cat("\n=> Save pa and pa_fs statistics for", ac)
 
   ha_adm <- dplyr::bind_rows(
     ha[ha$adm_code == ac,],
