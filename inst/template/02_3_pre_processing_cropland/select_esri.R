@@ -22,7 +22,7 @@ input <- file.path(param$db_path, glue("esri/esri_2020.tif"))
 output <- align_raster(input, grid, adm_map, method = "bilinear")
 names(output) <- "esri"
 plot(output)
-writeRaster(output, file.path(temp_path, glue("cropmask_esri_{param$res}_{param$year}_{param$iso3c}.tif")),
+writeRaster(output, file.path(temp_path, glue("croland_esri_{param$res}_{param$year}_{param$iso3c}.tif")),
             overwrite = TRUE)
 
 

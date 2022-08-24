@@ -1,12 +1,12 @@
 #'========================================================================================
-#' Project:  mapspamcC
+#' Project:  mapspamc
 #' Subject:  Code process SASAM global synergy cropland map
 #' Author:   Michiel van Dijk
 #' Contact:  michiel.vandijk@wur.nl
 #'========================================================================================
 
 # SOURCE PARAMETERS ----------------------------------------------------------------------
-source(here::here("scripts/01_model_setup/01_model_setup.r"))
+source(here::here("01_model_setup/01_model_setup.r"))
 
 
 # LOAD DATA ------------------------------------------------------------------------------

@@ -22,7 +22,7 @@ input <- file.path(param$db_path, glue("esacci/esacci_2020.tif"))
 output <- align_raster(input, grid, adm_map, method = "bilinear")
 names(output) <- "esacci"
 plot(output)
-writeRaster(output, file.path(temp_path, glue("cropmask_esacci_{param$res}_{param$year}_{param$iso3c}.tif")),
+writeRaster(output, file.path(temp_path, glue("cropland_esacci_{param$res}_{param$year}_{param$iso3c}.tif")),
             overwrite = TRUE)
 
 

@@ -31,7 +31,8 @@ create_folders <- function(param = NULL) {
         dir.create(param$db_path, showWarnings = TRUE, recursive = TRUE)
     db_folders <- c("adm", "aquastat", "copernicus", "esacci", "esri",
                     "faostat", "gaez", "gia", "glad", "gmia", "grump", "sasam",
-                    "subnational_statistics", "travel_time", "worldpop")
+                    "subnational_statistics", "synergy_cropland_rank_table",
+                    "travel_time", "worldpop")
     purrr::walk(db_folders, function(x) {
       if(!dir.exists(file.path(param$db_path, paste0("", x)))) {
         dir.create(file.path(param$db_path, paste0("", x)),

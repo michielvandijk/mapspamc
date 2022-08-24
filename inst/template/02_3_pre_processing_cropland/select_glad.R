@@ -22,7 +22,7 @@ input <- file.path(param$db_path, glue("glad/glad_2019.tif"))
 output <- align_raster(input, grid, adm_map, method = "bilinear")
 names(output) <- "glad"
 plot(output)
-writeRaster(output, file.path(temp_path, glue("cropmask_glad_{param$res}_{param$year}_{param$iso3c}.tif")),
+writeRaster(output, file.path(temp_path, glue("cropland_glad_{param$res}_{param$year}_{param$iso3c}.tif")),
             overwrite = TRUE)
 
 

@@ -39,10 +39,10 @@ navbar:
           href: articles/appendix.html
       - text: Preparation
         menu:
-        - text: Input data collection
-          href: articles/input_data_collection.html
-        - text: Country examples/templates
-          href: articles/template.html
+        - text: Input data
+          href: articles/input_data.html
+        - text: Country examples
+          href: articles/country_examples.html
       - text: Run mapspamc
         menu:
         - text: 1. Model setup

@@ -12,19 +12,19 @@ source(here::here("01_model_setup/01_model_setup.r"))
 # LOAD DATA ------------------------------------------------------------------------------
 load_data(c("adm_map", "grid"), param)
 
-# Cropmask from different sources
+# cropland from different sources
 esri <- rast(file.path(param$model_path,
-  glue("processed_data/maps/cropland/{param$res}/cropmask_esri_{param$res}_{param$year}_{param$iso3c}.tif")))
+                       glue("processed_data/maps/cropland/{param$res}/cropland_esri_{param$res}_{param$year}_{param$iso3c}.tif")))
 glad <- rast(file.path(param$model_path,
-  glue("processed_data/maps/cropland/{param$res}/cropmask_glad_{param$res}_{param$year}_{param$iso3c}.tif")))
+                       glue("processed_data/maps/cropland/{param$res}/cropland_glad_{param$res}_{param$year}_{param$iso3c}.tif")))
 esacci <- rast(file.path(param$model_path,
-  glue("processed_data/maps/cropland/{param$res}/cropmask_esacci_{param$res}_{param$year}_{param$iso3c}.tif")))
+                         glue("processed_data/maps/cropland/{param$res}/cropland_esacci_{param$res}_{param$year}_{param$iso3c}.tif")))
 copernicus <- rast(file.path(param$model_path,
-  glue("processed_data/maps/cropland/{param$res}/cropmask_copernicus_{param$res}_{param$year}_{param$iso3c}.tif")))
+                             glue("processed_data/maps/cropland/{param$res}/cropland_copernicus_{param$res}_{param$year}_{param$iso3c}.tif")))
 
-# Scoring table
+# Rank table
 st_raw <- read_excel(file.path(param$model_path,
-                               "synergy_cropmask_score_table/synergy_cropmask_score_table.xlsx"),
+                               glue("synergy_cropland_rank_table/synergy_rank_rank_table_{param$year}.xlsx")),
                      sheet = "table")
 
 
@@ -40,7 +40,7 @@ cl_df <- cl_df %>%
   filter(area != 0)
 summary(cl_df)
 
-# Create combined codes in scoring table
+# Create combined codes in rank table
 st <- st_raw %>%
   pivot_longer(-c(agreement, rank), names_to = "source", values_to = "code_digit") %>%
   mutate(code = ifelse(code_digit == 1, source, 0)) %>%
@@ -101,7 +101,7 @@ cl_max <- cl_max*r_area
 names(cl) <- "cl_max"
 plot(cl_max)
 
-# synergy cropmask rank
+# synergy cropland rank
 cl_rank <- rast(cl_syn_df[c("x","y", "rank")], type = "xyz", crs = "EPSG:4326")
 cl_rank <- extend(cl_rank, grid)
 names(cl_rank) <- "cl_rank"
@@ -110,15 +110,15 @@ plot(cl_rank)
 
 # SAVE -----------------------------------------------------------------------------------
 writeRaster(cl, file.path(param$model_path,
-          glue("processed_data/maps/cropland/{param$res}/cl_mean_{param$res}_{param$year}_{param$iso3c}.tif")),
-          overwrite = TRUE)
+                          glue("processed_data/maps/cropland/{param$res}/cl_mean_{param$res}_{param$year}_{param$iso3c}.tif")),
+            overwrite = TRUE)
 
 writeRaster(cl_max, file.path(param$model_path,
-                          glue("processed_data/maps/cropland/{param$res}/cl_max_{param$res}_{param$year}_{param$iso3c}.tif")),
+                              glue("processed_data/maps/cropland/{param$res}/cl_max_{param$res}_{param$year}_{param$iso3c}.tif")),
             overwrite = TRUE)
 
 writeRaster(cl_rank, file.path(param$model_path,
-                          glue("processed_data/maps/cropland/{param$res}/cl_rank_{param$res}_{param$year}_{param$iso3c}.tif")),
+                               glue("processed_data/maps/cropland/{param$res}/cl_rank_{param$res}_{param$year}_{param$iso3c}.tif")),
             overwrite = TRUE)
 
 # CLEAN UP -------------------------------------------------------------------------------

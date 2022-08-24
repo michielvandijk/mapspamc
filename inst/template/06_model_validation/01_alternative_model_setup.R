@@ -16,32 +16,17 @@ source(here::here("01_model_setup/01_model_setup.r"))
 
 
 # SETUP ALTERNATIVE MODEL ----------------------------------------------------------------
-# Set mapspamc parameters for an alternative min entropy 5min model that only uses adm1_level statistics
-# and constraints - min_entropy_5min_adm_level_1_solve_level_0 model)
+# Set mapspamc parameters for an alternative model that only uses adm1_level statistics
 alt_param <- mapspamc_par(
   model_path = model_path,
-  #db_path = db_path,
+  db_path = db_path,
   gams_path = gams_path,
-  iso3c = "THA",
-  year = 2020,
-  res = "5min",
+  iso3c = param$iso3c,
+  year = param$year,
+  res = param$resolution,
   adm_level = 1,
-  solve_level = 0,
-  model = "min_entropy")
-
-# Set mapspamc parameters for an alternative max score 30sec model that only uses adm1_level statistics
-# and constraints - max_score_30sec_adm_level_1_solve_level_0)
-# alt_param <- mapspamc_par(
-#   model_path = model_path,
-#   db_path = db_path,
-#   gams_path = gams_path,
-#   iso3c = "THA",
-#   year = 2020,
-#   res = "30sec",
-#   adm_level = 1,
-#   solve_level = 0,
-#   model = "max_score")
+  solve_level = param$solve_level,
+  model = param$model)
 
 # Show parameters
 print(alt_param)
-

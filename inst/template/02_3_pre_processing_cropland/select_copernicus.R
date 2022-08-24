@@ -22,7 +22,7 @@ input <- file.path(param$db_path, glue("copernicus/copernicus_2019.tif"))
 output <- align_raster(input, grid, adm_map, method = "bilinear")
 names(output) <- "copernicus"
 plot(output)
-writeRaster(output, file.path(temp_path, glue("cropmask_copernicus_{param$res}_{param$year}_{param$iso3c}.tif")),
+writeRaster(output, file.path(temp_path, glue("cropland_copernicus_{param$res}_{param$year}_{param$iso3c}.tif")),
             overwrite = TRUE)
 
 

@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-The aim of the [mapspamc R package](https://iiasa.github.io/mapspamc) is to facilitate the creation of country level crop distribution maps. `mapspamc` provides the necessary infrastructure to run the Spatial Production Allocation Model for country level studies. The model builds on the global version of SPAM [@You2006; @You2009; @You2014a; @Yu2020], which used an cross-entropy optimization approach to 'pixelate' national and subnational crop statistics on a spatial grid at a 5 arcmin resolution. `mapspamc` was specifically developed to support country level analysis and make it possible to incorporate national sources of information and potentially create maps at a higher resolution than 30 arcsec. The articles in the Background section provide more information on [Crop distribution maps](articles/crop_distribution_maps.html) in general, the [model](articles/model_description.html), [input data](articles/data.html) and an [Appendix](articles/appendix.html) with additional information on specific topics.
+The aim of the [mapspamc R package](https://github.com/michielvandijk/mapspamc) is to facilitate the creation of country-level crop distribution maps. `mapspamc` provides the necessary infrastructure to run the Spatial Production Allocation Model (SPAM) for country level studies. The model builds on the global version of [SPAM](www.mapspam.info) [@You2006; @You2009; @You2014a; @Yu2020], which uses an cross-entropy optimization approach to 'pixelate' national and subnational crop statistics on a spatial grid at a resolution of 5 arcmin (~ 10 x 10 km). `mapspamc` is specifically developed to support country-level analysis, makes it possible to incorporate national sources of information and potentially creates maps at a higher resolution than 5 arcmin. The articles in the Background section provide general information on approaches to create [crop distribution maps](articles/crop_distribution_maps.html), the [model](articles/model_description.html), [input data](articles/data.html) and an [Appendix](articles/appendix.html) with additional information on specific topics.
 
 
 ## Installation
@@ -39,17 +39,15 @@ Running `mapspamc` requires the installation of several other pieces of software
 
 ## Preparation
 
-It takes some preparation before the crop distribution maps can be generated. Most important and probably most time consuming is the collection of input data. `mapspamc` requires a large variety of input data, which can be grouped under three headers: (1) national crop statistics, (2) data to construct the priors/fitness scores and (3) data to determine the spatial constraints. The availability of data strongly affects the structure of the model and how it will be solved. We highly recommend to start collecting input data before running the model. The articles in the Preparation section give an overview of all the information that is requited by the package and shows were to download country examples, which can be used as a template to work on other countries:
-
-- [Input data collection](articles/input_data_collection.html).
-- [Country examples/templates](articles/template.html)
+It takes some preparation before the crop distribution maps can be generated. Most important and probably most time consuming is the collection of input data. `mapspamc` requires a large variety of input data, which can be grouped under three headers: (1) national crop statistics, (2) data to construct the priors/fitness scores and (3) data to determine the spatial constraints. The availability of data strongly affects the structure of the model, how it will be solved and how long it takes to solve. We highly recommend to start collecting input data before running the model. The articles in the Preparation section gives an overview of the [input data](articles/input_data.html) that is requited by the package and show were to download several [country applications](articles/country_examples.html), which can be used as an example to work
+)
 
 
 ## Run `mapspamc`
 
 Running `mapspamc` can be divided into six major steps which are split into nine smaller steps in the Run mapspamc section. 
 
-1. [Model setup](articles/model_structure.html)
+1. [Model setup](articles/model_setup.html)
 1. [Pre-processing: Subnational statistics](articles/process_subnational_statistics.html)
 1. [Pre-processing: Spatial data](articles/process_spatial_data.html)
 1. [Model preparation: Create synergy cropland map](articles/create_synergy_cropland.html)
@@ -57,7 +55,7 @@ Running `mapspamc` can be divided into six major steps which are split into nine
 1. [Model preparation: Combine input data](articles/combine_input_data.html)
 1. [Running the model](articles/run_model.html)
 1. [Post-processing](articles/post_process.html)
-1. [Validation](validation.html)
+1. [model validation](validation.html)
 
 
 ## References

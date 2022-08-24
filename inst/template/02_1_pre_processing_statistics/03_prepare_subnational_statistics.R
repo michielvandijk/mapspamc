@@ -31,11 +31,11 @@ ci_stat <- create_statistics_template("ci", param)
 
 # SAVE -----------------------------------------------------------------------------------
 write_csv(ha_stat, file.path(param$db_path,
-  glue("{param$iso3c}/subnational_statistics/subnational_harvested_area_template_{param$year}_{param$iso3c}.csv")))
+  glue("subnational_statistics/{param$iso3c}/subnational_harvested_area_template_{param$year}_{param$iso3c}.csv")))
 write_csv(ci_stat, file.path(param$db_path,
-  glue("{param$iso3c}/subnational_statistics/cropping_intensity_template_{param$year}_{param$iso3c}.csv")))
+  glue("subnational_statistics/{param$iso3c}/cropping_intensity_template_{param$year}_{param$iso3c}.csv")))
 write_csv(fs_stat, file.path(param$db_path,
-  glue("{param$iso3c}/subnational_statistics/farming_system_shares_template_{param$year}_{param$iso3c}.csv")))
+  glue("subnational_statistics/{param$iso3c}/farming_system_shares_template_{param$year}_{param$iso3c}.csv")))
 
 
 # NOTE -----------------------------------------------------------------------------------
