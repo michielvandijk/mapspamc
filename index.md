@@ -9,20 +9,21 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-The aim of the [mapspamc R
+The aim of the [`mapspamc` R
 package](https://github.com/michielvandijk/mapspamc) is to facilitate
-the creation of country-level crop distribution maps. `mapspamc`
-provides the necessary infrastructure to run the Spatial Production
-Allocation Model (SPAM) for country level studies. The model builds on
-the global version of [SPAM](www.mapspam.info) (You and Wood 2006; You,
-Wood, and Wood-Sichra 2009; You et al. 2014; Yu et al. 2020), which uses
-an cross-entropy optimization approach to ‘pixelate’ national and
-subnational crop statistics on a spatial grid at a resolution of 5
-arcmin (\~ 10 x 10 km). `mapspamc` is specifically developed to support
-country-level analysis, makes it possible to incorporate national
-sources of information and potentially creates maps at a higher
-resolution than 5 arcmin. The articles in the Background section provide
-general information on approaches to create [crop distribution
+the creation of country level crop distribution maps. The model builds
+on the global version of the [Spatial Production Allocation model
+(SPAM)](www.mapspam.info) (You and Wood 2006; You, Wood, and Wood-Sichra
+2009; You et al. 2014; Yu et al. 2020), which uses an cross-entropy
+optimization approach to ‘pixelate’ national and subnational crop
+statistics on a spatial grid at a resolution of 5 arcmin (\~ 10 x 10
+km). `mapspamc` provides the necessary infrastructure to run the Spatial
+Production Allocation Model at the country level and makes it possible
+to incorporate national sources of information and potentially create
+maps at a higher resolution of 30 arcsec (Van Dijk et al. 2020).
+
+The articles in the Background section provide general information on
+approaches to create [crop distribution
 maps](articles/crop_distribution_maps.html), the
 [model](articles/model_description.html), [input
 data](articles/data.html) and an [Appendix](articles/appendix.html) with
@@ -79,6 +80,14 @@ into nine smaller steps in the Run mapspamc section.
 ## References
 
 <div id="refs" class="references csl-bib-body hanging-indent">
+
+<div id="ref-VanDijk2020" class="csl-entry">
+
+Van Dijk, Michiel, Ulrike Wood-Sichra, Yating Ru, Amanda Palazzo, Petr
+Havlik, and Liangzhi You. 2020. “<span class="nocase">Mapping the change
+in crop distribution over time using a data fusion approach</span>.”
+
+</div>
 
 <div id="ref-You2006" class="csl-entry">
 

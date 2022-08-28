@@ -139,6 +139,7 @@ Overlay of grid and acc shows that the extent is the same BUT actual selected ce
 # Subnational statistics
 - check_statistics() has in the help that the input should be of class subnat => still need to implement this.
 - reaggregate statistics has limited documentation
+- Set all adm names to uppercase in map and in statistics tables
 
 # TODO FABLE
 - COMMENT how country teams can create mapspam2globiom_iso3c github repository
