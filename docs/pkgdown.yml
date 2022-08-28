@@ -4,6 +4,7 @@ pkgdown_sha: ~
 articles:
   appendix: appendix.html
   combine_input_data: combine_input_data.html
+  country_examples: country_examples.html
   create_synergy_cropland: create_synergy_cropland.html
   create_synergy_irrigated_area: create_synergy_irrigated_area.html
   crop_distribution_maps: crop_distribution_maps.html
@@ -16,9 +17,8 @@ articles:
   process_spatial_data: process_spatial_data.html
   process_subnational_statistics: process_subnational_statistics.html
   run_model: run_model.html
-  template: template.html
   validation: validation.html
-last_built: 2022-08-22T13:23Z
+last_built: 2022-08-28T19:14Z
 urls:
   reference: https://michielvandijk.github.io/mapspamc/reference
   article: https://michielvandijk.github.io/mapspamc/articles

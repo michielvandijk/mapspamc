@@ -22,6 +22,9 @@
     <loc>https://michielvandijk.github.io/mapspamc/articles/combine_input_data.html</loc>
   </url>
   <url>
+    <loc>https://michielvandijk.github.io/mapspamc/articles/country_examples.html</loc>
+  </url>
+  <url>
     <loc>https://michielvandijk.github.io/mapspamc/articles/create_synergy_cropland.html</loc>
   </url>
   <url>
@@ -137,6 +140,9 @@
   </url>
   <url>
     <loc>https://michielvandijk.github.io/mapspamc/reference/create_grid.html</loc>
+  </url>
+  <url>
+    <loc>https://michielvandijk.github.io/mapspamc/reference/create_model_template.html</loc>
   </url>
   <url>
     <loc>https://michielvandijk.github.io/mapspamc/reference/create_spam_folders.html</loc>

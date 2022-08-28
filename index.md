@@ -9,90 +9,76 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-The aim of the [mapspamc R package](https://iiasa.github.io/mapspamc) is
-to facilitate the creation of country level crop distribution maps.
-mapspamc provides the necessary infrastructure to run the Spatial
-Production Allocation Model for Country level studies (SPAMc). The model
-builds on the global version of SPAM (You and Wood 2006; You, Wood, and
-Wood-Sichra 2009; You et al. 2014; Yu et al. 2020), which uses an
-cross-entropy optimization approach to ‘pixelate’ national and
-subnational crop statistics on a spatial grid at a 5 arcmin resolution.
-SPAMc was specifically developed to support country level analysis and
-makes it possible to incorporate national sources of information and
-potentially create maps at a higher resolution of 30 arcsec (Van Dijk et
-al. 2020). The articles in the Background section provide more
-information on [Crop distribution
-maps](articles/crop_distribution_maps.html) in general, the
+The aim of the [mapspamc R
+package](https://github.com/michielvandijk/mapspamc) is to facilitate
+the creation of country-level crop distribution maps. `mapspamc`
+provides the necessary infrastructure to run the Spatial Production
+Allocation Model (SPAM) for country level studies. The model builds on
+the global version of [SPAM](www.mapspam.info) (You and Wood 2006; You,
+Wood, and Wood-Sichra 2009; You et al. 2014; Yu et al. 2020), which uses
+an cross-entropy optimization approach to ‘pixelate’ national and
+subnational crop statistics on a spatial grid at a resolution of 5
+arcmin (\~ 10 x 10 km). `mapspamc` is specifically developed to support
+country-level analysis, makes it possible to incorporate national
+sources of information and potentially creates maps at a higher
+resolution than 5 arcmin. The articles in the Background section provide
+general information on approaches to create [crop distribution
+maps](articles/crop_distribution_maps.html), the
 [model](articles/model_description.html), [input
 data](articles/data.html) and an [Appendix](articles/appendix.html) with
-additional information on specific topics. Apart from implementing
-SPAMc, mapspamc includes functions to aggregate the SPAMc output to the
-spatial (i.e. simulation units) and crop-level (18 major crops) format
-that is used by GLOBIOM.
+additional information on specific topics.
 
 ## Installation
 
-To install mapspamc:
+To install `mapspamc`:
 
 ``` r
 install.packages("remotes")
 remotes::install_github("michielvandijk/mapspamc")
 ```
 
-Apart from the mapspamc package, several other pieces of software are
-essential to run SPAMc, which are described in the
+Running `mapspamc` requires the installation of several other pieces of
+software, which are described in the
 [Installation](articles/software.html) section.
 
 ## Preparation
 
-It takes some preparation before SPAMc can be run. Most important and
-probably most time consuming is the collection of input data. SPAMc is a
-data-driven model and therefore requires a large variety of input data,
-which can be grouped under two headers: (1) (Sub)national agricultural
-statistics and (2) spatial information. The availability of data
-strongly affects the structure of the model and how can be solved. We
-highly recommend to start collecting input data before running the
-model. The articles in the Preparation section give an overview of all
-the information that is requited by SPAMc and shows were to download
-country examples, which can be used as a template to implement SPAMc to
-other countries:
+It takes some preparation before the crop distribution maps can be
+generated. Most important and probably most time consuming is the
+collection of input data. `mapspamc` requires a large variety of input
+data, which can be grouped under three headers: (1) national crop
+statistics, (2) data to construct the priors/fitness scores and (3) data
+to determine the spatial constraints. The availability of data strongly
+affects the structure of the model, how it will be solved and how long
+it takes to solve. We highly recommend to start collecting input data
+before running the model. The articles in the Preparation section gives
+an overview of the [input data](articles/input_data.html) that is
+requited by the package and show were to download several [country
+applications](articles/country_examples.html), which can be used as an
+example to work )
 
--   [Input data collection](articles/input_data_collection.html).
--   [Country examples/templates](articles/template.html)
+## Run `mapspamc`
 
-## Run SPAMc
+Running `mapspamc` can be divided into six major steps which are split
+into nine smaller steps in the Run mapspamc section.
 
-Running SPAMc can be divided into eight steps, which are described in
-the articles in the Run SPAMc section. The other two articlesdescribe
-how to update the land cover and land use maps in GLOBIOM and how to add
-a new crop in GLOBIOM, which both require SPAMc output:
-
-1.  [Model setup](articles/model_structure.html)
-2.  [Processing of subnational
+1.  [Model setup](articles/model_setup.html)
+2.  [Pre-processing: Subnational
     statistics](articles/process_subnational_statistics.html)
-3.  [Processing of spatial data](articles/process_spatial_data.html)
-4.  [Create synergy cropland map](articles/create_synergy_cropland.html)
-5.  [Create synergy irrigated area
+3.  [Pre-processing: Spatial data](articles/process_spatial_data.html)
+4.  [Model preparation: Create synergy cropland
+    map](articles/create_synergy_cropland.html)
+5.  [Model preparation: Create synergy irrigated area
     map](articles/create_synergy_irrigated_area.html)
-6.  [Combine input data](articles/combine_input_data.html)
-7.  [Run model](articles/run_spamc.html)
+6.  [Model preparation: Combine input
+    data](articles/combine_input_data.html)
+7.  [Running the model](articles/run_model.html)
 8.  [Post-processing](articles/post_process.html)
-9.  [Replace GLOBIOM land use and land
-    cover](articles/replace_globiom_land_cover_land_use.html)
-10. [Adding a new crop to
-    GLOBIOM](articles/add_new_crop_to_globiom.html)
+9.  [model validation](validation.html)
 
 ## References
 
 <div id="refs" class="references csl-bib-body hanging-indent">
-
-<div id="ref-VanDijk2020" class="csl-entry">
-
-Van Dijk, Michiel, Ulrike Wood-Sichra, Yating Ru, Amanda Palazzo, Petr
-Havlik, and Liangzhi You. 2020. “<span class="nocase">Mapping the change
-in crop distribution over time using a data fusion approach</span>.”
-
-</div>
 
 <div id="ref-You2006" class="csl-entry">
 

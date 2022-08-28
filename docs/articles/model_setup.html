@@ -76,10 +76,10 @@
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Preparation</a>
       <ul class="dropdown-menu" role="menu">
 <li>
-          <a href="../articles/input_data_collection.html">Input data collection</a>
+          <a href="../articles/input_data.html">Input data</a>
         </li>
         <li>
-          <a href="../articles/template.html">Country examples/templates</a>
+          <a href="../articles/country_examples.html">Country examples</a>
         </li>
       </ul>
 </li>
@@ -167,9 +167,9 @@ particular script is always loaded at the beginning of all the other
 scripts using the <code><a href="https://rdrr.io/r/base/source.html" class="external-link">source()</a></code> command. In this way, you only
 have to setup up the model once. It also ensures all the necessary
 packages are loaded into R.</p>
-<div class="section level2">
-<h2 id="set-model-parameters-and-location-of-files">Set model parameters and location of files<a class="anchor" aria-label="anchor" href="#set-model-parameters-and-location-of-files"></a>
-</h2>
+<div class="section level3">
+<h3 id="set-model-parameters-and-location-of-files">Set model parameters and location of files<a class="anchor" aria-label="anchor" href="#set-model-parameters-and-location-of-files"></a>
+</h3>
 <p>Nearly all functions in <code>mapspamc</code> need input on (1) key
 parameters that determine the design of the model and how it will be
 solved and (2) the location of raw and intermediate data, which will be
@@ -294,8 +294,18 @@ the documentation of most functions.</p>
 <span><span class="co">#&gt; crs:  epsg:4326</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="create-spam-c-folder-structure">Create SPAM-C folder structure<a class="anchor" aria-label="anchor" href="#create-spam-c-folder-structure"></a>
+<h2 id="an-rstudio-project-is-required-to-run-the-model-scripts--create-this-first-and-use-the-path">An RStudio project is required to run the model scripts. Create this
+first and use the path<a class="anchor" aria-label="anchor" href="#an-rstudio-project-is-required-to-run-the-model-scripts--create-this-first-and-use-the-path"></a>
 </h2>
+</div>
+<div class="section level2">
+<h2 id="of-the-project-as-template-path-to-copy-the-scripts-into-the-rstudio-project-">of the project as template path to copy the scripts into the RStudio
+project.<a class="anchor" aria-label="anchor" href="#of-the-project-as-template-path-to-copy-the-scripts-into-the-rstudio-project-"></a>
+</h2>
+<p>template_path &lt;- “c:/RStudio_project/”</p>
+<div class="section level3">
+<h3 id="create-spam-c-folder-structure">Create SPAM-C folder structure<a class="anchor" aria-label="anchor" href="#create-spam-c-folder-structure"></a>
+</h3>
 <p><code>mapspamc</code> includes a function to create all necessary
 folders <code><a href="../reference/create_folders.html">create_folders()</a></code>. The only input required is
 <code>param</code> which contains all the model parameters. The function
@@ -319,9 +329,9 @@ again when <code>create_spam_folders</code> is run.</p>
 <code class="sourceCode R"><span><span class="co"># Create SPAM-C folder structure in the spamc_path</span></span>
 <span><span class="fu"><a href="../reference/create_folders.html">create_folders</a></span><span class="op">(</span><span class="va">param</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="prepare-subnational-administrative-unit-map">Prepare subnational administrative unit map<a class="anchor" aria-label="anchor" href="#prepare-subnational-administrative-unit-map"></a>
-</h2>
+<div class="section level3">
+<h3 id="prepare-subnational-administrative-unit-map">Prepare subnational administrative unit map<a class="anchor" aria-label="anchor" href="#prepare-subnational-administrative-unit-map"></a>
+</h3>
 <p>To allocate subnational crop area information, a complementary map
 (most likely in the form of a shapefile) with the location of the
 subnational administrative units is needed. The processing of this map
@@ -446,9 +456,9 @@ shapefile and saves it as csv file in the
 <code class="sourceCode R"><span><span class="co"># Create adm_list</span></span>
 <span><span class="fu"><a href="../reference/create_adm_list.html">create_adm_list</a></span><span class="op">(</span><span class="va">adm_map</span>, <span class="va">param</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="create-grid-and-rasterize-subnational-administrative-unit-map">Create grid and rasterize subnational administrative unit map<a class="anchor" aria-label="anchor" href="#create-grid-and-rasterize-subnational-administrative-unit-map"></a>
-</h2>
+<div class="section level3">
+<h3 id="create-grid-and-rasterize-subnational-administrative-unit-map">Create grid and rasterize subnational administrative unit map<a class="anchor" aria-label="anchor" href="#create-grid-and-rasterize-subnational-administrative-unit-map"></a>
+</h3>
 <p>The <code><a href="../reference/create_grid.html">create_grid()</a></code> function creates a spatial grid at
 selected spatial resolution (i.e. 30 arcsec or 5 arcmin). The grid is
 subsequently used by <code><a href="../reference/rasterize_adm_map.html">rasterize_adm_map()</a></code>, which rasterizes
@@ -463,6 +473,7 @@ and the rasterized map are required by the model as input.</p>
 <p>This is all it takes to set up the SPAM-C model! The next step is
 processing the <a href="process_subnational_statistics.html">raw
 subnational statistics</a> and <a href="process_spatial_data.html">spatial data</a>.</p>
+</div>
 </div>
   </div>
 

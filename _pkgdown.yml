@@ -78,6 +78,7 @@ reference:
   - create_adm_list
   - create_grid
   - create_folders
+  - create_model_template
   - mapspamc_par
   - rasterize_adm_map
 - title: "Pre-processing"
