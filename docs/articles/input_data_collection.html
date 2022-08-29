@@ -65,7 +65,7 @@
           <a href="../articles/model_description.html">Model description</a>
         </li>
         <li>
-          <a href="../articles/data.html">Input data</a>
+          <a href="../articles/input_data.html">Input data</a>
         </li>
         <li>
           <a href="../articles/appendix.html">Appendix</a>
@@ -76,7 +76,7 @@
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Preparation</a>
       <ul class="dropdown-menu" role="menu">
 <li>
-          <a href="../articles/input_data.html">Input data</a>
+          <a href="../articles/input_data_collection.html">Collect input data</a>
         </li>
         <li>
           <a href="../articles/country_examples.html">Country examples</a>
@@ -90,25 +90,28 @@
           <a href="../articles/model_setup.html">1. Model setup</a>
         </li>
         <li>
-          <a href="../articles/process_subnational_statistics.html">2. Pre-processing</a>
+          <a href="../articles/preprocessing_subnational_statistics.html">2.1. Pre-processing - subnational statistics</a>
         </li>
         <li>
-          <a href="../articles/process_spatial_data.html">3. Process spatial data</a>
+          <a href="../articles/preprocessing_spatial_data.html">2.2. Pre-processing - spatial data</a>
         </li>
         <li>
-          <a href="../articles/create_synergy_cropland.html">4. Create synergy cropland map</a>
+          <a href="../articles/preprocessing_cropland.html">2.3. Pre-processing - cropland</a>
         </li>
         <li>
-          <a href="../articles/create_synergy_irrigated_area.html">5. Create synergy irrigated area map</a>
+          <a href="../articles/preprocessing_irrigated_area.html">2.4. Pre-processing - irrigated area</a>
         </li>
         <li>
-          <a href="../articles/combine_input_data.html">6. Combine input data</a>
+          <a href="../articles/model_preparation.html">3. Model preparation</a>
         </li>
         <li>
-          <a href="../articles/run_model.html">7. Run model</a>
+          <a href="../articles/run_model.html">4. Run model</a>
         </li>
         <li>
-          <a href="../articles/post_process.html">8. Post-processing</a>
+          <a href="../articles/post_processing.html">5. Post-processing</a>
+        </li>
+        <li>
+          <a href="../articles/model_validation.html">6. Validation</a>
         </li>
       </ul>
 </li>
@@ -165,23 +168,24 @@ spatial data</a>.</p>
 <h2 id="location-of-raw-data">Location of raw data<a class="anchor" aria-label="anchor" href="#location-of-raw-data"></a>
 </h2>
 <p>Raw data is stored in the <code>raw_data</code> folder. When the
-SPAMc is <a href="setup_model.html">setup</a>, you can specify the
-location of this folder. The default setting is to put it in the main
-SPAMc folder but you also have the possibility to create it somewhere
-else (e.g. a data server or external drive). This might be convenient
-when you have limited capacity on your local harddrive to store the
-required global maps, which can be large (i.e. several gigabytes!).</p>
+<code>mapspamc</code> is <a href="setup_model.html">setup</a>, you can
+specify the location of this folder. The default setting is to put it in
+the main <code>mapspamc</code> folder but you also have the possibility
+to create it somewhere else (e.g. a data server or external drive). This
+might be convenient when you have limited capacity on your local
+harddrive to store the required global maps, which can be large
+(i.e. several gigabytes!).</p>
 <p>For practical reasons, we use separate subfolders for each data
 source. The only exception is the subnational agricultural statistics,
 which are all stored in one folder. The raw data subfolders for the core
-global datasets are automatically created when SPAMc is setup and
-therefore the names cannot be changed. However, if alternative and more
-detailed information is available from national sources (e.g. cropland
-map) you can create new folders in the <code>raw_data</code> folder to
-store the data.</p>
+global datasets are automatically created when <code>mapspamc</code> is
+setup and therefore the names cannot be changed. However, if alternative
+and more detailed information is available from national sources
+(e.g. cropland map) you can create new folders in the
+<code>raw_data</code> folder to store the data.</p>
 <p>As you probably have not gone through the process of setting up the
 model yet, you can either create a temporary raw data folder structure
-now and copy the data to the SPAMc folder later or <a href="setup_model.html">setup the model</a> first and save all the data
+now and copy the data to the <code>mapspamc</code> folder later or <a href="setup_model.html">setup the model</a> first and save all the data
 directly in the correct location. In any case, the location of the raw
 data folder can be changed at any time so there is flexibility.</p>
 </div>
@@ -259,13 +263,13 @@ case <code>20200303_aquastat_irrigation.xlsx</code></p></li>
 <h2 id="subnational-agricultural-statistics">Subnational agricultural statistics<a class="anchor" aria-label="anchor" href="#subnational-agricultural-statistics"></a>
 </h2>
 <p>Availability of subnational statistics greatly improve the crop
-allocation process in SPAMc. Four pieces of information are
-required:</p>
+allocation process in <code>mapspamc</code>. Four pieces of information
+are required:</p>
 <ul>
 <li><p><strong>Harvested area statistics.</strong> Data on crop level
 harvested area at administrative unit level 1 and, if possible, level 2.
-SPAMc is designed to handle missing information at the subnational level
-so any data you can get is useful.</p></li>
+<code>mapspamc</code> is designed to handle missing information at the
+subnational level so any data you can get is useful.</p></li>
 <li><p><strong>Subnational administrative unit map.</strong>. It is
 essential to have a map (e.g. shapefile or any other polygon format)
 with the location of the subnational administrative units that
@@ -339,20 +343,21 @@ available. We explain both options below.</p>
 <div class="section level3">
 <h3 id="global-synergy-cropland-map-for-2010">Global synergy cropland map for 2010<a class="anchor" aria-label="anchor" href="#global-synergy-cropland-map-for-2010"></a>
 </h3>
-<p>If SPAMc is used to produce crop distribution maps for around 2010,
-it is possible to use a global synergy map produced by <span class="citation">Lu et al. (2020)</span>. This map was also used by for
-the global SPAM2010 <span class="citation">(@ Yu et al. 2020)</span>.
-The map, with a resolution of 500x500 meter, is constructed by means of
-the Self-adapting statistics allocation model (SASAM), which combines
-and ranks five different global cropland products: GlobeLand30, CCI-LC,
-GlobCover 2009, MODIS C5, and the Unified Cropland Layer, as well as
-several region cropland products, e.g. CORINE land cover for Europe for
-cropland maps for Australia and China. After harmonization of cropland
-classes, resolution and projection, cropland area statistics from
-FAOSTAT are used to rank the cropland maps and construct a scoring table
-that reflects the agreement among the datasets. In addition, maps are
-produced that contain the medium and maximum cropland area per grid
-cell.</p>
+<p>If <code>mapspamc</code> is used to produce crop distribution maps
+for around 2010, it is possible to use a global synergy map produced by
+<span class="citation">Lu et al. (2020)</span>. This map was also used
+by for the global SPAM2010 <span class="citation">(@ Yu et al.
+2020)</span>. The map, with a resolution of 500x500 meter, is
+constructed by means of the Self-adapting statistics allocation model
+(SASAM), which combines and ranks five different global cropland
+products: GlobeLand30, CCI-LC, GlobCover 2009, MODIS C5, and the Unified
+Cropland Layer, as well as several region cropland products, e.g. CORINE
+land cover for Europe for cropland maps for Australia and China. After
+harmonization of cropland classes, resolution and projection, cropland
+area statistics from FAOSTAT are used to rank the cropland maps and
+construct a scoring table that reflects the agreement among the
+datasets. In addition, maps are produced that contain the medium and
+maximum cropland area per grid cell.</p>
 <ul>
 <li>Download the <span class="citation">(<strong>UPDATE?</strong>)</span> maps from the <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZWSFAA" class="external-link">Harvard
 Dataverse</a> and save the files in the <code>raw_data/sasam</code>
@@ -405,9 +410,9 @@ subfolders!</p></li>
 </h2>
 <p>Spatially explicit information on the biophysical suitability and
 related potential yield of crops is a key factor to inform the
-allocation of crops in SPAMc. We use data the latest version of the
-global agro-ecological zones (GAEZ) data (version 3.0) as a source of
-information.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> The <a href="http://www.fao.org/nr/gaez/en/" class="external-link">GAEZ</a> website provides
+allocation of crops in <code>mapspamc</code>. We use data the latest
+version of the global agro-ecological zones (GAEZ) data (version 3.0) as
+a source of information.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> The <a href="http://www.fao.org/nr/gaez/en/" class="external-link">GAEZ</a> website provides
 background data on the data. As downloading bulk information from this
 website is problematic, we stored the relevant GAEZ maps in a data
 repository.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p>
@@ -424,11 +429,10 @@ accesibility of cropland. To take into account changes in infrastructure
 over time, we use two products that each represent a different period.
 <span class="citation">Nelson (2008)</span> presents a global travel
 time map for 2000 and <span class="citation">Weiss et al. (2018)</span>
-presents a comparable product for 2015. SPAMc selects the older product
-if the model is run for using data before 2008, the midpoint between the
-two maps. So in case the model is run for 2008 or later, there is no
-need to download the map produced by <span class="citation">Nelson
-(2008)</span>.</p>
+presents a comparable product for 2015. <code>mapspamc</code> selects
+the older product if the model is run for using data before 2008, the
+midpoint between the two maps. So in case the model is run for 2008 or
+later, there is no need to download the map produced by <span class="citation">Nelson (2008)</span>.</p>
 <ul>
 <li><p>Download the Accessibility to cities 2015 map (raster format)
 from <a href="https://malariaatlas.org/research-project/accessibility_to_cities" class="external-link">here</a>,
@@ -454,8 +458,8 @@ information on urban areas that are identified by the extent of the
 nighttime lights and approximated urban extents (circles) based on
 buffered settlement points.^[GRUMP is a somewhat outdated product as it
 presents data for the year 1995. We aim to replace it by a more recent
-source in the future. SPAMc combines the Worldpop and GRUMP datasets to
-create a map of rural population.</p>
+source in the future. <code>mapspamc</code> combines the Worldpop and
+GRUMP datasets to create a map of rural population.</p>
 <div class="section level3">
 <h3 id="gridded-population">Gridded population<a class="anchor" aria-label="anchor" href="#gridded-population"></a>
 </h3>
@@ -516,10 +520,10 @@ map of travel time to cities to assess inequalities in accessibility in
 </div>
 <div id="ref-Yu2020" class="csl-entry">
 Yu, Qiangyi, Liangzhi You, Ulrike Wood-Sichra, Yating Ru, Alison K. B.
-Joglekar, Steffen Fritz, Wei Xiong, Wenbin Wu, and Peng Yang. 2020.
-<span>“<span class="nocase">A cultivated planet in 2010: 2. the global
-gridded agricultural production maps</span>.”</span> <em>Earth System
-Science Data</em>. https://doi.org/<a href="https://doi.org/10.5194/essd-2020-11" class="external-link">https://doi.org/10.5194/essd-2020-11</a>.
+Joglekar, Steffen Fritz, Wei Xiong, Miao Lu, Wenbin Wu, and Peng Yang.
+2020. <span>“<span class="nocase">A cultivated planet in 2010 – Part 2:
+The global gridded agricultural-production maps</span>.”</span>
+<em>Earth System Science Data</em> 12 (4): 3545–72. <a href="https://doi.org/10.5194/essd-12-3545-2020" class="external-link">https://doi.org/10.5194/essd-12-3545-2020</a>.
 </div>
 </div>
 </div>

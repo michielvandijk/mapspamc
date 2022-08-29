@@ -6,8 +6,8 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
-  bib/mapspam.bib
-bibliography: bib/mapspam.bib
+  bib/mapspamc.bib
+bibliography: bib/mapspamc.bib
 ---
 
 ```{r, include = FALSE}
@@ -20,7 +20,8 @@ knitr::opts_chunk$set(
 
 ## Objective functions
 
-The spatial allocation model for Country-level analysis (SPAMc) includes two types of models: (1) Minimization of cross-entropy, which is used in the global SPAM [@You2006; @You2009; @You2014a; @Yu2020] and the maximization of fitness score, which was developed by @VanDijk2020.  
+`mapspamc` includes two types of models: (1) Minimization of cross-entropy, which is used by SPAM [@You2006; @You2009; @You2014a; @Yu2020] and the maximization of fitness score, which was developed by @VanDijk2022b.  
+
 
 ### Minimization of cross-entropy
 
@@ -49,7 +50,7 @@ Cross entropy minimization is better suited for maps at a resolution of 5 arcmin
 
 ## Economic and biophysical determinants of crop location
 
-To solve SPAMc and depending on the model, fitness scores or prior area information are needed to allocate the statistics on the grid. The fitness scores and priors are informed by a combination of economic (e.g. market access and population density) and biophysical factors (e.g growing conditions determined by soil, temperature and precipitation) that jointly determine the location of crops.  As these factors will have different impact across farming systems, we define separate fitness scores and priors for each of them. 
+To solve the models in `mapspamc`, fitness scores or prior area information are needed to allocate the statistics on the grid. The fitness scores and priors are informed by a combination of economic (e.g. market access and population density) and biophysical factors (e.g growing conditions determined by soil, temperature and precipitation) that jointly determine the location of crops.  As these factors will have different impact across farming systems, we define separate fitness scores and priors for each of them. 
 
 ### Fitness scores
 
@@ -107,6 +108,7 @@ Finally, the priors are converted in to crop area shares ($\pi_{ij}$), which are
 \begin{equation}
 \pi_{ij} = \frac{prior_{ijl}}{\sum_{i}{prior_{ijl}}}
 \end{equation}
+
 
 ## Constraints
 

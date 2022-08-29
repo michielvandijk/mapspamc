@@ -24,17 +24,18 @@ statistics on a spatial grid at a resolution of 5 arcmin (\~ 10 x 10
 km). `mapspamc` provides the necessary infrastructure to run the Spatial
 Production Allocation Model at the country level and makes it possible
 to incorporate national sources of information and potentially create
-maps at a higher resolution of 30 arcsec (Van Dijk et al. 2020).
+maps at a higher resolution of 30 arcsec (Dijk et al. 2022).
 
 ## References
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 
-<div id="ref-VanDijk2020" class="csl-entry">
+<div id="ref-VanDijk2022b" class="csl-entry">
 
-Van Dijk, Michiel, Ulrike Wood-Sichra, Yating Ru, Amanda Palazzo, Petr
-Havlik, and Liangzhi You. 2020. “<span class="nocase">Mapping the change
-in crop distribution over time using a data fusion approach</span>.”
+Dijk, Michiel van, Ulrike Wood-Sichra, Yating Ru, Amanda Palazzo, Petr
+Havlik, and Liangzhi You. 2022. “<span class="nocase">Generating
+multi-period crop distribution maps for Southern Africa using a data
+fusion approach</span>.”
 
 </div>
 
@@ -69,10 +70,11 @@ census to grid</span>.” *Agricultural Systems* 127: 53–60.
 <div id="ref-Yu2020" class="csl-entry">
 
 Yu, Qiangyi, Liangzhi You, Ulrike Wood-Sichra, Yating Ru, Alison K. B.
-Joglekar, Steffen Fritz, Wei Xiong, Wenbin Wu, and Peng Yang. 2020.
-“<span class="nocase">A cultivated planet in 2010: 2. the global gridded
-agricultural production maps</span>.” *Earth System Science Data*.
-https://doi.org/<https://doi.org/10.5194/essd-2020-11>.
+Joglekar, Steffen Fritz, Wei Xiong, Miao Lu, Wenbin Wu, and Peng Yang.
+2020. “<span class="nocase">A cultivated planet in 2010 – Part 2: The
+global gridded agricultural-production maps</span>.” *Earth System
+Science Data* 12 (4): 3545–72.
+<https://doi.org/10.5194/essd-12-3545-2020>.
 
 </div>
 

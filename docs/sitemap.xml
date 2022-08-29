@@ -46,6 +46,9 @@
     <loc>https://michielvandijk.github.io/mapspamc/articles/index.html</loc>
   </url>
   <url>
+    <loc>https://michielvandijk.github.io/mapspamc/articles/input_data.html</loc>
+  </url>
+  <url>
     <loc>https://michielvandijk.github.io/mapspamc/articles/input_data_collection.html</loc>
   </url>
   <url>
@@ -55,13 +58,34 @@
     <loc>https://michielvandijk.github.io/mapspamc/articles/model_description.html</loc>
   </url>
   <url>
+    <loc>https://michielvandijk.github.io/mapspamc/articles/model_preparation.html</loc>
+  </url>
+  <url>
     <loc>https://michielvandijk.github.io/mapspamc/articles/model_setup.html</loc>
   </url>
   <url>
     <loc>https://michielvandijk.github.io/mapspamc/articles/model_structure.html</loc>
   </url>
   <url>
+    <loc>https://michielvandijk.github.io/mapspamc/articles/model_validation.html</loc>
+  </url>
+  <url>
     <loc>https://michielvandijk.github.io/mapspamc/articles/post_process.html</loc>
+  </url>
+  <url>
+    <loc>https://michielvandijk.github.io/mapspamc/articles/post_processing.html</loc>
+  </url>
+  <url>
+    <loc>https://michielvandijk.github.io/mapspamc/articles/preprocessing_cropland.html</loc>
+  </url>
+  <url>
+    <loc>https://michielvandijk.github.io/mapspamc/articles/preprocessing_irrigated_area.html</loc>
+  </url>
+  <url>
+    <loc>https://michielvandijk.github.io/mapspamc/articles/preprocessing_spatial_data.html</loc>
+  </url>
+  <url>
+    <loc>https://michielvandijk.github.io/mapspamc/articles/preprocessing_subnational_statistics.html</loc>
   </url>
   <url>
     <loc>https://michielvandijk.github.io/mapspamc/articles/process_spatial_data.html</loc>

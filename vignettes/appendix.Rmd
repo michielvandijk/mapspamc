@@ -6,8 +6,8 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
-  bib/mapspam.bib
-bibliography: bib/mapspam.bib
+  bib/mapspamc.bib
+bibliography: bib/mapspamc.bib
 ---
 
 ```{r, include = FALSE}
@@ -19,9 +19,9 @@ knitr::opts_chunk$set(
 
 --- WORK IN PROGRESS ---
 
-## Solving SPAMc
+## Solving the `mapspamc` algorithms
 
-The General Algebraic Modeling System (GAMS) Release 25.0 [@GAMSDevelopmentCorporation2019] was used to solve SPAMc. To solve the inconsistencies, we start by inspecting the data for common errors (e.g. data entry errors in the subnational statistics) and, if needed, repair them. If there are still problems, we adjusted the data adopting a hierarchy of ‘credibility’ in the following decreasing order of importance:
+The General Algebraic Modeling System (GAMS) [@GAMSDevelopmentCorporation2019] is used to solve both the cross-entropy and fitness score models that are available in `mapspamc`. To deal with inconsistencies, the first step is to closely inspect the data, and in particular the subnational crop statistics, for data entry errors (e.g. missing values) and, if needed, repair them. If there are still problems, we recommend the following 'hierarchy' of addressing inconsistencies and errors in the data:
 
 1. Agricultural statistics
 1. Cropland
@@ -38,7 +38,7 @@ Slacks are needed to distribute the crops that belong to the subsistence farming
 
 ### Number of crops
 
-SPAMc models 40 different crop (and crop groups) that together cover the full agricultural sector and are each identified by a four letter code (Table 1).^[Global SPAM uses 42 different crops because it includes two types of millet and two types of coffee [@Wood-Sichra2016]. As this level of detail is not supported by most national statistics and FAOSTAT, the have been merged into millet and coffee, respectively.] The main reason for this classification is the limited availability of crop-specific biophysical suitability maps, which form a key element in the crop allocation process (see [spatial data](process_spatial_data.html) for more information). It would be relatively easy to add new crops by splitting them off from broader crop groups  (e.g. tropical and temperate fruits, and vegetables) if appropriate agricultural statistics and suitability maps would be available. We plan to add an example on how to do this in future updates. The actual number of crops in the model is determined by the number of crops that are actually grown in the target country and identified by the availability of national statistics.
+`mapspamc` models 40 different crop (and crop groups) that together cover the full agricultural sector and are each identified by a four letter code (Table 1).^[Global SPAM uses 42 different crops because it includes two types of millet and two types of coffee [@Wood-Sichra2016]. As this level of detail is not supported by most national statistics and FAOSTAT, the have been merged into millet and coffee, respectively.] The main reason for this classification is the limited availability of crop-specific biophysical suitability maps, which form a key element in the crop allocation process (see [spatial data](process_spatial_data.html) for more information). It would be relatively easy to add new crops by splitting them off from broader crop groups  (e.g. tropical and temperate fruits, and vegetables) if appropriate agricultural statistics and suitability maps would be available. We plan to add an example on how to do this in future updates. The actual number of crops in the model is determined by the number of crops that are actually grown in the target country and identified by the availability of national statistics.
 
 ```{r}
 # Add 40 crop table
@@ -47,7 +47,7 @@ SPAMc models 40 different crop (and crop groups) that together cover the full ag
 
 ### Number of farming systems
 
-Also similar to global SPAM, SPAMc distinguises between four different farming systems:
+Also similar to global SPAM, `mapspamc` distinguises between four different farming systems:
 
 - Rainfed subsistence
 - Rainfed low-input

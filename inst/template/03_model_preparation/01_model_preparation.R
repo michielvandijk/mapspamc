@@ -13,11 +13,11 @@ source(here::here("01_model_setup/01_model_setup.r"))
 prepare_physical_area(param)
 
 
-# CREATE SYNERGY CROPLAND INPUT ----------------------------------------------------------
+# PREPARE CROPLAND -----------------------------------------------------------------------
 prepare_cropland(param)
 
 
-# PROCESS --------------------------------------------------------------------------------
+# PREPARE IRRIGATED AREA -----------------------------------------------------------------
 prepare_irrigated_area(param)
 
 

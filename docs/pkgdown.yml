@@ -3,22 +3,22 @@ pkgdown: 2.0.5
 pkgdown_sha: ~
 articles:
   appendix: appendix.html
-  combine_input_data: combine_input_data.html
   country_examples: country_examples.html
-  create_synergy_cropland: create_synergy_cropland.html
-  create_synergy_irrigated_area: create_synergy_irrigated_area.html
   crop_distribution_maps: crop_distribution_maps.html
-  data: data.html
+  input_data: input_data.html
   input_data_collection: input_data_collection.html
   installation: installation.html
   model_description: model_description.html
+  model_preparation: model_preparation.html
   model_setup: model_setup.html
-  post_process: post_process.html
-  process_spatial_data: process_spatial_data.html
-  process_subnational_statistics: process_subnational_statistics.html
+  model_validation: model_validation.html
+  post_processing: post_processing.html
+  preprocessing_cropland: preprocessing_cropland.html
+  preprocessing_irrigated_area: preprocessing_irrigated_area.html
+  preprocessing_spatial_data: preprocessing_spatial_data.html
+  preprocessing_subnational_statistics: preprocessing_subnational_statistics.html
   run_model: run_model.html
-  validation: validation.html
-last_built: 2022-08-28T19:14Z
+last_built: 2022-08-29T15:13Z
 urls:
   reference: https://michielvandijk.github.io/mapspamc/reference
   article: https://michielvandijk.github.io/mapspamc/articles

@@ -112,22 +112,6 @@ filter_out_pa <- function(i, pa) {
 }
 
 
-
-# Function to setup gams
-setup_gams <- function(param) {
-    if (!requireNamespace("gdxrrw", quietly = TRUE)) {
-        stop("Package gdxrrw is not installed!",
-             "\nPlease install it (see vignette on installation for more information).",
-             call. = FALSE)
-    }
-    gams <- gdxrrw::igdx(param$gams_path, silent = TRUE)
-    if(!gams) {
-        stop("GAMS is not installed!",
-             "\nPlease install it (see vignette on installation for more information).",
-             call. = FALSE)
-    }
-}
-
 # Function to create folders
 create_model_folder <- function(param){
     model_folder <- glue::glue("{param$model}_{param$resolution}_adm_level_{param$adm_level}_solve_level_{param$solve_level}")

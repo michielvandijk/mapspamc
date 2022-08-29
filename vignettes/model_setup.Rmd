@@ -1,13 +1,13 @@
 ---
-title: "Model setup"
+title: "1. Model setup"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Model setup}
+  %\VignetteIndexEntry{1. Model setup}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
-  bib/mapspam.bib
-bibliography: bib/mapspam.bib
+  bib/mapspamc.bib
+bibliography: bib/mapspamc.bib
 ---
 
 ```{r, include = FALSE}
@@ -16,18 +16,34 @@ knitr::opts_chunk$set(
   comment = "#>")
 ```
 
-To setup SPAM-C several steps need to be taken. By now, we assume that all required software is [installed](installation.html) and working. It is by far the easiest to create a new RStudio project and use the mapspamc_mwi repository for Malawi as a [template](template.html) as a basis of your country SPAM-C version. All the steps described in the Articles run SPAM-C section use the code in mapspamc_mwi repository as an example code so there is no need to start from scratch. All scripts related to model setup can be found in the `01_model_setup` folder of the template. The most important is that you change the location on your hard disk where the model will be stored and set the model parameters (see below), which is done in the script `01_model_setup.r` in the template. As the model parameters are needed as input in nearly all functions, this particular script is always loaded at the beginning of all the other scripts using the `source()` command. In this way, you only have to setup up the model once. It also ensures all the necessary packages are loaded into R. 
+To start running one of the `mapspamc` models several steps need to be taken to setup the model (note that we assume that all required software was [installed](installation.html) and is working). 
+
+
+## Create model template
+
+The first step is to create a project with RStudio, activity `mapspamc` and use the `create_model_template` function to  create a set of template folders and scripts that implement the six steps to run the `mapspamc` models. An alternative approach would be to clone the repository with one of the [country examples](country_examples.html) and use that as a starting point. We will use scripts of the Malawi example to illustrate the various steps in the vignettes. All scripts related to model setup can be found in the `01_model_setup` folder of the template. The most important is that you change the location on your hard disk where the model will be stored and set the model parameters (see below), which is done in the script `01_model_setup.r` in the template. As the model parameters are needed as input in nearly all functions, this script is always loaded at the beginning of all the other scripts using the `source()` command. In this way, you only have to setup up the model once. It also ensures that all the necessary packages are loaded into R. 
+
+
+```{r eval=FALSE}
+# Create a new RStudio project called mapspamc_mwi in the folder c:/temp (or an alternative location)
+
+# Load mapspamc
+library("mapspamc")
+
+# Create the model template in the RStudio project folder
+create_model_template("c:/temp/mapspamc_mwi")
+```
 
 
 ## Set model parameters and location of files
 
-Nearly all functions in `mapspamc` need input on (1) key parameters that determine the design of the model and how it will be solved and (2) the location of raw and intermediate data, which will be further processed. Both pieces of information are bundled in a `spamc_par` object that is created by the function `set_spamc_par()`. Another piece of information that is also stored in the `spamc_par` object is the coordinate reference system of the maps. This is automatically set to WSG84 (epsg:4326).
+Nearly all functions in `mapspamc` need input on (1) key parameters that determine the design of the model and how it will be solved and (2) the location of raw data, which will be further processed. Both pieces of information are bundled in a `mapspamc_par` object that is created by the function `set_mapspamc_par()`. Another piece of information that is also stored in the `mapspamc_par` object is the coordinate reference system of the maps. This is automatically set to WSG84 (epsg:4326).
 
-The following model parameters need to be set before SPAM-C can be run:
+The following model parameters need to be set before `mapspamc` can be run:
 
 - **iso3c country code (`iso3c`).** The three letter ISO 3166-1 alpha-3 country code, also referred to as iso3c is used to extract national statistics from global datasets. A list of country codes can be found in [Wikipedia](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3).
 
-- **Year (`year`).** The year (four digits) will be used to select relevant global datasets when data is available for multiple years, in particular the FAOSTAT national statistics, population maps and and travel time maps. It is also useful to distinguish SPAM-C output when the model is used to create crop distribution maps for multiple years. (see [spatial data](process_subnat_stat.html)).
+- **Year (`year`).** The year (four digits) will be used to select relevant global datasets when data is available for multiple years, in particular the FAOSTAT national statistics, population maps and and travel time maps. It is also useful to distinguish `mapspamc` output when the model is used to create crop distribution maps for multiple years.
 
 - **Spatial resolution (`res`).** The user can choose between two spatial resolutions: 30 arcsec (~1x1 km at the equator) by selecting `"30sec"` and 5 arcmin (~10x10 km at the equator) by selecting `"5min"`. Note that selecting a resolution of 30 arcsec increases the model dimensions (number of grid cells) by a factor 100! This might mean the model becomes too big to be solved and/or your computer runs out of memory. We recommend experimenting with the 5 arcmin resolution first! 
 
@@ -37,13 +53,15 @@ The following model parameters need to be set before SPAM-C can be run:
 
 - **Type of model ('model').** You can choose between two types of models: (1) minimization of cross-entropy ('"min_entropy"`) and (2) maximization of fitness score. See the section on [Model description](model_description.html) for details.
 
-Similarly, the following two folders need to be defined when setting up the model:
+Similarly, the following three folders need to be defined when setting up the model:
 
-- **SPAM main folder location (`spamc_path`).** This folder will be used to store all model related data, including processed data, mapping tables, intermediate output, final results and, unless specified otherwise by the user, the raw data.
+- **main model folder (`model_path`).** This folder will be used to store all model related data, including processed data, mapping tables, intermediate output, final results and, unless specified otherwise by the user, the raw data.
 
-- **Raw data folder (`raw_path`).** Optionally the user can set a folder for the raw data. This might be convenient if hard disk capacity is insufficient to store the several gigabyte of data that are needed to store the global spatial datasets. In this case, a data server could be used to store the data. 
+- **Location of mapspam_db (`db_path`).** Optionally the user can set a folder for the location of the mapspamc database. This might be convenient if you want to use a server to store the database (> 5 GB).  A folder with the name `mapspamc_db` will be automatically created in the `db_path` set by the user. If `db_path` is not specified the `mapspamc_db` folder will be created in the `model_db` folder.
 
-The example below sets the SPAM-C parameters for Malawi and stores them in an object called `param`. Param is an arbitrary name but we recommend not to change it as we refer to `param` in the documentation of most functions.
+- **Location of GAMS (`gams_path`).** Optionally the user can set a folder for the location of GAMS and the libraries that are needed to process GAMS gdx with R. If GAMS is installed correctly, `mapspamc` will automatically find the GAMS system directory. However, occasionally the location of GAMS is not stored correctly by Windows, causing problems. Hence, we always recommend setting the location of GAMS manually. This might also be convenient when multiple versions of GAMS are installed on one machine and one is preferred over another. 
+
+The example below sets the `mapspamc` parameters for Malawi and stores them in an object called `param`. Param is an arbitrary name but we recommend not to change it as we refer to `param` in the documentation of most functions.
 
 ```{r}
 # Load mapspamc
@@ -51,32 +69,37 @@ library("mapspamc")
 
 # Set the folder where the model will be stored
 # Note that R uses forward slashes even in Windows!!
-model_path <- "C:/Users/dijk158/Dropbox/mapspamc_mwi"
+model_path <- "c:/temp/mapspamc_mwi"
 
-# Set SPAM-C parameters
-param <- mapspamc_par(model_path = model_path,
- iso3c = "MWI",
- year = 2010,
- res = "5min",
- adm_level = 1,
- solve_level = 0,
- model = "max_score")
+# Creates a database folder with the name mapspamc_db in c:/temp
+db_path <- "c:/temp"
+
+# Sets the location of the version of GAMS that will be used to solve the model
+gams_path <- "C:/MyPrograms/GAMS/win64/24.6"
+
+# Set mapspamc parameters for the min_entropy_5min_adm_level_2_solve_level_0 model
+param <- mapspamc_par(
+  model_path = model_path,
+  db_path = db_path,
+  gams_path = gams_path,
+  iso3c = "MWI",
+  year = 2010,
+  res = "5min",
+  adm_level = 2,
+  solve_level = 0,
+  model = "min_entropy")
 
 # Show parameters
 print(param)
 ```
 
 
-# An RStudio project is required to run the model scripts. Create this first and use the path
-# of the project as template path to copy the scripts into the RStudio project.
-template_path <- "c:/RStudio_project/"
-
-## Create SPAM-C folder structure
+## Create a folder structure
 
 `mapspamc` includes a function to create all necessary folders `create_folders()`. The only input required is `param` which contains all the model parameters. The function will create three folders: (1) `raw_data` is created in the main `spamc_path` unless indicated otherwise by the user and serves to store all the raw input data, (2) `processed_data` will be created in the main `mapspamc_path` and is used to save all the intermediary data products as well as the final results and (3) `mappings` will be created in the main `mapspamc_path` and contains all the lists and mappings that are needed to define the model (e.g. number crops) and harmonize various data sources (concordance tables). All tables are in csv format and will be created automatically into the `mappings` folder. Note that it is possible to adjust some of these tables if needed (e.g. adding a new crop). `create_folders()` will only create csv files if the files do not exist. Hence, updated files will not be overwritten. If for some reason you want to recreate the original tables, simply remove the folder and/or files and they will be created again when `create_spam_folders` is run. 
 
 ```{r eval=FALSE}
-# Create SPAM-C folder structure in the spamc_path
+# Create folder structure in the mapspamc_path
 create_folders(param)
 ```
 

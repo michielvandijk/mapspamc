@@ -35,6 +35,13 @@ db_path <- "c:/temp"
 
 # Sets the location of the version of GAMS that will be used to solve the model
 gams_path <- "C:/MyPrograms/GAMS/win64/24.6"
+gams_path <- "C:/MyPrograms/GAMS/win64/24.1"
+
+gams <- gdxrrw::igdx(param$gams_path, returnStr=FALSE)
+gams
+gams == TRUE
+gams <- gdxrrw::igdx()
+isTRUE(gams)
 
 # Set mapspamc parameters for the min_entropy_5min_adm_level_2_solve_level_0 model
 param <- mapspamc_par(
@@ -48,4 +55,4 @@ param <- mapspamc_par(
   solve_level = 0,
   model = "min_entropy")
 
-harmonize_inputs(param)
+

@@ -1,13 +1,13 @@
 ---
-title: "Create synergy cropland map"
+title: "Pre-processing - cropland"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Create synergy cropland map}
+  %\VignetteIndexEntry{Pre-processing - cropland}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
-  bib/mapspam.bib
-bibliography: bib/mapspam.bib
+  bib/mapspamc.bib
+bibliography: bib/mapspamc.bib
 ---
 
 ```{r, include = FALSE}

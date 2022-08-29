@@ -6,8 +6,8 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
-  bib/mapspam.bib
-bibliography: bib/mapspam.bib
+  bib/mapspamc.bib
+bibliography: bib/mapspamc.bib
 ---
 
 ```{r, include = FALSE}

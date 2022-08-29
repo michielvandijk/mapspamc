@@ -65,7 +65,7 @@
           <a href="../articles/model_description.html">Model description</a>
         </li>
         <li>
-          <a href="../articles/data.html">Input data</a>
+          <a href="../articles/input_data.html">Input data</a>
         </li>
         <li>
           <a href="../articles/appendix.html">Appendix</a>
@@ -76,7 +76,7 @@
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Preparation</a>
       <ul class="dropdown-menu" role="menu">
 <li>
-          <a href="../articles/input_data.html">Input data</a>
+          <a href="../articles/input_data_collection.html">Collect input data</a>
         </li>
         <li>
           <a href="../articles/country_examples.html">Country examples</a>
@@ -90,25 +90,28 @@
           <a href="../articles/model_setup.html">1. Model setup</a>
         </li>
         <li>
-          <a href="../articles/process_subnational_statistics.html">2. Pre-processing</a>
+          <a href="../articles/preprocessing_subnational_statistics.html">2.1. Pre-processing - subnational statistics</a>
         </li>
         <li>
-          <a href="../articles/process_spatial_data.html">3. Process spatial data</a>
+          <a href="../articles/preprocessing_spatial_data.html">2.2. Pre-processing - spatial data</a>
         </li>
         <li>
-          <a href="../articles/create_synergy_cropland.html">4. Create synergy cropland map</a>
+          <a href="../articles/preprocessing_cropland.html">2.3. Pre-processing - cropland</a>
         </li>
         <li>
-          <a href="../articles/create_synergy_irrigated_area.html">5. Create synergy irrigated area map</a>
+          <a href="../articles/preprocessing_irrigated_area.html">2.4. Pre-processing - irrigated area</a>
         </li>
         <li>
-          <a href="../articles/combine_input_data.html">6. Combine input data</a>
+          <a href="../articles/model_preparation.html">3. Model preparation</a>
         </li>
         <li>
-          <a href="../articles/run_model.html">7. Run model</a>
+          <a href="../articles/run_model.html">4. Run model</a>
         </li>
         <li>
-          <a href="../articles/post_process.html">8. Post-processing</a>
+          <a href="../articles/post_processing.html">5. Post-processing</a>
+        </li>
+        <li>
+          <a href="../articles/model_validation.html">6. Validation</a>
         </li>
       </ul>
 </li>
@@ -154,11 +157,11 @@
 <div class="section level2">
 <h2 id="objective-functions">Objective functions<a class="anchor" aria-label="anchor" href="#objective-functions"></a>
 </h2>
-<p>The spatial allocation model for Country-level analysis (SPAMc)
-includes two types of models: (1) Minimization of cross-entropy, which
-is used in the global SPAM <span class="citation">(You and Wood 2006;
-You, Wood, and Wood-Sichra 2009; You et al. 2014; Yu et al. 2020)</span>
-and the maximization of fitness score, which was developed by <span class="citation">Van Dijk et al. (2020)</span>.</p>
+<p><code>mapspamc</code> includes two types of models: (1) Minimization
+of cross-entropy, which is used by SPAM <span class="citation">(You and
+Wood 2006; You, Wood, and Wood-Sichra 2009; You et al. 2014; Yu et al.
+2020)</span> and the maximization of fitness score, which was developed
+by <span class="citation">Dijk et al. (2022)</span>.</p>
 <div class="section level3">
 <h3 id="minimization-of-cross-entropy">Minimization of cross-entropy<a class="anchor" aria-label="anchor" href="#minimization-of-cross-entropy"></a>
 </h3>
@@ -217,7 +220,7 @@ resolution.</p>
 <div class="section level2">
 <h2 id="economic-and-biophysical-determinants-of-crop-location">Economic and biophysical determinants of crop location<a class="anchor" aria-label="anchor" href="#economic-and-biophysical-determinants-of-crop-location"></a>
 </h2>
-<p>To solve SPAMc and depending on the model, fitness scores or prior
+<p>To solve the models in <code>mapspamc</code>, fitness scores or prior
 area information are needed to allocate the statistics on the grid. The
 fitness scores and priors are informed by a combination of economic
 (e.g. market access and population density) and biophysical factors (e.g
@@ -392,16 +395,16 @@ grid cell <span class="math inline">\(i\)</span>.</p>
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-VanDijk2022b" class="csl-entry">
+Dijk, Michiel van, Ulrike Wood-Sichra, Yating Ru, Amanda Palazzo, Petr
+Havlik, and Liangzhi You. 2022. <span>“<span class="nocase">Generating
+multi-period crop distribution maps for Southern Africa using a data
+fusion approach</span>.”</span>
+</div>
 <div id="ref-Kullback1951" class="csl-entry">
 Kullback, S., and R. A. Leibler. 1951. <span>“<span class="nocase">On
 Information and Sufficiency</span>.”</span> <em>The Annals of
 Mathematical Statistics</em> 22 (1): 79–86. <a href="https://doi.org/10.1214/AOMS/1177729694" class="external-link">https://doi.org/10.1214/AOMS/1177729694</a>.
-</div>
-<div id="ref-VanDijk2020" class="csl-entry">
-Van Dijk, Michiel, Ulrike Wood-Sichra, Yating Ru, Amanda Palazzo, Petr
-Havlik, and Liangzhi You. 2020. <span>“<span class="nocase">Mapping the
-change in crop distribution over time using a data fusion
-approach</span>.”</span>
 </div>
 <div id="ref-You2006" class="csl-entry">
 You, Liangzhi, and Stanley Wood. 2006. <span>“<span class="nocase">An
@@ -423,10 +426,10 @@ From census to grid</span>.”</span> <em>Agricultural Systems</em> 127:
 </div>
 <div id="ref-Yu2020" class="csl-entry">
 Yu, Qiangyi, Liangzhi You, Ulrike Wood-Sichra, Yating Ru, Alison K. B.
-Joglekar, Steffen Fritz, Wei Xiong, Wenbin Wu, and Peng Yang. 2020.
-<span>“<span class="nocase">A cultivated planet in 2010: 2. the global
-gridded agricultural production maps</span>.”</span> <em>Earth System
-Science Data</em>. https://doi.org/<a href="https://doi.org/10.5194/essd-2020-11" class="external-link">https://doi.org/10.5194/essd-2020-11</a>.
+Joglekar, Steffen Fritz, Wei Xiong, Miao Lu, Wenbin Wu, and Peng Yang.
+2020. <span>“<span class="nocase">A cultivated planet in 2010 – Part 2:
+The global gridded agricultural-production maps</span>.”</span>
+<em>Earth System Science Data</em> 12 (4): 3545–72. <a href="https://doi.org/10.5194/essd-12-3545-2020" class="external-link">https://doi.org/10.5194/essd-12-3545-2020</a>.
 </div>
 </div>
 </div>

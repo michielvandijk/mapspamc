@@ -6,8 +6,8 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
-  bib/mapspam.bib
-bibliography: bib/mapspam.bib
+  bib/mapspamc.bib
+bibliography: bib/mapspamc.bib
 ---
 
 ```{r, include = FALSE}
@@ -22,11 +22,11 @@ To create crop distribution maps with `mapspamc`, various [sources of data](data
 
 ## Location of raw data
 
-Raw data is stored in the `raw_data` folder. When the SPAMc is [setup](setup_model.html), you can specify the location of this folder. The default setting is to put it in the main SPAMc folder but you also have the possibility to create it somewhere else (e.g. a data server or external drive). This might be convenient when you have limited capacity on your local harddrive to store the required global maps, which can be large (i.e. several gigabytes!).
+Raw data is stored in the `raw_data` folder. When the `mapspamc` is [setup](setup_model.html), you can specify the location of this folder. The default setting is to put it in the main `mapspamc` folder but you also have the possibility to create it somewhere else (e.g. a data server or external drive). This might be convenient when you have limited capacity on your local harddrive to store the required global maps, which can be large (i.e. several gigabytes!).
 
-For practical reasons, we use separate subfolders for each data source. The only exception is the subnational agricultural statistics, which are all stored in one folder. The raw data subfolders for the core global datasets are automatically created when SPAMc is setup and therefore the names cannot be changed. However, if alternative and more detailed information is available from national sources (e.g. cropland map) you can create new folders in the `raw_data` folder to store the data.  
+For practical reasons, we use separate subfolders for each data source. The only exception is the subnational agricultural statistics, which are all stored in one folder. The raw data subfolders for the core global datasets are automatically created when `mapspamc` is setup and therefore the names cannot be changed. However, if alternative and more detailed information is available from national sources (e.g. cropland map) you can create new folders in the `raw_data` folder to store the data.  
 
-As you probably have not gone through the process of setting up the model yet, you can either create a temporary raw data folder structure now and copy the data to the SPAMc folder later or [setup the model](setup_model.html) first and save all the data directly in the correct location. In any case, the location of the raw data folder can be changed at any time so there is flexibility.   
+As you probably have not gone through the process of setting up the model yet, you can either create a temporary raw data folder structure now and copy the data to the `mapspamc` folder later or [setup the model](setup_model.html) first and save all the data directly in the correct location. In any case, the location of the raw data folder can be changed at any time so there is flexibility.   
 
 
 ## National agricultural statistics
@@ -62,9 +62,9 @@ Data from AQUASTAT is used to inform the share of irrigated crops in a country. 
 
 ## Subnational agricultural statistics
 
-Availability of subnational statistics greatly improve the crop allocation process in SPAMc. Four pieces of information are required:
+Availability of subnational statistics greatly improve the crop allocation process in `mapspamc`. Four pieces of information are required:
 
-- **Harvested area statistics.** Data on crop level harvested area at administrative unit level 1 and, if possible, level 2. SPAMc is designed to handle missing information at the subnational level so any data you can get is useful.
+- **Harvested area statistics.** Data on crop level harvested area at administrative unit level 1 and, if possible, level 2. `mapspamc` is designed to handle missing information at the subnational level so any data you can get is useful.
 
 - **Subnational administrative unit map.**. It is essential to have a map (e.g. shapefile or any other polygon format) with the location of the subnational administrative units that corresponds with the subnational statistics. These two sources of information need to be perfectly consistent or made consistent.
 
@@ -98,7 +98,7 @@ To demarcate the area where crops can be allocated a cropland extent is needed. 
 
 ### Global synergy cropland map for 2010
 
-If SPAMc is used to produce crop distribution maps for around 2010, it is possible to use a global synergy map produced by @Lu2020. This map was also used by for the global SPAM2010 [@@Yu2020]. The map, with a resolution of 500x500 meter, is constructed by means of the Self-adapting statistics allocation model (SASAM), which combines and ranks five different global cropland products: GlobeLand30, CCI-LC, GlobCover 2009, MODIS C5, and the Unified Cropland Layer, as well as several region cropland products, e.g. CORINE land cover for Europe for cropland maps for Australia and China. After harmonization of cropland classes, resolution and projection, cropland area statistics from FAOSTAT are used to rank the cropland maps and construct a scoring table that reflects the agreement among the datasets. In addition, maps are produced that contain the medium and maximum cropland area per grid cell.
+If `mapspamc` is used to produce crop distribution maps for around 2010, it is possible to use a global synergy map produced by @Lu2020. This map was also used by for the global SPAM2010 [@@Yu2020]. The map, with a resolution of 500x500 meter, is constructed by means of the Self-adapting statistics allocation model (SASAM), which combines and ranks five different global cropland products: GlobeLand30, CCI-LC, GlobCover 2009, MODIS C5, and the Unified Cropland Layer, as well as several region cropland products, e.g. CORINE land cover for Europe for cropland maps for Australia and China. After harmonization of cropland classes, resolution and projection, cropland area statistics from FAOSTAT are used to rank the cropland maps and construct a scoring table that reflects the agreement among the datasets. In addition, maps are produced that contain the medium and maximum cropland area per grid cell.
 
 - Download the [@UPDATE] maps from the [Harvard Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZWSFAA) and save the files in the `raw_data/sasam` folder.
 
@@ -128,14 +128,14 @@ Similar to the synergy cropland map, we need information on the location of irri
 
 ## Biophysical suitability and potential yield
 
-Spatially explicit information on the biophysical suitability and related potential yield of crops is a key factor to inform the allocation of crops in SPAMc. We use data the latest version of the global agro-ecological zones (GAEZ) data (version 3.0) as a source of information.^[It is expected that the results for GAEZv4 will be published soon. We will update this section when new data is available.] The [GAEZ](http://www.fao.org/nr/gaez/en/) website provides background data on the data. As downloading bulk information from this website is problematic, we stored the relevant GAEZ maps in a data repository.^[This is work in progress. Please contact Michiel van Dijk (michiel.vandijk@iiasa.ac.at) to obtain the maps].
+Spatially explicit information on the biophysical suitability and related potential yield of crops is a key factor to inform the allocation of crops in `mapspamc`. We use data the latest version of the global agro-ecological zones (GAEZ) data (version 3.0) as a source of information.^[It is expected that the results for GAEZv4 will be published soon. We will update this section when new data is available.] The [GAEZ](http://www.fao.org/nr/gaez/en/) website provides background data on the data. As downloading bulk information from this website is problematic, we stored the relevant GAEZ maps in a data repository.^[This is work in progress. Please contact Michiel van Dijk (michiel.vandijk@iiasa.ac.at) to obtain the maps].
 
 - Download the biophysical suitability and potential yield maps and save the files in the `raw_data/gaez` folder.
 
 
 ## Accessibility
 
-We use global maps of travel time to major cities as a proxy for accesibility of cropland. To take into account changes in infrastructure over time, we use two products that each represent a different period. @Nelson2008 presents a global travel time map for 2000 and @Weiss2018 presents a comparable product for 2015. SPAMc selects the older product if the model is run for using data before 2008, the midpoint between the two maps. So in case the model is run for 2008 or later, there is no need to download the map produced by @Nelson2008.
+We use global maps of travel time to major cities as a proxy for accesibility of cropland. To take into account changes in infrastructure over time, we use two products that each represent a different period. @Nelson2008 presents a global travel time map for 2000 and @Weiss2018 presents a comparable product for 2015. `mapspamc` selects the older product if the model is run for using data before 2008, the midpoint between the two maps. So in case the model is run for 2008 or later, there is no need to download the map produced by @Nelson2008.
 
 - Download the Accessibility to cities 2015  map (raster format) from [here](https://malariaatlas.org/research-project/accessibility_to_cities), unzip and save all files it in the `raw_data/travel_time_2015` folder. Make sure not to use any subfolders! 
 
@@ -144,7 +144,7 @@ We use global maps of travel time to major cities as a proxy for accesibility of
 
 ## Rural population
 
-We use to two sources of information to create a map of a country's rural population.  The first is [WorldPop](https://www.worldpop.org/), which presents time series for gridded population. WorldPop maps were generated by applying a machine learning approach to downscale subnational population information. The second source is the [Global Rural-Urban Mapping Project (GRUMPv1)](https://sedac.ciesin.columbia.edu/data/collection/grump-v1), which present polygon information on urban areas that are identified by the extent of the nighttime lights and approximated urban extents (circles) based on buffered settlement points.^[GRUMP is a somewhat outdated product as it presents data for the year 1995. We aim to replace it by a more recent source in the future. SPAMc combines the Worldpop and GRUMP datasets to create a map of rural population.
+We use to two sources of information to create a map of a country's rural population.  The first is [WorldPop](https://www.worldpop.org/), which presents time series for gridded population. WorldPop maps were generated by applying a machine learning approach to downscale subnational population information. The second source is the [Global Rural-Urban Mapping Project (GRUMPv1)](https://sedac.ciesin.columbia.edu/data/collection/grump-v1), which present polygon information on urban areas that are identified by the extent of the nighttime lights and approximated urban extents (circles) based on buffered settlement points.^[GRUMP is a somewhat outdated product as it presents data for the year 1995. We aim to replace it by a more recent source in the future. `mapspamc` combines the Worldpop and GRUMP datasets to create a map of rural population.
 
 
 ### Gridded population
