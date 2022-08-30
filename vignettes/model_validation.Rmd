@@ -1,8 +1,8 @@
 ---
-title: "Validation"
+title: "6. Model validation"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Validation}
+  %\VignetteIndexEntry{6. Model validation}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
@@ -17,4 +17,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-VALIDATION
+# Model validation
+
+To add

@@ -1,8 +1,8 @@
 ---
-title: "Prepare input data"
+title: "4. Model preparation"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Prepare input data}
+  %\VignetteIndexEntry{4. Model preparation}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:

@@ -1,8 +1,8 @@
 ---
-title: "Pre-processing - irrigated area"
+title: "2.4. Pre-processing - irrigated area"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Pre-processing - irrigated area}
+  %\VignetteIndexEntry{2.4. Pre-processing - irrigated area}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

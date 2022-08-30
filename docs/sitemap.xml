@@ -4,43 +4,13 @@
     <loc>https://michielvandijk.github.io/mapspamc/404.html</loc>
   </url>
   <url>
-    <loc>https://michielvandijk.github.io/mapspamc/articles/add_crop_in_globiom.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/articles/add_new_crop_to_globiom.html</loc>
-  </url>
-  <url>
     <loc>https://michielvandijk.github.io/mapspamc/articles/appendix.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/articles/appendix_b.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/articles/collect_input_data.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/articles/combine_input_data.html</loc>
   </url>
   <url>
     <loc>https://michielvandijk.github.io/mapspamc/articles/country_examples.html</loc>
   </url>
   <url>
-    <loc>https://michielvandijk.github.io/mapspamc/articles/create_synergy_cropland.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/articles/create_synergy_irrigated_area.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/articles/create_synergy_ir_area.html</loc>
-  </url>
-  <url>
     <loc>https://michielvandijk.github.io/mapspamc/articles/crop_distribution_maps.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/articles/data.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/articles/harmonize_input_data.html</loc>
   </url>
   <url>
     <loc>https://michielvandijk.github.io/mapspamc/articles/index.html</loc>
@@ -64,13 +34,10 @@
     <loc>https://michielvandijk.github.io/mapspamc/articles/model_setup.html</loc>
   </url>
   <url>
-    <loc>https://michielvandijk.github.io/mapspamc/articles/model_structure.html</loc>
-  </url>
-  <url>
     <loc>https://michielvandijk.github.io/mapspamc/articles/model_validation.html</loc>
   </url>
   <url>
-    <loc>https://michielvandijk.github.io/mapspamc/articles/post_process.html</loc>
+    <loc>https://michielvandijk.github.io/mapspamc/articles/postprocessing.html</loc>
   </url>
   <url>
     <loc>https://michielvandijk.github.io/mapspamc/articles/post_processing.html</loc>
@@ -88,31 +55,7 @@
     <loc>https://michielvandijk.github.io/mapspamc/articles/preprocessing_subnational_statistics.html</loc>
   </url>
   <url>
-    <loc>https://michielvandijk.github.io/mapspamc/articles/process_spatial_data.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/articles/process_subnational_statistics.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/articles/process_subnatnational_statistics.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/articles/process_subnat_stat.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/articles/replace_globiom_land_cover_land_use.html</loc>
-  </url>
-  <url>
     <loc>https://michielvandijk.github.io/mapspamc/articles/run_model.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/articles/setup_model.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/articles/template.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/articles/validation.html</loc>
   </url>
   <url>
     <loc>https://michielvandijk.github.io/mapspamc/authors.html</loc>
@@ -187,9 +130,6 @@
     <loc>https://michielvandijk.github.io/mapspamc/reference/harvest_results.html</loc>
   </url>
   <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/hello.html</loc>
-  </url>
-  <url>
     <loc>https://michielvandijk.github.io/mapspamc/reference/index.html</loc>
   </url>
   <url>
@@ -218,9 +158,6 @@
   </url>
   <url>
     <loc>https://michielvandijk.github.io/mapspamc/reference/prepare_cropland.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/prepare_cropland_tp1.html</loc>
   </url>
   <url>
     <loc>https://michielvandijk.github.io/mapspamc/reference/prepare_irrigated_area.html</loc>
@@ -260,9 +197,6 @@
   </url>
   <url>
     <loc>https://michielvandijk.github.io/mapspamc/reference/set_spam_par.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/spamc_par.html</loc>
   </url>
   <url>
     <loc>https://michielvandijk.github.io/mapspamc/reference/spam_par.html</loc>

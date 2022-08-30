@@ -27,8 +27,9 @@ The articles in the Background section provide general information on
 approaches to create [crop distribution
 maps](articles/crop_distribution_maps.html), the
 [model](articles/model_description.html), [input
-data](articles/data.html) and an [Appendix](articles/appendix.html) with
-additional information on specific topics.
+data](articles/input_data.html) and an
+[appendix](articles/appendix.html) with additional information on
+specific topics.
 
 ## Installation
 
@@ -75,8 +76,8 @@ into nine smaller steps in the Run mapspamc section.
     area](articles/pre_processing_irrigated_area.html)
 -   [3. Model preparation](articles/model_preparation.html)
 -   [4. Running the model](articles/run_model.html)
--   [5. Post-processing](articles/post_processing.html)
--   [6. model validation](model_validation.html)
+-   [5. Post-processing](articles/postprocessing.html)
+-   [6. Model validation](articles/model_validation.html)
 
 ## References
 

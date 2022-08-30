@@ -1,8 +1,8 @@
 ---
-title: "Running the model"
+title: "5. Running the model"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Running the model}
+  %\VignetteIndexEntry{5. Running the model}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:

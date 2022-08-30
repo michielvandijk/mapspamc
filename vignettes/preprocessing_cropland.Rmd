@@ -1,8 +1,8 @@
 ---
-title: "Pre-processing - cropland"
+title: "2.3. Pre-processing - cropland"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Pre-processing - cropland}
+  %\VignetteIndexEntry{2.3. Pre-processing - cropland}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
