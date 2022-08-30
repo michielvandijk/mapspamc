@@ -40,9 +40,6 @@
     <loc>https://michielvandijk.github.io/mapspamc/articles/postprocessing.html</loc>
   </url>
   <url>
-    <loc>https://michielvandijk.github.io/mapspamc/articles/post_processing.html</loc>
-  </url>
-  <url>
     <loc>https://michielvandijk.github.io/mapspamc/articles/preprocessing_cropland.html</loc>
   </url>
   <url>
@@ -79,9 +76,6 @@
     <loc>https://michielvandijk.github.io/mapspamc/reference/align_raster.html</loc>
   </url>
   <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/check_stat.html</loc>
-  </url>
-  <url>
     <loc>https://michielvandijk.github.io/mapspamc/reference/check_statistics.html</loc>
   </url>
   <url>
@@ -103,31 +97,16 @@
     <loc>https://michielvandijk.github.io/mapspamc/reference/create_folders.html</loc>
   </url>
   <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/create_globiom_input.html</loc>
-  </url>
-  <url>
     <loc>https://michielvandijk.github.io/mapspamc/reference/create_grid.html</loc>
   </url>
   <url>
     <loc>https://michielvandijk.github.io/mapspamc/reference/create_model_template.html</loc>
   </url>
   <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/create_spam_folders.html</loc>
-  </url>
-  <url>
     <loc>https://michielvandijk.github.io/mapspamc/reference/create_statistics_template.html</loc>
   </url>
   <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/harmonize_cl.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/harmonize_ia.html</loc>
-  </url>
-  <url>
     <loc>https://michielvandijk.github.io/mapspamc/reference/harmonize_inputs.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/harvest_results.html</loc>
   </url>
   <url>
     <loc>https://michielvandijk.github.io/mapspamc/reference/index.html</loc>
@@ -136,25 +115,10 @@
     <loc>https://michielvandijk.github.io/mapspamc/reference/load_data.html</loc>
   </url>
   <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/load_input.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/load_intermediate_data.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/mapspam2globiom-package.html</loc>
-  </url>
-  <url>
     <loc>https://michielvandijk.github.io/mapspamc/reference/mapspamc-package.html</loc>
   </url>
   <url>
     <loc>https://michielvandijk.github.io/mapspamc/reference/mapspamc_par.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/plus.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/prepare_bs_yg.html</loc>
   </url>
   <url>
     <loc>https://michielvandijk.github.io/mapspamc/reference/prepare_cropland.html</loc>
@@ -163,22 +127,10 @@
     <loc>https://michielvandijk.github.io/mapspamc/reference/prepare_irrigated_area.html</loc>
   </url>
   <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/prepare_ir_area.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/prepare_pa_stat.html</loc>
-  </url>
-  <url>
     <loc>https://michielvandijk.github.io/mapspamc/reference/prepare_physical_area.html</loc>
   </url>
   <url>
     <loc>https://michielvandijk.github.io/mapspamc/reference/prepare_priors_and_scores.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/prepare_score.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/prepare_scores.html</loc>
   </url>
   <url>
     <loc>https://michielvandijk.github.io/mapspamc/reference/rasterize_adm_map.html</loc>
@@ -187,39 +139,9 @@
     <loc>https://michielvandijk.github.io/mapspamc/reference/reaggregate_statistics.html</loc>
   </url>
   <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/rebalance_stat.html</loc>
-  </url>
-  <url>
     <loc>https://michielvandijk.github.io/mapspamc/reference/run_mapspamc.html</loc>
   </url>
   <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/run_spam.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/set_spam_par.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/spam_par.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/split_harmonized_inputs.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/split_statistics.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/validate_spam_par.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/view_4panel.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/view_panel.html</loc>
-  </url>
-  <url>
     <loc>https://michielvandijk.github.io/mapspamc/reference/view_results.html</loc>
-  </url>
-  <url>
-    <loc>https://michielvandijk.github.io/mapspamc/reference/view_stack.html</loc>
   </url>
 </urlset>

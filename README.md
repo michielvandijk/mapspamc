@@ -18,13 +18,13 @@ package](https://github.com/michielvandijk/mapspamc) is to facilitate
 the creation of country level crop distribution maps. The model builds
 on the global version of the [Spatial Production Allocation model
 (SPAM)](www.mapspam.info) (You and Wood 2006; You, Wood, and Wood-Sichra
-2009; You et al. 2014; Yu et al. 2020), which uses an cross-entropy
+2009; You et al. 2014; Yu et al. 2020), which uses a cross-entropy
 optimization approach to ‘pixelate’ national and subnational crop
 statistics on a spatial grid at a resolution of 5 arcmin (\~ 10 x 10
-km). `mapspamc` provides the necessary infrastructure to run the Spatial
-Production Allocation Model at the country level and makes it possible
-to incorporate national sources of information and potentially create
-maps at a higher resolution of 30 arcsec (Dijk et al. 2022).
+km). `mapspamc` provides the necessary infrastructure to run SPAM at the
+country level and makes it possible to incorporate national sources of
+information and potentially create maps at a higher resolution of 30
+arcsec (Dijk et al. 2022).
 
 ## References
 
