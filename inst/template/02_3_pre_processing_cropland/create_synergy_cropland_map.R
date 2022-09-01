@@ -23,8 +23,8 @@ copernicus <- rast(file.path(param$model_path,
                              glue("processed_data/maps/cropland/{param$res}/cropland_copernicus_{param$res}_{param$year}_{param$iso3c}.tif")))
 
 # Rank table
-st_raw <- read_excel(file.path(param$model_path,
-                               glue("synergy_cropland_rank_table/synergy_rank_rank_table_{param$year}.xlsx")),
+st_raw <- read_excel(file.path(param$db_path,
+                               glue("synergy_cropland_rank_table/synergy_cropland_rank_table_{param$year}.xlsx")),
                      sheet = "table")
 
 
