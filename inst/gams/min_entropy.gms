@@ -1,10 +1,10 @@
 *******************************************************************************
-********************               SPAMc                   ********************
+********************               mapspamc                   *****************
 *******************************************************************************
 
 $ontext
 min_entropy version of the Spatial Production Allocation Model for Country
-level assessments (SPAMc)at various resolutions.
+level assessments (mapspamc)at various resolutions.
 
 The input (gdx_input) and output (gdx_output) data files are parameters and
 need to be set before the code can be run.

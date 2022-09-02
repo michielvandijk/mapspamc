@@ -268,3 +268,11 @@ Also need a function that compares if adm_list is consistent between ci, fs and 
 
 # Naming if files
 Names of intermediate files is not completely consistent with model type (misses adm and solve level. Perhaps add to file name in some sort of short form?)
+
+# Log file
+- use log package
+- combine logs of ADM level solutions in one file as well
+
+# Solve level 1
+- Before combining different GDX results file, check whether the gdx results file exists. If not give a warning that that ADM model was not properly solved (infeasible) and requires attention.
+- Export run_gams_adm_level as this is convenient to run a separate ADM when something went wrong.

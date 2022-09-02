@@ -1,10 +1,10 @@
 *******************************************************************************
-********************               SPAMc                   ********************
+********************               mapspamc                ********************
 *******************************************************************************
 
 $ontext
 max_score version of the Spatial Production Allocation Model for Country
-level assessments (SPAMc)at various resolutions.
+level assessments (mapspamc) at various resolutions.
 
 The input (gdx_input) and output (gdx_output) data files are parameters and
 need to be set before the code can be run.
@@ -99,8 +99,6 @@ abort$sum(system_grid(i,j)$(scores(i,j) < 0), 1) "score should be positive", sco
 *******************************************************************************
 
 * Initialize report
-report('min_all_slack', 'mstat') = 13;
-report('min_all_slack', 'sstat') = 13;
 report('max_score', 'mstat') = 13;
 report('max_score', 'sstat') = 13;
 
