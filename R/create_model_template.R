@@ -17,11 +17,7 @@
 #'the RStudio project. Note that `create_model_template()` only copies files if they do not exist
 #'yet. In this way, the user cannot accidently replace already modified scripts.
 #'
-#'@param template_path folder where template scripts will be copied. the Object of type `mapspamc_par` that bundles all `mapspamc` parameters,
-#'  including core model folders, alpha-3 country code, year, spatial
-#'  resolution, most detailed level at which subnational statistics are
-#'  available, administrative unit level at which the model is solved and type of
-#'  model.
+#'@param template_path folder where template scripts will be copied.
 #'
 #'@examples
 #'\dontrun{
