@@ -9,10 +9,9 @@
 #'@details
 #'`mapspamc_par` creates an object of class `mapspamc_par`, which bundles all required
 #'`mapspamc` parameters set by the user: model folder, location of the input database folder,
-#'country alpha-3 code and name, year, spatial resolution, most detailed level at which
-#'subnational statistics are available, administrative unit level at which the
-#'model is solved, type of model, three digit country code and
-#'continent. The coordinate reference system is automatically set to WGS84
+#'country alpha-3 code, country name, continent, year, spatial resolution, most detailed level at which
+#'subnational statistics are available and administrative unit level at which the
+#'model is solved, type of model. The coordinate reference system is automatically set to WGS84
 #'(epsg:4326).
 #'
 #'If GAMS is properly installed, the GAMS executable is automatically found,
@@ -33,8 +32,8 @@
 #'@param iso3c character string with the three letter ISO 3166-1 alpha-3 country
 #'  code, also referred to as iso3c. A list of country codes can be found in
 #'  [Wikipedia](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3).
-#'@param year numeric with the reference year for SPAM.
-#'@param res character with the resolution of SPAM. Accepted inputs are "5min"
+#'@param year numeric with the reference year of the model.
+#'@param res character with the resolution of the model. Accepted inputs are "5min"
 #'  (default) and "30sec".
 #'@param adm_level integer with the level up to which subnational statistics are
 #'  available. Accepted inputs are 0 (only national level data), 1 (national
