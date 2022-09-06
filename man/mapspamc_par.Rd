@@ -28,9 +28,9 @@ mapspamc_db folder is automatically created in the model folder.}
 code, also referred to as iso3c. A list of country codes can be found in
 \href{https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3}{Wikipedia}.}
 
-\item{year}{numeric with the reference year for SPAM.}
+\item{year}{numeric with the reference year of the model.}
 
-\item{res}{character with the resolution of SPAM. Accepted inputs are "5min"
+\item{res}{character with the resolution of the model. Accepted inputs are "5min"
 (default) and "30sec".}
 
 \item{adm_level}{integer with the level up to which subnational statistics are
@@ -58,10 +58,9 @@ statistics, solve level, type of model and location of GAMS.
 \details{
 \code{mapspamc_par} creates an object of class \code{mapspamc_par}, which bundles all required
 \code{mapspamc} parameters set by the user: model folder, location of the input database folder,
-country alpha-3 code and name, year, spatial resolution, most detailed level at which
-subnational statistics are available, administrative unit level at which the
-model is solved, type of model, three digit country code and
-continent. The coordinate reference system is automatically set to WGS84
+country alpha-3 code, country name, continent, year, spatial resolution, most detailed level at which
+subnational statistics are available and administrative unit level at which the
+model is solved, type of model. The coordinate reference system is automatically set to WGS84
 (epsg:4326).
 
 If GAMS is properly installed, the GAMS executable is automatically found,

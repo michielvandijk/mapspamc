@@ -7,11 +7,7 @@
 create_model_template(template_path = NULL)
 }
 \arguments{
-\item{template_path}{folder where template scripts will be copied. the Object of type \code{mapspamc_par} that bundles all \code{mapspamc} parameters,
-including core model folders, alpha-3 country code, year, spatial
-resolution, most detailed level at which subnational statistics are
-available, administrative unit level at which the model is solved and type of
-model.}
+\item{template_path}{folder where template scripts will be copied.}
 }
 \description{
 \code{create_model_template} creates a folder structure with template R scripts to implement the various
