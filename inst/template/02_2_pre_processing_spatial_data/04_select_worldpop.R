@@ -17,7 +17,8 @@ load_data(c("adm_map", "grid"), param)
 # WorldPop presents population density per grid cell (in this case 30 arcsec, the resolution of the map).
 # In order to use the map at higher resolutions (e.g. 5 arcmin) we need to resample using
 # the average option and multiply by 100, the number of 30sec grid cells in 5 arcmin.
-# Note that WorldPop presents annual maps so make sure you download WorldPop map for the year set in param!
+# Note that WorldPop presents annual maps. Please select the map that is closest to your
+# target year.
 
 input <- file.path(param$db_path, glue("worldpop/ppp_{param$year}_1km_Aggregated.tif"))
 

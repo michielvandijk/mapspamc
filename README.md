@@ -26,6 +26,15 @@ country level and makes it possible to incorporate national sources of
 information and potentially create maps at a higher resolution of 30
 arcsec (Dijk et al. 2022).
 
+## Installation
+
+To install `mapspamc`:
+
+``` r
+install.packages("remotes")
+remotes::install_github("michielvandijk/mapspamc")
+```
+
 ## References
 
 <div id="refs" class="references csl-bib-body hanging-indent">

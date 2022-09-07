@@ -12,24 +12,24 @@ source(here::here("01_model_setup/01_model_setup.r"))
 # LOAD DATA ------------------------------------------------------------------------------
 load_data(c("adm_map"), param)
 
+# urban extent, select country
+grump_raw <- read_sf(file.path(param$db_path, "grump/global_urban_extent_polygons_v1.01.shp"))
+
 
 # PROCESS --------------------------------------------------------------------------------
-# Note that glh_smod presents annual maps. Please select the map that is closest to your
-# target year.
-
-# Create country polygon with clumps of urban areas
-input <- file.path(param$db_path, glue("ghs_smod/ghs_smod_{param$year}.tif"))
-output <- crop(rast(input), vect(adm_map), mask = TRUE)
-output <- patches(output, directions = 8, zeroAsNA = TRUE)
-output <- st_as_sf(as.polygons(output))
-plot(output$geometry)
+grump <- grump_raw %>%
+  filter(ISO3 == param$iso3c)
+plot(adm_map$geometry)
+plot(grump$geometry, col = "red", add = T)
 
 
 # SAVE -----------------------------------------------------------------------------------
 temp_path <- file.path(param$model_path, glue("processed_data/maps/population/{param$res}"))
 dir.create(temp_path, showWarnings = FALSE, recursive = TRUE)
-saveRDS(output, file.path(temp_path, glue("urb_{param$year}_{param$iso3c}.rds")))
+saveRDS(grump, file.path(temp_path, glue("urb_{param$year}_{param$iso3c}.rds")))
 
 
 # CLEAN UP -------------------------------------------------------------------------------
-rm(input, output, adm_map, temp_path)
+rm(adm_map, grump, grump_raw, temp_path)
+
+
