@@ -15,6 +15,3 @@ same class as \code{df}.
 \description{
 Reaggregates subnational statistics from the bottom up so they are consistent
 }
-\examples{
-
-}

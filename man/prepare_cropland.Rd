@@ -11,6 +11,3 @@ Combines all elements of the synergy cropland extent (median and maximum croplan
 with information on the location of the subnational units and fixes potential inconsistencies
 (e.g. cropland area larger than grid cell size).
 }
-\examples{
-
-}

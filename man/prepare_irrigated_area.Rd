@@ -11,6 +11,3 @@ Combines all elements of the synergy irrigated area extent (maximum irrigated ar
 with information on the location of the subnational units and fixes potential inconsistencies
 (e.g. irrigated area larger than grid cell size).
 }
-\examples{
-
-}

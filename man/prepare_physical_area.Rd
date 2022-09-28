@@ -20,6 +20,3 @@ format: (1) physical area (pa) and (2) physical area broken down by farming
 systems (pa_fs). Results are saved in the subfolders that are located in the
 the \code{processed_data/intermediate} folder.
 }
-\examples{
-
-}
