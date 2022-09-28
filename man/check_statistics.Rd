@@ -17,3 +17,6 @@ data.frame \code{df} when out is set to \code{TRUE}
 \description{
 Subnational statistics must be of class \code{subnat}
 }
+\examples{
+
+}
