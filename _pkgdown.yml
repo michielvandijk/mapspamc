@@ -1,13 +1,12 @@
 home:
   title: mapspamc
-  description: R package to create crop distribution maps as input for GLOBIOM.
+  description: R package to create crop distribution maps.
 
+url: https://michielvandijk.github.io/mapspamc/
 template:
   params:
     bootswatch: flatly
 
-destination: docs
-url: https://michielvandijk.github.io/mapspamc
 navbar:
   structure:
     left:
