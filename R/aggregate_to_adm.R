@@ -9,9 +9,7 @@
 #' subnational information at the most detailed level available is a validation of the alternative model and,
 #' indirectly, also of the target model.
 #'
-#'@param param
-#'@inheritParams create_mapspamc_folders
-#'
+#'@inheritParams create_folders
 #'@param alt_param Object of type spamc_par that bundles all `mapspamc` parameters, including core model folders,
 #'alpha-3 country code, year, spatial resolution, most detailed level at which subnational statistics are
 #'available, administrative unit level at which the model is solved and type of model.
@@ -21,7 +19,9 @@
 #'
 #'@examples
 #'\dontrun{
+#'aggregate_to_adm(param, alt_param)
 #'}
+#'
 #'@export
 aggregate_to_adm <- function(param, alt_param){
     stopifnot(inherits(param, "mapspamc_par"))

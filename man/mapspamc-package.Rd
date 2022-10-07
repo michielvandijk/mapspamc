@@ -12,6 +12,7 @@ The aim of the mapspamc R package is to facilitate the creation of country level
 Useful links:
 \itemize{
   \item \url{https://github.com/michielvandijk/mapspamc}
+  \item \url{https://michielvandijk.github.io/mapspamc/}
   \item Report bugs at \url{https://github.com/michielvandijk/mapspamc/issues}
 }
 

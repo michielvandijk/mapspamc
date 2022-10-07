@@ -12,8 +12,7 @@
 #'  computer runs out of memory and an error message will be printed in the
 #'  model log.
 #'
-#'@param param
-#'@inheritParams create_mapspamc_folders
+#'@inheritParams create_folders
 #'@param out logical; should the GAMS model log be send to the screen as output?
 #'
 #'@examples

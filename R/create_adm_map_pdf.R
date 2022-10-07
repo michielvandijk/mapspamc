@@ -8,8 +8,7 @@
 #'the location of administrative units, that needs to be created first by the
 #'user (see Articles).
 #'
-#'@param
-#'@inheritParams create_grid
+#'@inheritParams create_folders
 #'@param font_size Parameter to specify the font size of administrative unit
 #'  name that is plotted on the map (default size = 3). If names are long or
 #'  administrative unit polygons are small, the labels may get cluttered. Better

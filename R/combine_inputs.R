@@ -17,8 +17,7 @@
 #'  missing data, followed by `ART` and the level for which data is missing and
 #'  ending with the crop for which data is not available.
 #'
-#'@param param
-#'@inheritParams create_mapspamc_folders
+#'@inheritParams create_folders
 #'
 #'@examples
 #'\dontrun{

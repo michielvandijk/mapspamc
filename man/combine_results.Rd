@@ -7,6 +7,12 @@
 combine_results(param, cut = 1e-04, out = FALSE)
 }
 \arguments{
+\item{param}{Object of type \code{mapspamc_par} that bundles all \code{mapspamc} parameters,
+including core model folders, alpha-3 country code, year, spatial
+resolution, most detailed level at which subnational statistics are
+available, administrative unit level at which the model is solved and type of
+model.}
+
 \item{cut}{numeric. Sets allocation smaller than a certain value to 0. The default is 0.0001 (1 m2).}
 
 \item{out}{logical; should the results be returned as output?}

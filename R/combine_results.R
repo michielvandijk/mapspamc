@@ -4,8 +4,7 @@
 #'  0`)  or multiple (`solve_level = 1`) gdx files into one single rds file, that can be
 #'  easily loaded into R. The file is saved in the `processed_data/results` folder.
 #'
-#'@param param
-#'@inheritParams create_mapspamc_folders
+#'@inheritParams create_folders
 #'@param cut numeric. Sets allocation smaller than a certain value to 0. The default is 0.0001 (1 m2).
 #'@param out logical; should the results be returned as output?
 #'@examples

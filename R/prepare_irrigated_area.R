@@ -6,10 +6,12 @@
 #'with information on the location of the subnational units and fixes potential inconsistencies
 #'(e.g. irrigated area larger than grid cell size).
 #'
-#'@param param
-#'@inheritParams create_grid
+#'@inheritParams create_folders
 #'
 #'@examples
+#'\dontrun{
+#'prepare_irrigated_area(param)
+#'}
 #'
 #'@export
 

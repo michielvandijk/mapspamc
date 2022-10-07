@@ -19,8 +19,7 @@
 #'
 #'@param type Character vector that refers to the type of template that needs to
 #'  be created. See details for allowed input.
-#'@param param
-#'@inheritParams create_mapspamc_folders
+#'@inheritParams create_folders
 #'
 #'@examples
 #'create_statistics_template(type = "ha", param)

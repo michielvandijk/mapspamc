@@ -5,7 +5,6 @@
 #' Function that compares and harmonizes the subnational physical area with gridded information on the
 #' location and extend of cropland and irrigated area.
 #'
-#' @param param
 #' @inheritParams create_grid
 #' @param cl_slackp percentage of total cropland that will be added when comparing
 #' physical area statistics to cropland extent.

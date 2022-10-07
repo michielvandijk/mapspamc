@@ -2,12 +2,14 @@
 #'Reaggregates subnational statistics from the bottom up so they are consistent
 #'
 #'@param df tbl or data.frame
-#'@param param
-#'@inheritParams create_mapspamc_folders
+#'@inheritParams create_folders
 #'
 #'@return same class as `df`.
 #'
 #'@examples
+#'\dontrun{
+#'reaggregate_statistics(df, param)
+#'}
 #'
 #'@export
 reaggregate_statistics <- function(df, param){

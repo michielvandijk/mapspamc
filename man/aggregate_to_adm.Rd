@@ -7,6 +7,12 @@
 aggregate_to_adm(param, alt_param)
 }
 \arguments{
+\item{param}{Object of type \code{mapspamc_par} that bundles all \code{mapspamc} parameters,
+including core model folders, alpha-3 country code, year, spatial
+resolution, most detailed level at which subnational statistics are
+available, administrative unit level at which the model is solved and type of
+model.}
+
 \item{alt_param}{Object of type spamc_par that bundles all \code{mapspamc} parameters, including core model folders,
 alpha-3 country code, year, spatial resolution, most detailed level at which subnational statistics are
 available, administrative unit level at which the model is solved and type of model.}
@@ -25,5 +31,7 @@ indirectly, also of the target model.
 }
 \examples{
 \dontrun{
+aggregate_to_adm(param, alt_param)
 }
+
 }

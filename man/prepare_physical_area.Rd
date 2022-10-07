@@ -6,6 +6,13 @@
 \usage{
 prepare_physical_area(param)
 }
+\arguments{
+\item{param}{Object of type \code{mapspamc_par} that bundles all \code{mapspamc} parameters,
+including core model folders, alpha-3 country code, year, spatial
+resolution, most detailed level at which subnational statistics are
+available, administrative unit level at which the model is solved and type of
+model.}
+}
 \description{
 To estimate the physical crop area for each farming system harvest area (ha)
 statistics are combined with information on farmings system shares (fs) and
@@ -21,5 +28,8 @@ systems (pa_fs). Results are saved in the subfolders that are located in the
 the \code{processed_data/intermediate} folder.
 }
 \examples{
+\dontrun{
+prepare_physical_area(param)
+}
 
 }

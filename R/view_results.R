@@ -12,8 +12,7 @@
 #'  one of the `mapspamc`  four letter crop codes.
 #'@param var Character. The variable to be plotted. `var` has to be physical
 #'  area (`"pa"`) or harvested area (`"ha"`).
-#'@param param
-#'@inheritParams create_mapspamc_folders
+#'@inheritParams create_folders
 #'@param viewer Logical. Should the default web browers be used to show the
 #'  maps? `FALSE` will show the maps in the RStudio viewer pane.
 #'@param polygon Logical; should the country polygon be overlayed?

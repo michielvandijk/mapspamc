@@ -6,6 +6,13 @@
 \usage{
 combine_inputs(param)
 }
+\arguments{
+\item{param}{Object of type \code{mapspamc_par} that bundles all \code{mapspamc} parameters,
+including core model folders, alpha-3 country code, year, spatial
+resolution, most detailed level at which subnational statistics are
+available, administrative unit level at which the model is solved and type of
+model.}
+}
 \description{
 Combines all inputs, including the harmonized cropland, irrigated
 area and statistics, and the scores/priors into one GAMS gdx file that can be

@@ -18,7 +18,7 @@
 #'
 #'@param x	object of class sf with the location of the administrative units
 #'  including an attribute table with information on how they are nested
-#'@inheritParams create_mapspamc_folders
+#'@inheritParams create_folders
 #'
 #'@examples
 #'\dontrun{

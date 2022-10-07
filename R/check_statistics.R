@@ -3,13 +3,15 @@
 #'Subnational statistics must be of class `subnat`
 #'
 #'@param df data.frame with subnational statistics at various levels in the long format
-#'@param param
-#'@inheritParams create_mapspamc_folders
+#'@inheritParams create_folders
 #'@param out logical; should the checking report be returned as output?
 #'
 #'@return data.frame `df` when out is set to `TRUE`
 #'
 #'@examples
+#'\dontrun{
+#'check_statistics(df, param)
+#'}
 #'
 #'@export
 check_statistics <- function(df, param, out = FALSE){

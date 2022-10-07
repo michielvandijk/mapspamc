@@ -6,8 +6,7 @@
 #'with locations of the subnational administrative units. This function creates
 #'this map and saves it into the `/processed_data/maps/adm/` folder.
 #'
-#'@param
-#'@inheritParams create_mapspamc_folders
+#'@inheritParams create_folders
 #'
 #'@return RasterLayer
 #'
@@ -15,6 +14,7 @@
 #'\dontrun{
 #'rasterize_adm_map(param)
 #'}
+#'
 #'@rawNamespace import(terra, except = arrow)
 #'@importFrom magrittr %>%
 #'@export

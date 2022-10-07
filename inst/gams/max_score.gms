@@ -41,9 +41,9 @@ scalars
 
 parameters
     report(*,*)     report on model performance
-    scores(i,j)      score per grid cell and crop-system
-    adm_area(k,s)   crop area per adm
-    cl(i)           crop cover per grid cell
+    scores(i,j)     score per grid cell and crop-system
+    adm_area(k,s)   crop area per administrative unit
+    cl(i)           cropland per grid cell
     crop_area(j)    total area per crop-system
     ir_area(i)      irrigated area per grid cell
     ir_crop(j)      total irrigated crop area
@@ -52,7 +52,7 @@ parameters
 ;
 
 variables
-    alloc(i,j)          allocation of crop j to plot i
+    alloc(i,j)          allocation of crop j to grid cell i
     adm_slack(k,s,sign) slack variable for adm area
     sum_score           weighted sum of score
     cl_slack(i)         slack for land cover
@@ -99,8 +99,8 @@ abort$sum(system_grid(i,j)$(scores(i,j) < 0), 1) "score should be positive", sco
 *******************************************************************************
 
 * Initialize report
-report('max_score', 'mstat') = 13;
-report('max_score', 'sstat') = 13;
+report('max_score', 'modelstat') = 13;
+report('max_score', 'solvestat') = 13;
 
 
 *******************************************************************************
@@ -121,9 +121,8 @@ alloc.up(i,j) = min(scalef, scalef*cl(i)/crop_area(j))$crop_area(j);
 
 * Objective function to allocate using score including slack
 * We add weights for the slack to ensure small adms receive smaller slack
-* We prefer to have s_slack over adm, cl and ir slack and therefore add weights
-* Of these slacks with weights we would like to minize ir and cl slack so add
-* a higher weight than for adm.
+* We prefer to have s and adm slack over cl and ir slack and therefore add weights
+* We would like to minize ir and cl slack and therefore add higher weights than for s and adm.
 slackweights(k,s)$adm_area(k,s) = 1/adm_area(k,s);
     obj_max_score.. sum_score =e= sum(system_grid(i,j), (1/scalef)*alloc(i,j)*scores(i,j)) -
     (sum(system_grid(i,j), (s_slack(i,j, 'plus') + s_slack(i,j, 'minus'))) +
@@ -163,7 +162,6 @@ ir_cover_slack(i)..
 * Constraint 5
 * Total allocation per crop should be equal to land use in adm
 * allow slack between adm_area and total allocation into (k,s)
-* CHECK: SPAM uses additional constraint on artificial adms, for which no slack is allowed
 *
 adm_stat_slack(m(k,s))..
  (1/scalef)*sum((l(k,i),n(s,j)), alloc(i,j)*crop_area(j)) =e=
@@ -236,15 +234,15 @@ if (max_score.modelstat > 2,
 *******************************************************************************
 
 parameters
-    ir_slack_l(i)                ir_slack
-    adm_slack_l(k,s,sign)        adm_slack
-    cl_slack_l(i)                cl_slack
-    s_slack_l(i,j,sign)          s_slack
-    sum_ir_slack_l               sum of ir_slack
-    sum_adm_slack_l              sum of adm_slack
-    sum_cl_slack_l               sum of cl_slack
-    sum_s_slack_l                sum of s_slack
-    sum_all_slack_l              sum of all_slack
+    ir_slack_l(i)                irrigated area slack
+    adm_slack_l(k,s,sign)        administrative unit slack
+    cl_slack_l(i)                cropland slack
+    s_slack_l(i,j,sign)          subsistence allocation slack
+    sum_ir_slack_l               sum of irrigated area slack
+    sum_adm_slack_l              sum of administrative unit slack
+    sum_cl_slack_l               sum of cropland slack
+    sum_s_slack_l                sum of subsistence allocation slack
+    sum_all_slack_l              sum of all slack
 ;
 
 
@@ -274,24 +272,23 @@ display sum_adm_slack_l;
 
 
 parameters
-    palloc(i,j)           Allocations
-    rur_pop_alloc(i,j)    Allocation based on rural population
+    alloc_ha(i,j) grid cell allocation per crop-system
 ;
 
 * Allocation
-palloc(i,j) = alloc.l(i,j)*crop_area(j)/scalef;
-rur_pop_alloc(i,j) = rur_pop_share(i,j)*crop_area(j);
-
+alloc_ha(i,j) = alloc.l(i,j)*crop_area(j)/scalef;
 
 * Reporting
-report('max_score', 'mstat') = max_score.modelstat;
-report('max_score', 'sstat') = max_score.solvestat;
+report('max_score', 'modelstat') = max_score.modelstat;
+report('max_score', 'solvestat') = max_score.solvestat;
 report('max_score', 'resusd') = max_score.resusd;
-report('min_all_slack', 'sum_all_slack') = sum_all_slack_l;
-report('min_all_slack', 'sum_adm_slack') = sum_adm_slack_l;
-report('min_all_slack', 'sum_cl_slack') = sum_cl_slack_l;
-report('min_all_slack', 'sum_ir_slack') = sum_ir_slack_l;
-report('min_all_slack', 'sum_s_slack') = sum_s_slack_l;
+report('max_score', 'scaling_factor') = scalef;
+report('max_score', 'sum_score_l') =  sum_score_l;
+report('max_score', 'sum_all_slack') = sum_all_slack_l;
+report('max_score', 'sum_adm_slack') = sum_adm_slack_l;
+report('max_score', 'sum_cl_slack') = sum_cl_slack_l;
+report('max_score', 'sum_ir_slack') = sum_ir_slack_l;
+report('max_score', 'sum_s_slack') = sum_s_slack_l;
 
 
 *******************************************************************************
@@ -299,8 +296,8 @@ report('min_all_slack', 'sum_s_slack') = sum_s_slack_l;
 *******************************************************************************
 
 execute_unload "%gdx_output%",
-adm_area, cl crop_area, scalef, ir_crop, ir_area, scores, rur_pop_share,
-alloc, palloc, report, sum_cl_slack_l, sum_adm_slack_l, sum_ir_slack_l, sum_s_slack_l, sum_score_l,
-ir_slack_l, adm_slack_l, s_slack_l, cl_slack_l, sum_all_slack_l, rur_pop_alloc;
+adm_area, cl, crop_area, ir_crop, ir_area, alloc_ha, report, ir_slack_l, adm_slack_l, cl_slack_l,
+scores, rur_pop_share;
+
 
 $onListing

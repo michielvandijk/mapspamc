@@ -6,11 +6,21 @@
 \usage{
 prepare_cropland(param)
 }
+\arguments{
+\item{param}{Object of type \code{mapspamc_par} that bundles all \code{mapspamc} parameters,
+including core model folders, alpha-3 country code, year, spatial
+resolution, most detailed level at which subnational statistics are
+available, administrative unit level at which the model is solved and type of
+model.}
+}
 \description{
 Combines all elements of the synergy cropland extent (median and maximum cropland per grid cell and rank),
 with information on the location of the subnational units and fixes potential inconsistencies
 (e.g. cropland area larger than grid cell size).
 }
 \examples{
+\dontrun{
+prepare_cropland(param)
+}
 
 }

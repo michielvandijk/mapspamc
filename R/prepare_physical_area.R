@@ -15,10 +15,12 @@
 #'systems (pa_fs). Results are saved in the subfolders that are located in the
 #'the `processed_data/intermediate` folder.
 #'
-#'@param param
 #'@inheritParams create_grid
 #'
 #'@examples
+#'\dontrun{
+#'prepare_physical_area(param)
+#'}
 #'
 #'@export
 prepare_physical_area <- function(param){

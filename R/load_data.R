@@ -38,8 +38,7 @@
 #'
 #'@param data character vector that refers to the data that is loaded. See
 #'  details for allowed input.
-#'@param
-#'@inheritParams create_grid
+#'@inheritParams create_folders
 #'@param local logical; should the data be loaded into the global (`TRUE`) or
 #'  local environment (`FALSE). Loading data into the local environment is only
 #'  relevant when the function is used in internal package functions.

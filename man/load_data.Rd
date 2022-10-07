@@ -10,6 +10,12 @@ load_data(data, param, local = FALSE, mess = TRUE)
 \item{data}{character vector that refers to the data that is loaded. See
 details for allowed input.}
 
+\item{param}{Object of type \code{mapspamc_par} that bundles all \code{mapspamc} parameters,
+including core model folders, alpha-3 country code, year, spatial
+resolution, most detailed level at which subnational statistics are
+available, administrative unit level at which the model is solved and type of
+model.}
+
 \item{local}{logical; should the data be loaded into the global (\code{TRUE}) or
 local environment (`FALSE). Loading data into the local environment is only
 relevant when the function is used in internal package functions.}

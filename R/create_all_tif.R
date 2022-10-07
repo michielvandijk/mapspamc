@@ -6,7 +6,6 @@
 #'was allocated by the model. Maps are both created for harvested (ha) and physical (pa) area. Files are
 #'saved in the `/processed_data/results/{model}/maps` folder.
 #'
-#'@param param
 #'@inheritParams create_grid
 #'
 #'@export

@@ -11,8 +11,7 @@
 #'grids at a resolution of 30 arcsec can become very large and might make some
 #'time to create. The file is saved in `/processed_data/maps/{resolution}/grid`
 #'
-#'@param param
-#'@inheritParams create_mapspamc_folders
+#'@inheritParams create_folders
 #'
 #'@examples
 #'\dontrun{

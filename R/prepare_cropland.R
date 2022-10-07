@@ -6,10 +6,12 @@
 #'with information on the location of the subnational units and fixes potential inconsistencies
 #'(e.g. cropland area larger than grid cell size).
 #'
-#'@param param
 #'@inheritParams create_grid
 #'
 #'@examples
+#'\dontrun{
+#'prepare_cropland(param)
+#'}
 #'
 #'@importFrom magrittr %>%
 #'@export
