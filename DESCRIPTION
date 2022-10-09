@@ -18,7 +18,7 @@ Description: The aim of the mapspamc R package is to facilitate the
     at a resolution of 5 arcmin. mapspamc was specifically developed to support
     country level analysis and makes it possible to incorporate national
     sources of information and create maps at a higher resolution of 30
-    arcsec. 
+    arc seconds. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

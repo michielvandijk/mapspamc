@@ -132,6 +132,14 @@
 <dd><p>data.frame with subnational statistics at various levels in the long format</p></dd>
 
 
+<dt>param</dt>
+<dd><p>Object of type <code>mapspamc_par</code> that bundles all <code>mapspamc</code> parameters,
+including core model folders, alpha-3 country code, year, spatial
+resolution, most detailed level at which subnational statistics are
+available, administrative unit level at which the model is solved and type of
+model.</p></dd>
+
+
 <dt>out</dt>
 <dd><p>logical; should the checking report be returned as output?</p></dd>
 
@@ -147,8 +155,10 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">check_statistics</span><span class="op">(</span><span class="va">df</span>, <span class="va">param</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

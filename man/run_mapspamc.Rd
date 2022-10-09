@@ -4,7 +4,7 @@
 \alias{run_mapspamc}
 \title{Runs crop allocation algorithm at the set administrative unit level}
 \usage{
-run_mapspamc(param, out = TRUE)
+run_mapspamc(param, solver = NULL, out = TRUE)
 }
 \arguments{
 \item{param}{Object of type \code{mapspamc_par} that bundles all \code{mapspamc} parameters,
@@ -12,6 +12,9 @@ including core model folders, alpha-3 country code, year, spatial
 resolution, most detailed level at which subnational statistics are
 available, administrative unit level at which the model is solved and type of
 model.}
+
+\item{solver}{Name of the solver that is used by GAMS. If left blank, the default solvers are selected,
+see Details for more information.}
 
 \item{out}{logical; should the GAMS model log be send to the screen as output?}
 }
@@ -28,9 +31,23 @@ lot of time to run. If the model is very large, there is a risk your
 computer runs out of memory and an error message will be printed in the
 model log.
 }
+\details{
+The default solvers for \code{run_mapspamc} are CONOPT4 for the cross-entropy model and
+CPLEX for the max_score model. CONOPT4 was developed to solve large
+non-linear problems, including cross-entropy, whereas CPLEX was designed to solve large linear problems,
+such as the max_score model. For more information see the CONOPT4 documentation
+\href{https://www.gams.com/latest/docs/S_CONOPT4.html}{here} and the CPLEX documentation
+\href{https://www.gams.com/latest/docs/S_CPLEX.html}{here}.
+
+It depends on the GAMS license of the user if these solvers are available. For the cross-entropy model,
+the user can select several alternative solvers: IPOPT, IPOPTH and CONOPT by setting the solver argument.
+Note, however, that in comparison with CONOPT4, these three solvers should inferior performance and were
+often not able to solve the model. Also note that selecting a solver for which the user does not have a
+license will result in a GAMS error, causing problems in further steps to create the crop distribution maps.
+}
 \examples{
 \dontrun{
-run_mapspamc(param, out = FALSE)
+run_mapspamc(param, solver = "CONOPT4", out = FALSE)
 }
 
 }

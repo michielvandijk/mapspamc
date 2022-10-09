@@ -190,7 +190,6 @@ option
     limcol = 5
     solprint = off
     sysout = off
-    nlp = IPOPT
     reslim = 900000
 ;
 

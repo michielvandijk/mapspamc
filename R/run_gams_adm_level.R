@@ -1,5 +1,5 @@
 # Function to run mapspam in gams
-run_gams_adm_level <- function(ac, param, out = TRUE){
+run_gams_adm_level <- function(ac, solver = solver, param, out = TRUE){
   cat("\nSolving",  param$model, "model for", ac)
   gams_model <- system.file("gams", glue::glue("{param$model}.gms"), package = "mapspamc", mustWork = TRUE)
 
@@ -16,6 +16,19 @@ run_gams_adm_level <- function(ac, param, out = TRUE){
   logf <- file.path(param$model_path,
       glue::glue("processed_data/intermediate_output/{model_folder}/{ac}/spamc_{param$model}_{param$res}_{param$year}_{ac}_{param$iso3c}.log"))
 
+  if(is.null(solver)){
+    if(param$model == "min_entropy"){
+      solver_sel <- "CONOPT4"
+    } else {
+      solver_sel <- "CPLEX"
+    }
+  } else {
+    solver <- tolower(solver)
+    if(solver %in% tolower(c("CPLEX", "CONOPT4", "CONOPT", "IPOPT", "IPOPTH"))){
+      solver_sel <- toupper(solver)
+    }
+  }
+
   # Using system2 now as this should be more portable and flexible. Still need to test it on Mac or Linux
   gams_model <- gsub("/", "\\\\", gams_model)
   input <- gsub("/", "\\\\", input)
@@ -27,7 +40,9 @@ run_gams_adm_level <- function(ac, param, out = TRUE){
                                 glue::glue('--gdx_input="{input}"'),
                                 glue::glue('--gdx_output="{output}"'),
                                 glue::glue('lf="{logf}"'),
-                                glue::glue('o="{lst}"'), "logoption 4"),
+                                glue::glue('o="{lst}"'),
+                                glue::glue('solver="{solver_sel}"'),
+                                "logoption 4"),
                stdout = TRUE, stderr = TRUE)
 
   if (out) {
