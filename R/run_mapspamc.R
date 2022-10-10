@@ -1,46 +1,56 @@
 #'@title Runs crop allocation algorithm at the set administrative unit level
 #'
-#'@description Run the selected model (min_entropy or max_score) and in
-#'  GAMS. If `model_sel = 1`, the model is run for each individual
-#'  administrative unit at level 1. If `model_sel = 0` the model is run only
-#'  once for the total country. Selecting `out = TRUE` (default setting), the
-#'  model log will be sent to the screen after the model run is finished. The
-#'  log is as text file, which names starts with `model_log_` and is saved in
-#'  the `processed_data/intermediate_output` folder.  Note that, depending on
-#'  the size of the country and the selected resolution, the model might take a
-#'  lot of time to run. If the model is very large, there is a risk your
-#'  computer runs out of memory and an error message will be printed in the
-#'  model log.
+#'@description Run the selected model (`min_entropy` or `max_score`) in GAMS
+#'  with a pre-selected solver (see details). If `model_sel = 1`, the model is
+#'  run for each individual administrative unit at level 1. If `model_sel = 0`
+#'  the model is run only once for the total country. Selecting `out = TRUE`
+#'  (default setting), the GAMS model log will be sent to the screen after the
+#'  model run has finished. The log is a text file, which names starts with
+#'  `model_log_` and is saved in the `processed_data/intermediate_output`
+#'  folder.  Note that, depending on the size of the country and the selected
+#'  resolution, the model might take a long time to run. If the model is very
+#'  large, the computer might run out of memory and an error message will be
+#'  printed in the log file.
 #'
-#'@details
-#'The default solvers for `run_mapspamc` are CONOPT4 for the cross-entropy model and
-#'CPLEX for the max_score model. CONOPT4 was developed to solve large
-#'non-linear problems, including cross-entropy, whereas CPLEX was designed to solve large linear problems,
-#'such as the max_score model. For more information see the CONOPT4 documentation
-#'[here](https://www.gams.com/latest/docs/S_CONOPT4.html) and the CPLEX documentation
-#'[here](https://www.gams.com/latest/docs/S_CPLEX.html).
+#'@details Depending on the license, GAMS is installed with several solvers. For
+#'  each type of problem a default solver is pre-selected. If `solver =
+#'  "default"`, the GAMS default options for linear (`max_score`) and non-linear
+#'  (`min_entropy`) problems are used to solve the models. To find out which
+#'  solvers are available and which are the default, open the GAMS IDE: file ->
+#'  options -> solvers.  The user has the option to select one of the other
+#'  linear- and non-linear solvers supported by GAMS: ANTIGONE, BARON, CPC,
+#'  CPLEX, CONOPT4, CONOPT, GUROBI, IPOPT, IPOPTH, KNITRO, LGO, LINDO,
+#'  LOCALSOLVER, MINOS, MOSEK, MSNLP, OSICPLEX, OSIGUROBI, OSIMOSEK, OSIXPRESS,
+#'  PATHNLP, SCIP, SNOPT, SOPLEX, XA, XPRESS.
 #'
-#'It depends on the GAMS license of the user if these solvers are available. For the cross-entropy model,
-#'the user can select several alternative solvers: IPOPT, IPOPTH and CONOPT by setting the solver argument.
-#'Note, however, that in comparison with CONOPT4, these three solvers should inferior performance and were
-#'often not able to solve the model. Also note that selecting a solver for which the user does not have a
-#'license will result in a GAMS error, causing problems in further steps to create the crop distribution maps.
+#'  For the `max_score` model, which is a linear problem, it is recommended to
+#'  use [CPLEX](https://www.gams.com/latest/docs/S_CPLEX.html). For  non-linear
+#'  problems, such as the `min_entropy` model, is not possible to predict at
+#'  forehand, which solver performs best. It is recommended to start with using
+#'  the [IPOPT](https://www.gams.com/latest/docs/S_IPOPT.html), which has shown
+#'  good performance in solving cross-entropy models. An alternative option is
+#'  [CONOPT4](https://www.gams.com/latest/docs/S_CONOPT4.html), which, however,
+#'  is often much slower, and in some cases is not able to solve the model.
+#'
+#'  The GAMS code (gms files) to solve the `max_score` and `min_entropy` models
+#'  is stored in the `gams` folder in the `mapspamc` R library folder.
+#'  Interested users might want to take a look and, if necessary, modify the
+#'  code and run it directly in GAMS, separately from the `mapspamc` package.
 #'
 #'@inheritParams create_folders
-#'@param solver Name of the solver that is used by GAMS. If left blank, the default solvers are selected,
-#'see Details for more information.
+#'@param solver Name of the GAMS solver. If set to `"default"`, the GAMS default
+#'  solvers are selected, see details for more information.
 #'@param out logical; should the GAMS model log be send to the screen as output?
 #'
 #'@examples
 #'\dontrun{
-#'run_mapspamc(param, solver = "CONOPT4", out = FALSE)
+#'run_mapspamc(param, solver = "IPOPT", out = FALSE)
 #'}
 #'
 #'@export
-run_mapspamc <- function(param, solver = NULL, out = TRUE) {
+run_mapspamc <- function(param, solver = "default", out = TRUE) {
   stopifnot(inherits(param, "mapspamc_par"))
   stopifnot(is.logical(out))
-  cat("\n => Running mapspamc")
   load_data("adm_list", param, local = TRUE, mess = FALSE)
 
   # Set adm_level
@@ -50,7 +60,7 @@ run_mapspamc <- function(param, solver = NULL, out = TRUE) {
     ac <- unique(adm_list$adm1_code)
   }
 
-  purrr::walk(ac, run_gams_adm_level, param, solver, out = out)
+  purrr::walk(ac, run_gams_adm_level, param, solver = solver, out = out)
 
 }
 

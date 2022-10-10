@@ -163,45 +163,42 @@ potential <span class="citation">(You et al. 2014; Xie, You, and
 Takeshima 2017)</span> and to assess the impact of climate change and
 socioeconomic development on land use change and wider developmental
 trade-offs <span class="citation">(Ahmed et al. 2016)</span>.</p>
-<p>Currently, the only source of information that provide spatial
-information on the location of crops are a number of global products
-<span class="citation">(Monfreda, Ramankutty, and Foley 2008; Portmann,
-Siebert, and Döll 2010; You et al. 2014; see Anderson et al. 2015 for a
-comparison)</span>. These products use spatial information on land
-cover, suitability and irrigation to ‘grid’ (sub)national agricultural
-statistics at 5 arcmin resolution (~10x10 kilometer at the equator).
-Apart from the Spatial Production Allocation Model (SPAM), which latest
-version covers the year 2010 <span class="citation">(Yu et al.
-2020)</span>, these datasets are rather outdated and cannot be used to
-track changes over time.</p>
+<p>Currently, only several global products provide spatial information
+on the location of crops <span class="citation">(Monfreda, Ramankutty,
+and Foley 2008; Portmann, Siebert, and Döll 2010; You et al. 2014; see
+Anderson et al. 2015 for a comparison)</span>. These datasets use
+spatial information on land cover, suitability and irrigation to
+‘pixelate’ (sub)national agricultural statistics at 5 arc minute
+resolution (~10x10 kilometer at the equator). Apart from the Spatial
+Production Allocation Model (SPAM), which latest version covers the year
+2010 <span class="citation">(Yu et al. 2020)</span>, these datasets are
+rather outdated.</p>
 <p>Global crop distribution maps are a useful starting point for
-national analysis but are of limited use when more detailed information
-is required. National decision makers often want to zoom in on
-subnational regions (e.g. bread basket areas) and investigate the shift
-in crops over time, which requires high(er) resolution maps. Also global
-products cannot easily be adapted when better information is available
-from local sources, such as national inventories of large-scale
-plantations, geo-coded data of irrigation schemes and national land
-cover maps.</p>
+national analysis but are of limited use when more detailed and up to
+date information is required. National decision makers often want to
+zoom in on subnational regions (e.g. bread basket areas), which requires
+(higher) resolution maps that are consistent with national data sources
+such as land cover maps and subnational crop statistics.</p>
 <p>An interesting alternative and new approach to create high resolution
 crop distribution maps are machine learning techniques, which can be
-used to identify the location of specific crops on satellite imagery.
-Although promising, these techniques are still under active development
-and the available studies predominantly target large-scale crops
-(e.g. soy bean and palm oil), which are easier to identify using machine
-learning classification approaches <span class="citation">(Zhong et al.
-2016; Song et al. 2017; Danylo et al. 2020)</span>.</p>
-<p><code>mapspamc</code> provide the infrastructure to create plausible
+used to identify the location of specific crops using satellite imagery
+in combination with other predictors. Although promising, these
+techniques are still under active development and the available studies
+predominantly target large-scale crops (e.g. soy bean and palm oil),
+which are easier to identify using machine learning classification
+approaches <span class="citation">(Zhong et al. 2016; Song et al. 2017;
+Danylo et al. 2020)</span>.</p>
+<p><code>mapspamc</code> provides the infrastructure to create plausible
 spatial estimates of physical and harvested crop area at national scale
 using the SPAM approach described in <span class="citation">You and Wood
 (2006)</span>, <span class="citation">You, Wood, and Wood-Sichra
 (2009)</span>, <span class="citation">You et al. (2014)</span> and <span class="citation">Yu et al. (2020)</span>, which uses a cross-entropy
-framework to allocate subnational land use information on a 5 arcmin
+framework to allocate subnational land use information on a 5 arc minute
 grid. Apart from the standard model, <code>mapspamc</code> offers an
 alternative algorithm, which makes it possible to create crop
-distributions maps with a resolution of 30 arcsec (~1x1 kilometer at the
-equator) - see <span class="citation">Dijk et al. (2022)</span> for more
-information.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+distributions maps with a resolution of 30 arc second (~1x1 kilometer at
+the equator) - see <span class="citation">Dijk et al. (2022)</span> for
+more information.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <div class="section level2 unnumbered">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
@@ -315,8 +312,7 @@ model extensions presented in <span class="citation">Dijk et al.
 information on the location of crops (e.g. OpenStreetMap information,
 large-farm surveys and machine learning products). <code>mapspamc</code>
 also does not include the approach to backcast crop distribution maps to
-earlier periods. These features might be added in an update of the
-package.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+earlier periods. These features might be added in an futured updates.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
   </div>

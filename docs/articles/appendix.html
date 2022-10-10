@@ -141,7 +141,8 @@
 
       
 
-      </header><div class="row">
+      </header><script src="appendix_files/kePrint-0.0.1/kePrint.js"></script><link href="appendix_files/lightable-0.0.1/lightable.css" rel="stylesheet">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Appendix</h1>
@@ -154,99 +155,858 @@
 
     
     
-<p>— WORK IN PROGRESS —</p>
 <div class="section level2">
-<h2 id="solving-the-mapspamc-algorithms">Solving the <code>mapspamc</code> algorithms<a class="anchor" aria-label="anchor" href="#solving-the-mapspamc-algorithms"></a>
+<h2 id="use-of-gams-to-solve-the-mapspamc-models">Use of GAMS to solve the <code>mapspamc</code> models<a class="anchor" aria-label="anchor" href="#use-of-gams-to-solve-the-mapspamc-models"></a>
 </h2>
-<p>The General Algebraic Modeling System (GAMS) <span class="citation">(GAMS Development Corporation 2019)</span> is used to
-solve both the cross-entropy and fitness score models that are available
-in <code>mapspamc</code>. To deal with inconsistencies, the first step
-is to closely inspect the data, and in particular the subnational crop
-statistics, for data entry errors (e.g. missing values) and, if needed,
-repair them. If there are still problems, we recommend the following
-‘hierarchy’ of addressing inconsistencies and errors in the data:</p>
-<ol style="list-style-type: decimal">
-<li>Agricultural statistics</li>
-<li>Cropland</li>
-<li>Irrigated area</li>
-</ol>
-<p>The agricultural statistics were not changed, except when the model
-proved to be infeasible and after all other modification options were
-exhausted. If there are inconsistencies with cropland and irrigated
-area, values are scaled up so that they match with the statistical
-totals reported for the smallest available administrative unit, while at
-the same time, checking that the corresponding totals at higher
-administrative units also continue to align <span class="citation">Wood-Sichra, Joglekar, and You (2016)</span> presents
-more details about the various procedures.</p>
-<p>Slacks are needed to distribute the crops that belong to the
-subsistence farming system in the maximize score mnodel. The equation
-that fixes the allocation of these crops proportional to rural
-population density will almost never be within the bounds of the model
-solution that are set by the other constraints. To ensure a feasible
-solution, a slack variable is essential.</p>
+<p>The <code>mapspamc</code> package depends on General Algebraic
+Modeling System (GAMS) <span class="citation">(GAMS Development
+Corporation 2019)</span> to solve the cross-entropy and fitness score
+models. GAMS is commercial software, designed for modelling and solving
+large complex optimization problems. To be able to solve the models in
+<code>mapspamc</code> a GAMS licence is required that includes full
+access (without size limitations) to CPLEX and IPOPT solvers (but see
+below for potential alternative solvers). The function
+<code>run_mapspamc</code> activates GAMS to run the model as defined by
+the user in the model setup step. The GAMS model log will be sent to the
+screen after the model run has finished. The log is a text file, which
+names starts with <code>model_log_</code> and is saved in the
+<code>processed_data/intermediate_output</code> folder after the model
+has finished. The GAMS code (gms files) is stored in the
+<code>gams</code> folder in the <code>mapspamc</code> R library folder.
+Interested users might want to take a look and, if necessary, modify the
+code and run it directly in GAMS, separately from the
+<code>mapspamc</code> package.</p>
 </div>
 <div class="section level2">
-<h2 id="how-to-deal-with-slack">How to deal with slack<a class="anchor" aria-label="anchor" href="#how-to-deal-with-slack"></a>
+<h2 id="use-of-slack-when-solving-models">Use of slack when solving models<a class="anchor" aria-label="anchor" href="#use-of-slack-when-solving-models"></a>
 </h2>
-</div>
-<div class="section level2">
-<h2 id="model-dimensions">Model dimensions<a class="anchor" aria-label="anchor" href="#model-dimensions"></a>
-</h2>
+<p>The GAMS code involves the use of a slack variable to deal with data
+inconsistencies, which result in infeasible models. A slack variable
+transforms an inequality constraint in an equality constraint by adding
+‘slack’ <span class="citation">(Boyd and Vandenberghe 2004)</span>. This
+makes it possible to solve the model even though it is technically
+infeasible. Different weights (i.e. penalties) are used to capture the
+interaction and trade-offs between the different slack variables (e.g. a
+lower slack for irrigated area may result in a higher slack for
+available cropland). Relatively high weights are used to minimize the
+slack for cropland availability and irrigated area, whereas low weights
+are used for the subnational statistics, which values are considered
+less reliable (see GAMS gms files for which weights are used). After the
+model is run, the slack variables are saved in the model output gdx
+file, which is stored in the
+<code>processed_data/intermediate_output</code> folder.</p>
+<p>Excessive slack points at inconsistencies between the (sub)national
+statistics and the available crop and irrigated area to which the
+statistics are allocated. To deal with these inconsistencies, the first
+step is to closely inspect the data, and in particular the subnational
+crop statistics, for data entry errors (e.g. missing values) and, if
+needed, correct them. If there are still problems, we recommend by
+adjusting the subnational statistics as they are sometimes inconsistent
+with the FAOSTAT national statistics.</p>
 <div class="section level3">
-<h3 id="number-of-crops">Number of crops<a class="anchor" aria-label="anchor" href="#number-of-crops"></a>
+<h3 id="gams-solvers">GAMS solvers<a class="anchor" aria-label="anchor" href="#gams-solvers"></a>
 </h3>
-<p><code>mapspamc</code> models 40 different crop (and crop groups) that
-together cover the full agricultural sector and are each identified by a
-four letter code (Table 1).<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> The main reason for this classification is
-the limited availability of crop-specific biophysical suitability maps,
-which form a key element in the crop allocation process (see <a href="process_spatial_data.html">spatial data</a> for more information).
-It would be relatively easy to add new crops by splitting them off from
-broader crop groups (e.g. tropical and temperate fruits, and vegetables)
-if appropriate agricultural statistics and suitability maps would be
-available. We plan to add an example on how to do this in future
-updates. The actual number of crops in the model is determined by the
-number of crops that are actually grown in the target country and
-identified by the availability of national statistics.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Add 40 crop table</span></span></code></pre></div>
+<p>Depending on the licence, GAMS is installed with several solvers. For
+each type of problem a default solver is pre-selected. Unless changed by
+the user, the <code>run_mapspamc</code> function will use the GAMS
+default solvers for linear-problems (i.e. the <code>max_score</code>
+model) and non-linear problems (i.e. the <code>min_entropy</code> model)
+to solve the models. To find out which solvers are available and which
+are the default, open the GAMS IDE: file -&gt; options -&gt; solvers.
+The user has the option to select one of the other linear- and
+non-linear solvers supported by GAMS: ANTIGONE, BARON, CPC, CPLEX,
+CONOPT4, CONOPT, GUROBI, IPOPT, IPOPTH, KNITRO, LGO, LINDO, LOCALSOLVER,
+MINOS, MOSEK, MSNLP, OSICPLEX, OSIGUROBI, OSIMOSEK, OSIXPRESS, PATHNLP,
+SCIP, SNOPT, SOPLEX, XA, XPRESS.</p>
+<p>For the <code>max_score</code> model, which is a linear problem, it
+is recommended to use <a href="https://www.gams.com/latest/docs/S_CPLEX.html" class="external-link">CPLEX</a>. For
+non-linear problems, such as the <code>min_entropy</code> model, is not
+possible to predict at forehand, which solver performs best. It is
+recommended to start with using the <a href="https://www.gams.com/latest/docs/S_IPOPT.html" class="external-link">IPOPT</a>, which
+has shown good performance in solving cross-entropy models. An
+alternative option is <a href="https://www.gams.com/latest/docs/S_CONOPT4.html" class="external-link">CONOPT4</a>,
+which, however, is often much slower, and in some cases is not able to
+solve the model.</p>
 </div>
 <div class="section level3">
-<h3 id="number-of-farming-systems">Number of farming systems<a class="anchor" aria-label="anchor" href="#number-of-farming-systems"></a>
+<h3 id="differences-between-mapspamc-and-spam">Differences between <code>mapspamc</code> and SPAM<a class="anchor" aria-label="anchor" href="#differences-between-mapspamc-and-spam"></a>
 </h3>
-<p>Also similar to global SPAM, <code>mapspamc</code> distinguises
-between four different farming systems:</p>
-<ul>
-<li>Rainfed subsistence</li>
-<li>Rainfed low-input</li>
-<li>Rainfed high-input</li>
-<li>Irrigated</li>
-</ul>
+<p>There are several differences between <code>mapspamc</code> and SPAM
+<span class="citation">(Yu et al. 2020)</span> related to the allocation
+algorithm, calculation of priors and the input data (Table
+@ref(tab:tab-spam-dif)). A main innovation is that apart from the SPAM
+cross-entropy model, <code>mapspamc</code> also provides the option to
+use an alternative ‘fitness score’ model. This model was developed to
+create crop distribution maps at a higher resolution of 30 arc seconds
+<span class="citation">(Dijk et al. 2022)</span>. As a consequence of
+using priors based on socio-economic and biophysical suitability
+measures, the cross-entropy approach allocates relatively small shares
+of a large number of crops and farmings systems to grid cells. This is
+plausible for a 5 arc minute resolution when grid cells are relatively
+large (~ 10x10 km) and a large diversity of crops and farmings systems
+is to be expected. This is, however, less likely for high resolutions of
+30 arc seconds, where grid cells are much smaller (~ 1x1 km) and it is
+more likely to observe clusters of grid cells that are populated by a
+small number of crops and farming systems. To simulate this process, a
+‘fitness’ score between 0 and 100, which measures both the
+socio-economic and biophysical suitability, is calculated for each grid
+cell. Crops and farming systems will be allocated in such a way that the
+crop area weighted fitness score is maximized, subject to subnational
+crop area information and availability of cropland and irrigated
+area.</p>
+<p>Another difference related to the allocation algorithm is the use of
+slacks in the constraints to better deal with data inconsistencies (see
+above). We also dropped the suitability constraint in
+<code>mapspamc</code>. In SPAM, the suitable crop area, calculated as
+the biophyiscal suitability times the cropland area in a grid cell, was
+used as a hard constraint. In practice, this constraint was often
+dropped because it severely limits the space to allocate crops,
+resulting in infeasible models. As an alternative, the cross-entropy and
+fitness score models in <code>mapspam</code> use the suitability
+information to inform the priors and fitness scores, in particular for
+the subsistence and low-input farming systems. We also slightly modified
+the calculation of the high-input and irrigated crops, which are now
+based on the geometric average of accessibility and potential revenue
+indicators that are normalized by means of the min-max method.</p>
+<p>Finally, we updated several input data sources with more recent and
+higher resolution products, in particular (a) accessibility, which is
+now based on travel time <span class="citation">(Weiss et al.
+2018)</span>, (b) population, taken from <span class="citation">Tatem
+(2017)</span>, (c) urban extent taken from <span class="citation">Schiavina et al. (2022)</span>, (d) irrigated area,
+which is a synergy product, based on GIA <span class="citation">(Siebert
+et al. 2013)</span> and GMIA <span class="citation">(Meier, Zabel, and
+Mauser 2018)</span>, and (e) cropland, taken from several recent
+cropland products that can be combined to generate a synergy cropland
+map in the pre-processing step. We also reduced the number of standard
+crops from 42 in SPAM to 40 in <code>mapspamc</code> by merging the two
+millet (pearl and small millet) and coffee (arabica and robusta) species
+because statistical information is difficult to find at such detailed
+crop level (see below).</p>
+<p>As a consequence of these modifications, the maps created with
+<code>mapspamc</code> will deviate from comparable information presented
+by SPAM. Nonetheless, output is expected to be comparable if similar
+model settings are used.</p>
+<table class="table table" style="font-size: 9px; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+Differences between <code>mapspamc</code> and SPAM. SPAM refers to the
+latest version, which was used to generate SPAM2010 <span class="citation">(Yu et al. 2020)</span>
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+item
+</th>
+<th style="text-align:left;">
+SPAM
+</th>
+<th style="text-align:left;">
+mapspamc
+</th>
+</tr></thead>
+<tbody>
+<tr grouplength="4">
+<td colspan="3" style="border-bottom: 1px solid;">
+<strong>Allocation algorithm</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Objective function
+</td>
+<td style="text-align:left;">
+Minimization of cross-entropy
+</td>
+<td style="text-align:left;">
+Minimization of cross-entropy and maximization of fitness score
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Resolution
+</td>
+<td style="text-align:left;">
+5 arc minutes
+</td>
+<td style="text-align:left;">
+5 arc minutes &amp; 30 arc seconds
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Slack variable
+</td>
+<td style="text-align:left;">
+Used for model checking only
+</td>
+<td style="text-align:left;">
+Added to the objective function to improve flexibility
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Suitability constraint
+</td>
+<td style="text-align:left;">
+Allocation cannot be larger than biophysically suitable cropland area
+</td>
+<td style="text-align:left;">
+No longer implemented
+</td>
+</tr>
+<tr grouplength="4">
+<td colspan="3" style="border-bottom: 1px solid;">
+<strong>Calculation of priors</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Subsistence priors
+</td>
+<td style="text-align:left;">
+based on share of rural population
+</td>
+<td style="text-align:left;">
+based on share of rural population but set to zero when bio-physical
+suitability is zero
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Low-input priors
+</td>
+<td style="text-align:left;">
+based on potential revenue times accessibility
+</td>
+<td style="text-align:left;">
+based on min-max normalized suitability
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+High-input priors
+</td>
+<td style="text-align:left;">
+based on potential revenue times accessibility
+</td>
+<td style="text-align:left;">
+based on weighted average of min-max normalized potential revenue and
+accessibility
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Irrigated-area priors
+</td>
+<td style="text-align:left;">
+based on potential revenue times accessibility
+</td>
+<td style="text-align:left;">
+based on weighted average of min-max normalized potential revenue and
+accessibility
+</td>
+</tr>
+<tr grouplength="6">
+<td colspan="3" style="border-bottom: 1px solid;">
+<strong>Data</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Number of crops
+</td>
+<td style="text-align:left;">
+42
+</td>
+<td style="text-align:left;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Accessibility
+</td>
+<td style="text-align:left;">
+Based on population density
+</td>
+<td style="text-align:left;">
+Based on time to travel
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Population
+</td>
+<td style="text-align:left;">
+SEDAC v4
+</td>
+<td style="text-align:left;">
+WorldPop
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Urban extent
+</td>
+<td style="text-align:left;">
+GRUMP
+</td>
+<td style="text-align:left;">
+GHL-SMOD
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Irrigation
+</td>
+<td style="text-align:left;">
+GMIA
+</td>
+<td style="text-align:left;">
+GIA &amp; GMIA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Cropland
+</td>
+<td style="text-align:left;">
+SASAM
+</td>
+<td style="text-align:left;">
+Recent cropland products
+</td>
+</tr>
+</tbody>
+</table>
 </div>
+<div class="section level3">
+<h3 id="list-of-mapspamc-crops">List of <code>mapspamc</code> crops<a class="anchor" aria-label="anchor" href="#list-of-mapspamc-crops"></a>
+</h3>
+<p><code>mapspamc</code> identifies 40 different crop (and crop groups)
+that together cover the full agricultural sector and are each identified
+by a four letter code (Table 1). The main reason for this classification
+is the limited availability of crop-specific biophysical suitability
+maps, which form a key input of the crop allocation process (see <a href="preprocessing_spatial_data.html.html">pre-processing spatial
+data</a> for more information). It would be relatively easy to add new
+crops by splitting them off from broader crop groups (e.g. separate
+tomatoes from vegetables) if appropriate agricultural statistics and
+suitability maps are available. We plan to add an example on how to do
+this in future updates. The actual number of crops in the model is
+determined by the number of crops for which statistical information is
+provided.</p>
+<table class="table">
+<caption>
+List of <code>mapspamc</code> crops
+</caption>
+<thead><tr>
+<th style="text-align:right;">
+number
+</th>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:left;">
+group
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Wheat
+</td>
+<td style="text-align:left;">
+Cereals
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+Rice
+</td>
+<td style="text-align:left;">
+Cereals
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Maize
+</td>
+<td style="text-align:left;">
+Cereals
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+Barley
+</td>
+<td style="text-align:left;">
+Cereals
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+Millet
+</td>
+<td style="text-align:left;">
+Cereals
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+Sorghum
+</td>
+<td style="text-align:left;">
+Cereals
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+Other Cereals
+</td>
+<td style="text-align:left;">
+Cereals
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+Potato
+</td>
+<td style="text-align:left;">
+Roots &amp; Tubers
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:left;">
+Sweet Potato
+</td>
+<td style="text-align:left;">
+Roots &amp; Tubers
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+Yams
+</td>
+<td style="text-align:left;">
+Roots &amp; Tubers
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:left;">
+Cassava
+</td>
+<td style="text-align:left;">
+Roots &amp; Tubers
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:left;">
+Other Roots
+</td>
+<td style="text-align:left;">
+Roots &amp; Tubers
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:left;">
+Bean
+</td>
+<td style="text-align:left;">
+Pulses
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:left;">
+Chickpea
+</td>
+<td style="text-align:left;">
+Pulses
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:left;">
+Cowpea
+</td>
+<td style="text-align:left;">
+Pulses
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:left;">
+Pigeon Pea
+</td>
+<td style="text-align:left;">
+Pulses
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:left;">
+Lentil
+</td>
+<td style="text-align:left;">
+Pulses
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:left;">
+Other Pulses
+</td>
+<td style="text-align:left;">
+Pulses
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:left;">
+Soybean
+</td>
+<td style="text-align:left;">
+Oilcrops
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:left;">
+Groundnut
+</td>
+<td style="text-align:left;">
+Oilcrops
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:left;">
+Coconut
+</td>
+<td style="text-align:left;">
+Oilcrops
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:left;">
+Oilpalm
+</td>
+<td style="text-align:left;">
+Oilcrops
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:left;">
+Sunflower
+</td>
+<td style="text-align:left;">
+Oilcrops
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:left;">
+Rapeseed
+</td>
+<td style="text-align:left;">
+Oilcrops
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:left;">
+Sesame Seed
+</td>
+<td style="text-align:left;">
+Oilcrops
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:left;">
+Other Oil Crops
+</td>
+<td style="text-align:left;">
+Oilcrops
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:left;">
+Sugarcane
+</td>
+<td style="text-align:left;">
+Sugar Crops
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:left;">
+Sugarbeet
+</td>
+<td style="text-align:left;">
+Sugar Crops
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:left;">
+Cotton
+</td>
+<td style="text-align:left;">
+Fibres
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:left;">
+Other Fibre Crops
+</td>
+<td style="text-align:left;">
+Fibres
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:left;">
+Coffee
+</td>
+<td style="text-align:left;">
+Stimulates
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+32
+</td>
+<td style="text-align:left;">
+Cocoa
+</td>
+<td style="text-align:left;">
+Stimulates
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:left;">
+Tea
+</td>
+<td style="text-align:left;">
+Stimulates
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:left;">
+Tobacco
+</td>
+<td style="text-align:left;">
+Stimulates
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+35
+</td>
+<td style="text-align:left;">
+Banana
+</td>
+<td style="text-align:left;">
+Fruits
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+36
+</td>
+<td style="text-align:left;">
+Plantain
+</td>
+<td style="text-align:left;">
+Fruits
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+37
+</td>
+<td style="text-align:left;">
+Tropical Fruit
+</td>
+<td style="text-align:left;">
+Fruits
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+38
+</td>
+<td style="text-align:left;">
+Temperate Fruit
+</td>
+<td style="text-align:left;">
+Fruits
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+39
+</td>
+<td style="text-align:left;">
+Vegetables
+</td>
+<td style="text-align:left;">
+Vegetables
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+40
+</td>
+<td style="text-align:left;">
+Rest Of Crops
+</td>
+<td style="text-align:left;">
+Other
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="section level2 unnumbered">
-<h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h2>
+<div class="section level3">
+<h3 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Boyd2004a" class="csl-entry">
+Boyd, Stephen, and Lieven Vandenberghe. 2004. <em><span>Convex
+Optimization</span></em>. Cambridge University Press. <a href="https://doi.org/10.1017/CBO9780511804441" class="external-link">https://doi.org/10.1017/CBO9780511804441</a>.
+</div>
+<div id="ref-VanDijk2022b" class="csl-entry">
+Dijk, Michiel van, Ulrike Wood-Sichra, Yating Ru, Amanda Palazzo, Petr
+Havlik, and Liangzhi You. 2022. <span>“<span class="nocase">Generating
+multi-period crop distribution maps for Southern Africa using a data
+fusion approach</span>.”</span>
+</div>
 <div id="ref-GAMSDevelopmentCorporation2019" class="csl-entry">
 GAMS Development Corporation. 2019. <span>“<span>General Algebraic
 Modeling System (GAMS)</span>.”</span> Fairfax, VA. <a href="https://www.gams.com" class="external-link">www.gams.com</a>.
 </div>
-<div id="ref-Wood-Sichra2016" class="csl-entry">
-Wood-Sichra, Ulrike, Alison B. Joglekar, and Liangzhi You. 2016.
-<span>“<span>Spatial Producion Allocation Model (SPAM) 2005: Technical
-Documentation</span>.”</span> Harvest Choice Working Paper. Washington,
-D.C.: International Food Policy Research (IFPRI).
+<div id="ref-Meier2018" class="csl-entry">
+Meier, Jonas, Florian Zabel, and Wolfram Mauser. 2018. <span>“<span class="nocase">A global approach to estimate irrigated areas – a
+comparison between different data and statistics</span>.”</span>
+<em>Hydrology and Earth System Sciences</em> 22 (2): 1119–33. <a href="https://doi.org/10.5194/hess-22-1119-2018" class="external-link">https://doi.org/10.5194/hess-22-1119-2018</a>.
+</div>
+<div id="ref-Schiavina2022" class="csl-entry">
+Schiavina, Marcello, M. Melchiorri, Martino Pesaresi, P. Politis, S.
+Freire, Luca Maffenini, P. Florio, et al. 2022. <em><span>GHSL Data
+Package 2022</span></em>. Luxembourg: Publications Office of the
+European Union. <a href="https://doi.org/10.2760/19817,%20JRC%20129516" class="external-link">https://doi.org/10.2760/19817,
+JRC 129516</a>.
+</div>
+<div id="ref-Siebert2013" class="csl-entry">
+Siebert, Stefan, Verena Henrich, Karen Frenken, and Jacob Burke. 2013.
+<span>“<span class="nocase">Global Map of Irrigation Areas version
+5</span>.”</span> Bonn, Germany: Rheinisch
+Friedrich-Wilhelms-University.
+</div>
+<div id="ref-Tatem2017" class="csl-entry">
+Tatem, Andrew J. 2017. <span>“<span class="nocase">WorldPop, open data
+for spatial demography</span>.”</span> Nature Publishing Groups. <a href="https://doi.org/10.1038/sdata.2017.4" class="external-link">https://doi.org/10.1038/sdata.2017.4</a>.
+</div>
+<div id="ref-Weiss2018" class="csl-entry">
+Weiss, D. J., A. Nelson, H. S. Gibson, W. Temperley, S. Peedell, A.
+Lieber, M. Hancher, et al. 2018. <span>“<span class="nocase">A global
+map of travel time to cities to assess inequalities in accessibility in
+2015</span>.”</span> <em>Nature</em> 553 (7688): 333–36. <a href="https://doi.org/10.1038/nature25181" class="external-link">https://doi.org/10.1038/nature25181</a>.
+</div>
+<div id="ref-Yu2020" class="csl-entry">
+Yu, Qiangyi, Liangzhi You, Ulrike Wood-Sichra, Yating Ru, Alison K. B.
+Joglekar, Steffen Fritz, Wei Xiong, Miao Lu, Wenbin Wu, and Peng Yang.
+2020. <span>“<span class="nocase">A cultivated planet in 2010 – Part 2:
+The global gridded agricultural-production maps</span>.”</span>
+<em>Earth System Science Data</em> 12 (4): 3545–72. <a href="https://doi.org/10.5194/essd-12-3545-2020" class="external-link">https://doi.org/10.5194/essd-12-3545-2020</a>.
 </div>
 </div>
 </div>
-<div class="footnotes footnotes-end-of-document">
-<hr>
-<ol>
-<li id="fn1"><p>Global SPAM uses 42 different crops because it includes
-two types of millet and two types of coffee <span class="citation">(Wood-Sichra, Joglekar, and You 2016)</span>. As this
-level of detail is not supported by most national statistics and
-FAOSTAT, the have been merged into millet and coffee, respectively.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
   </div>
 

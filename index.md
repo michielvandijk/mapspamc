@@ -42,7 +42,7 @@ remotes::install_github("michielvandijk/mapspamc")
 
 Running `mapspamc` requires the installation of several other pieces of
 software, which are described in the
-[Installation](articles/software.html) section.
+[Installation](articles/installation.html) section.
 
 ## Preparation
 
@@ -54,11 +54,10 @@ statistics, (2) data to construct the priors/fitness scores and (3) data
 to determine the spatial constraints. The availability of data strongly
 affects the structure of the model, how it will be solved and how long
 it takes to solve. We highly recommend to start collecting input data
-before running the model. The articles in the Preparation section gives
-an overview of the [input data](articles/input_data.html) that is
-requited by the package and show were to download several [country
-applications](articles/country_examples.html), which can be used as an
-example to work )
+before running the model. The articles in the Preparation section give
+an overview of the [input data](articles/input_data.html) that are
+required by the package and show were to download several [country
+examples](articles/country_examples.html).
 
 ## Run `mapspamc`
 
@@ -73,7 +72,7 @@ into nine smaller steps in the Run mapspamc section.
 -   [2.3. Pre-processing -
     cropland](articles/preprocessing_cropland.html)
 -   [2.4. Pre-processing - irrigated
-    area](articles/pre_processing_irrigated_area.html)
+    area](articles/preprocessing_irrigated_area.html)
 -   [3. Model preparation](articles/model_preparation.html)
 -   [4. Running the model](articles/run_model.html)
 -   [5. Post-processing](articles/postprocessing.html)

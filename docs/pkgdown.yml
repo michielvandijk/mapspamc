@@ -18,7 +18,7 @@ articles:
   preprocessing_spatial_data: preprocessing_spatial_data.html
   preprocessing_subnational_statistics: preprocessing_subnational_statistics.html
   run_model: run_model.html
-last_built: 2022-10-09T15:08Z
+last_built: 2022-10-10T09:14Z
 urls:
   reference: https://michielvandijk.github.io/mapspamc/reference
   article: https://michielvandijk.github.io/mapspamc/articles

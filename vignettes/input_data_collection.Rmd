@@ -1,8 +1,8 @@
 ---
-title: "Input data"
+title: "Input data collection"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Input data}
+  %\VignetteIndexEntry{Input data collection}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-To create crop distribution maps with `mapspamc`, various [sources of data](data.html) are required, including national and subnational agricultural statistics, cropland exent, map of irrigated areas and spatially explicit information on economic and bio-physical suitability. This section provides an overview of which raw data needs to be collected and where to store the datasets so they can be used by `mapspamc` as input. Details on how the data will be processed are discussed in the articles on [Processing subnational statistics](process_subnational_statistics.html) and [Processing spatial data](process_spatial_data.html). 
+To create crop distribution maps with `mapspamc`, various [types of data](input_data.html) are required, including national and subnational agricultural statistics, cropland and irrigated area extent, and spatially explicit information on economic and bio-physical suitability. Users of `mapspamc` can use country-specific sources for each of these categories, such as national irrigation, cropland and crop suitability maps. However, apart from the subnational statistics, most of the data can be taken from global data products. To support easy implementation of the package, `mapspamc` is accompanied by a public data repository (referred to as the mapspamc_db) that contains a large number of global maps that are publicly available. 
 
 
 ## Location of raw data
@@ -156,8 +156,6 @@ We use to two sources of information to create a map of a country's rural popula
 
 - Download GRUMPS [here](https://sedac.ciesin.columbia.edu/data/set/grump-v1-urban-ext-polygons-rev01/data-download). Note than one needs to register before file can be downloaded. Save the file in the `raw_data/grump` folder. 
 
-### Simu map
 
-To prepare the national land cover and land use maps as input for GLOBIOM, one needs a map with the location of the GLOBIOM simulation units. This map can be downloaded from the data repository.^[This is work in progress. Please contact Michiel van Dijk (michiel.vandijk@iiasa.ac.at) to obtain the map]
 
 ## References

@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Input data • mapspamc</title>
+<title>Input data collection • mapspamc</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Input data">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Input data collection">
 <meta property="og:description" content="mapspamc">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -144,7 +144,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Input data</h1>
+      <h1 data-toc-skip>Input data collection</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/michielvandijk/mapspamc/blob/HEAD/vignettes/input_data_collection.Rmd" class="external-link"><code>vignettes/input_data_collection.Rmd</code></a></small>
@@ -155,15 +155,17 @@
     
     
 <p>To create crop distribution maps with <code>mapspamc</code>, various
-<a href="data.html">sources of data</a> are required, including national
-and subnational agricultural statistics, cropland exent, map of
-irrigated areas and spatially explicit information on economic and
-bio-physical suitability. This section provides an overview of which raw
-data needs to be collected and where to store the datasets so they can
-be used by <code>mapspamc</code> as input. Details on how the data will
-be processed are discussed in the articles on <a href="process_subnational_statistics.html">Processing subnational
-statistics</a> and <a href="process_spatial_data.html">Processing
-spatial data</a>.</p>
+<a href="input_data.html">types of data</a> are required, including
+national and subnational agricultural statistics, cropland and irrigated
+area extent, and spatially explicit information on economic and
+bio-physical suitability. Users of <code>mapspamc</code> can use
+country-specific sources for each of these categories, such as national
+irrigation, cropland and crop suitability maps. However, apart from the
+subnational statistics, most of the data can be taken from global data
+products. To support easy implementation of the package,
+<code>mapspamc</code> is accompanied by a public data repository
+(referred to as the mapspamc_db) that contains a large number of global
+maps that are publicly available.</p>
 <div class="section level2">
 <h2 id="location-of-raw-data">Location of raw data<a class="anchor" aria-label="anchor" href="#location-of-raw-data"></a>
 </h2>
@@ -479,13 +481,6 @@ Note than one needs to register before file can be downloaded. Save the
 file in the <code>raw_data/grump</code> folder.</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="simu-map">Simu map<a class="anchor" aria-label="anchor" href="#simu-map"></a>
-</h3>
-<p>To prepare the national land cover and land use maps as input for
-GLOBIOM, one needs a map with the location of the GLOBIOM simulation
-units. This map can be downloaded from the data repository.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
-</div>
 </div>
 <div class="section level2 unnumbered">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
@@ -540,8 +535,6 @@ individual country maps at a resolution of 100mx100m. These files are
 relatively much larger, in particular for large countries like China and
 are not required as we will aggregate the population maps to 30 arcsec -
 the current highest SPAM resolution.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p>This is work in progress. Please contact Michiel van
-Dijk (<a href="mailto:michiel.vandijk@iiasa.ac.at" class="email">michiel.vandijk@iiasa.ac.at</a>) to obtain the map<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
   </div>
