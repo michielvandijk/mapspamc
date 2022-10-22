@@ -42,7 +42,6 @@ Imports:
     exactextractr,
     leafsync,
     terra,
-    gdxrrw (>= 1.0.10)
 Suggests: 
     rmarkdown,
     spelling
@@ -52,7 +51,5 @@ Depends:
 URL: https://github.com/michielvandijk/mapspamc,
     https://michielvandijk.github.io/mapspamc/
 BugReports: https://github.com/michielvandijk/mapspamc/issues
-Remotes:  
-    GAMS-dev/gdxrrw/gdxrrw
 Config/Needs/website:
     GAMS-dev/gdxrrw/gdxrrw
