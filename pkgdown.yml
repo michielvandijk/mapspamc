@@ -1,0 +1,26 @@
+pandoc: 2.19.2
+pkgdown: 2.0.6
+pkgdown_sha: ~
+articles:
+  appendix: appendix.html
+  country_examples: country_examples.html
+  crop_distribution_maps: crop_distribution_maps.html
+  design: design.html
+  input_data: input_data.html
+  input_data_collection: input_data_collection.html
+  installation: installation.html
+  model_description: model_description.html
+  model_preparation: model_preparation.html
+  model_setup: model_setup.html
+  model_validation: model_validation.html
+  postprocessing: postprocessing.html
+  preprocessing_cropland: preprocessing_cropland.html
+  preprocessing_irrigated_area: preprocessing_irrigated_area.html
+  preprocessing_spatial_data: preprocessing_spatial_data.html
+  preprocessing_subnational_statistics: preprocessing_subnational_statistics.html
+  run_model: run_model.html
+last_built: 2022-10-22T20:36Z
+urls:
+  reference: https://michielvandijk.github.io/mapspamc/reference
+  article: https://michielvandijk.github.io/mapspamc/articles
+
