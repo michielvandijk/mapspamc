@@ -68,18 +68,10 @@
           <a href="../articles/input_data.html">Input data</a>
         </li>
         <li>
-          <a href="../articles/appendix.html">Appendix</a>
-        </li>
-      </ul>
-</li>
-    <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Preparation</a>
-      <ul class="dropdown-menu" role="menu">
-<li>
-          <a href="../articles/input_data_collection.html">Collect input data</a>
+          <a href="../articles/country_examples.html">Country examples</a>
         </li>
         <li>
-          <a href="../articles/country_examples.html">Country examples</a>
+          <a href="../articles/appendix.html">Appendix</a>
         </li>
       </ul>
 </li>
@@ -172,97 +164,6 @@ maps that are publicly available.</p>
 <div class="section level2">
 <h2 id="location-of-raw-data">Location of raw data<a class="anchor" aria-label="anchor" href="#location-of-raw-data"></a>
 </h2>
-<p>Raw data is stored in the <code>raw_data</code> folder. When the
-<code>mapspamc</code> is <a href="setup_model.html">setup</a>, you can
-specify the location of this folder. The default setting is to put it in
-the main <code>mapspamc</code> folder but you also have the possibility
-to create it somewhere else (e.g. a data server or external drive). This
-might be convenient when you have limited capacity on your local
-harddrive to store the required global maps, which can be large
-(i.e. several gigabytes!).</p>
-<p>For practical reasons, we use separate subfolders for each data
-source. The only exception is the subnational agricultural statistics,
-which are all stored in one folder. The raw data subfolders for the core
-global datasets are automatically created when <code>mapspamc</code> is
-setup and therefore the names cannot be changed. However, if alternative
-and more detailed information is available from national sources
-(e.g. cropland map) you can create new folders in the
-<code>raw_data</code> folder to store the data.</p>
-<p>As you probably have not gone through the process of setting up the
-model yet, you can either create a temporary raw data folder structure
-now and copy the data to the <code>mapspamc</code> folder later or <a href="setup_model.html">setup the model</a> first and save all the data
-directly in the correct location. In any case, the location of the raw
-data folder can be changed at any time so there is flexibility.</p>
-</div>
-<div class="section level2">
-<h2 id="national-agricultural-statistics">National agricultural statistics<a class="anchor" aria-label="anchor" href="#national-agricultural-statistics"></a>
-</h2>
-<p>National crop and price statistics are taken from <a href="http://www.fao.org/faostat/en/#home" class="external-link">FAOSTAT</a> and <a href="http://www.fao.org/aquastat/en/" class="external-link">AQUASTAT</a>.</p>
-<div class="section level3">
-<h3 id="faostat-crops-database">FAOSTAT crops database<a class="anchor" aria-label="anchor" href="#faostat-crops-database"></a>
-</h3>
-<p>The FAOSTAT crops database is used as a source of data for all crops
-for which no subnational statistics are available. It is also used to
-scale all the subnational information so that they add up to the FAOSTAT
-national totals.</p>
-<ul>
-<li><p>Download the <em>All Data Normalized</em> file
-(<code>Production_Crops_E_All_Data_(Normalized).zip</code>) from the <a href="http://www.fao.org/faostat/en/#data/QC" class="external-link">FAOSTAT Crops statistics
-website</a> and save it in the <code>data\raw\faostat</code>
-folder.</p></li>
-<li><p>Unzip the file, which creates the file
-<code>Production_Crops_E_All_Data_(Normalized).csv</code>. Rename the
-file using the following format <code>YYYYMMDD_faostat_crops.csv</code>
-In the Malawi example we use:
-<code>20200303_faostat_crops.csv</code></p></li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="faostat-prices-database">FAOSTAT Prices database<a class="anchor" aria-label="anchor" href="#faostat-prices-database"></a>
-</h3>
-<p>The FAOSTAT Prices database is used to calculate the potential
-revenue at each grid cell, which is uses to determine the fitness score
-an priors.</p>
-<ul>
-<li><p>Download the <em>All Data Normalized</em> file
-(<code>Prices_E_All_Data_(Normalized).zip</code>) from the <a href="http://www.fao.org/faostat/en/#data/PP" class="external-link">FAOSTAT Producer Prices
-Anual statistics website</a> and save it in the
-<code>data/raw/faostat</code> folder.</p></li>
-<li><p>Unzip the file, which creates the file
-<code>Prices_E_All_Data_(Normalized).csv</code>. Rename the file using
-the following format <code>YYYYMMDD_faostat_prices.csv</code> In this
-case we use: <code>20200303_faostat_prices.csv</code></p></li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="aquastat-irrigation-statistics">AQUASTAT irrigation statistics<a class="anchor" aria-label="anchor" href="#aquastat-irrigation-statistics"></a>
-</h3>
-<p>Data from AQUASTAT is used to inform the share of irrigated crops in
-a country. If there are better (national) sources of information to
-determine this, they can be used as a substitute for the AQUASTAT
-data.</p>
-<ul>
-<li><p>Download the irrigation data from AQUASTAT. As AQUASTAT does not
-offer a bulk download option, the the easiest way is to go the <a href="http://www.fao.org/nr/water/aquastat/data/query/index.html?lang=en" class="external-link">AQUASTAT</a>
-database, tick the <strong>irrigation and drainage development</strong>
-box under variables and tick the target country. Click
-<strong>submit</strong> and then save the file by selecting <strong>csv
-(flat)</strong> on top of the page. Save this file in the
-<code>data/aquastat</code> folder. This is a temporary file so you use
-any name you like.</p></li>
-<li><p>Unfortunately, the AQUASTAT csv file contains several empty lines
-and mixes up statistics and meta-data, which requires a bit of manual
-cleaning. Open the csv file in Excel or similar software and copy all
-contents to a new file, remove the empty lines in the beginning (the
-contents of cell A1 should now be <strong>Area</strong>) and remove the
-all rows starting with <strong>metadata:</strong> at the bottom of the
-file or (even better) copy the meta-data to a new worksheet called
-<strong>metadata</strong>. Rename the worksheet with the cleaned
-AQUASTAT data <strong>data</strong> and save it in using the following
-format, <code>YYYYMMDD_aquastat_irrigation.xlsx</code>, in the Malawi
-case <code>20200303_aquastat_irrigation.xlsx</code></p></li>
-</ul>
-</div>
 </div>
 <div class="section level2">
 <h2 id="subnational-agricultural-statistics">Subnational agricultural statistics<a class="anchor" aria-label="anchor" href="#subnational-agricultural-statistics"></a>
