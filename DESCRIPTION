@@ -43,6 +43,7 @@ Imports:
     leafsync,
     terra,
 Suggests: 
+    kableExtra,
     rmarkdown,
     spelling
 Language: en-US
@@ -51,4 +52,3 @@ Depends:
 URL: https://github.com/michielvandijk/mapspamc,
     https://michielvandijk.github.io/mapspamc/
 BugReports: https://github.com/michielvandijk/mapspamc/issues
-

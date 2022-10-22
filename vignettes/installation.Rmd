@@ -30,7 +30,7 @@ All the pre- and post-processing of the data is done in R [@RCoreTeam2022]. R is
 
 ## Installing GAMS
 
-The downscaling algorithms in `mapspamc` are solved using the [General Algebraic Modeling System](https://www.gams.com/) (GAMS), which is modelling system and language designed for mathematical optimization. The GAMS system and solvers can be downloaded from the GAMS website. Unfortunately, one needs a GAMS Base Module licence plus additional CONOPT4 and CPLEX solver licence to run `mapspamc`.
+The downscaling algorithms in `mapspamc` are solved using the [General Algebraic Modeling System](https://www.gams.com/) (GAMS), which is modelling system and language designed for mathematical optimization. The GAMS system and solvers can be downloaded from the GAMS website. Unfortunately, one needs a GAMS Base Module licence plus additional IPOPT and CPLEX solver licence to run `mapspamc`.
 
 - [Download and install GAMS](https://www.gams.com/download)
 
@@ -49,12 +49,12 @@ library(remotes)
 remotes::install_github("michielvandijk/mapspamc")
 ```
 
-To interface between R and GAMS the GDXRRW package is required. Unfortunately, this package is also not available on CRAN and therefore has to be installed manually. The package can be found [here](https://github.com/GAMS-dev/gdxrrw), which also presents instructions on how to install the package. Several functions in `mapspamc` use GDXRRW to read and save GAMS gdx files and check whether the package and GAMS are installed.
-
 
 ### Essential packages
 
-Apart from mapspam and GDXRRW, several R packages are required to run `mapspamc` scripts: 
+Several R packages are required to run `mapspamc` scripts: 
+
+- To interface between R and GAMS the gdxrrw package is required. Unfortunately, this package is not available on CRAN and therefore has to be installed manually. The package can be found [here](https://github.com/GAMS-dev/gdxrrw), which also presents instructions on how to install the package. Several functions in `mapspamc` use gdxrrw to read and save GAMS gdx files and check whether the package and GAMS are installed.
 
 - [tidyverse](https://cran.r-project.org/web/packages/tidyverse/index.html) [@Wickham2019] is the name for a set of packages that work in harmony to facilitate data preparation and processing, most importantly dplyr, purrr, tidyr and ggplot2. Some of them are used by `mapspamc` and will be installed automatically when the package is installed for the first time and were not installed before. 
 
