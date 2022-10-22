@@ -152,23 +152,11 @@
 <div class="section level2">
 <h2 id="inspect-results-and-create-maps">Inspect results and create maps<a class="anchor" aria-label="anchor" href="#inspect-results-and-create-maps"></a>
 </h2>
-<p>The package offers to functions to quickly inspect the results, after
-the model has been run. <code>view_panel()</code> shows crop
-distribution maps for a selected crop, using a different panel for each
-farming system. <code>view_stack()</code> shows the same information but
-stacking the various maps. Both functions plot the maps in the default
-browser overlaying the country polygon, unless specified otherwise. The
-visualization is done using <a href="https://leafletjs.com/" class="external-link">leafletjs</a>, which makes it possible to
-select different background tiles (e.g. OpenStreetMap) to put the data
-into perspective.</p>
+<p>The package offers to functions to quickly inspect the results, after the model has been run. <code>view_panel()</code> shows crop distribution maps for a selected crop, using a different panel for each farming system. <code>view_stack()</code> shows the same information but stacking the various maps. Both functions plot the maps in the default browser overlaying the country polygon, unless specified otherwise. The visualization is done using <a href="https://leafletjs.com/" class="external-link">leafletjs</a>, which makes it possible to select different background tiles (e.g. OpenStreetMap) to put the data into perspective.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">view_panel</span><span class="op">(</span><span class="st">"rice"</span>, var <span class="op">=</span> <span class="st">"ha"</span>, <span class="va">param</span><span class="op">)</span></span>
 <span><span class="fu">view_stack</span><span class="op">(</span><span class="st">"rice"</span>, var <span class="op">=</span> <span class="st">"ha"</span>, <span class="va">param</span><span class="op">)</span></span></code></pre></div>
-<p>As it is easier to process and visualize geo-spatial data when the
-data is saved in tif format, <code><a href="../reference/create_all_tif.html">create_all_tif()</a></code> produces a
-tif file for each crop - farming-system combination. The tif files are
-also needed as input to aggregate the data in a format that can be used
-by GLOBIOM, which is described next.</p>
+<p>As it is easier to process and visualize geo-spatial data when the data is saved in tif format, <code><a href="../reference/create_all_tif.html">create_all_tif()</a></code> produces a tif file for each crop - farming-system combination. The tif files are also needed as input to aggregate the data in a format that can be used by GLOBIOM, which is described next.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/create_all_tif.html">create_all_tif</a></span><span class="op">(</span><span class="va">param</span><span class="op">)</span></span></code></pre></div>
 </div>

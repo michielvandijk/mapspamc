@@ -142,7 +142,6 @@
 <div class="page-header"><h1 id="mapspamc">mapspamc<a class="anchor" aria-label="anchor" href="#mapspamc"></a>
 </h1></div>
 <!-- badges: start -->
-
 <p>The aim of the <a href="https://github.com/michielvandijk/mapspamc" class="external-link"><code>mapspamc</code> R package</a> is to facilitate the creation of country level crop distribution maps. The model builds on the global version of the <a href="http://www.mapspam.info" class="external-link">Spatial Production Allocation model (SPAM)</a> (You and Wood 2006; You, Wood, and Wood-Sichra 2009; You et al. 2014; Yu et al. 2020), which uses a cross-entropy optimization approach to ‘pixelate’ national and subnational crop statistics on a spatial grid at a resolution of 5 arc minutes (~ 10 x 10 km). <code>mapspamc</code> provides the necessary infrastructure to run SPAM at the country level and makes it possible to incorporate national sources of information and potentially create maps at a higher resolution of 30 arc seconds (~ 1 x 1 km)(Dijk et al. 2022).</p>
 <p>The articles in the Background section provide general information on approaches to create <a href="articles/crop_distribution_maps.html">crop distribution maps</a>, the <a href="articles/model_description.html">model</a>, <a href="articles/input_data.html">input data</a> and an <a href="articles/appendix.html">appendix</a> with additional information on specific topics.</p>
 <div class="section level2">
@@ -151,7 +150,7 @@
 <p>To install <code>mapspamc</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"michielvandijk/mapspamc"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"michielvandijk/mapspamc"</span><span class="op">)</span></span></code></pre></div>
 <p>Running <code>mapspamc</code> requires the installation of several other pieces of software, which are described in the <a href="articles/installation.html">Installation</a> section.</p>
 </div>
 <div class="section level2">
@@ -180,21 +179,11 @@
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-VanDijk2022b" class="csl-entry">
-Dijk, Michiel van, Ulrike Wood-Sichra, Yating Ru, Amanda Palazzo, Petr Havlik, and Liangzhi You. 2022. “<span class="nocase">Generating multi-period crop distribution maps for Southern Africa using a data fusion approach</span>.”
-</div>
-<div id="ref-You2006" class="csl-entry">
-You, Liangzhi, and Stanley Wood. 2006. “<span class="nocase">An entropy approach to spatial disaggregation of agricultural production</span>.” <em>Agricultural Systems</em> 90 (1): 329–47. <a href="https://doi.org/10.1016/j.agsy.2006.01.008" class="external-link uri">https://doi.org/10.1016/j.agsy.2006.01.008</a>.
-</div>
-<div id="ref-You2009" class="csl-entry">
-You, Liangzhi, Stanley Wood, and Ulrike Wood-Sichra. 2009. “<span class="nocase">Generating plausible crop distribution maps for Sub-Saharan Africa using a spatially disaggregated data fusion and optimization approach</span>.” <em>Agricultural Systems</em> 99 (2): 126–40. <a href="https://doi.org/10.1016/j.agsy.2008.11.003" class="external-link uri">https://doi.org/10.1016/j.agsy.2008.11.003</a>.
-</div>
-<div id="ref-You2014a" class="csl-entry">
-You, Liangzhi, Stanley Wood, Ulrike Wood-Sichra, and Wenbin Wu. 2014. “<span class="nocase">Generating global crop distribution maps: From census to grid</span>.” <em>Agricultural Systems</em> 127: 53–60. <a href="https://doi.org/10.1016/j.agsy.2014.01.002" class="external-link uri">https://doi.org/10.1016/j.agsy.2014.01.002</a>.
-</div>
-<div id="ref-Yu2020" class="csl-entry">
-Yu, Qiangyi, Liangzhi You, Ulrike Wood-Sichra, Yating Ru, Alison K. B. Joglekar, Steffen Fritz, Wei Xiong, Miao Lu, Wenbin Wu, and Peng Yang. 2020. “<span class="nocase">A cultivated planet in 2010 – Part 2: The global gridded agricultural-production maps</span>.” <em>Earth System Science Data</em> 12 (4): 3545–72. <a href="https://doi.org/10.5194/essd-12-3545-2020" class="external-link uri">https://doi.org/10.5194/essd-12-3545-2020</a>.
-</div>
+<div id="ref-VanDijk2022b" class="csl-entry">Dijk, Michiel van, Ulrike Wood-Sichra, Yating Ru, Amanda Palazzo, Petr Havlik, and Liangzhi You. 2022. “<span class="nocase">Generating multi-period crop distribution maps for Southern Africa using a data fusion approach</span>.”</div>
+<div id="ref-You2006" class="csl-entry">You, Liangzhi, and Stanley Wood. 2006. “<span class="nocase">An entropy approach to spatial disaggregation of agricultural production</span>.” <em>Agricultural Systems</em> 90 (1): 329–47. <a href="https://doi.org/10.1016/j.agsy.2006.01.008" class="external-link uri">https://doi.org/10.1016/j.agsy.2006.01.008</a>.</div>
+<div id="ref-You2009" class="csl-entry">You, Liangzhi, Stanley Wood, and Ulrike Wood-Sichra. 2009. “<span class="nocase">Generating plausible crop distribution maps for Sub-Saharan Africa using a spatially disaggregated data fusion and optimization approach</span>.” <em>Agricultural Systems</em> 99 (2): 126–40. <a href="https://doi.org/10.1016/j.agsy.2008.11.003" class="external-link uri">https://doi.org/10.1016/j.agsy.2008.11.003</a>.</div>
+<div id="ref-You2014a" class="csl-entry">You, Liangzhi, Stanley Wood, Ulrike Wood-Sichra, and Wenbin Wu. 2014. “<span class="nocase">Generating global crop distribution maps: From census to grid</span>.” <em>Agricultural Systems</em> 127: 53–60. <a href="https://doi.org/10.1016/j.agsy.2014.01.002" class="external-link uri">https://doi.org/10.1016/j.agsy.2014.01.002</a>.</div>
+<div id="ref-Yu2020" class="csl-entry">Yu, Qiangyi, Liangzhi You, Ulrike Wood-Sichra, Yating Ru, Alison K. B. Joglekar, Steffen Fritz, Wei Xiong, Miao Lu, Wenbin Wu, and Peng Yang. 2020. “<span class="nocase">A cultivated planet in 2010 – Part 2: The global gridded agricultural-production maps</span>.” <em>Earth System Science Data</em> 12 (4): 3545–72. <a href="https://doi.org/10.5194/essd-12-3545-2020" class="external-link uri">https://doi.org/10.5194/essd-12-3545-2020</a>.</div>
 </div>
 </div>
 </div>

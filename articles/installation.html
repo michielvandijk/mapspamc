@@ -149,46 +149,23 @@
 
     
     
-<p>To run <code>mapspamc</code>, several software packages need to be
-installed. Below, we provide a brief description on how to install the
-software. Note that GAMS is a commercial product, which requires a
-licence. Also note that the scripts and implementation of the model have
-been developed, implemented and tested using a Windows environment. As
-all the software is cross platform it should be possible to run
-<code>mapspamc</code> on Mac and Linux but this was not tested.</p>
+<p>To run <code>mapspamc</code>, several software packages need to be installed. Below, we provide a brief description on how to install the software. Note that GAMS is a commercial product, which requires a licence. Also note that the scripts and implementation of the model have been developed, implemented and tested using a Windows environment. As all the software is cross platform it should be possible to run <code>mapspamc</code> on Mac and Linux but this was not tested.</p>
 <div class="section level2">
 <h2 id="installing-r-and-rstudio">Installing R and RStudio<a class="anchor" aria-label="anchor" href="#installing-r-and-rstudio"></a>
 </h2>
-<p>All the pre- and post-processing of the data is done in R <span class="citation">(R Core Team 2022)</span>. R is a free and open source
-software environment for statistical computing and graphics supported by
-the R Foundation for Statistical Computing. To run <code>mapspamc</code>
-one needs to install R and RStudio, a graphical user interface for R.
-Both pieces of software are available for various operating systems. The
-package was developed and tested with R version 4.2.1. If you are not
-familiar with R, please have a look at the online book <a href="https://r4ds.had.co.nz" class="external-link">R for Data Science</a> by Hadley Wickham
-and Garrett Grolemund, which is probably the best book to get
-started.</p>
+<p>All the pre- and post-processing of the data is done in R <span class="citation">(R Core Team 2022)</span>. R is a free and open source software environment for statistical computing and graphics supported by the R Foundation for Statistical Computing. To run <code>mapspamc</code> one needs to install R and RStudio, a graphical user interface for R. Both pieces of software are available for various operating systems. The package was developed and tested with R version 4.2.1. If you are not familiar with R, please have a look at the online book <a href="https://r4ds.had.co.nz" class="external-link">R for Data Science</a> by Hadley Wickham and Garrett Grolemund, which is probably the best book to get started.</p>
 <ol style="list-style-type: decimal">
-<li><a href="https://cran.r-project.org/" class="external-link">Download and install
-R</a></li>
+<li><a href="https://cran.r-project.org/" class="external-link">Download and install R</a></li>
 <li>
-<a href="https://rstudio.com/products/rstudio/download/" class="external-link">Download
-and install Rstudio</a>.</li>
+<a href="https://rstudio.com/products/rstudio/download/" class="external-link">Download and install Rstudio</a>.</li>
 </ol>
 </div>
 <div class="section level2">
 <h2 id="installing-gams">Installing GAMS<a class="anchor" aria-label="anchor" href="#installing-gams"></a>
 </h2>
-<p>The downscaling algorithms in <code>mapspamc</code> are solved using
-the <a href="https://www.gams.com/" class="external-link">General Algebraic Modeling
-System</a> (GAMS), which is modelling system and language designed for
-mathematical optimization. The GAMS system and solvers can be downloaded
-from the GAMS website. Unfortunately, one needs a GAMS Base Module
-licence plus additional IPOPT and CPLEX solver licence to run
-<code>mapspamc</code>.</p>
+<p>The downscaling algorithms in <code>mapspamc</code> are solved using the <a href="https://www.gams.com/" class="external-link">General Algebraic Modeling System</a> (GAMS), which is modelling system and language designed for mathematical optimization. The GAMS system and solvers can be downloaded from the GAMS website. Unfortunately, one needs a GAMS Base Module licence plus additional IPOPT and CPLEX solver licence to run <code>mapspamc</code>.</p>
 <ul>
-<li><a href="https://www.gams.com/download" class="external-link">Download and install
-GAMS</a></li>
+<li><a href="https://www.gams.com/download" class="external-link">Download and install GAMS</a></li>
 </ul>
 </div>
 <div class="section level2">
@@ -197,114 +174,55 @@ GAMS</a></li>
 <div class="section level3">
 <h3 id="installing-mapspamc">Installing <code>mapspamc</code><a class="anchor" aria-label="anchor" href="#installing-mapspamc"></a>
 </h3>
-<p>R packages are pieces of bundled R code, frequently including scripts
-from other languages (e.g. C or C++) to speed up calculations or
-interface with other software (e.g. GAMS). Packages can be easily
-installed by using the command <code><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages()</a></code> in R or
-by clicking on the <strong>package</strong> tab in RStudio. Nearly all
-packages are directly downloaded from CRAN, the R package
-repository.</p>
-<p>To install <code>mapspamc</code>, which is not on CRAN, one first has
-to install the <strong>remotes</strong> package:</p>
+<p>R packages are pieces of bundled R code, frequently including scripts from other languages (e.g. C or C++) to speed up calculations or interface with other software (e.g. GAMS). Packages can be easily installed by using the command <code><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages()</a></code> in R or by clicking on the <strong>package</strong> tab in RStudio. Nearly all packages are directly downloaded from CRAN, the R package repository.</p>
+<p>To install <code>mapspamc</code>, which is not on CRAN, one first has to install the <strong>remotes</strong> package:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org" class="external-link">remotes</a></span><span class="op">)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"michielvandijk/mapspamc"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"michielvandijk/mapspamc"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="essential-packages">Essential packages<a class="anchor" aria-label="anchor" href="#essential-packages"></a>
 </h3>
-<p>Several R packages are required to run <code>mapspamc</code>
-scripts:</p>
+<p>Several R packages are required to run <code>mapspamc</code> scripts:</p>
 <ul>
-<li><p>To interface between R and GAMS the gdxrrw package is required.
-Unfortunately, this package is not available on CRAN and therefore has
-to be installed manually. The package can be found <a href="https://github.com/GAMS-dev/gdxrrw" class="external-link">here</a>, which also presents
-instructions on how to install the package. Several functions in
-<code>mapspamc</code> use gdxrrw to read and save GAMS gdx files and
-check whether the package and GAMS are installed.</p></li>
-<li><p><a href="https://cran.r-project.org/web/packages/tidyverse/index.html" class="external-link">tidyverse</a>
-<span class="citation">(Wickham et al. 2019)</span> is the name for a
-set of packages that work in harmony to facilitate data preparation and
-processing, most importantly dplyr, purrr, tidyr and ggplot2. Some of
-them are used by <code>mapspamc</code> and will be installed
-automatically when the package is installed for the first time and were
-not installed before.</p></li>
-<li><p><a href="https://cran.r-project.org/web/packages/sf/index.html" class="external-link">sf
-package</a> <span class="citation">(Pebesma 2018)</span> is a package to
-process spatial data in vector (polygon) format.</p></li>
-<li><p><a href="https://cran.r-project.org/web/packages/raster/index.html" class="external-link">terra
-package</a> <span class="citation">(Hijmans 2022)</span> is a package to
-process spatial data in raster format.</p></li>
+<li><p>To interface between R and GAMS the gdxrrw package is required. Unfortunately, this package is not available on CRAN and therefore has to be installed manually. The package can be found <a href="https://github.com/GAMS-dev/gdxrrw" class="external-link">here</a>, which also presents instructions on how to install the package. Several functions in <code>mapspamc</code> use gdxrrw to read and save GAMS gdx files and check whether the package and GAMS are installed.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/tidyverse/index.html" class="external-link">tidyverse</a> <span class="citation">(Wickham et al. 2019)</span> is the name for a set of packages that work in harmony to facilitate data preparation and processing, most importantly dplyr, purrr, tidyr and ggplot2. Some of them are used by <code>mapspamc</code> and will be installed automatically when the package is installed for the first time and were not installed before.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/sf/index.html" class="external-link">sf package</a> <span class="citation">(Pebesma 2018)</span> is a package to process spatial data in vector (polygon) format.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/raster/index.html" class="external-link">terra package</a> <span class="citation">(Hijmans 2022)</span> is a package to process spatial data in raster format.</p></li>
 </ul>
 </div>
 </div>
 <div class="section level2">
 <h2 id="additional-software">Additional software<a class="anchor" aria-label="anchor" href="#additional-software"></a>
 </h2>
-<p>Although not strictly necessary to use <code>mapspamc</code>, We
-recommend installing the following additional software:</p>
+<p>Although not strictly necessary to use <code>mapspamc</code>, We recommend installing the following additional software:</p>
 <ul>
-<li><p><a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git" class="external-link">Git</a>
-is software to version your code. RStudio and git can be easily linked
-to version code.</p></li>
-<li><p><a href="https://qgis.org/en/site/" class="external-link">QGIS</a> a free and
-open-source cross-platform desktop geographic information system
-application that supports viewing, editing, and analysis of geospatial
-data. It is convenient to quickly inspect vector and raster
-maps.</p></li>
+<li><p><a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git" class="external-link">Git</a> is software to version your code. RStudio and git can be easily linked to version code.</p></li>
+<li><p><a href="https://qgis.org/en/site/" class="external-link">QGIS</a> a free and open-source cross-platform desktop geographic information system application that supports viewing, editing, and analysis of geospatial data. It is convenient to quickly inspect vector and raster maps.</p></li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="hardware">Hardware<a class="anchor" aria-label="anchor" href="#hardware"></a>
 </h2>
-<p>The dimensions of <code>mapspamc</code> models are determined by the
-number of grid cells, administrative regions, crops and farming systems.
-Of these four elements, the number of grid cells is the main factor
-determining the size of the model although the other dimensions (in
-combination with the number of grid cells) also play a role. The total
-number of grid cells is related to (1) the cropland extent and, hence,
-the size of the country and (2) the resolution of the model, e.g. 5 arc
-minutes or 30 arc seconds.</p>
-<p>When the model is run at the highest resolution of 30 arc seconds,
-the dimensions quickly tend to become very large. Excessively large
-models will result in memory problems or very long processing times on a
-standard desktop machine. We successfully managed to run 30 arc seconds
-single country models for small to medium size African countries, such
-as Malawi, Zambia and Kenya on a Windows 10 desktop with 16 gigabyte
-memory but we were unable to run the model for Ethiopia, which is a much
-larger country. To produce crop distribution maps for large countries,
-we provide the possibility to split the data and solve the model for
-each level 1 administrative unit separately. The main disadvantage of
-this approach is that it is not allowed to have missing crop statistics
-(e.g. total area of maize) at the level 1 administrative unit. In
-practice, level 1 administrative crop information is not always
-available and therefore has to be imputed. We recommend testing models
-at a resolution of 5 arc minutes and only proceed with running at 30 arc
-seconds resolution if really needed.</p>
+<p>The dimensions of <code>mapspamc</code> models are determined by the number of grid cells, administrative regions, crops and farming systems. Of these four elements, the number of grid cells is the main factor determining the size of the model although the other dimensions (in combination with the number of grid cells) also play a role. The total number of grid cells is related to (1) the cropland extent and, hence, the size of the country and (2) the resolution of the model, e.g. 5 arc minutes or 30 arc seconds.</p>
+<p>When the model is run at the highest resolution of 30 arc seconds, the dimensions quickly tend to become very large. Excessively large models will result in memory problems or very long processing times on a standard desktop machine. We successfully managed to run 30 arc seconds single country models for small to medium size African countries, such as Malawi, Zambia and Kenya on a Windows 10 desktop with 16 gigabyte memory but we were unable to run the model for Ethiopia, which is a much larger country. To produce crop distribution maps for large countries, we provide the possibility to split the data and solve the model for each level 1 administrative unit separately. The main disadvantage of this approach is that it is not allowed to have missing crop statistics (e.g. total area of maize) at the level 1 administrative unit. In practice, level 1 administrative crop information is not always available and therefore has to be imputed. We recommend testing models at a resolution of 5 arc minutes and only proceed with running at 30 arc seconds resolution if really needed.</p>
 </div>
 <div class="section level2 unnumbered">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-Hijmans2022" class="csl-entry">
-Hijmans, Robert J. 2022. <span>“<span class="nocase">Terra: Spatial data
-analysis</span>.”</span> <a href="https://cran.r-project.org/package=terra" class="external-link">https://cran.r-project.org/package=terra</a>.
+Hijmans, Robert J. 2022. <span>“<span class="nocase">Terra: Spatial data analysis</span>.”</span> <a href="https://cran.r-project.org/package=terra" class="external-link">https://cran.r-project.org/package=terra</a>.
 </div>
 <div id="ref-Pebesma2018" class="csl-entry">
-Pebesma, Edzer. 2018. <span>“<span class="nocase">Simple Features for R:
-Standardized Support for Spatial Vector Data</span>.”</span> <em>The R
-Journal</em> 10 (1): 439. <a href="https://doi.org/10.32614/RJ-2018-009" class="external-link">https://doi.org/10.32614/RJ-2018-009</a>.
+Pebesma, Edzer. 2018. <span>“<span class="nocase">Simple Features for R: Standardized Support for Spatial Vector Data</span>.”</span> <em>The R Journal</em> 10 (1): 439. <a href="https://doi.org/10.32614/RJ-2018-009" class="external-link">https://doi.org/10.32614/RJ-2018-009</a>.
 </div>
 <div id="ref-RCoreTeam2022" class="csl-entry">
-R Core Team. 2022. <span>“<span class="nocase">R: A Language and
-Environment for Statistical Computing</span>.”</span> R Foundation for
-Statistical Computing. <a href="https://www.r-project.org/" class="external-link">https://www.r-project.org/</a>.
+R Core Team. 2022. <span>“<span class="nocase">R: A Language and Environment for Statistical Computing</span>.”</span> R Foundation for Statistical Computing. <a href="https://www.r-project.org/" class="external-link">https://www.r-project.org/</a>.
 </div>
 <div id="ref-Wickham2019" class="csl-entry">
-Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy
-McGowan, Romain François, Garrett Grolemund, et al. 2019. <span>“<span class="nocase">Welcome to the Tidyverse</span>.”</span> <em>Journal of
-Open Source Software</em> 4 (43): 1686. <a href="https://doi.org/10.21105/joss.01686" class="external-link">https://doi.org/10.21105/joss.01686</a>.
+Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy McGowan, Romain François, Garrett Grolemund, et al. 2019. <span>“<span class="nocase">Welcome to the Tidyverse</span>.”</span> <em>Journal of Open Source Software</em> 4 (43): 1686. <a href="https://doi.org/10.21105/joss.01686" class="external-link">https://doi.org/10.21105/joss.01686</a>.
 </div>
 </div>
 </div>

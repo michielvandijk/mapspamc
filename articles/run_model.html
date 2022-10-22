@@ -149,29 +149,10 @@
 
     
     
-<p><code>run_mapspamc</code> runs the selected model
-(<code>min_entropy</code> or <code>max_score</code>) in GAMS. If
-<code>model_sel = 1</code>, the model is run for each individual
-administrative unit at level 1. If <code>model_sel = 0</code> the model
-is run only once for the total country. Selecting
-<code>out = TRUE</code> (default setting), the model log will be sent to
-the screen after the model run is finished. The log is as text file,
-whicn names starts with <code>model_log_</code> and is saved in the
-<code>processed_data/intermediate_output</code> folder. Note that,
-depending on the size of the country and the selected resolution, the
-model might take a lot of time to run. If the model is very large, there
-is a risk your computer runs out of memory and an error message will be
-printed in the model log.</p>
+<p><code>run_mapspamc</code> runs the selected model (<code>min_entropy</code> or <code>max_score</code>) in GAMS. If <code>model_sel = 1</code>, the model is run for each individual administrative unit at level 1. If <code>model_sel = 0</code> the model is run only once for the total country. Selecting <code>out = TRUE</code> (default setting), the model log will be sent to the screen after the model run is finished. The log is as text file, whicn names starts with <code>model_log_</code> and is saved in the <code>processed_data/intermediate_output</code> folder. Note that, depending on the size of the country and the selected resolution, the model might take a lot of time to run. If the model is very large, there is a risk your computer runs out of memory and an error message will be printed in the model log.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/run_mapspamc.html">run_mapspamc</a></span><span class="op">(</span><span class="va">param</span><span class="op">)</span></span></code></pre></div>
-<p><code>mapspamc</code> results are saved into one
-(<code>solve_level = 0</code>) or multiple
-(<code>solve_level = 1</code>) gdx files
-after<code><a href="../reference/run_mapspamc.html">run_mapspamc()</a></code> is executed.
-<code><a href="../reference/combine_results.html">combine_results()</a></code> combines the file(s) into a single rds
-file, that can be easily loaded into R and used for further inspection
-and further processing. The file is saved in the
-<code>processed_data/results</code> folder.</p>
+<p><code>mapspamc</code> results are saved into one (<code>solve_level = 0</code>) or multiple (<code>solve_level = 1</code>) gdx files after<code><a href="../reference/run_mapspamc.html">run_mapspamc()</a></code> is executed. <code><a href="../reference/combine_results.html">combine_results()</a></code> combines the file(s) into a single rds file, that can be easily loaded into R and used for further inspection and further processing. The file is saved in the <code>processed_data/results</code> folder.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/combine_results.html">combine_results</a></span><span class="op">(</span><span class="va">param</span><span class="op">)</span></span></code></pre></div>
   </div>

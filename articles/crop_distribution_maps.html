@@ -149,165 +149,66 @@
 
     
     
-<p>Comprehensive, detailed and spatially explicit information on the
-locations of crops is essential to inform agricultural and food
-policies. crop distribution maps are used to as crucial input for
-regional crop monitoring systems <span class="citation">(Fritz et al.
-2019; Becker-Reshef et al. 2019)</span>, to analyse national irrigation
-potential <span class="citation">(You et al. 2014; Xie, You, and
-Takeshima 2017)</span> and to assess the impact of climate change and
-socioeconomic development on land use change and wider developmental
-trade-offs <span class="citation">(Ahmed et al. 2016)</span>.</p>
-<p>Currently, only several global products provide spatial information
-on the location of crops <span class="citation">(Monfreda, Ramankutty,
-and Foley 2008; Portmann, Siebert, and Döll 2010; You et al. 2014; see
-Anderson et al. 2015 for a comparison)</span>. These datasets use
-spatial information on land cover, suitability and irrigation to
-‘pixelate’ (sub)national agricultural statistics at 5 arc minute
-resolution (~10x10 kilometer at the equator). Apart from the Spatial
-Production Allocation Model (SPAM), which latest version covers the year
-2010 <span class="citation">(Yu et al. 2020)</span>, these datasets are
-rather outdated.</p>
-<p>Global crop distribution maps are a useful starting point for
-national analysis but are of limited use when more detailed and up to
-date information is required. National decision makers often want to
-zoom in on subnational regions (e.g. bread basket areas), which requires
-(higher) resolution maps that are consistent with national data sources
-such as land cover maps and subnational crop statistics.</p>
-<p>An interesting alternative and new approach to create high resolution
-crop distribution maps are machine learning techniques, which can be
-used to identify the location of specific crops using satellite imagery
-in combination with other predictors. Although promising, these
-techniques are still under active development and the available studies
-predominantly target large-scale crops (e.g. soy bean and palm oil),
-which are easier to identify using machine learning classification
-approaches <span class="citation">(Zhong et al. 2016; Song et al. 2017;
-Danylo et al. 2020)</span>.</p>
-<p><code>mapspamc</code> provides the infrastructure to create plausible
-spatial estimates of physical and harvested crop area at national scale
-using the SPAM approach described in <span class="citation">You and Wood
-(2006)</span>, <span class="citation">You, Wood, and Wood-Sichra
-(2009)</span>, <span class="citation">You et al. (2014)</span> and <span class="citation">Yu et al. (2020)</span>, which uses a cross-entropy
-framework to allocate subnational land use information on a 5 arc minute
-grid. Apart from the standard model, <code>mapspamc</code> offers an
-alternative algorithm, which makes it possible to create crop
-distributions maps with a resolution of 30 arc second (~1x1 kilometer at
-the equator) - see <span class="citation">Dijk et al. (2022)</span> for
-more information.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>Comprehensive, detailed and spatially explicit information on the locations of crops is essential to inform agricultural and food policies. crop distribution maps are used to as crucial input for regional crop monitoring systems <span class="citation">(Fritz et al. 2019; Becker-Reshef et al. 2019)</span>, to analyse national irrigation potential <span class="citation">(You et al. 2014; Xie, You, and Takeshima 2017)</span> and to assess the impact of climate change and socioeconomic development on land use change and wider developmental trade-offs <span class="citation">(Ahmed et al. 2016)</span>.</p>
+<p>Currently, only several global products provide spatial information on the location of crops <span class="citation">(Monfreda, Ramankutty, and Foley 2008; Portmann, Siebert, and Döll 2010; You et al. 2014; see Anderson et al. 2015 for a comparison)</span>. These datasets use spatial information on land cover, suitability and irrigation to ‘pixelate’ (sub)national agricultural statistics at 5 arc minute resolution (~10x10 kilometer at the equator). Apart from the Spatial Production Allocation Model (SPAM), which latest version covers the year 2010 <span class="citation">(Yu et al. 2020)</span>, these datasets are rather outdated.</p>
+<p>Global crop distribution maps are a useful starting point for national analysis but are of limited use when more detailed and up to date information is required. National decision makers often want to zoom in on subnational regions (e.g. bread basket areas), which requires (higher) resolution maps that are consistent with national data sources such as land cover maps and subnational crop statistics.</p>
+<p>An interesting alternative and new approach to create high resolution crop distribution maps are machine learning techniques, which can be used to identify the location of specific crops using satellite imagery in combination with other predictors. Although promising, these techniques are still under active development and the available studies predominantly target large-scale crops (e.g. soy bean and palm oil), which are easier to identify using machine learning classification approaches <span class="citation">(Zhong et al. 2016; Song et al. 2017; Danylo et al. 2020)</span>.</p>
+<p><code>mapspamc</code> provides the infrastructure to create plausible spatial estimates of physical and harvested crop area at national scale using the SPAM approach described in <span class="citation">You and Wood (2006)</span>, <span class="citation">You, Wood, and Wood-Sichra (2009)</span>, <span class="citation">You et al. (2014)</span> and <span class="citation">Yu et al. (2020)</span>, which uses a cross-entropy framework to allocate subnational land use information on a 5 arc minute grid. Apart from the standard model, <code>mapspamc</code> offers an alternative algorithm, which makes it possible to create crop distributions maps with a resolution of 30 arc second (~1x1 kilometer at the equator) - see <span class="citation">Dijk et al. (2022)</span> for more information.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <div class="section level2 unnumbered">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-Ahmed2016" class="csl-entry">
-Ahmed, Kazi Farzan, Guiling Wang, Liangzhi You, and Miao Yu. 2016.
-<span>“<span class="nocase">Potential impact of climate and
-socioeconomic changes on future agricultural land use in West
-Africa</span>.”</span> <em>Earth System Dynamics</em> 7 (1): 151–65. <a href="https://doi.org/10.5194/esd-7-151-2016" class="external-link">https://doi.org/10.5194/esd-7-151-2016</a>.
+Ahmed, Kazi Farzan, Guiling Wang, Liangzhi You, and Miao Yu. 2016. <span>“<span class="nocase">Potential impact of climate and socioeconomic changes on future agricultural land use in West Africa</span>.”</span> <em>Earth System Dynamics</em> 7 (1): 151–65. <a href="https://doi.org/10.5194/esd-7-151-2016" class="external-link">https://doi.org/10.5194/esd-7-151-2016</a>.
 </div>
 <div id="ref-Anderson2015" class="csl-entry">
-Anderson, Weston, Liangzhi You, Stanley Wood, Ulrike Wood-Sichra, and
-Wenbin Wu. 2015. <span>“<span class="nocase">An analysis of
-methodological and spatial differences in global cropping systems models
-and maps</span>.”</span> <em>Global Ecology and Biogeography</em> 24
-(2): 180–91. <a href="https://doi.org/10.1111/geb.12243" class="external-link">https://doi.org/10.1111/geb.12243</a>.
+Anderson, Weston, Liangzhi You, Stanley Wood, Ulrike Wood-Sichra, and Wenbin Wu. 2015. <span>“<span class="nocase">An analysis of methodological and spatial differences in global cropping systems models and maps</span>.”</span> <em>Global Ecology and Biogeography</em> 24 (2): 180–91. <a href="https://doi.org/10.1111/geb.12243" class="external-link">https://doi.org/10.1111/geb.12243</a>.
 </div>
 <div id="ref-Becker-Reshef2019" class="csl-entry">
-Becker-Reshef, Inbal, Brian Barker, Michael Humber, Estefania Puricelli,
-Antonio Sanchez, Ritvik Sahajpal, Katie McGaughey, et al. 2019.
-<span>“<span class="nocase">The GEOGLAM crop monitor for AMIS: Assessing
-crop conditions in the context of global markets</span>.”</span>
-<em>Global Food Security</em> 23 (December): 173–81. <a href="https://doi.org/10.1016/j.gfs.2019.04.010" class="external-link">https://doi.org/10.1016/j.gfs.2019.04.010</a>.
+Becker-Reshef, Inbal, Brian Barker, Michael Humber, Estefania Puricelli, Antonio Sanchez, Ritvik Sahajpal, Katie McGaughey, et al. 2019. <span>“<span class="nocase">The GEOGLAM crop monitor for AMIS: Assessing crop conditions in the context of global markets</span>.”</span> <em>Global Food Security</em> 23 (December): 173–81. <a href="https://doi.org/10.1016/j.gfs.2019.04.010" class="external-link">https://doi.org/10.1016/j.gfs.2019.04.010</a>.
 </div>
 <div id="ref-Danylo2020" class="csl-entry">
-Danylo, Olha, Johannes Pirker, Guido Lemoine, Guido Ceccherini, Linda
-See, Ian McCallum, Hadi, Florian Kraxner, Frédéric Achard, and Steffen
-Fritz. 2020. <span>“<span class="nocase">Satellite reveals age and
-extent of oil palm plantations in Southeast Asia</span>,”</span>
-February. <a href="http://arxiv.org/abs/2002.07163" class="external-link">http://arxiv.org/abs/2002.07163</a>.
+Danylo, Olha, Johannes Pirker, Guido Lemoine, Guido Ceccherini, Linda See, Ian McCallum, Hadi, Florian Kraxner, Frédéric Achard, and Steffen Fritz. 2020. <span>“<span class="nocase">Satellite reveals age and extent of oil palm plantations in Southeast Asia</span>,”</span> February. <a href="http://arxiv.org/abs/2002.07163" class="external-link">http://arxiv.org/abs/2002.07163</a>.
 </div>
 <div id="ref-VanDijk2022b" class="csl-entry">
-Dijk, Michiel van, Ulrike Wood-Sichra, Yating Ru, Amanda Palazzo, Petr
-Havlik, and Liangzhi You. 2022. <span>“<span class="nocase">Generating
-multi-period crop distribution maps for Southern Africa using a data
-fusion approach</span>.”</span>
+Dijk, Michiel van, Ulrike Wood-Sichra, Yating Ru, Amanda Palazzo, Petr Havlik, and Liangzhi You. 2022. <span>“<span class="nocase">Generating multi-period crop distribution maps for Southern Africa using a data fusion approach</span>.”</span>
 </div>
 <div id="ref-Fritz2019" class="csl-entry">
-Fritz, Steffen, Linda See, Juan Carlos Laso Bayas, François Waldner,
-Damien Jacques, Inbal Becker-Reshef, Alyssa Whitcraft, et al. 2019.
-<span>“<span class="nocase">A comparison of global agricultural
-monitoring systems and current gaps</span>.”</span> <em>Agricultural
-Systems</em> 168 (January): 258–72. <a href="https://doi.org/10.1016/j.agsy.2018.05.010" class="external-link">https://doi.org/10.1016/j.agsy.2018.05.010</a>.
+Fritz, Steffen, Linda See, Juan Carlos Laso Bayas, François Waldner, Damien Jacques, Inbal Becker-Reshef, Alyssa Whitcraft, et al. 2019. <span>“<span class="nocase">A comparison of global agricultural monitoring systems and current gaps</span>.”</span> <em>Agricultural Systems</em> 168 (January): 258–72. <a href="https://doi.org/10.1016/j.agsy.2018.05.010" class="external-link">https://doi.org/10.1016/j.agsy.2018.05.010</a>.
 </div>
 <div id="ref-Monfreda2008" class="csl-entry">
-Monfreda, Chad, Navin Ramankutty, and Jonathan A. Foley. 2008.
-<span>“<span class="nocase">Farming the planet: 2. Geographic
-distribution of crop areas, yields, physiological types, and net primary
-production in the year 2000</span>.”</span> <em>Global Biogeochemical
-Cycles</em> 22 (1). <a href="https://doi.org/10.1029/2007GB002947" class="external-link">https://doi.org/10.1029/2007GB002947</a>.
+Monfreda, Chad, Navin Ramankutty, and Jonathan A. Foley. 2008. <span>“<span class="nocase">Farming the planet: 2. Geographic distribution of crop areas, yields, physiological types, and net primary production in the year 2000</span>.”</span> <em>Global Biogeochemical Cycles</em> 22 (1). <a href="https://doi.org/10.1029/2007GB002947" class="external-link">https://doi.org/10.1029/2007GB002947</a>.
 </div>
 <div id="ref-Portmann2010" class="csl-entry">
-Portmann, Felix T., Stefan Siebert, and Petra Döll. 2010. <span>“<span class="nocase">MIRCA2000—Global monthly irrigated and rainfed crop areas
-around the year 2000: A new high-resolution data set for agricultural
-and hydrological modeling</span>.”</span> <em>Global Biogeochemical
-Cycles</em> 24: 1–24. <a href="https://doi.org/10.1029/2008GB003435" class="external-link">https://doi.org/10.1029/2008GB003435</a>.
+Portmann, Felix T., Stefan Siebert, and Petra Döll. 2010. <span>“<span class="nocase">MIRCA2000—Global monthly irrigated and rainfed crop areas around the year 2000: A new high-resolution data set for agricultural and hydrological modeling</span>.”</span> <em>Global Biogeochemical Cycles</em> 24: 1–24. <a href="https://doi.org/10.1029/2008GB003435" class="external-link">https://doi.org/10.1029/2008GB003435</a>.
 </div>
 <div id="ref-Song2017" class="csl-entry">
-Song, Xiao Peng, Peter V. Potapov, Alexander Krylov, Lee Ann King,
-Carlos M. Di Bella, Amy Hudson, Ahmad Khan, Bernard Adusei, Stephen V.
-Stehman, and Matthew C. Hansen. 2017. <span>“<span class="nocase">National-scale soybean mapping and area estimation in the
-United States using medium resolution satellite imagery and field
-survey</span>.”</span> <em>Remote Sensing of Environment</em> 190
-(March): 383–95. <a href="https://doi.org/10.1016/j.rse.2017.01.008" class="external-link">https://doi.org/10.1016/j.rse.2017.01.008</a>.
+Song, Xiao Peng, Peter V. Potapov, Alexander Krylov, Lee Ann King, Carlos M. Di Bella, Amy Hudson, Ahmad Khan, Bernard Adusei, Stephen V. Stehman, and Matthew C. Hansen. 2017. <span>“<span class="nocase">National-scale soybean mapping and area estimation in the United States using medium resolution satellite imagery and field survey</span>.”</span> <em>Remote Sensing of Environment</em> 190 (March): 383–95. <a href="https://doi.org/10.1016/j.rse.2017.01.008" class="external-link">https://doi.org/10.1016/j.rse.2017.01.008</a>.
 </div>
 <div id="ref-Xie2017" class="csl-entry">
-Xie, Hua, Liangzhi You, and Hiroyuki Takeshima. 2017. <span>“<span class="nocase">Invest in small-scale irrigated agriculture: A national
-assessment on potential to expand small-scale irrigation in
-Nigeria</span>.”</span> <em>Agricultural Water Management</em> 193
-(November): 251–64. <a href="https://doi.org/10.1016/j.agwat.2017.08.020" class="external-link">https://doi.org/10.1016/j.agwat.2017.08.020</a>.
+Xie, Hua, Liangzhi You, and Hiroyuki Takeshima. 2017. <span>“<span class="nocase">Invest in small-scale irrigated agriculture: A national assessment on potential to expand small-scale irrigation in Nigeria</span>.”</span> <em>Agricultural Water Management</em> 193 (November): 251–64. <a href="https://doi.org/10.1016/j.agwat.2017.08.020" class="external-link">https://doi.org/10.1016/j.agwat.2017.08.020</a>.
 </div>
 <div id="ref-You2006" class="csl-entry">
-You, Liangzhi, and Stanley Wood. 2006. <span>“<span class="nocase">An
-entropy approach to spatial disaggregation of agricultural
-production</span>.”</span> <em>Agricultural Systems</em> 90 (1): 329–47.
-<a href="https://doi.org/10.1016/j.agsy.2006.01.008" class="external-link">https://doi.org/10.1016/j.agsy.2006.01.008</a>.
+You, Liangzhi, and Stanley Wood. 2006. <span>“<span class="nocase">An entropy approach to spatial disaggregation of agricultural production</span>.”</span> <em>Agricultural Systems</em> 90 (1): 329–47. <a href="https://doi.org/10.1016/j.agsy.2006.01.008" class="external-link">https://doi.org/10.1016/j.agsy.2006.01.008</a>.
 </div>
 <div id="ref-You2009" class="csl-entry">
-You, Liangzhi, Stanley Wood, and Ulrike Wood-Sichra. 2009. <span>“<span class="nocase">Generating plausible crop distribution maps for
-Sub-Saharan Africa using a spatially disaggregated data fusion and
-optimization approach</span>.”</span> <em>Agricultural Systems</em> 99
-(2): 126–40. <a href="https://doi.org/10.1016/j.agsy.2008.11.003" class="external-link">https://doi.org/10.1016/j.agsy.2008.11.003</a>.
+You, Liangzhi, Stanley Wood, and Ulrike Wood-Sichra. 2009. <span>“<span class="nocase">Generating plausible crop distribution maps for Sub-Saharan Africa using a spatially disaggregated data fusion and optimization approach</span>.”</span> <em>Agricultural Systems</em> 99 (2): 126–40. <a href="https://doi.org/10.1016/j.agsy.2008.11.003" class="external-link">https://doi.org/10.1016/j.agsy.2008.11.003</a>.
 </div>
 <div id="ref-You2014a" class="csl-entry">
-You, Liangzhi, Stanley Wood, Ulrike Wood-Sichra, and Wenbin Wu. 2014.
-<span>“<span class="nocase">Generating global crop distribution maps:
-From census to grid</span>.”</span> <em>Agricultural Systems</em> 127:
-53–60. <a href="https://doi.org/10.1016/j.agsy.2014.01.002" class="external-link">https://doi.org/10.1016/j.agsy.2014.01.002</a>.
+You, Liangzhi, Stanley Wood, Ulrike Wood-Sichra, and Wenbin Wu. 2014. <span>“<span class="nocase">Generating global crop distribution maps: From census to grid</span>.”</span> <em>Agricultural Systems</em> 127: 53–60. <a href="https://doi.org/10.1016/j.agsy.2014.01.002" class="external-link">https://doi.org/10.1016/j.agsy.2014.01.002</a>.
 </div>
 <div id="ref-Yu2020" class="csl-entry">
-Yu, Qiangyi, Liangzhi You, Ulrike Wood-Sichra, Yating Ru, Alison K. B.
-Joglekar, Steffen Fritz, Wei Xiong, Miao Lu, Wenbin Wu, and Peng Yang.
-2020. <span>“<span class="nocase">A cultivated planet in 2010 – Part 2:
-The global gridded agricultural-production maps</span>.”</span>
-<em>Earth System Science Data</em> 12 (4): 3545–72. <a href="https://doi.org/10.5194/essd-12-3545-2020" class="external-link">https://doi.org/10.5194/essd-12-3545-2020</a>.
+Yu, Qiangyi, Liangzhi You, Ulrike Wood-Sichra, Yating Ru, Alison K. B. Joglekar, Steffen Fritz, Wei Xiong, Miao Lu, Wenbin Wu, and Peng Yang. 2020. <span>“<span class="nocase">A cultivated planet in 2010 – Part 2: The global gridded agricultural-production maps</span>.”</span> <em>Earth System Science Data</em> 12 (4): 3545–72. <a href="https://doi.org/10.5194/essd-12-3545-2020" class="external-link">https://doi.org/10.5194/essd-12-3545-2020</a>.
 </div>
 <div id="ref-Zhong2016" class="csl-entry">
-Zhong, Liheng, Lina Hu, Le Yu, Peng Gong, and Gregory S. Biging. 2016.
-<span>“<span class="nocase">Automated mapping of soybean and corn using
-phenology</span>.”</span> <em>ISPRS Journal of Photogrammetry and Remote
-Sensing</em> 119 (September): 151–64. <a href="https://doi.org/10.1016/J.ISPRSJPRS.2016.05.014" class="external-link">https://doi.org/10.1016/J.ISPRSJPRS.2016.05.014</a>.
+Zhong, Liheng, Lina Hu, Le Yu, Peng Gong, and Gregory S. Biging. 2016. <span>“<span class="nocase">Automated mapping of soybean and corn using phenology</span>.”</span> <em>ISPRS Journal of Photogrammetry and Remote Sensing</em> 119 (September): 151–64. <a href="https://doi.org/10.1016/J.ISPRSJPRS.2016.05.014" class="external-link">https://doi.org/10.1016/J.ISPRSJPRS.2016.05.014</a>.
 </div>
 </div>
 </div>
-<div class="footnotes footnotes-end-of-document">
+<div class="footnotes">
 <hr>
 <ol>
-<li id="fn1"><p>Note <code>mapspamc</code> does not support all the
-model extensions presented in <span class="citation">Dijk et al.
-(2022)</span>. At the moment, it is not possible to blend in detailed
-information on the location of crops (e.g. OpenStreetMap information,
-large-farm surveys and machine learning products). <code>mapspamc</code>
-also does not include the approach to backcast crop distribution maps to
-earlier periods. These features might be added in an futured updates.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>Note <code>mapspamc</code> does not support all the model extensions presented in <span class="citation">Dijk et al. (2022)</span>. At the moment, it is not possible to blend in detailed information on the location of crops (e.g. OpenStreetMap information, large-farm surveys and machine learning products). <code>mapspamc</code> also does not include the approach to backcast crop distribution maps to earlier periods. These features might be added in an futured updates.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
   </div>
