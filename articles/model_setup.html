@@ -317,7 +317,21 @@ the documentation of most functions.</p>
 <span>  model <span class="op">=</span> <span class="st">"min_entropy"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Show parameters</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">param</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">param</span><span class="op">)</span></span>
+<span><span class="co">#&gt; country name:  Malawi </span></span>
+<span><span class="co">#&gt; iso3n:  454 </span></span>
+<span><span class="co">#&gt; iso3c:  MWI </span></span>
+<span><span class="co">#&gt; continent:  Africa </span></span>
+<span><span class="co">#&gt; year:  2010 </span></span>
+<span><span class="co">#&gt; model:  min_entropy </span></span>
+<span><span class="co">#&gt; resolution:  5min </span></span>
+<span><span class="co">#&gt; adm level:  2 </span></span>
+<span><span class="co">#&gt; solve level:  0 </span></span>
+<span><span class="co">#&gt; model path:  c:/temp/mapspamc_mwi </span></span>
+<span><span class="co">#&gt; mapspamc_db path:  c:/temp/mapspamc_db </span></span>
+<span><span class="co">#&gt; gams path: C:/MyPrograms/GAMS/35 </span></span>
+<span><span class="co">#&gt; model folder:  min_entropy_5min_adm_level_2_solve_level_0 </span></span>
+<span><span class="co">#&gt; crs:  epsg:4326</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="create-a-folder-structure">Create a folder structure<a class="anchor" aria-label="anchor" href="#create-a-folder-structure"></a>
@@ -367,8 +381,10 @@ other spatial data.</p>
 <span><span class="co">#adm_map_raw &lt;- read_sf(file.path(param$db_path, glue("adm/{param$iso3c}/{iso3c_shp}")))</span></span>
 <span></span>
 <span><span class="co"># plot</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">mapspamc</span><span class="fu">::</span><span class="va">adm_map_raw</span><span class="op">$</span><span class="va">geometry</span><span class="op">)</span></span>
-<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">mapspamc</span><span class="fu">::</span><span class="va">adm_map_raw</span><span class="op">$</span><span class="va">geometry</span><span class="op">)</span></span></code></pre></div>
+<p><img src="model_setup_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="co"># Project to standard global projection</span></span>
 <span><span class="va">adm_map</span> <span class="op">&lt;-</span> <span class="va">adm_map_raw</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html" class="external-link">st_transform</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">crs</span><span class="op">)</span></span></code></pre></div>
@@ -390,9 +406,15 @@ crop area information for the combination of two subnational regions
 both regions (ADM A &amp; ADM B). In such case, you can simply give each
 polygon the same name (e.g. ADM_A_B) and code (A_B) and they will
 automatically be dissolved into one polygon.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Check names</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">adm_map</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [1] "AREA"       "PERIMETER"  "G2008_2_"   "G2008_2_ID" "ADM2_CODE" </span></span>
+<span><span class="co">#&gt;  [6] "ADM0_CODE"  "ADM0_NAME"  "ADM1_NAME"  "ADM1_CODE"  "ADM2_NAME" </span></span>
+<span><span class="co">#&gt; [11] "DISP_AREA"  "LAST_UPDAT" "CONTINENT"  "REGION"     "STR_YEAR0" </span></span>
+<span><span class="co">#&gt; [16] "STR_YEAR1"  "STR_YEAR2"  "EXP_YEAR0"  "EXP_YEAR1"  "EXP_YEAR2" </span></span>
+<span><span class="co">#&gt; [21] "FIPS0"      "FIPS1"      "FIPS2"      "NAME1"      "NAME2"     </span></span>
+<span><span class="co">#&gt; [26] "O_FIPS1"    "O_FIPS2"    "O_NAME1"    "O_NAME2"    "geometry"</span></span>
 <span></span>
 <span><span class="co"># Set the original names, i.e. the ones that will be replaced. Remove adm1</span></span>
 <span><span class="co"># and/or adm2 entries if such data is not available.</span></span>
@@ -425,7 +447,25 @@ automatically be dissolved into one polygon.</p>
 <span></span>
 <span><span class="co"># Check names</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">adm_map</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">adm_map</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co">#&gt; Simple feature collection with 6 features and 6 fields</span></span>
+<span><span class="co">#&gt; Geometry type: POLYGON</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: 32.67395 ymin: -14.60495 xmax: 35.2957 ymax: -9.49193</span></span>
+<span><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 7</span></span></span>
+<span><span class="co">#&gt;   adm0_name adm0_code adm1_n…¹ adm1_…² adm2_…³ adm2_…⁴                  geometry</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;POLYGON [°]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Malawi    MWI       Area un… MI01    Area u… MI01001 ((34.07573 -9.526601, 34…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Malawi    MWI       Central… MI02    Dedza   MI02001 ((34.27983 -13.86093, 34…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Malawi    MWI       Central… MI02    Dowa    MI02002 ((33.70179 -13.19747, 33…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Malawi    MWI       Central… MI02    Kasungu MI02003 ((33.58521 -12.44411, 33…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Malawi    MWI       Central… MI02    Lilong… MI02004 ((33.40644 -13.48576, 33…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Malawi    MWI       Central… MI02    Mchinji MI02005 ((33.03184 -13.35057, 33…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with abbreviated variable names ¹​adm1_name, ²​adm1_code, ³​adm2_name,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​adm2_code</span></span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">adm_map</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "adm0_name" "adm0_code" "adm1_name" "adm1_code" "adm2_name" "adm2_code"</span></span>
+<span><span class="co">#&gt; [7] "geometry"</span></span></code></pre></div>
 <p>Polygons of administrative units where no crops should be allocated
 must be removed. If this is not done, and in the rare case when the area
 statistics are larger than the cropland exent, the model might still
@@ -435,9 +475,11 @@ the part of Lake Malawi that belongs to Malawi, and Likoma, several
 small islands in lake Malawi that are not covered by the statistics. The
 script below shows how to remove them. It there is no reason to remove
 polygons, simply delete the lines of script in the template.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">adm_map</span><span class="op">$</span><span class="va">geometry</span>, main <span class="op">=</span> <span class="st">"ADM all polygons"</span><span class="op">)</span></span>
-<span></span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">adm_map</span><span class="op">$</span><span class="va">geometry</span>, main <span class="op">=</span> <span class="st">"ADM all polygons"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="model_setup_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="co"># Set names of ADMs that need to be removed from the polygon. </span></span>
 <span><span class="va">adm1_to_remove</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Area under National Administration"</span><span class="op">)</span></span>
 <span><span class="va">adm2_to_remove</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Likoma"</span><span class="op">)</span></span>
@@ -448,6 +490,7 @@ polygons, simply delete the lines of script in the template.</p>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">adm2_name</span> <span class="op">!=</span> <span class="va">adm2_to_remove</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">adm_map</span><span class="op">$</span><span class="va">geometry</span>, main <span class="op">=</span> <span class="st">"ADM polygons removed"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="model_setup_files/figure-html/unnamed-chunk-7-2.png" width="700"></p>
 <p>To link the subnational statistics to other spatial data a mapping
 table is needed (<code>adm_list</code>) that contains information on how
 the administrative units at various levels are nested, which is
@@ -455,12 +498,12 @@ precisely the information that is stored in the attribute table of the
 administrative unit map. The following code, extracts the list from the
 shapefile and saves it as csv file in the
 <code>processed_data/lists</code> folder.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create adm_list</span></span>
 <span><span class="fu"><a href="../reference/create_adm_list.html">create_adm_list</a></span><span class="op">(</span><span class="va">adm_map</span>, <span class="va">param</span><span class="op">)</span></span></code></pre></div>
 <p>After the administrative region shapefile has been processed save it
 in the right location.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">temp_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">model_path</span>, <span class="fu">glue</span><span class="op">(</span><span class="st">"processed_data/maps/adm/{param$res}"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="va">temp_path</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
@@ -469,7 +512,7 @@ in the right location.</p>
 <p>By running <code><a href="../reference/create_adm_map_pdf.html">create_adm_map_pdf()</a></code> a pdf file with maps of
 the (sub)national regions is created in the
 <code>processed_data/maps/adm</code> folder.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create pdf file with the location of administrative units</span></span>
 <span><span class="fu"><a href="../reference/create_adm_map_pdf.html">create_adm_map_pdf</a></span><span class="op">(</span><span class="va">param</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -483,7 +526,7 @@ grid is subsequently used by <code><a href="../reference/rasterize_adm_map.html"
 rasterizes the administrative unit map at the selected resolution. Both
 the grid and the rasterized map are required by the model as input and
 are saved automatically in the right location.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create grid</span></span>
 <span><span class="fu"><a href="../reference/create_grid.html">create_grid</a></span><span class="op">(</span><span class="va">param</span><span class="op">)</span></span>
 <span></span>
