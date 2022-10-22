@@ -70,7 +70,7 @@ Similarly, the following three folders need to be defined when setting up the mo
 
 The example below sets the `mapspamc` parameters for Malawi and stores them in an object called `param`. Param is an arbitrary name but we recommend not to change it as we refer to `param` in the template scripts and use `param` in the documentation of most functions.
 
-```{r, eval = FALSE}
+```{r, eval = TRUE}
 # Load mapspamc
 library("mapspamc")
 
@@ -117,7 +117,7 @@ To allocate subnational crop area information, a complementary map (most likely 
 
 Before the shapefile can be processed you need to load it into R by setting the name (in this case `adm_2010_MWI.shp`), which is stored in the `mapspamc_db/adm/` folder. For illustrative purposes, we also added the map (in rda format) to the `mapspamc` package. The `sf::st_transform` command projects the map to epsg:4326 so that it is consistent with all the other spatial data. 
 
-```{r eval = FALSE}
+```{r eval = TRUE}
 # replace the name of the shapefile with that of your own country.
 iso3c_shp <- "adm_2010_MWI.shp"
 
@@ -134,7 +134,7 @@ adm_map <- adm_map_raw %>%
 
 For the model to work, it is essential that the attribute table with the names and codes of the administrative units has the correct column names. To rename to columns, you only have to specify the column names of the attribute table which contain the original names and code of the (sub)national units and store them in the `admX_name_orig` and `admX_code_orig` variables, respectively, where X is the administrative unit level. If you only have data at level 0 and 1, simply delete the lines of script that refer to administrative unit level 2, etc. In case of Malawi, we have data at level 0, 1 and 2 so for each administrative unit level the column names for name and code need to be set. Columns in the attribute table that are not relevant will automatically be deleted. The script will also union all polygons with the same name and code. This is convenient if, for example, you have crop area information for the combination of two subnational regions (e.g. ADM A + ADM B) but a shapefile with the individual polygons of both regions (ADM A & ADM B). In such case, you can simply give each polygon the same name (e.g. ADM_A_B) and code (A_B) and they will automatically be dissolved into one polygon.
 
-```{r eval = FALSE}
+```{r eval = TRUE}
 # Check names
 names(adm_map)
 
@@ -174,9 +174,7 @@ names(adm_map)
 
 Polygons of administrative units where no crops should be allocated must be removed. If this is not done, and in the rare case when the area statistics are larger than the cropland exent, the model might still allocate crops into these regions. The Malawi shapefile includes two of such regions. One is the Area under National Administration, which is the part of Lake Malawi that belongs to Malawi, and Likoma, several small islands in lake Malawi that are not covered by the statistics. The script below shows how to remove them. It there is no reason to remove polygons, simply delete the lines of script in the template. 
 
-```{r eval = FALSE}
-plot(adm_map$geometry, main = "ADM all polygons")
-
+```{r eval = TRUE}
 # Set names of ADMs that need to be removed from the polygon. 
 adm1_to_remove <- c("Area under National Administration")
 adm2_to_remove <- c("Likoma")

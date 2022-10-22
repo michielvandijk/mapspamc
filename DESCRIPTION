@@ -51,5 +51,4 @@ Depends:
 URL: https://github.com/michielvandijk/mapspamc,
     https://michielvandijk.github.io/mapspamc/
 BugReports: https://github.com/michielvandijk/mapspamc/issues
-Config/Needs/website:
-    GAMS-dev/gdxrrw/gdxrrw
+
