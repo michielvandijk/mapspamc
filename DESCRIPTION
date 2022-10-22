@@ -54,4 +54,5 @@ URL: https://github.com/michielvandijk/mapspamc,
 BugReports: https://github.com/michielvandijk/mapspamc/issues
 Remotes:  
     GAMS-dev/gdxrrw/gdxrrw
-
+Config/Needs/website:
+    GAMS-dev/gdxrrw/gdxrrw
