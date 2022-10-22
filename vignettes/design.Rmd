@@ -1,0 +1,21 @@
+---
+title: "0. Design and process flow"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{0. Design and process flow}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The `mapspamc` package includes functions to facilitate all six major steps to create crop distribution maps, including (1) model setup, (2) pre-processing, (3) model preparation, (4) running the model, (5) post-processing and (6) model validation. Each of the steps explained in the other vignettes.
+
+```{r fig-flowchart, echo=FALSE, error=FALSE, fig.cap="Six main steps to create crop distribution maps with `mapspamc` Functions printed inside flow chart shapes implement key model steps, while functions printed outside have auxiliary purposes", fig.align="center", out.width="80%"}
+knitr::include_graphics("tables_chart/mapspamc_flowchart.png")
+```

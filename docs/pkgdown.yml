@@ -1,10 +1,11 @@
-pandoc: '2.18'
+pandoc: 2.19.2
 pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   appendix: appendix.html
   country_examples: country_examples.html
   crop_distribution_maps: crop_distribution_maps.html
+  design: design.html
   input_data: input_data.html
   input_data_collection: input_data_collection.html
   installation: installation.html
@@ -18,7 +19,7 @@ articles:
   preprocessing_spatial_data: preprocessing_spatial_data.html
   preprocessing_subnational_statistics: preprocessing_subnational_statistics.html
   run_model: run_model.html
-last_built: 2022-10-10T09:14Z
+last_built: 2022-10-22T18:44Z
 urls:
   reference: https://michielvandijk.github.io/mapspamc/reference
   article: https://michielvandijk.github.io/mapspamc/articles

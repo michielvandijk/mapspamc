@@ -14,18 +14,21 @@ bibliography: bib/mapspamc.bib
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>")
+
+library(sf)
+library(tidyverse)
 ```
 
-To start running one of the `mapspamc` models several steps need to be taken to setup the model (note that we assume that all required software was [installed](installation.html) and is working). 
+To start running one of the `mapspamc` models several steps need to be taken to setup the model (note that we assume that the `mapspamc` package and other required software has been already [installed](installation.html) and is working). 
 
 
 ## Create model template
 
-The first step is to create a project with RStudio, activity `mapspamc` and use the `create_model_template` function to  create a set of template folders and scripts that implement the six steps to run the `mapspamc` models. An alternative approach would be to clone the repository with one of the [country examples](country_examples.html) and use that as a starting point. We will use scripts of the Malawi example to illustrate the various steps in the vignettes. All scripts related to model setup can be found in the `01_model_setup` folder of the template. The most important is that you change the location on your hard disk where the model will be stored and set the model parameters (see below), which is done in the script `01_model_setup.r` in the template. As the model parameters are needed as input in nearly all functions, this script is always loaded at the beginning of all the other scripts using the `source()` command. In this way, you only have to setup up the model once. It also ensures that all the necessary packages are loaded into R. 
+The first step is to create a project with RStudio, activate the `mapspamc` package by typing `library("mapspamc")` and use the `create_model_template` function to  create a set of template folders and scripts that implement the six steps to develop a `mapspamc` model. An alternative approach would be to copy the repository with one of the [country examples](country_examples.html) and use that as a starting point. We will use the scripts of the Malawi example to illustrate the various steps in the vignettes. 
 
 
 ```{r eval=FALSE}
-# Create a new RStudio project called mapspamc_mwi in the folder c:/temp (or an alternative location)
+# First create a new RStudio project (here we use the name mapspamc_mwi but any name is possible) in the folder c:/temp (or a location of your choice)
 
 # Load mapspamc
 library("mapspamc")
@@ -35,21 +38,21 @@ create_model_template("c:/temp/mapspamc_mwi")
 ```
 
 
-## Set model parameters and location of files
+## Set the model parameters and the location of files
 
-Nearly all functions in `mapspamc` need input on (1) key parameters that determine the design of the model and how it will be solved and (2) the location of raw data, which will be further processed. Both pieces of information are bundled in a `mapspamc_par` object that is created by the function `set_mapspamc_par()`. Another piece of information that is also stored in the `mapspamc_par` object is the coordinate reference system of the maps. This is automatically set to WSG84 (epsg:4326).
+Nearly all functions in `mapspamc` need input on (1) key parameters that determine the design of the model and how it will be solved; (2) the location of the mapspamc database with all raw data that will be further processed and (c) the location of the model itself. All these pieces of information are bundled in a `mapspamc_par` object that is created by the function `set_mapspamc_par()`. The `mapspamc_par` object is created in the script `01_model_setup\01_model_setup.r`. As the model parameters are needed as input in nearly all functions, this script is always loaded at the beginning of all the other scripts using the `source()` command. In this way, you only have to setup up the model once. It also ensures that all the necessary packages are loaded into R. 
 
 The following model parameters need to be set before `mapspamc` can be run:
 
 - **iso3c country code (`iso3c`).** The three letter ISO 3166-1 alpha-3 country code, also referred to as iso3c is used to extract national statistics from global datasets. A list of country codes can be found in [Wikipedia](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3).
 
-- **Year (`year`).** The year (four digits) will be used to select relevant global datasets when data is available for multiple years, in particular the FAOSTAT national statistics, population maps and and travel time maps. It is also useful to distinguish `mapspamc` output when the model is used to create crop distribution maps for multiple years.
+- **Year (`year`).** The year (four digits) will be used to select relevant global datasets when data is available for multiple years, in particular the FAOSTAT national statistics and population maps. It is also useful to distinguish `mapspamc` output when the model is used to create crop distribution maps for multiple years.
 
-- **Spatial resolution (`res`).** The user can choose between two spatial resolutions: 30 arcsec (~1x1 km at the equator) by selecting `"30sec"` and 5 arcmin (~10x10 km at the equator) by selecting `"5min"`. Note that selecting a resolution of 30 arcsec increases the model dimensions (number of grid cells) by a factor 100! This might mean the model becomes too big to be solved and/or your computer runs out of memory. We recommend experimenting with the 5 arcmin resolution first! 
+- **Spatial resolution (`res`).** The user can choose between two spatial resolutions: 30 arc seconds (~1x1 km at the equator) by selecting `"30sec"` and 5 arc minutes (~10x10 km at the equator) by selecting `"5min"`. Note that selecting a resolution of 30 arcsec increases the model dimensions (number of grid cells) by a factor 100! This might mean the model becomes too big to solve and/or your computer runs out of memory. We recommend experimenting with the 5 arc minute resolution first! 
 
-- **Depth of subnational statistics (`adm_level`).** This parameter sets the most detailed level at which subnational administrative statistics are available. Accepted inputs are `0` (only national level data), `1` (national level and first level subnational data and `2` (national level, first and second level subnational data).  In most cases first level data refers to states and province and level 2 data indicates districts, counties and departments. However, in the unusual case that you would have only national and county level data for a country (i.e. there is no state or province data available), you should set the adm_level parameter to 1 as the depth of your subnational statistics is 1.
+- **Depth of subnational statistics (`adm_level`).** This parameter sets the most detailed level at which subnational administrative statistics are available. Accepted inputs are `0` (only national level data), `1` (national level and first level subnational data) and `2` (national level, first and second level subnational data).  In most cases first level data refers to states and provinces and level 2 data indicates districts, counties and departments. However, in the unusual case that you would have only national and county level data for a country (i.e. there is no state or province data available), you should set the adm_level parameter to 1 as the depth of your subnational statistics is 1.
 
-- **Level at which the model is solved (`solve_level`).** The model can be solved at the national level (`0`) or at the subnational level 1 (`1`). In the first case, all grid cells are optimized using national level constraints. This means that for crops for which no subnational level information is available, the national physical crop area  will be distributed over the whole country, subject to the standard model constraints. In the latter case, the model is split into smaller administrative level 1 models, which are solved separately. Breaking up the model in smaller pieces will result in less complex and less memory intensive models, which are easier to solve. The disadvantage is that the subnatonal level models require **full information** (i.e. harvested area statistics, cropping intensity statistics and farmin system area shares) for all crops that are cultivated in the country at administrative unit level 1. For most countries, the subnational statistics tend to be incomplete and full crop information is only available at the national level (from FAOSTAT). Hence, the only way to run the model at administrative unit level 1 is to impute the missing crop area values (e.g. by taking values for comparable crops for which information is available, use national values or look for secondary information). Running the model at administrative unit 1 level is most useful for larger countries, such as China, Brazil and the USA, for which subnational statistics coverage is high and models tend to be large and complex due to the size of the country.
+- **Level at which the model is solved (`solve_level`).** The model can be solved at the national level (`0`) or at the subnational level 1 (`1`). In the first case, all grid cells are optimized using national level constraints. This means that for crops for which no subnational level information is available, the national physical crop area  will be distributed over the whole country, subject to the standard model constraints. In the second case, the model is split into several administrative level 1 models, which are solved separately. Breaking up the model in smaller pieces will result in less complex and less memory intensive models, which are easier to solve. The disadvantage is that the subnational level models require **full information** (i.e. harvested area statistics, cropping intensity statistics and farming system shares) for all crops that are cultivated in the country at administrative unit level 1. For most countries, the subnational statistics tend to be incomplete and full crop information is only available at the national level (from FAOSTAT). Hence, the only way to run the model at administrative unit level 1 is to impute the missing crop area values (e.g. by taking values for comparable crops for which information is available, use national values or look for secondary information). Running the model at administrative unit 1 level is most useful for larger countries, such as China, Brazil and the USA, for which detailed subnational statistics are available and models tend to be large and complex due to the size of the country.
 
 - **Type of model ('model').** You can choose between two types of models: (1) minimization of cross-entropy ('"min_entropy"`) and (2) maximization of fitness score. See the section on [Model description](model_description.html) for details.
 
@@ -57,11 +60,11 @@ Similarly, the following three folders need to be defined when setting up the mo
 
 - **main model folder (`model_path`).** This folder will be used to store all model related data, including processed data, mapping tables, intermediate output, final results and, unless specified otherwise by the user, the raw data.
 
-- **Location of mapspam_db (`db_path`).** Optionally the user can set a folder for the location of the mapspamc database. This might be convenient if you want to use a server to store the database (> 5 GB).  A folder with the name `mapspamc_db` will be automatically created in the `db_path` set by the user. If `db_path` is not specified the `mapspamc_db` folder will be created in the `model_db` folder.
+- **Location of mapspam_db (`db_path`).** Optionally the user can set a folder for the location of the mapspamc database. This might be convenient if you want to use a server to store the database (> 5 GB).  A folder with the name `mapspamc_db` will automatically be created in the `db_path` set by the user. If `db_path` is not specified the `mapspamc_db` folder will be created in the `model_db` folder.
 
-- **Location of GAMS (`gams_path`).** Optionally the user can set a folder for the location of GAMS and the libraries that are needed to process GAMS gdx with R. If GAMS is installed correctly, `mapspamc` will automatically find the GAMS system directory. However, occasionally the location of GAMS is not stored correctly by Windows, causing problems. Hence, we always recommend setting the location of GAMS manually. This might also be convenient when multiple versions of GAMS are installed on one machine and one is preferred over another. 
+- **Location of GAMS (`gams_path`).** Optionally the user can set a folder for the location of GAMS, which also includes the GAMS libraries that are needed to load GAMS gdx files with R. If GAMS is installed correctly, `mapspamc` will automatically find the GAMS system directory. However, occasionally the location of GAMS is not stored correctly by Windows, resulting in errors. Hence, we always recommend setting the location of GAMS manually. This might also be convenient when multiple versions of GAMS are installed on one machine and one is preferred over another. 
 
-The example below sets the `mapspamc` parameters for Malawi and stores them in an object called `param`. Param is an arbitrary name but we recommend not to change it as we refer to `param` in the documentation of most functions.
+The example below sets the `mapspamc` parameters for Malawi and stores them in an object called `param`. Param is an arbitrary name but we recommend not to change it as we refer to `param` in the template scripts and use `param` in the documentation of most functions.
 
 ```{r}
 # Load mapspamc
@@ -71,11 +74,11 @@ library("mapspamc")
 # Note that R uses forward slashes even in Windows!!
 model_path <- "c:/temp/mapspamc_mwi"
 
-# Creates a database folder with the name mapspamc_db in c:/temp
+# Creates a database folder with the name mapspamc_db in c:/temp. 
 db_path <- "c:/temp"
 
 # Sets the location of the version of GAMS that will be used to solve the model
-gams_path <- "C:/MyPrograms/GAMS/win64/24.6"
+gams_path <- "C:/MyPrograms/GAMS/35"
 
 # Set mapspamc parameters for the min_entropy_5min_adm_level_2_solve_level_0 model
 param <- mapspamc_par(
@@ -96,7 +99,7 @@ print(param)
 
 ## Create a folder structure
 
-`mapspamc` includes a function to create all necessary folders `create_folders()`. The only input required is `param` which contains all the model parameters. The function will create three folders: (1) `raw_data` is created in the main `spamc_path` unless indicated otherwise by the user and serves to store all the raw input data, (2) `processed_data` will be created in the main `mapspamc_path` and is used to save all the intermediary data products as well as the final results and (3) `mappings` will be created in the main `mapspamc_path` and contains all the lists and mappings that are needed to define the model (e.g. number crops) and harmonize various data sources (concordance tables). All tables are in csv format and will be created automatically into the `mappings` folder. Note that it is possible to adjust some of these tables if needed (e.g. adding a new crop). `create_folders()` will only create csv files if the files do not exist. Hence, updated files will not be overwritten. If for some reason you want to recreate the original tables, simply remove the folder and/or files and they will be created again when `create_spam_folders` is run. 
+`mapspamc` includes a function `create_folders()` to create the model structure in `model_path` defined by the user . The only input required is `param` which contains all the model parameters. The function will create three folders: (1) `mapspamc_db` and several subfolders are created  the `model_path` (or in the `db_path` if specified by the user) and serves to store all the raw input data, (2) `processed_data` is used to save all the intermediary data products as well as the final results and (3) `mappings` contains all the lists and mappings that are needed to define the model (e.g. number crops) and harmonize various data sources (concordance tables). All tables are in csv format and will be created automatically into the `mappings` folder. `create_folders()` will only create csv files if the files do not exist. Hence, updated files will not be overwritten. If for some reason you want to recreate the original tables, simply remove the folder and/or files and they will be created again when `create_folders` is run. 
 
 ```{r eval=FALSE}
 # Create folder structure in the mapspamc_path
@@ -104,32 +107,31 @@ create_folders(param)
 ```
 
 
-## Prepare subnational administrative unit map
+## Prepare the subnational administrative unit map
 
 To allocate subnational crop area information, a complementary map (most likely in the form of a shapefile) with the location of the subnational administrative units is needed. The processing of this map cannot be captured by a single function as it involves several decisions that need to be made by the user. These are explained next. 
 
-Before the shapefile can be processed you need to load it into R by setting the name (in this case `adm_2010_MWI.shp`), which is stored in the `raw_data/adm/` folder. The `st_transform` command projects the map to WSG84 so that it is consistent with all the other spatial data. 
+Before the shapefile can be processed you need to load it into R by setting the name (in this case `adm_2010_MWI.shp`), which is stored in the `mapspamc_db/adm/` folder. For illustrative purposes, we also added the map (in rda format) to the `mapspamc` package. The `sf::st_transform` command projects the map to epsg:4326 so that it is consistent with all the other spatial data. 
 
-```{r eval = FALSE}
+```{r eval = TRUE}
 # replace the name of the shapefile with that of your own country.
 iso3c_shp <- "adm_2010_MWI.shp"
 
-# load shapefile
-adm_map_raw <- read_sf(file.path(param$mapspamc_path, glue("raw_data/adm/{iso3c_shp}")))
+# load shapefile (not needed now as adm_map_raw is stored inside the package)
+#adm_map_raw <- read_sf(file.path(param$db_path, glue("adm/{param$iso3c}/{iso3c_shp}")))
 
 # plot
-plot(adm_map_raw$geometry)
+plot(mapspamc::adm_map_raw$geometry)
 
 # Project to standard global projection
 adm_map <- adm_map_raw %>%
-  st_transform(param$crs)
+  sf::st_transform(param$crs)
 ```
 
-For the model to work, it is essential that the attribute table with the names and codes of the administrative units has the correct column names. To make this easier, you only have to specify the column names of the attribute table which contain the names and code of the (sub)national units and store them in the `admX_name_orig` and `admX_code_orig` variables, respectively, where X is the administrative unit level. If you only have data at level 0 and 1, simply delete the lines of script that refer to administrative unit level 2, etc. In case of Malawi, we have data at level 0, 1 and 2 so for each level the column names for name and code need to be set. Columns in the attribute table that are not relevant will be automatically deleted. The script will also union all polygons with the same name and code. Hence, if you only have statistics for the combination of two subnational regions, simply give them the same name and code and they will automatically be dissolved into one polygon.
+For the model to work, it is essential that the attribute table with the names and codes of the administrative units has the correct column names. To rename to columns, you only have to specify the column names of the attribute table which contain the original names and code of the (sub)national units and store them in the `admX_name_orig` and `admX_code_orig` variables, respectively, where X is the administrative unit level. If you only have data at level 0 and 1, simply delete the lines of script that refer to administrative unit level 2, etc. In case of Malawi, we have data at level 0, 1 and 2 so for each administrative unit level the column names for name and code need to be set. Columns in the attribute table that are not relevant will automatically be deleted. The script will also union all polygons with the same name and code. This is convenient if, for example, you have crop area information for the combination of two subnational regions (e.g. ADM A + ADM B) but a shapefile with the individual polygons of both regions (ADM A & ADM B). In such case, you can simply give each polygon the same name (e.g. ADM_A_B) and code (A_B) and they will automatically be dissolved into one polygon.
 
-```{r eval = FALSE}
+```{r eval = TRUE}
 # Check names
-head(adm_map)
 names(adm_map)
 
 # Set the original names, i.e. the ones that will be replaced. Remove adm1
@@ -156,7 +158,7 @@ adm_map <- adm_map %>%
 # Union separate polygons that belong to the same adm    
 adm_map <- adm_map %>%
   group_by(adm0_name, adm0_code, adm1_name, adm1_code, adm2_name, adm2_code) %>%
-  summarize() %>%
+  summarize(.groups = "drop") %>%
   ungroup() %>%
   mutate(adm0_name = param$country,
          adm0_code = param$iso3c)
@@ -166,10 +168,9 @@ head(adm_map)
 names(adm_map)
 ```
 
-Polygons of administrative units where no crops should be allocated must be removed. If this is not done and in the rare case when the area statistics are larger than the cropland exent, the model might still allocate crops into these regions. The Malawi shapefile includes two of such regions. One is the Area under National Administration, which is the part of Lake Malawi that belongs to Malawi and Likoma, several small islands in lake Malawi that are not covered by the statistics. The script below shows how to remove them. It there is no reason to remove any polygons, simply delete the lines of script in the template. By running `create_adm_map_pdf()` a pdf file with maps of the (sub)national regions is created in the `processed_data/maps/adm`  folder. Finally, the script saves the maps in shapefile and rds format in the relevant folder.
+Polygons of administrative units where no crops should be allocated must be removed. If this is not done, and in the rare case when the area statistics are larger than the cropland exent, the model might still allocate crops into these regions. The Malawi shapefile includes two of such regions. One is the Area under National Administration, which is the part of Lake Malawi that belongs to Malawi, and Likoma, several small islands in lake Malawi that are not covered by the statistics. The script below shows how to remove them. It there is no reason to remove polygons, simply delete the lines of script in the template. 
 
-```{r eval = FALSE}
-par(mfrow=c(1,2))
+```{r eval = TRUE}
 plot(adm_map$geometry, main = "ADM all polygons")
 
 # Set names of ADMs that need to be removed from the polygon. 
@@ -182,30 +183,36 @@ adm_map <- adm_map %>%
   filter(adm2_name != adm2_to_remove)
 
 plot(adm_map$geometry, main = "ADM polygons removed")
-par(mfrow=c(1,1))
-
-# Save adm maps
-temp_path <- file.path(param$mapspamc_path, glue("processed_data/maps/adm/{param$res}"))
-dir.create(temp_path, showWarnings = FALSE, recursive = TRUE)
-
-saveRDS(adm_map, file.path(temp_path, glue("adm_map_{param$year}_{param$iso3c}.rds")))
-write_sf(adm_map, file.path(temp_path, glue("adm_map_{param$year}_{param$iso3c}.shp")))
-
-# Create pdf file with the location of administrative units
-create_adm_map_pdf(param)
 ```
 
-To link the subnational statistics to other spatial data a mapping table is needed (`adm_list`) that contains information on how the administrative units at various levels are nested, which is exactly the information that is stored in the attribute table of the administrative unit map. The following code, extracts the list from the shapefile and saves it as csv file in the `processed_data/lists` folder. 
+To link the subnational statistics to other spatial data a mapping table is needed (`adm_list`) that contains information on how the administrative units at various levels are nested, which is precisely the information that is stored in the attribute table of the administrative unit map. The following code, extracts the list from the shapefile and saves it as csv file in the `processed_data/lists` folder. 
 
 ```{r eval = FALSE}
 # Create adm_list
 create_adm_list(adm_map, param)
 ```
 
+After the administrative region shapefile has been processed save it in the right location.
 
-## Create grid and rasterize subnational administrative unit map
+```{r eval = FALSE}
+temp_path <- file.path(param$model_path, glue("processed_data/maps/adm/{param$res}"))
+dir.create(temp_path, showWarnings = FALSE, recursive = TRUE)
 
-The `create_grid()` function creates a spatial grid at selected spatial resolution (i.e. 30 arcsec or 5 arcmin). The grid is subsequently used by `rasterize_adm_map()`, which rasterizes the administrative unit map at the selected resolution. Both the grid and the rasterized map are required by the model as input.
+saveRDS(adm_map, file.path(temp_path, glue("adm_map_{param$year}_{param$iso3c}.rds")))
+write_sf(adm_map, file.path(temp_path, glue("adm_map_{param$year}_{param$iso3c}.shp")))
+```
+
+By running `create_adm_map_pdf()` a pdf file with maps of the (sub)national regions is created in the `processed_data/maps/adm`  folder. 
+
+```{r eval = FALSE}
+# Create pdf file with the location of administrative units
+create_adm_map_pdf(param)
+```
+
+
+## Create grid and rasterize the subnational administrative unit map
+
+The `create_grid()` function creates a spatial grid at selected spatial resolution (i.e. 30 arc seconds or 5 arc minutes). The grid is subsequently used by `rasterize_adm_map()`, which rasterizes the administrative unit map at the selected resolution. Both the grid and the rasterized map are required by the model as input and are saved automatically in the right location.
 
 ```{r eval = FALSE}
 # Create grid
@@ -214,5 +221,4 @@ create_grid(param)
 # Rasterize administrative unit map
 rasterize_adm_map(param)
 ```
-
-This is all it takes to set up the SPAM-C model! The next step is processing the [raw subnational statistics](process_subnational_statistics.html) and [spatial data](process_spatial_data.html).
+This is all it takes to set up a `mapspamc` model! The next step is processing the [raw subnational statistics](preprocessing_subnational_statistics.html) and [spatial data](preprocessing_spatial_data.html).
