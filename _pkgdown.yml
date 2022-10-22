@@ -4,8 +4,8 @@ home:
 
 url: https://michielvandijk.github.io/mapspamc/
 template:
-  params:
-    bootswatch: flatly
+  bootstrap: 5
+  bootswatch: materia
 
 navbar:
   structure:
