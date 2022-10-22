@@ -1,8 +1,8 @@
 ---
-title: "4. Model preparation"
+title: "3. Model preparation"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{4. Model preparation}
+  %\VignetteIndexEntry{3. Model preparation}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
@@ -17,9 +17,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-Now you have created all the necessary input data, it is time to combine and reshape them so they can be used by `mapspamc`. The sections below briefly describe the main functions in mapspamc to do this. Almost all functions require only one input `param`, an object with the `mapspamc` parameters. Note that 'under the hood' of most functions a lot of other processes are triggered, which automatically load the data that was created in previous steps, check them for consistency, reformat them from spatial to data table format and, where needed, run algorithms to harmonize the various inputs. This means that some of the functions might take some time to run, in particular if the resolution is set to 30 arcsec, which considerably increases the size of the model. All the functions send a message to the screen when they are processing and when they are finished so you know what is happening.  
+Now you have created all the necessary input data, it is time to combine and reshape them so they can be used by `mapspamc`. The sections below briefly describe the main functions in `mapspamc` to do this. Almost all functions require only one input `param`, an object with the `mapspamc` parameters. Note that 'under the hood' of most functions a lot of other processes are triggered, which automatically load the data that was created in previous steps, check them for consistency, reformat them from spatial to data table format and, where needed, run algorithms to harmonize the various inputs. This means that some of the functions might take some time to run, in particular if the resolution is set to 30 arcsec, which considerably increases the size of the model. All the functions send a message to the screen when they are processing and when they are finished so you know what is happening.  
 
 All the intermediate data output is saved in the `processed_data/intermediate_output` folder. In case you have set `solve_level = 1`, the various functions split the data in administrative level 1 chunks, which are saved in subfolders using the administrative unit level 1 as name. If `solve_level = 0` there will be only one subfolder that used the country iso3c code as name.
+
  
 ## Prepare FAOSTAT crop prices
 

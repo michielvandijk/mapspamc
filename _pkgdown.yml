@@ -34,14 +34,10 @@ navbar:
           href: articles/model_description.html
         - text: Input data
           href: articles/input_data.html
-        - text: Appendix
-          href: articles/appendix.html
-      - text: Preparation
-        menu:
-        - text: Collect input data
-          href: articles/input_data_collection.html
         - text: Country examples
           href: articles/country_examples.html
+        - text: Appendix
+          href: articles/appendix.html
       - text: Run mapspamc
         menu:
         - text: 0. Design and process flow

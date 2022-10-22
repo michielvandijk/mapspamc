@@ -1,8 +1,8 @@
 ---
-title: "5. Post processing"
+title: "5. Post-processing"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{5. Post processing}
+  %\VignetteIndexEntry{5. Post-processing}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
