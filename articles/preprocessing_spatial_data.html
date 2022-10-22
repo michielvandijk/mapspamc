@@ -152,72 +152,36 @@
 <p>As described in the section on <a href="input_data.html">Input
 data</a>, a variety of spatial datasets are needed to run the model. A
 large number of global products are available through the mapspamc
-database - see the <a href="input_data_collection.html">Input data
-collection</a> section. All the spatial data layers are taken from
-global datasets, which might not always be the best source for detailed
-country studies. Hence, you might want to replace some of them by more
-detailed country-level products (e.g. national land cover, accessibility
-or population maps.</p>
+database. All the spatial data layers are taken from global datasets,
+which might not always be the best source for detailed country studies.
+Hence, you might want to replace some of them by more detailed
+country-level products (e.g. national land cover, accessibility or
+population maps.</p>
 <p>For this reason, we decided not to create specific functions to
 process the spatial data, which offer limited flexibility for user
 interaction. Instead we share the detailed scripts we used to process
 all the spatial datasets, which can be found in the
-<code>03_spatial_data</code> folder. To process raster data, we
-primarily used GDAL, a software library for reading and writing raster
-and vector geospatial data (see <a href="installation.html">Installation</a> for more information), which
-can be operated from R by means of the <a href="https://cran.r-project.org/web/packages/gdalUtils/index.html" class="external-link">gdalUtils</a>
-package. We mainly used two functions. <code>gdalwarp()</code> is a very
-powerful command that can be used to clip the country data from a global
-spatial layer using a shapefile and at the same time reproject the map
-to any desired extent, resolution and coordinate reference system.
-<code>align_rasters()</code> combines <code>gdalwarp</code> with a
-template raster to easily align different raster files.</p>
-<p>The code below illustrates the use of <code>align_rasters()</code> to
+<code>03_spatial_data</code> folder. To process raster data, we created
+the <code><a href="../reference/align_raster.html">align_raster()</a></code> function that can be used to clip
+country data from a global spatial layer using a country map and at the
+same time reproject the map to the desired extent, resolution and
+coordinate reference system.</p>
+<p>The code below illustrates the use of <code><a href="../reference/align_raster.html">align_raster()</a></code> to
 clip the Malawi data from the global WorldPop map used in
-<code>select_worldpop.r</code>. Note that several data layers require
+<code>04_select_worldpop.r</code>. Note that several data layers require
 additional or slightly different processing approach before they can be
 used. For example, the raw WorldPop dataset presents population density
-per grid cell at a resolution of 30 arcsec. If we want to run the model
-at a resolution of 5 arcmin, which has grid cells that are 100 times
-larger, the data needs to be summed when aggregating the grid cells.
-This is different from the standard options in
-<code>align_rasters()</code>, which uses a resampling approach when
-reprojecting the maps.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">grid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">mapspamc_path</span>,</span>
-<span>                  <span class="fu">glue</span><span class="op">(</span><span class="st">"processed_data/maps/grid/{param$res}/grid_{param$res}_{param$year}_{param$iso3c}.tif"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">mask</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">mapspamc_path</span>,</span>
-<span>                  <span class="fu">glue</span><span class="op">(</span><span class="st">"processed_data/maps/adm/{param$res}/adm_map_{param$year}_{param$iso3c}.shp"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">raw_path</span>, <span class="st">"worldpop/ppp_2010_1km_Aggregated.tif"</span><span class="op">)</span></span>
-<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">mapspamc_path</span>,</span>
-<span>                  <span class="fu">glue</span><span class="op">(</span><span class="st">"processed_data/maps/population/{param$res}/pop_{param$res}_{param$year}_{param$iso3c}.tif"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="kw">if</span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">res</span> <span class="op">==</span> <span class="st">"30sec"</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  </span>
-<span>  <span class="va">temp_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">mapspamc_path</span>, <span class="fu">glue</span><span class="op">(</span><span class="st">"processed_data/maps/population/{param$res}"</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="va">temp_path</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="co"># Warp and mask</span></span>
-<span>  <span class="va">output_map</span> <span class="op">&lt;-</span> <span class="fu">align_rasters</span><span class="op">(</span>unaligned <span class="op">=</span> <span class="va">input</span>, reference <span class="op">=</span> <span class="va">grid</span>, dstfile <span class="op">=</span> <span class="va">output</span>,</span>
-<span>                   cutline <span class="op">=</span> <span class="va">mask</span>, crop_to_cutline <span class="op">=</span> <span class="cn">F</span>, </span>
-<span>                   r <span class="op">=</span> <span class="st">"bilinear"</span>, verbose <span class="op">=</span> <span class="cn">F</span>, output_Raster <span class="op">=</span> <span class="cn">T</span>, overwrite <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">output_map</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code></pre></div>
+per grid cell at a resolution of 30 arc second. If we want to run the
+model at a resolution of 5 arc minutes, which has grid cells that are
+100 times larger, the data needs to be summed when aggregating the grid
+cells. This is different from the default option in
+<code><a href="../reference/align_raster.html">align_raster()</a></code>, which uses a resampling approach when
+reprojecting the maps.</p>
 <p>To process the spatial data, simply run the various scripts in the
-<code>03_spatial_data</code> folder. As the scripts can be run in any
-order, they do not have a number such as most scripts in the other
-folders. Note that some of the scripts, in particular
-<code>select_gaez.r</code>, which processes more than 300 global maps,
-can take a long time to run!</p>
-<p>If you have processed all the spatial data you can continue with <a href="create_synergy_cropland.html">building the synergy cropland
-map</a>.</p>
-<div class="footnotes footnotes-end-of-document">
-<hr>
-<ol>
-<li id="fn1"><p>For more information see the resampling section in the
-<code>gdalwarp()</code> documentation.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
-</div>
+<code>02_2_pre_processing_spatial_data</code> folder. Note that some of
+the scripts, in particular <code>select_gaez.r</code>, which processes
+more than 300 global maps, can take a long time to run!</p>
+<p>The next step involves the creation of the <a href="preprocessing_cropland.html">synergy cropland map</a>.</p>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
