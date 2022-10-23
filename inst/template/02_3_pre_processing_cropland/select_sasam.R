@@ -15,9 +15,9 @@ temp_path <- file.path(param$model_path, glue("processed_data/maps/cropland/{par
 dir.create(temp_path, showWarnings = FALSE, recursive = TRUE)
 
 
-# PROCESS CROPRATIO (MEDIAN AREA) --------------------------------------------------------
+# PROCESS MEAN ---------------------------------------------------------------------------
 # Warp and mask
-input <- file.path(param$db_path,  glue("sasam/cropland_ratio_{param$continent}.tif"))
+input <- file.path(param$db_path,  glue("sasam/cl_mean.tif"))
 output <- align_raster(input, grid, adm_map, method = "bilinear")
 
 # Maps are in shares of area. We multiply by grid size to create an area map.
@@ -32,9 +32,9 @@ writeRaster(output, file.path(temp_path,
 rm(input, output, r_area)
 
 
-# PROCESS CROPMAX (MAXIMUM AREA) ---------------------------------------------------------
+# PROCESS MAX ---------------------------------------------------------------------------
 # Warp and mask
-input <- file.path(param$db_path,  glue("sasam/cropland_max_{param$continent}.tif"))
+input <- file.path(param$db_path,  glue("sasam/cl_max.tif"))
 output <- align_raster(input, grid, adm_map, method = "bilinear")
 
 # Maps are in shares of area. We multiply by grid size to create an area map.
@@ -49,10 +49,10 @@ writeRaster(output, file.path(temp_path,
 rm(input, output, r_area)
 
 
-# PROCESS CROPPROB (PROBABILITY, 1 IS HIGHEST) -------------------------------------------
+# PROCESS RANK ---------------------------------------------------------------------------
 # Warp and mask
 # Use r = "mode" to select the probability that occurs most often as probability is a categorical variable (1-32)
-input <- file.path(param$db_path,  glue("sasam/cropland_confidence_level_{param$continent}.tif"))
+input <- file.path(param$db_path,  glue("sasam/cl_rank.tif"))
 output <- align_raster(input, grid, adm_map, method = "mode")
 
 # Maps are in shares of area. We multiply by grid size to create an area map.
