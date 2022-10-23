@@ -24,7 +24,7 @@ copernicus <- rast(file.path(param$model_path,
 
 # Rank table
 st_raw <- read_excel(file.path(param$db_path,
-                               glue("synergy_cropland_rank_table/synergy_cropland_rank_table_{param$year}.xlsx")),
+                               glue("synergy_cropland_table/synergy_cropland_table_{param$year}.xlsx")),
                      sheet = "table")
 
 
