@@ -68,18 +68,10 @@
           <a href="../articles/input_data.html">Input data</a>
         </li>
         <li>
-          <a href="../articles/appendix.html">Appendix</a>
-        </li>
-      </ul>
-</li>
-    <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Preparation</a>
-      <ul class="dropdown-menu" role="menu">
-<li>
-          <a href="../articles/input_data_collection.html">Collect input data</a>
+          <a href="../articles/country_examples.html">Country examples</a>
         </li>
         <li>
-          <a href="../articles/country_examples.html">Country examples</a>
+          <a href="../articles/appendix.html">Appendix</a>
         </li>
       </ul>
 </li>
@@ -192,7 +184,7 @@ the <a href="https://www.gams.com/" class="external-link">General Algebraic Mode
 System</a> (GAMS), which is modelling system and language designed for
 mathematical optimization. The GAMS system and solvers can be downloaded
 from the GAMS website. Unfortunately, one needs a GAMS Base Module
-licence plus additional CONOPT4 and CPLEX solver licence to run
+licence plus additional IPOPT and CPLEX solver licence to run
 <code>mapspamc</code>.</p>
 <ul>
 <li><a href="https://www.gams.com/download" class="external-link">Download and install
@@ -218,19 +210,19 @@ to install the <strong>remotes</strong> package:</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org" class="external-link">remotes</a></span><span class="op">)</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"michielvandijk/mapspamc"</span><span class="op">)</span></span></code></pre></div>
-<p>To interface between R and GAMS the GDXRRW package is required.
-Unfortunately, this package is also not available on CRAN and therefore
-has to be installed manually. The package can be found <a href="https://github.com/GAMS-dev/gdxrrw" class="external-link">here</a>, which also presents
-instructions on how to install the package. Several functions in
-<code>mapspamc</code> use GDXRRW to read and save GAMS gdx files and
-check whether the package and GAMS are installed.</p>
 </div>
 <div class="section level3">
 <h3 id="essential-packages">Essential packages<a class="anchor" aria-label="anchor" href="#essential-packages"></a>
 </h3>
-<p>Apart from mapspam and GDXRRW, several R packages are required to run
-<code>mapspamc</code> scripts:</p>
+<p>Several R packages are required to run <code>mapspamc</code>
+scripts:</p>
 <ul>
+<li><p>To interface between R and GAMS the gdxrrw package is required.
+Unfortunately, this package is not available on CRAN and therefore has
+to be installed manually. The package can be found <a href="https://github.com/GAMS-dev/gdxrrw" class="external-link">here</a>, which also presents
+instructions on how to install the package. Several functions in
+<code>mapspamc</code> use gdxrrw to read and save GAMS gdx files and
+check whether the package and GAMS are installed.</p></li>
 <li><p><a href="https://cran.r-project.org/web/packages/tidyverse/index.html" class="external-link">tidyverse</a>
 <span class="citation">(Wickham et al. 2019)</span> is the name for a
 set of packages that work in harmony to facilitate data preparation and
