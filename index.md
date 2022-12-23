@@ -64,19 +64,18 @@ examples](articles/country_examples.html).
 Running `mapspamc` can be divided into six major steps which are split
 into nine smaller steps in the Run mapspamc section.
 
--   [1. Model setup](articles/model_setup.html)
--   [2.1. Pre-processing - Subnational
-    statistics](articles/preprocessing_subnational_statistics.html)
--   [2.2. Pre-processing - Spatial
-    data](articles/preprocessing_spatial_data.html)
--   [2.3. Pre-processing -
-    cropland](articles/preprocessing_cropland.html)
--   [2.4. Pre-processing - irrigated
-    area](articles/preprocessing_irrigated_area.html)
--   [3. Model preparation](articles/model_preparation.html)
--   [4. Running the model](articles/run_model.html)
--   [5. Post-processing](articles/postprocessing.html)
--   [6. Model validation](articles/model_validation.html)
+- [1. Model setup](articles/model_setup.html)
+- [2.1. Pre-processing - Subnational
+  statistics](articles/preprocessing_subnational_statistics.html)
+- [2.2. Pre-processing - Spatial
+  data](articles/preprocessing_spatial_data.html)
+- [2.3. Pre-processing - cropland](articles/preprocessing_cropland.html)
+- [2.4. Pre-processing - irrigated
+  area](articles/preprocessing_irrigated_area.html)
+- [3. Model preparation](articles/model_preparation.html)
+- [4. Running the model](articles/run_model.html)
+- [5. Post-processing](articles/postprocessing.html)
+- [6. Model validation](articles/model_validation.html)
 
 ## References
 

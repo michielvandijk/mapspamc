@@ -17,8 +17,7 @@ library(pacman)
 p_load(here, tidyverse, readxl, stringr, scales, glue)
 
 # Load additional packages
-p_load(countrycode, sf, usethis)
-
+p_load(countrycode, sf)
 
 # Set database version
 db_version <- "v0.0.1"
@@ -41,20 +40,38 @@ options(digits = 4)
 iso3c_sel <- "MWI"
 country_sel <- countrycode(iso3c_sel, "iso3c", "country.name")
 year_sel <- 2010
-adm_raw <- st_read(file.path(db_path, glue("raw_data/adm/{iso3c_sel}/gg_SPAM_2/g2008_2.shp")))
-
+ha_df_raw <- read_csv(file.path(db_path,
+                                glue("processed_data/subnational_statistics/{iso3c_sel}/subnational_harvested_area_{year_sel}_{iso3c_sel}.csv")))
 
 # ========================================================================================
-# PROCESS --------------------------------------------------------------------------------
+# PROCESS HA STATISTICS ------------------------------------------------------------------
 # ========================================================================================
 
-adm_map_raw <- adm_raw %>%
-  filter(ADM0_NAME == country_sel)
-plot(adm$geometry)
+# wide to long format
+ha_df <- ha_df_raw %>%
+  pivot_longer(-c(adm_name, adm_code, adm_level), names_to = "crop", values_to = "ha")
+
+# Convert -999 and empty string values to NA
+ha_df <- ha_df %>%
+  mutate(ha = if_else(ha == -999, NA_real_, ha),
+         ha = as.numeric(ha)) # this will transform empty string values "" into NA and throw a warning
+
+# filter out crops which values are all zero or NA
+crop_na_0 <- ha_df %>%
+  group_by(crop) %>%
+  filter(all(ha %in% c(0, NA))) %>%
+  dplyr::select(crop) %>%
+  unique
+
+ha_df <- ha_df %>%
+  filter(!crop %in% crop_na_0$crop)
+
+# Round values
+ha_df <- ha_df %>%
+  mutate(ha = round(ha, 0))
 
 # ========================================================================================
 # SAVE -----------------------------------------------------------------------------------
 # ========================================================================================
 
-use_data(adm_map_raw)
-
+usethis::use_data(ha_df)

@@ -40,7 +40,7 @@ navbar:
           href: articles/appendix.html
       - text: Run mapspamc
         menu:
-        - text: 0. Design and process flow
+        - text: Design and process flow
           href: articles/design.html
         - text: 1. Model setup
           href: articles/model_setup.html
