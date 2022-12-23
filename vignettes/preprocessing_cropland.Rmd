@@ -17,10 +17,26 @@ knitr::opts_chunk$set(
 )
 ```
 
-A key feature of `mapspamc` is to allocate the crop statistics to areas identified as cropland on a map - the cropland extent. As described in the section on [Input data](inputdata.html), we use a so-called synergy cropland map to account for the uncertainty in the location of cropland. The synergy cropland map combines different cropland products to construct one map that presents the mean and maximum available crop area per grid cell as well as a ranking that measures the agreement between the various cropland products. A ranking of 1 means that all sources agree there is cropland in a grid cell, while higher rankings signals more disagreement. The highest ranking depends on the number of cropland products that are compared. 
+A key feature of `mapspamc` is to allocate the crop statistics to areas identified as cropland on a map - the cropland extent. As described in the section on [Input data](inputdata.html), we use a so-called synergy cropland map to account for the uncertainty in the location of cropland. The synergy cropland map combines different cropland products to construct a single cropland map that presents the mean and maximum available crop area per grid cell as well as a ranking that measures the agreement between the various cropland products. A ranking of 1 means that all sources agree there is cropland in a grid cell, while a higher rank signals disagreement. 
 
-@TODO add illustration how to make a synergy cropland map.
-To create the cropland extent, we followed a comparable approach as was used to construct the global synergy cropland map for 2010. Only three global products with cropland information were available for 2000: GLC2000, ESA-CCI-LC and GlobeLand30. We combined the three maps to create the median, maximum and score maps for 2010. We considered the following order of increasing importance when creating the scoring table: (1) ESA-CCI-LC, (2) GlobeLand30, (3) 2010 cropland extent and (4) GLC2000. The ESA-CGI-LC receives the highest score because it is the only product with consistent information for both 2000 and 2010. GlobeLand30 is second because it has a much higher resolution (30x30 meter) than GLC2000 1x1 kilometer), which can be considered somewhat outdated. Grid cells that show cropland in all four layers receive the highest score. 
+We added scripts to create synergy cropland maps for recent period, using several global land use products that are included in the maspamc database. The scripts are located in the `02_3_pre_processing_cropland` folder. Before the synergy cropland can be created the user needs to clip the data for the target country from the global datasets and ensure they have the right format (i.e. desired extent, resolution and coordinate reference system). Dedicated scripts to process each of the global land use products are provided in the folder. 
 
-For 2010, we can make use of SASAM, the global synergy map that was prepared for SPAM2010 [@Lu2020].  
+For the Malawi example, we can make use of an existing global synergy cropland map (SASAM) that was prepared for SPAM2010 [@Lu2020], which can be selected by running `select_sasam.R`. For the Ethiopia country example we used information from four datasets that represent global cropland around the period 2015: GLAD, COPERNICUS, ESACCI and MODIS. 
+
+The script `create_synergy_cropland_map.R` combines the selected land use maps and creates a country synergy cropland map.
+  
+We combined the three maps to create the median, maximum and score maps for 2010. We considered the following order of increasing importance when creating the scoring table: (1) ESA-CCI-LC, (2) GlobeLand30, (3) 2010 cropland extent and (4) GLC2000. The ESA-CGI-LC receives the highest score because it is the only product with consistent information for both 2000 and 2010. GlobeLand30 is second because it has a much higher resolution (30x30 meter) than GLC2000 1x1 kilometer), which can be considered somewhat outdated. Grid cells that show cropland in all four layers receive the highest score. 
+
+
+
+
+```{r tab-synergy, echo=FALSE, warning=FALSE, message=FALSE}
+library(readxl)
+library(kableExtra)
+synergy <- read_excel("tables_chart/tables.xlsx", sheet = "tab_synergy_cl")
+
+synergy %>%
+  kable(.,booktabs = TRUE, linesep = "", caption = "Ranking table for 2015 synergy cropland map")
+```
+
 

@@ -17,12 +17,12 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Use of GAMS to solve the `mapspamc` models
+## Use of GAMS to solve the `mapspamc` models
 
 The `mapspamc` package depends on General Algebraic Modeling System (GAMS) [@GAMSDevelopmentCorporation2019] to solve the cross-entropy and fitness score models. GAMS is commercial software, designed for modelling and solving large complex optimization problems. To be able to solve the models in `mapspamc` a GAMS licence is required that includes full access (without size limitations) to CPLEX and IPOPT solvers (but see below for potential alternative solvers). The function `run_mapspamc` activates GAMS to run the model as defined by the user in the model setup step. The GAMS model log will be sent to the screen after the model run has finished. The log is a text file, which names starts with `model_log_` and is saved in the  `processed_data/intermediate_output` folder after the model has finished. The GAMS code (gms files) is stored in the `gams` folder in the `mapspamc` R library folder. Interested users might want to take a look and, if necessary, modify the code and run it directly in GAMS, separately from the `mapspamc` package.
 
 
-# Use of slack when solving models
+## Use of slack when solving models
 
 The GAMS code involves the use of a slack variable to deal with data inconsistencies, which result in infeasible models. A slack variable transforms an inequality constraint in an equality constraint by adding 'slack' [@Boyd2004a]. This makes it possible to solve the model even though it is technically infeasible. Different weights (i.e. penalties) are used to capture the interaction and trade-offs between the different slack variables (e.g. a lower slack for irrigated area may result in a higher slack for available cropland). Relatively high weights are used to minimize the slack for cropland availability and irrigated area, whereas low weights are used for the subnational statistics, which values are considered less reliable (see GAMS gms files for which weights are used). After the model is run, the slack variables are saved in the model output gdx file, which is stored in the `processed_data/intermediate_output` folder.
 

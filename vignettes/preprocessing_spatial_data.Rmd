@@ -17,15 +17,35 @@ knitr::opts_chunk$set(
 )
 ```
 
-As described in the section on [Input data](input_data.html), a variety of spatial datasets are needed to run the model. A large number of global products are available through the mapspamc database. All the spatial data layers are taken from global datasets, which might not always be the best source for detailed country studies. Hence, you might want to replace some of them by more detailed country-level products (e.g. national land cover, accessibility or population maps.
+As described in the section on [Input data](input_data.html), a large number of spatial datasets are needed as input to run the model. Most of the data can be taken from global data products that are are available in the mapspamc database. In case more detailed national data sources  (e.g. national land cover, accessibility or population maps) are available, the user can  use those instead.
 
-For this reason, we decided not to create specific functions to process the spatial data, which offer limited flexibility for user interaction. Instead we share the detailed scripts we used to process all the spatial datasets, which can be found in the `03_spatial_data` folder. To process raster data, we created the `align_raster()` function that can be used to clip country data from a global spatial layer using a country map and at the same time reproject the map to the desired extent, resolution and coordinate reference system. 
+For this reason, we decided not to create specific functions to process the spatial data, which offer limited flexibility for user interaction. Instead we share the detailed scripts that we used to process all the spatial datasets, which can be found in the `02_2_pre_processing_spatial_data` folder. To process raster data, we created the `align_raster()` function that can be used to clip country data from a global spatial layer using a country shapefile and at the same time reproject the map to the desired extent, resolution and coordinate reference system. 
 
-The code below illustrates the use of `align_raster()` to clip the Malawi data from the global WorldPop map used in `04_select_worldpop.r`. Note that several data layers require additional or slightly different processing approach before they can be used. For example, the raw WorldPop dataset presents population density per grid cell at a resolution of 30 arc second. If we want to run the model at a resolution of 5 arc minutes, which has grid cells that are 100 times larger, the data needs to be summed when aggregating the grid cells. This is different from the default option in `align_raster()`, which uses a resampling approach when reprojecting the maps.    
+The code below illustrates the use of `align_raster()` to clip the Malawi data from the global WorldPop map used in `04_select_worldpop.R`. Note that several data layers require additional or slightly different processing approach before they can be used. For example, the raw WorldPop dataset presents population density per grid cell at a resolution of 30 arc second. If we want to run the model at a resolution of 5 arc minutes, which has grid cells that are 100 times larger, the data needs to be summed when aggregating the grid cells. This is different from the default option in `align_raster()`, which uses a bilinear resampling approach when reprojecting the maps.    
 
 ```{r, eval = FALSE}
+input <- file.path(param$db_path, glue("worldpop/ppp_{param$year}_1km_Aggregated.tif"))
+
+if(param$res == "30sec") {
+  temp_path <- file.path(param$model_path, glue("processed_data/maps/population/{param$res}"))
+  dir.create(temp_path, showWarnings = FALSE, recursive = TRUE)
+
+  output <- align_raster(input, grid, adm_map, method = "bilinear")
+  plot(output)
+}
+
+if(param$res == "5min") {
+  temp_path <- file.path(param$model_path, glue("processed_data/maps/population/{param$res}"))
+  dir.create(temp_path, showWarnings = FALSE, recursive = TRUE)
+
+  output <- align_raster(input, grid, adm_map, method = "average")
+
+  # Multiply average population with 100
+  output <- output*100
+  plot(output)
+}
 ```
 
-To process the spatial data, simply run the various scripts in the `02_2_pre_processing_spatial_data` folder. Note that some of the scripts, in particular `select_gaez.r`, which processes more than 300 global maps, can take a long time to run! 
+To process the spatial data, the user needs to run all scripts in the `02_2_pre_processing_spatial_data` folder. Note that some of the scripts, in particular `select_gaez.R`, which processes more than 300 global maps, can take a long time to run! 
 
 The next step involves the creation of the [synergy cropland map](preprocessing_cropland.html). 
