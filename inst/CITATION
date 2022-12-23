@@ -1,12 +1,14 @@
 citHeader("To cite mapspamc in publications use:")
 
-
 citEntry(
   entry    = "Article",
   title    = "mapspamc: An R package to create crop distribution maps for country studies using a downscaling approach",
-  author   = "Michiel van Dijk", "Ulrike Wood-Sichra", "Yating Ru", "Zhe Guo", "Liangzhi You",
-  journal  = "not published",
+  author   = "Michiel van Dijk, Ulrike Wood-Sichra, Yating Ru, Zhe Guo and Liangzhi You",
+  journal  = "submitted",
   year     = "2022",
+  volume   = "",
+  number   = "",
+  pages    = "",
   url      = "",
   textVersion = paste(
 

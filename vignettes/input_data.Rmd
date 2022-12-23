@@ -17,9 +17,17 @@ knitr::opts_chunk$set(
 )
 ```
 
-To create crop distribution maps with `mapspamc`, various types of data are required, including national and subnational agricultural statistics, cropland and irrigated area extent, and spatially explicit information on economic and bio-physical suitability. Users of `mapspamc` can use country-specific sources for each of these categories, such as national irrigation, cropland and crop suitability maps. However, apart from the subnational statistics, most of the data can be taken from global data products. To support easy implementation of the package, `mapspamc` is accompanied by a public data repository (referred to as the mapspamc_db) that contains a large number of global maps that are publicly available. The table below shows the global data products that are included in the database. They are briefly discusssed below.
+To create crop distribution maps with `mapspamc`, various types of data are required, including national and subnational agricultural statistics, cropland and irrigated area extent, and spatially explicit information on economic and bio-physical suitability. Users of `mapspamc` can use country-specific sources for each of these categories, such as national irrigation, cropland and crop suitability maps. However, apart from the subnational statistics, most of the data can be taken from global data products. To support easy implementation of the package, `mapspamc` is accompanied by a public data repository (referred to as the mapspamc_db) that contains a large number of global maps that are publicly available. The table below shows the global data products that are included in the database. They are briefly discussed below.
 
-      
+```{r tab-data-sources, echo=FALSE, warning=FALSE, message=FALSE}
+library(readxl)
+library(kableExtra)
+sources <- read_excel("tables_chart/tables.xlsx", sheet = "tab_data_sources")
+
+sources %>%
+  kable(.,booktabs = TRUE, linesep = "", caption = "Data products in the mapspamc database")
+```
+
 
 ## Crop statistics
 
@@ -56,7 +64,7 @@ To allocate the physical area statistics `mapspamc` requires a cropland extent, 
 
 The synergy cropland approach combines all available (global) cropland maps and creates a ranking for each grid cell that measures the level of agreement between the various input maps. In the `mapspamc` the grid cells with the least uncertainty are selected first when allocating physical area of individual crops. Apart from the ranking, the synergy cropland approach also prepares maps with the mean and maximum cropland area per grid cell. The mean area product is used as the base layer by `mapspamc` but in case this is not sufficient to allocate all the physical area, grid cells from the maximum cropland map can be used (see [Model preparation](model_preparation.html) for more information on how this is done).  
 
-There are two options to obtain a synergy cropland map. The first is to take an existing product. If `mapspamc` is used to produce crop distribution maps for around 2010, the user can use an existing global product [@Lu2020] that was also used as input for SPAM2010. A second option is to construct a country specific synergy cropland extent. mapspam_db includes several recent cropland products that can be combined using code in `mapspamc` to create country-specific synergy cropland maps.  
+There are two options to obtain a synergy cropland map. The first is to take an existing product. If `mapspamc` is used to produce crop distribution maps for around 2010, the user can use an existing global product [@Lu2020] that was also used as input for SPAM2010. A second option is to construct a country specific synergy cropland extent. mapspam_db includes several recent cropland products that can be combined using scripts in `mapspamc` to create  a country-specific synergy cropland map.  
 
 
 ## Irrigation
