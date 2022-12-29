@@ -29,11 +29,12 @@ ir_df <-   as.data.frame(c(grid, grid_size, gmia, gia), xy = TRUE) %>%
   mutate(gia = ifelse(gia < 0.01, 0, gia),
          gmia = ifelse(gmia < 0.01, 0, gmia))
 
-# Create ranking by first taking the maximum of the irrigated area share,
-# calculate irrigated area, and then rank. In this way we prefer the largest
-# area, and hence prefer GIA over GMIA when the resolution is 30 arcsec (GIA is
-# 1 or 0). At a resolution of 5 arcmin the GMIA and grid cells with a lot of GIA
-# observations get a high rank, which is also desirable.
+# Create ranking by (1) take the maximum of the GMIA and GIA irrigated area share,
+# (2) add a rank from 1 (highest share) to 10 (lowest share) using equal intervals of 0.1 irrigated area share,
+# (3) rank the cells from 1 to 10 and (4) calculate the irrigated area in ha.
+# By ranking on irrigated area share, GIA (share is 1) is always preferred over GMIA when a resolution of 30 arc seconds
+# is selected. At a resolution of 5 arc minutes GMIA and GIA grid cells with a large share of irrigated area receive
+# a high rank, which is also desirable.
 
 ir_df <- ir_df %>%
   dplyr::mutate(ir_max = pmax(gmia, gia, na.rm = T),

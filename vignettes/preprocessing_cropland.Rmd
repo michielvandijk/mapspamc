@@ -17,17 +17,13 @@ knitr::opts_chunk$set(
 )
 ```
 
-A key feature of `mapspamc` is to allocate the crop statistics to areas identified as cropland on a map - the cropland extent. As described in the section on [Input data](inputdata.html), we use a so-called synergy cropland map to account for the uncertainty in the location of cropland. The synergy cropland map combines different cropland products to construct a single cropland map that presents the mean and maximum available crop area per grid cell as well as a ranking that measures the agreement between the various cropland products. A ranking of 1 means that all sources agree there is cropland in a grid cell, while a higher rank signals disagreement. 
+A key feature of `mapspamc` is to allocate the crop statistics to areas identified as cropland on a map - the cropland extent. As described in the section on [Input data](inputdata.html), we use a so-called synergy cropland map to account for the uncertainty in the location of cropland. The synergy cropland map combines different cropland products to construct a single cropland map that presents the mean and maximum available crop area per grid cell as well as a ranking that measures the agreement between the various cropland products for each grid cell. A ranking of 1 means that all sources agree there is cropland in a grid cell, while a higher rank signals disagreement. 
 
-We added scripts to create synergy cropland maps for recent period, using several global land use products that are included in the maspamc database. The scripts are located in the `02_3_pre_processing_cropland` folder. Before the synergy cropland can be created the user needs to clip the data for the target country from the global datasets and ensure they have the right format (i.e. desired extent, resolution and coordinate reference system). Dedicated scripts to process each of the global land use products are provided in the folder. 
+The package contains a script to create a synergy cropland map using global land use products that are included in the maspamc database: COPERNICUS, ESACCI, ESRI, GLAD and MODIS (see the database documentation for details). The script is located in the `02_3_pre_processing_cropland` folder. Before the synergy cropland map can be created the user needs to clip target country from the global datasets and ensure the maps have the right format (i.e. desired extent, resolution and coordinate reference system). Scripts to do this for each global land use product are provided in the same folder. 
 
-For the Malawi example, we can make use of an existing global synergy cropland map (SASAM) that was prepared for SPAM2010 [@Lu2020], which can be selected by running `select_sasam.R`. For the Ethiopia country example we used information from four datasets that represent global cropland around the period 2015: GLAD, COPERNICUS, ESACCI and MODIS. 
+For the Malawi example, we can make use of an existing global synergy cropland map (SASAM) that was prepared for SPAM2010 [@Lu2020], which can be selected by running `select_sasam.R`. For the Ethiopia country example we used information from four datasets that represent global cropland around the period 2015: GLAD, COPERNICUS, ESACCI and MODIS. The user needs to run `select_*.R` first to process the global maps. The script `create_synergy_cropland_map.R` combines the selected land use maps and creates a country synergy cropland map.
 
-The script `create_synergy_cropland_map.R` combines the selected land use maps and creates a country synergy cropland map.
-  
-We combined the three maps to create the median, maximum and score maps for 2010. We considered the following order of increasing importance when creating the scoring table: (1) ESA-CCI-LC, (2) GlobeLand30, (3) 2010 cropland extent and (4) GLC2000. The ESA-CGI-LC receives the highest score because it is the only product with consistent information for both 2000 and 2010. GlobeLand30 is second because it has a much higher resolution (30x30 meter) than GLC2000 1x1 kilometer), which can be considered somewhat outdated. Grid cells that show cropland in all four layers receive the highest score. 
-
-
+In order to create the synergy map, a ranking table is needed that indicates, which (combination) of the inputs maps is regarded as the most reliable. In case all the global cropland maps signal a grid cell contains cropland the ranking is 1 (highest and most reliable). For all other combinations the user needs to prepare a ranking table. The table for Ethiopia is added to the mapspamc database(`synergy_cropland_table/synergy_cropland_table_2015.xlsx`) and contains a ranking from 1 to 16 (see below) because it is based on four maps. For Ethiopia, we decided on the following order of increasing importance when creating the scoring table: (1) GLAD, (2) COPERNICUS, (3) ESACCI and (4) MODIS. GLAD receives the highest score because it has the highest original resolution (30 meter) and is therefore assumed to be the most accurate, followed by COPERNICUS (100 meter), ESACCI (300 meter) and MODIS (500 meter).  
 
 
 ```{r tab-synergy, echo=FALSE, warning=FALSE, message=FALSE}
@@ -39,4 +35,7 @@ synergy %>%
   kable(.,booktabs = TRUE, linesep = "", caption = "Ranking table for 2015 synergy cropland map")
 ```
 
+If the user is interested in creating a more recent synergy cropland map (e.g. for around 2020), we recommend using the following combination of cropland products, which are available in the mapspamc database: ESRI (2020), GLAD (2019), COPERNICUS (2019) and ESACCI (2020), and modify the 2015 ranking table accordingly. Alternatively, and if available, the user could add a national land use product and create a ranking with five different inputs that goes up to 32.
 
+
+## References
