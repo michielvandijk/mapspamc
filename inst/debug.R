@@ -83,3 +83,5 @@ print(param)
 # Create folder structure in the mapspamc_path
 create_folders(param)
 
+view_results("rice", var = "ha", param)
+crp <- "rice"

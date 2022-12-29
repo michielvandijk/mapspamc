@@ -48,7 +48,6 @@ view_results <- function(crp, var, param, viewer = TRUE, polygon = TRUE){
   }
 
   load_data(c("grid", "results", "adm_map"), param, mess = FALSE, local = TRUE)
-  ext <- raster::extent(raster::raster(grid))
   grid_df <- as.data.frame(grid, xy = TRUE)
 
   df <- results %>%
@@ -56,14 +55,13 @@ view_results <- function(crp, var, param, viewer = TRUE, polygon = TRUE){
   sys <- unique(df$system)
 
   # Note that mapview does not support terra yet so we convert to raster
-  st <- lapply(sys, function(x) raster::rasterFromXYZ(df[df$system == x, c("x", "y", var)], crs = raster::crs(grid)))
-  st <- lapply(st, function(x) raster::extend(x, ext)) # Harmonize exent for stacking
+  st <- lapply(sys, function(x) terra::rast(df[df$system == x, c("x", "y", var)], type = "xyz", crs = terra::crs(grid)))
   st <- lapply(seq(length(st)), function(i){
-    mapview::mapview(st[[i]], layer.name = glue::glue("{var} {crp} {sys[i]}"))
+    mapview::mapView(st[[i]], layer.name = glue::glue("{var} {crp} {sys[i]}"))
   })
 
   if(polygon) {
-    st <- lapply(seq(length(st)), function(i){st[[i]] + mapview::mapview(adm_map, alpha.region = 0)})
+    st <- lapply(seq(length(st)), function(i){st[[i]] + mapview::mapView(adm_map, alpha.region = 0)})
   }
 
   leafsync::sync(st)

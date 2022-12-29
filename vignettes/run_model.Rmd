@@ -17,13 +17,13 @@ knitr::opts_chunk$set(
 )
 ```
 
-`run_mapspamc` runs the selected model (`min_entropy` or `max_score`) in GAMS. If `model_sel = 1`, the model is run for each individual administrative unit at level 1. If `model_sel = 0` the model is run only once for the total country. Selecting `out = TRUE` (default setting), the model log will be sent to the screen after the model run is finished. The log is as text file, whicn names starts with `model_log_` and is saved in the `processed_data/intermediate_output` folder.  Note that, depending on the size of the country and the selected resolution, the model might take a lot of time to run. If the model is very large, there is a risk your computer runs out of memory and an error message will be printed in the model log. 
+`run_mapspamc` runs the selected model (`min_entropy` or `max_score`) in GAMS. If `model_sel = 1`, the model is run for each individual administrative unit at level 1. If `model_sel = 0` the model is run only once for the total country. Selecting `out = TRUE` (default setting), the model log will be sent to the screen after the model run is finished. The log is a text file, which names starts with `model_log_` and is saved in the `processed_data/intermediate_output` folder. Note that, depending on the size of the country and the selected resolution, the model might take a lot of time to run. If the model is very large, there is a risk the user's computer runs out of memory and an error message will be printed in the model log. 
 
 ```{r eval = FALSE}
 run_mapspamc(param)
 ```
 
-`mapspamc` results are saved into one (`solve_level = 0`)  or multiple (`solve_level = 1`) gdx files after`run_mapspamc()` is executed. `combine_results()` combines the file(s) into a single rds file, that can be easily loaded into R and used for further inspection and further processing. The file is saved in the `processed_data/results` folder.
+`mapspamc` results are saved into one (`solve_level = 0`)  or multiple (`solve_level = 1`) gdx files after `run_mapspamc()` is executed. `combine_results()` combines the file(s) into a single rds file that can be loaded into R for further processing. The file is saved in the `processed_data/results` folder.
 
 ```{r eval = FALSE}
 combine_results(param)

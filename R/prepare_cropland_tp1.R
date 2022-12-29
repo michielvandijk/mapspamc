@@ -8,8 +8,8 @@ prepare_cropland_tp1 <- function(param){
   grid_size <- calc_grid_size(grid)
 
   # Combine and remove few cells where gridID is missing, caused by masking grid with country borders using gdal.
-  df <- as.data.frame(raster::rasterToPoints(raster::stack(grid, cl_mean, cl_rank, cl_max, grid_size))) %>%
-    dplyr::filter(!is.na(gridID))
+  # df <- as.data.frame(raster::rasterToPoints(raster::stack(grid, cl_mean, cl_rank, cl_max, grid_size))) %>%
+  #   dplyr::filter(!is.na(gridID))
 
   # Fix inconsistencies
   # Set cl_max to cl_mean if cl > cl_max because of inconsistencies (when using SASAM)
