@@ -27,13 +27,17 @@ ha <- ha %>%
 # Statistics are created with the ggpubr package. Absolute positioning is used to place the
 # labels and likely need to be set for each model. We use logs to account for very large and
 # small values
+
+# Create enough colors
+cols <- colorRampPalette(brewer.pal(9, "Set1"))(n_distinct(ha$crop))
+
 p_val1 <- bind_rows(ha, results_alt_ag)  %>%
   pivot_wider(names_from = source, values_from = value) %>%
   na.omit() %>%
   ggplot(aes(x = log(model+1), y = log(statistics+1), color = crop)) +
-  scale_colour_viridis_d(option = "viridis") +
+  scale_colour_manual(values = cols) +
   geom_point(alpha = 0.5, size = 1.5) +
-  stat_cor(p.accuracy = 0.001, r.accuracy = 0.01, label.x = 3, label.y = 2) +
+  stat_cor(aes(label = ..r.label..), p.accuracy = 0.001, r.accuracy = 0.01, label.x = 3, label.y = 2) +
   facet_wrap(~crop) +
   geom_abline(slope = 1, linetype = "dashed") +
   labs(x = "mapspamc (log)", y = "Statistics (log)") +
@@ -44,6 +48,7 @@ p_val1 <- bind_rows(ha, results_alt_ag)  %>%
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())
 print(p_val1)
+
 
 # COMPARE MODEL WITH STATISTICS -----------------------------------------------------------------
 # Another type of model validation is to compare the subnational statistics with the preferred model,
@@ -74,9 +79,9 @@ p_val2 <- bind_rows(ha, results_ag)  %>%
   pivot_wider(names_from = source, values_from = value) %>%
   na.omit() %>%
   ggplot(aes(x = log(model+1), y = log(statistics+1), color = crop)) +
-  scale_colour_viridis_d(option = "viridis") +
+  scale_colour_manual(values = cols) +
   geom_point(alpha = 0.5, size = 1.5) +
-  stat_cor(p.accuracy = 0.001, r.accuracy = 0.01, label.x = 3, label.y = 2) +
+  stat_cor(aes(label = ..r.label..), p.accuracy = 0.001, r.accuracy = 0.01, label.x = 3, label.y = 2) +
   facet_wrap(~crop) +
   geom_abline(slope = 1, linetype = "dashed") +
   labs(x = "mapspamc (log)", y = "Statistics (log)") +

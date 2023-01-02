@@ -4,7 +4,7 @@
 #'To support the preparation of the subnational statistics,
 #'`create_statistics_template()` can create three types of data templates:
 #'- ha for harvest area statistics
-#'- fs for farming system share
+#'- fs for production system share
 #'- ci for cropping intensity.
 #'
 #'@details

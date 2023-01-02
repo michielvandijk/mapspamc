@@ -57,7 +57,7 @@ navbar:
         - text: 4. Run model
           href: articles/run_model.html
         - text: 5. Post-processing
-          href: articles/post_processing.html
+          href: articles/postprocessing.html
         - text: 6. Model validation
           href: articles/model_validation.html
     reference:

@@ -16,7 +16,8 @@ if(!require(pacman)) install.packages("pacman")
 library(pacman)
 
 # Load required packages
-p_load(mapspamc, countrycode, here, glue, terra, readxl, tidyverse, sf, ggpubr, viridis, tictoc)
+p_load(mapspamc, countrycode, here, glue, terra, readxl, RColorBrewer, tidyverse, sf, ggpubr,
+       viridis, tictoc)
 
 # R options
 options(scipen=999) # Suppress scientific notation

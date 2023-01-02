@@ -64,6 +64,7 @@ examples](articles/country_examples.html).
 Running `mapspamc` can be divided into six major steps which are split
 into nine smaller steps in the Run mapspamc section.
 
+- [Design and process flow](articles/design.html)
 - [1. Model setup](articles/model_setup.html)
 - [2.1. Pre-processing - Subnational
   statistics](articles/preprocessing_subnational_statistics.html)

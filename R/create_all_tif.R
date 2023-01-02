@@ -11,7 +11,7 @@
 #'@export
 create_all_tif <- function(param) {
   stopifnot(inherits(param, "mapspamc_par"))
-  cat("\n=> Create .tif files for all crop and farming system combinations")
+  cat("\n=> Create .tif files for all crop and production system combinations")
   load_data("results", param, mess = F)
 
   # by crop and system

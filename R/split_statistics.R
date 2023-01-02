@@ -34,7 +34,7 @@ split_statistics <- function(ac, ha, fs, ci, param){
                      .groups = "drop") %>%
     ungroup()
 
-  # Calculate physical area broken down by farming systems
+  # Calculate physical area broken down by production systems
   pa_fs_adm <- pa_adm %>%
     dplyr::filter(adm_code == ac) %>%
     dplyr::left_join(fs_adm, by = "crop") %>%

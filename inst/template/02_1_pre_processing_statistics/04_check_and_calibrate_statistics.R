@@ -13,7 +13,7 @@ source(here::here("01_model_setup/01_model_setup.r"))
 ha_df_raw <- read_csv(file.path(param$db_path,
   glue("subnational_statistics/{param$iso3c}/subnational_harvested_area_{param$year}_{param$iso3c}.csv")))
 
-# Farming systems shares
+# production systems shares
 fs_df_raw <- read_csv(file.path(param$db_path,
   glue("subnational_statistics/{param$iso3c}/farming_system_shares_{param$year}_{param$iso3c}.csv")))
 
@@ -163,7 +163,7 @@ ha_df <- ha_df %>%
   arrange(adm_code, adm_code, adm_level)
 
 
-# PROCESS FARMING SYSTEM SHARES ------------------------------------------------------------
+# PROCESS production system SHARES ------------------------------------------------------------
 # ci does not need to be adjusted
 fs_df <- fs_df_raw
 

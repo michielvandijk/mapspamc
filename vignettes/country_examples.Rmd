@@ -26,5 +26,5 @@ knitr::opts_chunk$set(
 - Update the location of the mapspamc model and the mapspamc database in the 01_model_setup.r script so it matches with the locations on your machine. 
 - Copy the [mapspamc database](@ADD) to the set location on your machine.
 
-Now you should be ready to run the country example on your own machine! The articles in the Running `mapspamc` section will guide you through the various steps to build the model, using the Malawi example.
+The articles in the Running `mapspamc` section will guide you through the various steps to build the model, using the Malawi example.
 

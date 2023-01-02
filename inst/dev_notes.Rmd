@@ -209,7 +209,7 @@ We do not scale if there are missing values and sum(ADM1)<faostat. Here the same
 # Compare adm
 Build check function that compares adm_map_list, which should be leading, with adm stat
 
-# Farming systems
+# production systems
 Add in 02_agricultural statistics a script that creates overview of export shares of crops to determine system. Also add script that creates template for setting shares. Including pre-processing share of irrigated. 
 
 # Running at ADM0

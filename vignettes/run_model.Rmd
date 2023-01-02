@@ -29,4 +29,10 @@ run_mapspamc(param)
 combine_results(param)
 ```
 
+Finally, the user can inspect the results using the `view_results()` function, which only works after `combine_results()` is run. This function produces a grid that compares the crop distribution maps (harvested or physical area) for a selected crop, using a different panel for each farming system. The maps are interactive and the user can zoom in for closer inspection and select different background maps. The plots are shown in the default browser, unless specified otherwise. 
+
+```{r eval = FALSE}
+view_results("rice", var = "ha", param)
+```
+
 

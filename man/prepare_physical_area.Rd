@@ -14,7 +14,7 @@ available, administrative unit level at which the model is solved and type of
 model.}
 }
 \description{
-To estimate the physical crop area for each farming system harvest area (ha)
+To estimate the physical crop area for each production system harvest area (ha)
 statistics are combined with information on farmings system shares (fs) and
 cropping intensity (ci). Depending on how the model is solved, the physical
 area statistics are saved at the administrative unit level 0 (country) level

@@ -17,17 +17,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-
-## Inspect results and create maps 
-
-The package offers to functions to quickly inspect the results, after the model has been run. `view_panel()` shows crop distribution maps for a selected crop, using a different panel for each farming system. `view_stack()` shows the same information but stacking the various maps. Both functions plot the maps in the default browser overlaying the country polygon, unless specified otherwise. The visualization is done using [leafletjs](https://leafletjs.com/), which makes it possible to select different background tiles (e.g. OpenStreetMap) to put the data into perspective. 
-
-```{r eval = FALSE}
-view_panel("rice", var = "ha", param)
-view_stack("rice", var = "ha", param)
-```
-
-As it is easier to process and visualize geo-spatial data when the data is saved in tif format, `create_all_tif()` produces a tif file for each crop - farming-system combination. The tif files are also needed as input to aggregate the data in a format that can be used by GLOBIOM, which is described next.
+The function `create_all_tif()` produces tif files of all crop distribution maps that are produced after the downscaling algorithm is solved and the results are combined in one rds file using `combine_results(param)`. In theory, the function creates 320 maps: 2 (harvested area and physical area) x 40 (crops) x 4 (production systems) but in practice the number will be lower, depending on the actual number of crops and production systems observed in a country. 
 
 ```{r eval = FALSE}
 create_all_tif(param)

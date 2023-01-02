@@ -11,7 +11,6 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![R-CMD-check](https://github.com/michielvandijk/mapspamc/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/michielvandijk/mapspamc/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The aim of the [`mapspamc` R

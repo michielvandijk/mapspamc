@@ -1,8 +1,8 @@
 #'@title
-#'Compares crop distribution maps using a panel for each farming system
+#'Compares crop distribution maps using a panel for each production system
 #'
 #'@description To quickly inspect the `mapspamc` results, `view_results()` shows crop
-#'  distribution maps for a selected crop using a panel for each farming system.
+#'  distribution maps for a selected crop using a panel for each production system.
 #'  This function works after `combine_results()` is run. There is no need to
 #'  run `create_all_tif()`. The maps are visualized using
 #'  [leafletjs](https://leafletjs.com/), which makes it possible to select a
@@ -54,10 +54,10 @@ view_results <- function(crp, var, param, viewer = TRUE, polygon = TRUE){
     dplyr::filter(crop == crp, {var} != 0)
   sys <- unique(df$system)
 
-  # Note that mapview does not support terra yet so we convert to raster
   st <- lapply(sys, function(x) terra::rast(df[df$system == x, c("x", "y", var)], type = "xyz", crs = terra::crs(grid)))
   st <- lapply(seq(length(st)), function(i){
-    mapview::mapView(st[[i]], layer.name = glue::glue("{var} {crp} {sys[i]}"))
+    mapview::mapView(st[[i]], layer.name = glue::glue("{var} {crp} {sys[i]}"),
+                     map.types = c("OpenStreetMap", "Esri.WorldImagery", "OpenTopoMap", "CartoDB.Positron"))
   })
 
   if(polygon) {

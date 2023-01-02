@@ -2,7 +2,7 @@
 % Please edit documentation in R/view_results.R
 \name{view_results}
 \alias{view_results}
-\title{Compares crop distribution maps using a panel for each farming system}
+\title{Compares crop distribution maps using a panel for each production system}
 \usage{
 view_results(crp, var, param, viewer = TRUE, polygon = TRUE)
 }
@@ -26,7 +26,7 @@ maps? \code{FALSE} will show the maps in the RStudio viewer pane.}
 }
 \description{
 To quickly inspect the \code{mapspamc} results, \code{view_results()} shows crop
-distribution maps for a selected crop using a panel for each farming system.
+distribution maps for a selected crop using a panel for each production system.
 This function works after \code{combine_results()} is run. There is no need to
 run \code{create_all_tif()}. The maps are visualized using
 \href{https://leafletjs.com/}{leafletjs}, which makes it possible to select a

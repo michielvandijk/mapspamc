@@ -21,7 +21,7 @@ To support the preparation of the subnational statistics,
 \code{create_statistics_template()} can create three types of data templates:
 \itemize{
 \item ha for harvest area statistics
-\item fs for farming system share
+\item fs for production system share
 \item ci for cropping intensity.
 }
 }

@@ -31,7 +31,7 @@ sources %>%
 
 ## Crop statistics
 
-The aim of `mapspamc` is to spatially allocate national and subnational information on harvested and physical crop area for four different farming systems (subsistence, low-input rainfed, high-input rainfed and high-input irrigated). The use of subnational statistics is of key importance and greatly improves the quality of the gridded maps [@Joglekar2019]. Four pieces of information need to be collected by the user:
+The aim of `mapspamc` is to spatially allocate national and subnational information on harvested and physical crop area for four different production systems (subsistence, low-input rainfed, high-input rainfed and high-input irrigated). The use of subnational statistics is of key importance and greatly improves the quality of the gridded maps [@Joglekar2019]. Four pieces of information need to be collected by the user:
 
 - **Harvested area statistics.** Data on crop level harvested area at administrative unit level 1 and, if possible, level 2. `mapspamc` is designed to handle missing information at the subnational level so any data is useful.
 
@@ -39,9 +39,9 @@ The aim of `mapspamc` is to spatially allocate national and subnational informat
 
 - **Cropping intensity statistics.** Information on the cropping intensity (e.g. the number of crop rotations in case of multicropping) per crop at the national level and, if available, at the subnational 1 level. This information will be combined with the harvested area statistics to estimate the physical crop area at the national and subnational level. 
 
-- **Farming system area shares.** Data on the area share for each crop and all four farming systems, preferably at the national and, if available, subnational 1 level. This information will be combined with physical area estimation to calculate the physical crop area for each of the four farming systems times crop combinations at the national and subnational level.
+- **production system area shares.** Data on the area share for each crop and all four production systems, preferably at the national and, if available, subnational 1 level. This information will be combined with physical area estimation to calculate the physical crop area for each of the four production systems times crop combinations at the national and subnational level.
 
-Finding subnational information on harvested area is not easy as they are not always collected and/or published by national statistical agencies and if they are available they often cover a selection of crops and might have many missing values. Cropping intensity and farming system shares are probably even much more difficult to find and often requires making a lot of assumptions to fill data gaps (e.g. assuming the same cropping intensity for similar crops).
+Finding subnational information on harvested area is not easy as they are not always collected and/or published by national statistical agencies and if they are available they often cover a selection of crops and might have many missing values. Cropping intensity and production system shares are probably even much more difficult to find and often requires making a lot of assumptions to fill data gaps (e.g. assuming the same cropping intensity for similar crops).
 
 Some places where you might look for subnational statistics:
 
@@ -74,7 +74,7 @@ To allocate the irrigated crops, `mapspamc` needs an irrigated area extent. Simi
 
 ## Biophysical suitability and potential yield
 
-Spatially explicit information on biophysical suitability and potential yield is taken from @IIASA2012. The International Institute for Applied Systems Analysis (IIASA) in collaboration with FAO, developed the global agro-ecological zones (GAEZ) methodology that assesses the biophysical potential for a large number of crops across three farming systems: low-input rainfed, high-input rainfed and high-input irrigated systems. The first class is used for both the subsistence and low-input system in `mapspamc`. GAEZ presents spatially explicit information on the biophysical suitability (on a scale from 1 to 100) and potential yield (in t/ha) separate for each farming system.  mapspamc_db includes data for GAEZv3.^[Recently GAEZv4 was released, which we aim to add in an update of mapspamc_db].
+Spatially explicit information on biophysical suitability and potential yield is taken from @IIASA2012. The International Institute for Applied Systems Analysis (IIASA) in collaboration with FAO, developed the global agro-ecological zones (GAEZ) methodology that assesses the biophysical potential for a large number of crops across three production systems: low-input rainfed, high-input rainfed and high-input irrigated systems. The first class is used for both the subsistence and low-input system in `mapspamc`. GAEZ presents spatially explicit information on the biophysical suitability (on a scale from 1 to 100) and potential yield (in t/ha) separate for each production system.  mapspamc_db includes data for GAEZv3.^[Recently GAEZv4 was released, which we aim to add in an update of mapspamc_db].
 
 
 ## Accessibility
