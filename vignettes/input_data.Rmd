@@ -51,7 +51,7 @@ Some places where you might look for subnational statistics:
 
 - Knowing in which regions crops are not produced is also very useful. By setting the harvested area to 0 for some regions the model will be forced to allocate the (national) statistics in other subnational units. 
 
-- Agricultural trade statistics in FAOSTAT might give you an idea about the farmings system shares. If most crop production is exported, a large share of the farmers can probably be categorized as high-input (or irrigated) farming. 
+- Agricultural trade statistics in FAOSTAT might give you an idea about the production system shares. If most crop production is exported, a large share of the farmers can probably be categorized as high-input (or irrigated) farming. 
 
 - As mentioned above, the [AQUASTAT](http://www.fao.org/nr/water/aquastat/data/query/index.html?lang=en) database provides information on irrigated area shares.
 

@@ -28,7 +28,7 @@
 #'- simu:
 #'- simu_r:
 #'- ha:
-#'- fs:
+#'- ps:
 #'- ci:
 #'- price:
 #'- dm2fm:
@@ -56,7 +56,7 @@ load_data <- function(data, param, local = FALSE, mess = TRUE){
                         "ia_max", "ia_rank",
                         "grid", "gia", "gmia",
                         "pop", "acc", "urb",
-                        "ha", "fs", "ci",
+                        "ha", "ps", "ci",
                         "price",
                         "dm2fm", "crop2globiom", "faostat2crop", "crop", "gaez2crop",
                         "gaez_replace",
@@ -280,11 +280,11 @@ load_data <- function(data, param, local = FALSE, mess = TRUE){
     }
   }
 
-  if("fs" %in% data) {
+  if("ps" %in% data) {
     file <- file.path(param$model_path,
-                      glue::glue("processed_data/agricultural_statistics/fs_adm_{param$year}_{param$iso3c}.csv"))
+                      glue::glue("processed_data/agricultural_statistics/ps_adm_{param$year}_{param$iso3c}.csv"))
     if(file.exists(file)) {
-      load_list[["fs"]] <- suppressMessages(readr::read_csv(file))
+      load_list[["ps"]] <- suppressMessages(readr::read_csv(file))
     } else {
       stop(paste(basename(file), "does not exist"),
            call. = FALSE)

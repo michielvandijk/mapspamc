@@ -15,7 +15,7 @@ ha_df_raw <- read_csv(file.path(param$db_path,
 
 # production systems shares
 fs_df_raw <- read_csv(file.path(param$db_path,
-  glue("subnational_statistics/{param$iso3c}/farming_system_shares_{param$year}_{param$iso3c}.csv")))
+  glue("subnational_statistics/{param$iso3c}/production_system_shares_{param$year}_{param$iso3c}.csv")))
 
 # Cropping intensity
 ci_df_raw <- read_csv(file.path(param$db_path,
@@ -163,9 +163,9 @@ ha_df <- ha_df %>%
   arrange(adm_code, adm_code, adm_level)
 
 
-# PROCESS production system SHARES ------------------------------------------------------------
+# PROCESS PRODUCTION SYSTEM SHARES ------------------------------------------------------------
 # ci does not need to be adjusted
-fs_df <- fs_df_raw
+ps_df <- ps_df_raw
 
 # PROCESS CROPPING INTENSITY ---------------------------------------------------------------
 # ci does not need to be adjusted
@@ -176,7 +176,7 @@ ci_df <- ci_df_raw
 # Save the ha, fs and ci csv files in the Processed_data/agricultural_statistics folder
 # Note that they have to be saved in this folder using the names below so do not change this!
 write_csv(ha_df, file.path(param$model_path, glue("processed_data/agricultural_statistics/ha_adm_{param$year}_{param$iso3c}.csv")))
-write_csv(fs_df, file.path(param$model_path, glue("processed_data/agricultural_statistics/fs_adm_{param$year}_{param$iso3c}.csv")))
+write_csv(ps_df, file.path(param$model_path, glue("processed_data/agricultural_statistics/ps_adm_{param$year}_{param$iso3c}.csv")))
 write_csv(ci_df, file.path(param$model_path, glue("processed_data/agricultural_statistics/ci_adm_{param$year}_{param$iso3c}.csv")))
 
 
