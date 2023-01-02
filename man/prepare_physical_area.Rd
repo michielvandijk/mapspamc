@@ -15,16 +15,16 @@ model.}
 }
 \description{
 To estimate the physical crop area for each production system harvest area (ha)
-statistics are combined with information on farmings system shares (fs) and
+statistics are combined with information on production system shares (ps) and
 cropping intensity (ci). Depending on how the model is solved, the physical
 area statistics are saved at the administrative unit level 0 (country) level
 (model solve level 0) or at the level 1 administrative unit level (model solve
 level 1).
 }
 \details{
-\code{prepare_physical_area} combines ha, fs and ci statistics and saves two files in csv
+\code{prepare_physical_area} combines ha, ps and ci statistics and saves two files in csv
 format: (1) physical area (pa) and (2) physical area broken down by farming
-systems (pa_fs). Results are saved in the subfolders that are located in the
+systems (pa_ps). Results are saved in the subfolders that are located in the
 the \code{processed_data/intermediate} folder.
 }
 \examples{

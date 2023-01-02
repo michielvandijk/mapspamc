@@ -21,7 +21,7 @@ To support the preparation of the subnational statistics,
 \code{create_statistics_template()} can create three types of data templates:
 \itemize{
 \item ha for harvest area statistics
-\item fs for production system share
+\item ps for production system share
 \item ci for cropping intensity.
 }
 }
@@ -32,7 +32,7 @@ levels are nested. This file needs to be created first by running
 
 The dimensions of the templates are determined by the parameters set by means of
 \code{mapspamc_par()}. The ha template dimension is determined by adm level parameter,
-while the dimensions of the fs and cs templates (which are identical) are determined
+while the dimensions of the ps and cs templates (which are identical) are determined
 by the solve level parameter.
 }
 \examples{

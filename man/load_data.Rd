@@ -51,7 +51,7 @@ The following inputs are allowed:
 \item simu:
 \item simu_r:
 \item ha:
-\item fs:
+\item ps:
 \item ci:
 \item price:
 \item dm2fm:
