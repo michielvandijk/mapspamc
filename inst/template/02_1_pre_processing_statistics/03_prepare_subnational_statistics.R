@@ -38,6 +38,10 @@ write_csv(fs_stat, file.path(param$db_path,
   glue("subnational_statistics/{param$iso3c}/production_system_shares_template_{param$year}_{param$iso3c}.csv")))
 
 
+# CLEAN UP -------------------------------------------------------------------------------
+rm(ha_stat, ps_stat, ci_stat)
+
+
 # NOTE -----------------------------------------------------------------------------------
 # As you probably created a lot of objects in he R memory, we recommend to
 # restart R at this moment and start fresh. This can be done easily in RStudio by

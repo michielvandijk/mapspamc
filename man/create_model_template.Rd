@@ -7,7 +7,7 @@
 create_model_template(template_path = NULL)
 }
 \arguments{
-\item{template_path}{folder where template scripts will be copied.}
+\item{template_path}{folder where template scripts will be copied.If NULL the current working directory will be used.}
 }
 \description{
 \code{create_model_template} creates a folder structure with template R scripts to implement the various

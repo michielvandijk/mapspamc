@@ -22,8 +22,7 @@ data, processed data and parameters for \code{mapspamc}.
 mappings and processed_data (including subfolders). It copies a number of cvs files
 into the mappings folder, which contain several data tables that are needed to run
 the model and, if needed can be adjusted by the user. If set by the user a mapspamc_db
-folder (including subfolders) is created in  \code{db_path}. Otherwise the folder is
-created in the model folder.
+folder is created in  \code{db_path}. Otherwise the folder is created in the main model folder.
 }
 \examples{
 \dontrun{

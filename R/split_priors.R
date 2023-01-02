@@ -4,7 +4,7 @@ split_priors <- function(ac, param){
   cat("\n=> Prepare priors for", ac)
 
   # Load data
-  load_intermediate_data(c("pa", "pa_fs", "cl_harm", "ia_harm", "bs", "py"), ac, param, local = TRUE, mess = FALSE)
+  load_intermediate_data(c("pa", "pa_ps", "cl_harm", "ia_harm", "bs", "py"), ac, param, local = TRUE, mess = FALSE)
   load_data(c("adm_list", "adm_map", "adm_map_r", "grid", "pop", "acc", "urb", "price", "dm2fm"), param, local = TRUE, mess = FALSE)
 
   ############### PREPARATIONS ###############
@@ -12,14 +12,14 @@ split_priors <- function(ac, param){
   pa <- pa %>%
     tidyr::pivot_longer(-c(adm_code, adm_name, adm_level), names_to = "crop", values_to = "pa")
 
-  pa_fs <- pa_fs %>%
+  pa_ps <- pa_ps %>%
     dplyr::filter(adm_code == ac) %>%
     tidyr::pivot_longer(-c(adm_code, adm_name, adm_level, system), names_to = "crop", values_to = "pa") %>%
     dplyr::filter(!is.na(pa) & pa != 0) %>%
     dplyr::mutate(crop_system = paste(crop, system , sep = "_"))
 
   priors_base <- expand.grid(gridID = unique(cl_harm$gridID),
-                             crop_system = unique(pa_fs$crop_system), stringsAsFactors = F) %>%
+                             crop_system = unique(pa_ps$crop_system), stringsAsFactors = F) %>%
     tidyr::separate(crop_system, into = c("crop", "system"), sep = "_", remove = F)
 
   # create gridID list
@@ -80,7 +80,7 @@ split_priors <- function(ac, param){
   # We also remove adm where crops are not allocated by definition because stat indicates zero ha.
 
   # crop_s
-  crop_s <- unique(pa_fs$crop[pa_fs$system == "S"])
+  crop_s <- unique(pa_ps$crop[pa_ps$system == "S"])
 
   # select adm without crop_s
   adm_code_crop_s <- dplyr::bind_rows(
@@ -113,7 +113,7 @@ split_priors <- function(ac, param){
       crop_system = paste(crop, system, sep = "_")) %>%
     dplyr::ungroup() %>%
     dplyr::select(gridID, crop_system, rur_pop_share) %>%
-    dplyr::left_join(pa_fs, by = "crop_system") %>%
+    dplyr::left_join(pa_ps, by = "crop_system") %>%
     dplyr::mutate(prior = rur_pop_share*pa) %>%
     dplyr::select(gridID, crop_system, prior)
 
@@ -125,7 +125,7 @@ split_priors <- function(ac, param){
   # Will be allocated first
 
   # crop_l
-  crop_l <- unique(pa_fs$crop[pa_fs$system == "L"])
+  crop_l <- unique(pa_ps$crop[pa_ps$system == "L"])
 
   # prior table.  We use suitability only for L
   prior_l <- priors_base %>%
@@ -147,7 +147,7 @@ split_priors <- function(ac, param){
   # We rerank the combined rev and accessibility prior again to it has the same scale as l and i priors.
 
   # crop_h
-  crop_h <- unique(pa_fs$crop[pa_fs$system == "H"])
+  crop_h <- unique(pa_ps$crop[pa_ps$system == "H"])
 
   # prior table.  We use geometric average of revenue and accessibility
   prior_h <- priors_base %>%
@@ -167,7 +167,7 @@ split_priors <- function(ac, param){
   # We use the same prior as for H
   # We select only ir gridID
   # crop_i
-  crop_i <- unique(pa_fs$crop[pa_fs$system == "I"])
+  crop_i <- unique(pa_ps$crop[pa_ps$system == "I"])
 
   # prior table.  We use geometric average of revenue and accessibility
   prior_i <- priors_base %>%

@@ -1,6 +1,6 @@
 # FUnction to load intermediate output in line with solve level for further processing
 load_intermediate_data <- function(fl, adm_code, param, local = TRUE, mess = TRUE){
-  fl <- match.arg(fl, c("cl", "ia", "ir", "pa", "pa_fs",
+  fl <- match.arg(fl, c("cl", "ia", "ir", "pa", "pa_ps",
                         "cl_harm", "ia_harm", "bs", "py",
                         "rps", "priors", "scores"),
                   several.ok = TRUE)
@@ -40,11 +40,11 @@ load_intermediate_data <- function(fl, adm_code, param, local = TRUE, mess = TRU
     }
   }
 
-  if("pa_fs" %in% fl) {
+  if("pa_ps" %in% fl) {
     file <- file.path(param$model_path,
-      glue::glue("processed_data/intermediate_output/{model_folder}/{adm_code}/pa_fs_{param$year}_{adm_code}_{param$iso3c}.csv"))
+      glue::glue("processed_data/intermediate_output/{model_folder}/{adm_code}/pa_ps_{param$year}_{adm_code}_{param$iso3c}.csv"))
     if(file.exists(file)) {
-      load_list[["pa_fs"]] <- suppressMessages(readr::read_csv(file))
+      load_list[["pa_ps"]] <- suppressMessages(readr::read_csv(file))
     } else {
       stop(paste(basename(file), "does not exist"),
            call. = FALSE)

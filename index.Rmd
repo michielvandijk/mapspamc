@@ -26,7 +26,7 @@ knitr::opts_chunk$set(
 
 The aim of the [`mapspamc` R package](https://github.com/michielvandijk/mapspamc) is to facilitate the creation of country level crop distribution maps. The model builds on the global version of the [Spatial Production Allocation model (SPAM)](http://www.mapspam.info) [@You2006; @You2009; @You2014a; @Yu2020], which uses a cross-entropy optimization approach to 'pixelate' national and subnational crop statistics on a spatial grid at a resolution of 5 arc minutes (~ 10 x 10 km). `mapspamc` provides the necessary infrastructure to run SPAM at the country level and makes it possible to incorporate national sources of information and potentially create maps at a higher resolution of 30 arc seconds (~ 1 x 1 km)[@VanDijk2022b].
 
-The articles in the Background section provide general information on approaches to create [crop distribution maps](articles/crop_distribution_maps.html), the [model](articles/model_description.html), [input data](articles/input_data.html) and an [appendix](articles/appendix.html) with additional information on specific topics.
+The articles in the Background section provide general information on approaches to create [crop distribution maps](articles/crop_distribution_maps.html), the [model](articles/model_description.html), [input data](articles/input_data.html), [country examples](articles/country_examples.html) and an [appendix](articles/appendix.html) with additional information on specific topics.
 
 
 ## Installation
@@ -41,7 +41,7 @@ Running `mapspamc` requires the installation of several other pieces of software
 
 ## Preparation
 
-It takes some preparation before the crop distribution maps can be generated. Most important and probably most time consuming is the collection of input data. `mapspamc` requires a large variety of input data, which can be grouped under three headers: (1) national crop statistics, (2) data to construct the priors/fitness scores and (3) data to determine the spatial constraints. The availability of data strongly affects the structure of the model, how it will be solved and how long it takes to solve. We highly recommend to start collecting input data before running the model. The articles in the Preparation section give an overview of the [input data](articles/input_data.html) that are required by the package and show were to download several [country examples](articles/country_examples.html).
+It takes some preparation before the crop distribution maps can be generated. Most important and probably most time consuming is the collection of input data. `mapspamc` requires a large variety of input data, which can be grouped under three headers: (1) national crop statistics, (2) data to construct the priors/fitness scores and (3) data to determine the spatial constraints. The availability of data strongly affects the structure of the model, how it will be solved and how long it takes to solve. We highly recommend to start collecting input data before running the model. The articles in the Background section give an overview of the [input data](articles/input_data.html) that are required by the package and show were to download several [country examples](articles/country_examples.html).
 
 
 ## Run `mapspamc`

@@ -2,7 +2,7 @@
 prepare_results_adm_level <- function(ac, param) {
 
   cat("\n=> Extract results for", ac)
-  load_data(c("grid", "adm_map_r"), param, mess = F)
+  load_data(c("grid", "adm_map_r"), param, local = TRUE, mess = F)
 
   model_folder <- create_model_folder(param)
   results_file <- file.path(param$model_path,

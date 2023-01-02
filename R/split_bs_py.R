@@ -17,15 +17,15 @@ split_bs_py <- function(var, ac, param){
     cat("\n", basename(f), "already exists. Not created again.")
   } else {
     cat(paste0("\n", ac))
-    load_intermediate_data(c("cl_harm", "pa_fs"), ac, param, local = TRUE, mess = FALSE)
+    load_intermediate_data(c("cl_harm", "pa_ps"), ac, param, local = TRUE, mess = FALSE)
     load_data(c("grid"), param, local = TRUE, mess = FALSE)
 
     # Select relevant crop_system combinations to process
-    pa_fs <- pa_fs %>%
+    pa_ps <- pa_ps %>%
       tidyr::pivot_longer(-c(adm_code, adm_name, adm_level, system), names_to = "crop", values_to = "pa") %>%
       filter(pa != 0)
 
-    cs_list <- pa_fs %>%
+    cs_list <- pa_ps %>%
       dplyr::group_by(crop, system) %>%
       dplyr::filter(!all(pa %in% c(0, NA))) %>%
       dplyr::mutate(crop_system = paste(crop, system , sep = "_")) %>%

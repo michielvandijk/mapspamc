@@ -27,7 +27,8 @@ The articles in the Background section provide general information on
 approaches to create [crop distribution
 maps](articles/crop_distribution_maps.html), the
 [model](articles/model_description.html), [input
-data](articles/input_data.html) and an
+data](articles/input_data.html), [country
+examples](articles/country_examples.html) and an
 [appendix](articles/appendix.html) with additional information on
 specific topics.
 
@@ -54,9 +55,9 @@ statistics, (2) data to construct the priors/fitness scores and (3) data
 to determine the spatial constraints. The availability of data strongly
 affects the structure of the model, how it will be solved and how long
 it takes to solve. We highly recommend to start collecting input data
-before running the model. The articles in the Preparation section give
-an overview of the [input data](articles/input_data.html) that are
-required by the package and show were to download several [country
+before running the model. The articles in the Background section give an
+overview of the [input data](articles/input_data.html) that are required
+by the package and show were to download several [country
 examples](articles/country_examples.html).
 
 ## Run `mapspamc`

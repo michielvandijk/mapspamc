@@ -17,7 +17,7 @@
 #'the RStudio project. Note that `create_model_template()` only copies files if they do not exist
 #'yet. In this way, the user cannot accidently replace already modified scripts.
 #'
-#'@param template_path folder where template scripts will be copied.
+#'@param template_path folder where template scripts will be copied.If NULL the current working directory will be used.
 #'
 #'@examples
 #'\dontrun{
@@ -26,7 +26,10 @@
 #'
 #'@export
 create_model_template <- function(template_path = NULL) {
-  if(is.null(template_path)) stop("The template_path is not set")
+  if(is.null(template_path)){
+    cat("The current working directory will be used: ", getwd())
+    template_path <- getwd()
+    }
   if(!dir.exists(template_path))
       dir.create(template_path, showWarnings = TRUE, recursive = TRUE)
 

@@ -4,7 +4,7 @@ split_scores <- function(ac, param){
   cat("\nPrepare scores for", ac)
 
   # Load data
-  load_intermediate_data(c("pa", "pa_fs", "cl_harm", "ia_harm", "bs", "py"), ac, param, local = TRUE, mess = FALSE)
+  load_intermediate_data(c("pa", "pa_ps", "cl_harm", "ia_harm", "bs", "py"), ac, param, local = TRUE, mess = FALSE)
   load_data(c("adm_list", "adm_map", "adm_map_r", "grid", "pop", "acc", "urb", "price", "dm2fm"), param, local = TRUE, mess = FALSE)
 
   ############### PREPARATIONS ###############
@@ -12,14 +12,14 @@ split_scores <- function(ac, param){
   pa <- pa %>%
     tidyr::pivot_longer(-c(adm_code, adm_name, adm_level), names_to = "crop", values_to = "pa")
 
-  pa_fs <- pa_fs %>%
+  pa_ps <- pa_ps %>%
     dplyr::filter(adm_code == ac) %>%
     tidyr::pivot_longer(-c(adm_code, adm_name, adm_level, system), names_to = "crop", values_to = "pa") %>%
     dplyr::filter(!is.na(pa) & pa != 0) %>%
     dplyr::mutate(crop_system = paste(crop, system , sep = "_"))
 
   scores_base <- expand.grid(gridID = unique(cl_harm$gridID),
-                             crop_system = unique(pa_fs$crop_system), stringsAsFactors = F) %>%
+                             crop_system = unique(pa_ps$crop_system), stringsAsFactors = F) %>%
     tidyr::separate(crop_system, into = c("crop", "system"), sep = "_", remove = F)
 
   # create gridID list
@@ -81,7 +81,7 @@ split_scores <- function(ac, param){
   # We also remove adm where crops are not allocated by definition because stat indicates zero ha.
 
   # crop_s
-  crop_s <- unique(pa_fs$crop[pa_fs$system == "S"])
+  crop_s <- unique(pa_ps$crop[pa_ps$system == "S"])
 
   # select adm without crop_s
   adm_code_crop_s <- dplyr::bind_rows(
@@ -123,7 +123,7 @@ split_scores <- function(ac, param){
   # Will be allocated first
 
   # crop_l
-  crop_l <- unique(pa_fs$crop[pa_fs$system == "L"])
+  crop_l <- unique(pa_ps$crop[pa_ps$system == "L"])
 
   # Score table.  We use suitability only for L
   score_l <- scores_base %>%
@@ -146,7 +146,7 @@ split_scores <- function(ac, param){
   # We rerank the combined rev and accessibility score again to it has the same scale as l and i scores.
 
   # crop_h
-  crop_h <- unique(pa_fs$crop[pa_fs$system == "H"])
+  crop_h <- unique(pa_ps$crop[pa_ps$system == "H"])
 
   # Score table.  We use geometric average of rev and accessibility
   score_h <- scores_base %>%
@@ -168,7 +168,7 @@ split_scores <- function(ac, param){
   # We use the same score as for H
   # We select only ir gridID
   # crop_i
-  crop_i <- unique(pa_fs$crop[pa_fs$system == "I"])
+  crop_i <- unique(pa_ps$crop[pa_ps$system == "I"])
 
   # Score table.  We use geometric average of suitability and accessibility
   score_i <- scores_base %>%

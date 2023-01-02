@@ -4,11 +4,11 @@ harmonize_ia <- function(df, adm_code, param, ia_slackp, ia_slackn) {
   # Rank irrigated grid cells till sum of cl under irrigation is at least equal
   # to the area of irrigated crops. We add the maximum of ia_slackn * grid_sell area or
   # a percentage of the total irrigated area (ia_slackp) to ensure this.
-  load_intermediate_data(c("pa_fs", "ia"), adm_code, param, local = T, mess = F)
-  pa_fs <- pa_fs %>%
+  load_intermediate_data(c("pa_ps", "ia"), adm_code, param, local = T, mess = F)
+  pa_ps <- pa_ps %>%
     tidyr::gather(crop, pa, -adm_code, -adm_name, -adm_level, -system)
 
-  pa_I_tot <- sum(pa_fs$pa[pa_fs$system == "I"], na.rm = T)
+  pa_I_tot <- sum(pa_ps$pa[pa_ps$system == "I"], na.rm = T)
   slack <- max(ia_slackn * max(df$grid_size), pa_I_tot*ia_slackp)
   pa_I_tot = pa_I_tot + slack
 

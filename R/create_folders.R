@@ -10,8 +10,7 @@
 #'mappings and processed_data (including subfolders). It copies a number of cvs files
 #'into the mappings folder, which contain several data tables that are needed to run
 #'the model and, if needed can be adjusted by the user. If set by the user a mapspamc_db
-#'folder (including subfolders) is created in  `db_path`. Otherwise the folder is
-#'created in the model folder.
+#'folder is created in  `db_path`. Otherwise the folder is created in the main model folder.
 #'
 #'@param param Object of type `mapspamc_par` that bundles all `mapspamc` parameters,
 #'  including core model folders, alpha-3 country code, year, spatial
@@ -29,17 +28,6 @@ create_folders <- function(param = NULL) {
     stopifnot(inherits(param, "mapspamc_par"))
     if(!dir.exists(param$db_path))
         dir.create(param$db_path, showWarnings = TRUE, recursive = TRUE)
-    db_folders <- c("adm", "aquastat", "copernicus", "esacci", "esri",
-                    "faostat", "gaez", "gia", "glad", "gmia", "grump", "sasam",
-                    "subnational_statistics", "synergy_cropland_table",
-                    "travel_time", "worldpop")
-    purrr::walk(db_folders, function(x) {
-      if(!dir.exists(file.path(param$db_path, paste0("", x)))) {
-        dir.create(file.path(param$db_path, paste0("", x)),
-                   showWarnings = TRUE,
-                   recursive = TRUE)
-      }
-    })
 
     if(!dir.exists(file.path(param$model_path, "processed_data")))
         dir.create(file.path(param$model_path, paste0("processed_data")),

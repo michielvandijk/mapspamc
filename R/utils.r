@@ -40,7 +40,7 @@ compare_adm <- function(df, level_1, level_2, out = F){
     if(out) return(out_df)
 }
 
-# Function to compare adm totals for two different data.frames, i.e. pa and pa_fs
+# Function to compare adm totals for two different data.frames, i.e. pa and pa_ps
 compare_adm2 <- function(df1, df2, level, out = F){
     tot1 <- sum_adm_total(df1, level) %>%
         na.omit

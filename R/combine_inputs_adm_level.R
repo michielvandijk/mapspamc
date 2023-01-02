@@ -3,14 +3,14 @@ combine_inputs_adm_level <- function(ac, param){
 
   cat("\nPrepare model input for", ac)
   # Load data
-  load_intermediate_data(c("pa_fs", "cl_harm", "ia_harm", "bs", "py", "rps", "priors", "scores"),
+  load_intermediate_data(c("pa_ps", "cl_harm", "ia_harm", "bs", "py", "rps", "priors", "scores"),
                          ac, param, local = TRUE, mess = FALSE)
   load_data(c("adm_list"), param, local = TRUE, mess = FALSE)
 
 
   ############### PREPARATIONS ###############
   # Put statistics in long format and filter out crops where pa = 0
-  pa_fs <- pa_fs %>%
+  pa_ps <- pa_ps %>%
     tidyr::pivot_longer(-c(adm_code, adm_name, adm_level, system), names_to = "crop", values_to = "pa") %>%
     dplyr::filter(pa != 0)
 
@@ -65,7 +65,7 @@ combine_inputs_adm_level <- function(ac, param){
 
 
   # crop_area(j): Total area per crop system (j)
-  crop_area <- pa_fs %>%
+  crop_area <- pa_ps %>%
     dplyr::filter(adm_code == ac) %>%
     dplyr::mutate(crop_system = paste(crop, system, sep = "_")) %>%
     dplyr::ungroup() %>%
@@ -83,7 +83,7 @@ combine_inputs_adm_level <- function(ac, param){
 
 
   # ir_crop(j): Total irrigated area per crop system (j)
-  ir_crop <- pa_fs %>%
+  ir_crop <- pa_ps %>%
     dplyr::filter(adm_code == ac) %>%
     dplyr::filter(system == "I") %>%
     dplyr::mutate(crop_system = paste(crop, system, sep = "_")) %>%
@@ -122,7 +122,7 @@ combine_inputs_adm_level <- function(ac, param){
 
 
   # Crops system combinations (j)
-  crop_system_s <- pa_fs %>%
+  crop_system_s <- pa_ps %>%
     dplyr::mutate(crop_system = paste(crop, system, sep = "_")) %>%
     dplyr::filter(adm_code == ac) %>%
     dplyr::ungroup() %>%
@@ -140,7 +140,7 @@ combine_inputs_adm_level <- function(ac, param){
   crop_s_gdx <- set_gdx(crop_s, c("crop"), "s", "Crops")
 
   # Subsistence system
-  s_system_s <- pa_fs %>%
+  s_system_s <- pa_ps %>%
     dplyr::mutate(crop_system = paste(crop, system, sep = "_")) %>%
     dplyr::filter(adm_code == ac, system == "S") %>%
     dplyr::ungroup() %>%
@@ -162,7 +162,7 @@ combine_inputs_adm_level <- function(ac, param){
 
 
   # Crops with corresponding crop system combinations (s,j)
-  crop_crop_system_s <- pa_fs %>%
+  crop_crop_system_s <- pa_ps %>%
     dplyr::mutate(crop_system = paste(crop, system, sep = "_")) %>%
     dplyr::filter(adm_code == ac) %>%
     dplyr::ungroup() %>%
