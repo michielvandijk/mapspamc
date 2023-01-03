@@ -163,6 +163,7 @@ Overlay of grid and acc shows that the extent is the same BUT actual selected ce
 - 
 
 
+
 # To do
 update 04_synergy_cropland for now using SASAM product
 compare_processed statistics
