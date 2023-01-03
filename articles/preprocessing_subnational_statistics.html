@@ -339,7 +339,7 @@ data in the statistics need to be set to <code>NA</code> for
 <span><span class="va">stat</span> <span class="op">&lt;-</span> <span class="va">stat</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">orig2crop</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">crop</span>, <span class="va">adm_code</span>, <span class="va">adm_name</span>, <span class="va">adm_level</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">summarize</span><span class="op">(</span>value_ha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">value_ha</span>, na.rm <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">summarize</span><span class="op">(</span>value_ha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">value_ha</span>, na.rm <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -371,7 +371,7 @@ when putting the data in the wide format.</p>
 <code class="sourceCode R"><span><span class="co"># Put in preferred mapspam format, adding -999 for missing values</span></span>
 <span><span class="va">stat_mapspam</span> <span class="op">&lt;-</span> <span class="va">stat</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">pivot_wider</span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">crop</span>, value_from <span class="op">=</span> <span class="va">value_ha</span>, values_fill <span class="op">=</span> <span class="op">-</span><span class="fl">999</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">arrange</span><span class="op">(</span><span class="va">adm_code</span>, <span class="va">adm_code</span>, <span class="va">adm_level</span><span class="op">)</span> </span></code></pre></div>
+<span>  <span class="fu">arrange</span><span class="op">(</span><span class="va">adm_code</span>, <span class="va">adm_code</span>, <span class="va">adm_level</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="data-consistency">Data consistency<a class="anchor" aria-label="anchor" href="#data-consistency"></a>
@@ -454,20 +454,23 @@ so the total is equal to the FAOSTAT figures.</p>
 <span>    <span class="va">fao</span> <span class="op">%&gt;%</span></span>
 <span>      <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">crop</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">crop_add</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>      <span class="fu">mutate</span><span class="op">(</span></span>
-<span>        fips <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ha_df</span><span class="op">$</span><span class="va">adm_code</span><span class="op">[</span><span class="va">ha_df</span><span class="op">$</span><span class="va">adm_level</span><span class="op">==</span><span class="fl">0</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>        fips <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ha_df</span><span class="op">$</span><span class="va">adm_code</span><span class="op">[</span><span class="va">ha_df</span><span class="op">$</span><span class="va">adm_level</span> <span class="op">==</span> <span class="fl">0</span><span class="op">]</span><span class="op">)</span>,</span>
 <span>        adm_level <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>        adm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ha_df</span><span class="op">$</span><span class="va">adm_name</span><span class="op">[</span><span class="va">ha_df</span><span class="op">$</span><span class="va">adm_level</span><span class="op">==</span><span class="fl">0</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>        adm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ha_df</span><span class="op">$</span><span class="va">adm_name</span><span class="op">[</span><span class="va">ha_df</span><span class="op">$</span><span class="va">adm_level</span> <span class="op">==</span> <span class="fl">0</span><span class="op">]</span><span class="op">)</span></span>
+<span>      <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Calculate scaling factor</span></span>
-<span><span class="va">fao_stat_sf</span> <span class="op">&lt;-</span><span class="fu">bind_rows</span><span class="op">(</span></span>
+<span><span class="va">fao_stat_sf</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span></span>
 <span>  <span class="va">fao</span> <span class="op">%&gt;%</span></span>
 <span>    <span class="fu">mutate</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"fao"</span><span class="op">)</span>,</span>
 <span>  <span class="va">ha_df</span> <span class="op">%&gt;%</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">adm_level</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>    <span class="fu">mutate</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"ha_df"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">mutate</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"ha_df"</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">crop</span>, <span class="va">source</span>, <span class="va">ha</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">spread</span><span class="op">(</span><span class="va">source</span>, <span class="va">ha</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>sf <span class="op">=</span> <span class="va">fao</span><span class="op">/</span><span class="va">ha_df</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>sf <span class="op">=</span> <span class="va">fao</span> <span class="op">/</span> <span class="va">ha_df</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">crop</span>, <span class="va">sf</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># rescale ha_df</span></span>

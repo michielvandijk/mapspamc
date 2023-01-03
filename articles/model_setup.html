@@ -289,7 +289,7 @@ documentation of most functions.</p>
 <span><span class="co"># Note that R uses forward slashes even in Windows!!</span></span>
 <span><span class="va">model_path</span> <span class="op">&lt;-</span> <span class="st">"c:/temp/mapspamc_mwi"</span></span>
 <span></span>
-<span><span class="co"># Creates a database folder with the name mapspamc_db in c:/temp. </span></span>
+<span><span class="co"># Creates a database folder with the name mapspamc_db in c:/temp.</span></span>
 <span><span class="va">db_path</span> <span class="op">&lt;-</span> <span class="st">"c:/temp"</span></span>
 <span></span>
 <span><span class="co"># Sets the location of the version of GAMS that will be used to solve the model</span></span>
@@ -305,7 +305,8 @@ documentation of most functions.</p>
 <span>  res <span class="op">=</span> <span class="st">"5min"</span>,</span>
 <span>  adm_level <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>  solve_level <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  model <span class="op">=</span> <span class="st">"min_entropy"</span><span class="op">)</span></span>
+<span>  model <span class="op">=</span> <span class="st">"min_entropy"</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Show parameters</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">param</span><span class="op">)</span></span>
@@ -370,7 +371,7 @@ that it is consistent with all the other spatial data.</p>
 <span><span class="va">iso3c_shp</span> <span class="op">&lt;-</span> <span class="st">"adm_2010_MWI.shp"</span></span>
 <span></span>
 <span><span class="co"># load shapefile (not needed below as adm_map_raw is stored inside the mapspamc package)</span></span>
-<span><span class="co">#adm_map_raw &lt;- read_sf(file.path(param$db_path, glue("adm/{param$iso3c}/{iso3c_shp}")))</span></span>
+<span><span class="co"># adm_map_raw &lt;- read_sf(file.path(param$db_path, glue("adm/{param$iso3c}/{iso3c_shp}")))</span></span>
 <span></span>
 <span><span class="co"># plot</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">mapspamc</span><span class="fu">::</span><span class="va">adm_map_raw</span><span class="op">$</span><span class="va">geometry</span><span class="op">)</span></span></code></pre></div>
@@ -430,13 +431,15 @@ you can simply give each polygon the same name (e.g. ADM_A_B) and code
 <span><span class="va">adm_map</span> <span class="op">&lt;-</span> <span class="va">adm_map</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">adm0_name</span>, <span class="va">adm0_code</span>, <span class="va">adm1_name</span>, <span class="va">adm1_code</span>, <span class="va">adm2_name</span>, <span class="va">adm2_code</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Union separate polygons that belong to the same adm    </span></span>
+<span><span class="co"># Union separate polygons that belong to the same adm</span></span>
 <span><span class="va">adm_map</span> <span class="op">&lt;-</span> <span class="va">adm_map</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">adm0_name</span>, <span class="va">adm0_code</span>, <span class="va">adm1_name</span>, <span class="va">adm1_code</span>, <span class="va">adm2_name</span>, <span class="va">adm2_code</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">summarize</span><span class="op">(</span>.groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>adm0_name <span class="op">=</span> <span class="va">param</span><span class="op">$</span><span class="va">country</span>,</span>
-<span>         adm0_code <span class="op">=</span> <span class="va">param</span><span class="op">$</span><span class="va">iso3c</span><span class="op">)</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span></span>
+<span>    adm0_name <span class="op">=</span> <span class="va">param</span><span class="op">$</span><span class="va">country</span>,</span>
+<span>    adm0_code <span class="op">=</span> <span class="va">param</span><span class="op">$</span><span class="va">iso3c</span></span>
+<span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Check names</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">adm_map</span><span class="op">)</span></span>
@@ -470,7 +473,7 @@ the statistics. The script below shows how to remove them. It there is
 no reason to remove polygons, simply delete the lines of script in the
 template.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Set names of ADMs that need to be removed from the polygon. </span></span>
+<code class="sourceCode R"><span><span class="co"># Set names of ADMs that need to be removed from the polygon.</span></span>
 <span><span class="va">adm1_to_remove</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Area under National Administration"</span><span class="op">)</span></span>
 <span><span class="va">adm2_to_remove</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Likoma"</span><span class="op">)</span></span>
 <span></span>
