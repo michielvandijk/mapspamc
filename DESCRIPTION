@@ -15,7 +15,7 @@ Description: The aim of the mapspamc R package is to facilitate the
     of SPAM (You et al., 2006; You et al., 2009 et al.; You et al., 2014
     and Yu et al., 2020), which used a cross-entropy optimization approach
     to 'pixelate' national and subnational crop statistics on a spatial grid
-    at a resolution of 5 arcmin. mapspamc was specifically developed to support
+    at a resolution of 5 arc minutes. mapspamc was specifically developed to support
     country level analysis and makes it possible to incorporate national
     sources of information and create maps at a higher resolution of 30
     arc seconds. 
