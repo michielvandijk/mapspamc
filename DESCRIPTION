@@ -1,6 +1,6 @@
 Package: mapspamc
 Title: An R package to create crop distribution maps
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: c( 
     person(given = "Michiel",
            family = "Van Dijk",
@@ -52,5 +52,5 @@ Depends:
 URL: https://github.com/michielvandijk/mapspamc,
     https://michielvandijk.github.io/mapspamc/
 BugReports: https://github.com/michielvandijk/mapspamc/issues
-Remotes:  
+Remotes: 
     GAMS-dev/gdxrrw/gdxrrw/
