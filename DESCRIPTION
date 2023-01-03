@@ -41,7 +41,6 @@ Imports:
     exactextractr,
     leafsync,
     terra,
-    gdxrrw (>= 1.0.10)
 Suggests: 
     kableExtra,
     rmarkdown,
