@@ -13,7 +13,8 @@ bibliography: bib/mapspamc.bib
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>")
+  comment = "#>"
+)
 
 # Code not displayed but needed for showing examples
 library(mapspamc)
@@ -78,7 +79,7 @@ library("mapspamc")
 # Note that R uses forward slashes even in Windows!!
 model_path <- "c:/temp/mapspamc_mwi"
 
-# Creates a database folder with the name mapspamc_db in c:/temp. 
+# Creates a database folder with the name mapspamc_db in c:/temp.
 db_path <- "c:/temp"
 
 # Sets the location of the version of GAMS that will be used to solve the model
@@ -94,7 +95,8 @@ param <- mapspamc_par(
   res = "5min",
   adm_level = 2,
   solve_level = 0,
-  model = "min_entropy")
+  model = "min_entropy"
+)
 
 # Show parameters
 print(param)
@@ -122,7 +124,7 @@ Before the shapefile can be processed the user needs to load the file in R by se
 iso3c_shp <- "adm_2010_MWI.shp"
 
 # load shapefile (not needed below as adm_map_raw is stored inside the mapspamc package)
-#adm_map_raw <- read_sf(file.path(param$db_path, glue("adm/{param$iso3c}/{iso3c_shp}")))
+# adm_map_raw <- read_sf(file.path(param$db_path, glue("adm/{param$iso3c}/{iso3c_shp}")))
 
 # plot
 plot(mapspamc::adm_map_raw$geometry)
@@ -159,13 +161,15 @@ names(adm_map)[names(adm_map) == adm2_code_orig] <- "adm2_code"
 adm_map <- adm_map %>%
   dplyr::select(adm0_name, adm0_code, adm1_name, adm1_code, adm2_name, adm2_code)
 
-# Union separate polygons that belong to the same adm    
+# Union separate polygons that belong to the same adm
 adm_map <- adm_map %>%
   group_by(adm0_name, adm0_code, adm1_name, adm1_code, adm2_name, adm2_code) %>%
   summarize(.groups = "drop") %>%
   ungroup() %>%
-  mutate(adm0_name = param$country,
-         adm0_code = param$iso3c)
+  mutate(
+    adm0_name = param$country,
+    adm0_code = param$iso3c
+  )
 
 # Check names
 head(adm_map)
@@ -175,7 +179,7 @@ names(adm_map)
 Polygons of administrative units where no crops can or should be allocated must be removed. If this is not done, and in the rare case when the area statistics are larger than the cropland exent, the model might still allocate crops into these regions. The Malawi shapefile includes two of such regions. One is the Area under National Administration, which is the part of Lake Malawi that belongs to Malawi, and Likoma, several small islands in lake Malawi that are not covered by the statistics. The script below shows how to remove them. It there is no reason to remove polygons, simply delete the lines of script in the template. 
 
 ```{r eval = TRUE}
-# Set names of ADMs that need to be removed from the polygon. 
+# Set names of ADMs that need to be removed from the polygon.
 adm1_to_remove <- c("Area under National Administration")
 adm2_to_remove <- c("Likoma")
 

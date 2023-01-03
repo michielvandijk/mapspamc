@@ -26,7 +26,7 @@ The code below illustrates the use of `align_raster()` to clip the Malawi data f
 ```{r, eval = FALSE}
 input <- file.path(param$db_path, glue("worldpop/ppp_{param$year}_1km_Aggregated.tif"))
 
-if(param$res == "30sec") {
+if (param$res == "30sec") {
   temp_path <- file.path(param$model_path, glue("processed_data/maps/population/{param$res}"))
   dir.create(temp_path, showWarnings = FALSE, recursive = TRUE)
 
@@ -34,14 +34,14 @@ if(param$res == "30sec") {
   plot(output)
 }
 
-if(param$res == "5min") {
+if (param$res == "5min") {
   temp_path <- file.path(param$model_path, glue("processed_data/maps/population/{param$res}"))
   dir.create(temp_path, showWarnings = FALSE, recursive = TRUE)
 
   output <- align_raster(input, grid, adm_map, method = "average")
 
   # Multiply average population with 100
-  output <- output*100
+  output <- output * 100
   plot(output)
 }
 ```

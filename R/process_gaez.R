@@ -1,12 +1,11 @@
 # Process gaez
 process_gaez <- function(f, var, lookup, ac, param) {
-
   # Prepare
   load_intermediate_data(c("cl_harm"), ac, param, local = TRUE, mess = FALSE)
   load_data(c("grid"), param, local = TRUE, mess = FALSE)
 
   crp_sys <- basename(f)
-  crp_sys <- unlist(lapply(strsplit(crp_sys, "_"), function(x) paste(x[1], x[2], sep="_")))
+  crp_sys <- unlist(lapply(strsplit(crp_sys, "_"), function(x) paste(x[1], x[2], sep = "_")))
   crp <- strsplit(crp_sys, split = "_")[[1]][1]
   sys <- strsplit(crp_sys, split = "_")[[1]][2]
   cat("\n=> Processing", var, crp_sys)
@@ -42,13 +41,13 @@ process_gaez <- function(f, var, lookup, ac, param) {
       dplyr::mutate(value = ifelse(is.na(value) | value < 0, 0, value))
 
     # Break out of loop if all values are non-zero
-    if(!all(df$value == 0)) {
+    if (!all(df$value == 0)) {
       break
-      }
+    }
 
     # Break out of loop if all values are still zero but there is no replacement crop
     # anymore in the list.
-    if(is.na(target_rc)) {
+    if (is.na(target_rc)) {
       no_rc <- TRUE
       break
     }
@@ -62,13 +61,15 @@ process_gaez <- function(f, var, lookup, ac, param) {
 
   # Create log
   model_folder <- create_model_folder(param)
-  log_file = file(file.path(param$model_path,
-    glue::glue("processed_data/intermediate_output/{model_folder}/{ac}/log_{param$res}_{param$year}_{ac}_{param$iso3c}.log")))
-  capture.output(file = log_file, append = TRUE, split = T,{
+  log_file <- file(file.path(
+    param$model_path,
+    glue::glue("processed_data/intermediate_output/{model_folder}/{ac}/log_{param$res}_{param$year}_{ac}_{param$iso3c}.log")
+  ))
+  capture.output(file = log_file, append = TRUE, split = T, {
     if (no_rc) {
       cat("\nThere is no replacement crop for: ", var, " ", crp_sys, ". All values are zero.", sep = "")
     } else {
-      if(crp_sys != crp_sys_rep) {
+      if (crp_sys != crp_sys_rep) {
         cat("\nAll values for ", var, " ", crp_sys, " are zero, replaced by: ", crp_sys_rep, sep = "")
       }
     }
@@ -76,4 +77,3 @@ process_gaez <- function(f, var, lookup, ac, param) {
 
   return(df)
 }
-

@@ -53,14 +53,13 @@ spamdif <- read_excel("tables_chart/tables.xlsx", sheet = "tab_spam_comparison")
 
 spamdif %>%
   dplyr::select(item, SPAM, mapspamc) %>%
-  kable(.,booktabs = TRUE, linesep = "", caption = "Differences between `mapspamc` and SPAM. SPAM refers to the latest version, which was used to generate SPAM2010 [@Yu2020]") %>%
-  kable_styling(latex_options =c("hold_position"), font_size = 9) %>%
+  kable(., booktabs = TRUE, linesep = "", caption = "Differences between `mapspamc` and SPAM. SPAM refers to the latest version, which was used to generate SPAM2010 [@Yu2020]") %>%
+  kable_styling(latex_options = c("hold_position"), font_size = 9) %>%
   pack_rows("Allocation algorithm", 1, 4) %>%
   pack_rows("Calculation of priors", 5, 8) %>%
   pack_rows("Data", 9, 14)
 # %>%
 #    column_spec(c(1,2,3),width = c("4cm", "5cm", "5cm"))
-
 ```
 
 ## List of `mapspamc` crops
@@ -75,7 +74,7 @@ spamdif <- read_excel("tables_chart/tables.xlsx", sheet = "tab_crop_list")
 
 spamdif %>%
   dplyr::select(number, name, group) %>%
-  kable(.,booktabs = TRUE, linesep = "", caption = "List of `mapspamc` crops")
+  kable(., booktabs = TRUE, linesep = "", caption = "List of `mapspamc` crops")
 ```
 
 

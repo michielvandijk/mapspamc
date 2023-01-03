@@ -1,10 +1,11 @@
 # Function to combine all model input per adm_level
-combine_inputs_adm_level <- function(ac, param){
-
+combine_inputs_adm_level <- function(ac, param) {
   cat("\nPrepare model input for", ac)
   # Load data
   load_intermediate_data(c("pa_ps", "cl_harm", "ia_harm", "bs", "py", "rps", "priors", "scores"),
-                         ac, param, local = TRUE, mess = FALSE)
+    ac, param,
+    local = TRUE, mess = FALSE
+  )
   load_data(c("adm_list"), param, local = TRUE, mess = FALSE)
 
 
@@ -29,7 +30,7 @@ combine_inputs_adm_level <- function(ac, param){
   # These are set to zero
 
   adm_art_raw <- adm_art_raw %>%
-    dplyr::rename(pa = {{pa_rn}}) %>%
+    dplyr::rename(pa = {{ pa_rn }}) %>%
     dplyr::mutate(pa = ifelse(dplyr::near(pa, 0), 0, pa))
   # Put statistics in long format and filter out crops where pa = 0
   # These crops create artificial adms, which created conflicts.
@@ -39,14 +40,16 @@ combine_inputs_adm_level <- function(ac, param){
   #   dplyr::filter(pa != 0)
 
   adm_art <- adm_art_raw %>%
-    dplyr::select(-{{ac_rn}}) %>%
-    unique %>%
-    dplyr::rename(adm_code = {{ac_art_rn}})
+    dplyr::select(-{{ ac_rn }}) %>%
+    unique() %>%
+    dplyr::rename(adm_code = {{ ac_art_rn }})
 
   # artificial adm mapping
   adm_art_map <- adm_art_raw %>%
-    dplyr::rename(adm_code_art = {{ac_art_rn}},
-                  adm_code = {{ac_rn}}) %>%
+    dplyr::rename(
+      adm_code_art = {{ ac_art_rn }},
+      adm_code = {{ ac_rn }}
+    ) %>%
     dplyr::select(adm_code_art, adm_code) %>%
     unique()
 
@@ -98,14 +101,14 @@ combine_inputs_adm_level <- function(ac, param){
 
   priors_gdx <- para_gdx(priors, c("gridID", "crop_system"), "priors", "prior per grid cell and crop_system")
 
-    # score(i,j): Score per grid cell and crop_system
+  # score(i,j): Score per grid cell and crop_system
   scores <- scores %>%
     dplyr::select(gridID, crop_system, score)
 
   scores_gdx <- para_gdx(scores, c("gridID", "crop_system"), "scores", "score per grid cell and crop_system")
 
   # rur_pop_s(i,j): Rural population share per grid cell
-  if(nrow(rps)==0){
+  if (nrow(rps) == 0) {
     rps_gdx <- numeric(0)
   } else {
     rps_gdx <- para_gdx(rps, c("gridID", "crop_system"), "rur_pop_share", "Rural population shares")
@@ -147,7 +150,7 @@ combine_inputs_adm_level <- function(ac, param){
     dplyr::select(crop_system) %>%
     unique()
 
-  if(nrow(s_system_s)==0){
+  if (nrow(s_system_s) == 0) {
     s_system_s_gdx <- numeric(0)
   } else {
     s_system_s_gdx <- set_gdx(s_system_s, c("crop_system"), "j_s", "Subsistence system combinations")
@@ -169,7 +172,7 @@ combine_inputs_adm_level <- function(ac, param){
     dplyr::select(crop, crop_system) %>%
     unique()
 
-  crop_crop_system_s_gdx <- set_gdx(crop_crop_system_s, c("crop","crop_system"), "n", "Crops with corresponding system combinations")
+  crop_crop_system_s_gdx <- set_gdx(crop_crop_system_s, c("crop", "crop_system"), "n", "Crops with corresponding system combinations")
 
   # Administrative regions with corresponding grid cells (k,i)
   adm_grid_s <- cl_harm %>%
@@ -177,7 +180,7 @@ combine_inputs_adm_level <- function(ac, param){
     dplyr::select(adm_code = adm_code_art, gridID) %>%
     unique()
 
-  adm_grid_s_gdx <- set_gdx(adm_grid_s, c("adm_code","gridID"), "l", "adm with corresponding grid cells")
+  adm_grid_s_gdx <- set_gdx(adm_grid_s, c("adm_code", "gridID"), "l", "adm with corresponding grid cells")
 
 
   # Administrative regions with corresponding crops (k,s)
@@ -195,24 +198,29 @@ combine_inputs_adm_level <- function(ac, param){
 
 
   ############### REMOVE ALL EMPTY GDX COMPONENTS AS THEY ARE NOT ALLOWED ###############
-  gdx_input <- list(cl_gdx, adm_area_gdx, ir_crop_gdx, ir_area_gdx, crop_area_gdx,
+  gdx_input <- list(
+    cl_gdx, adm_area_gdx, ir_crop_gdx, ir_area_gdx, crop_area_gdx,
     s_system_s_gdx,
     scores_gdx, priors_gdx, grid_s_gdx, crop_system_s_gdx, adm_s_gdx, crop_crop_system_s_gdx,
     adm_grid_s_gdx, adm_crop_s_gdx, crop_s_gdx,
     rps_gdx,
-    scalef_gdx)
+    scalef_gdx
+  )
 
   gdx_input <- gdx_input[lapply(gdx_input, length) > 0]
 
   ############### SAVE ###############
   model_folder <- create_model_folder(param)
-  temp_path <- file.path(param$model_path,
-                         glue::glue("processed_data/intermediate_output/{model_folder}/{ac}"))
+  temp_path <- file.path(
+    param$model_path,
+    glue::glue("processed_data/intermediate_output/{model_folder}/{ac}")
+  )
   dir.create(temp_path, recursive = T, showWarnings = F)
 
   # Prepare GDX
-  gdxrrw::wgdx(file.path(temp_path, glue::glue("input_{param$res}_{param$year}_{ac}_{param$iso3c}.gdx")),
-               gdx_input)
+  gdxrrw::wgdx(
+    file.path(temp_path, glue::glue("input_{param$res}_{param$year}_{ac}_{param$iso3c}.gdx")),
+    gdx_input
+  )
   cat("\n=> GDX model input file saved for ", ac)
 }
-

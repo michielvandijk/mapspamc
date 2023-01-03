@@ -20,18 +20,24 @@ In order to combine the GMIA and GIA data, we processed both maps so that they p
 
 
 ```{r eval = FALSE}
-ir_df <-   as.data.frame(c(grid, grid_size, gmia, gia), xy = TRUE) %>%
+ir_df <- as.data.frame(c(grid, grid_size, gmia, gia), xy = TRUE) %>%
   filter(!is.na(gridID)) %>%
   dplyr::select(-x, -y) %>%
-  mutate(gia = ifelse(gia < 0.01, 0, gia),
-         gmia = ifelse(gmia < 0.01, 0, gmia))
+  mutate(
+    gia = ifelse(gia < 0.01, 0, gia),
+    gmia = ifelse(gmia < 0.01, 0, gmia)
+  )
 
 ir_df <- ir_df %>%
-  dplyr::mutate(ir_max = pmax(gmia, gia, na.rm = T),
-                ir_rank = cut(ir_max, labels = c(1:10), breaks = seq(0, 1, 0.1),
-                              include.lowest = T),
-                ir_rank = dense_rank(desc(ir_rank)),
-                ir_max = ir_max * grid_size) %>%
+  dplyr::mutate(
+    ir_max = pmax(gmia, gia, na.rm = T),
+    ir_rank = cut(ir_max,
+      labels = c(1:10), breaks = seq(0, 1, 0.1),
+      include.lowest = T
+    ),
+    ir_rank = dense_rank(desc(ir_rank)),
+    ir_max = ir_max * grid_size
+  ) %>%
   filter(!is.na(ir_rank), ir_max > 0) %>%
   dplyr::select(-gmia, -gia, -grid_size)
 ```

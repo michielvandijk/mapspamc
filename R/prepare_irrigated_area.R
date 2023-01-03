@@ -1,24 +1,24 @@
-#'@title
-#'Prepares synergy irrigated area extent
+#' @title
+#' Prepares synergy irrigated area extent
 #'
-#'@description
-#'Combines all elements of the synergy irrigated area extent (maximum irrigated area and rank),
-#'with information on the location of the subnational units and fixes potential inconsistencies
-#'(e.g. irrigated area larger than grid cell size).
+#' @description
+#' Combines all elements of the synergy irrigated area extent (maximum irrigated area and rank),
+#' with information on the location of the subnational units and fixes potential inconsistencies
+#' (e.g. irrigated area larger than grid cell size).
 #'
-#'@inheritParams create_folders
+#' @inheritParams create_folders
 #'
-#'@examples
-#'\dontrun{
-#'prepare_irrigated_area(param)
-#'}
+#' @examples
+#' \dontrun{
+#' prepare_irrigated_area(param)
+#' }
 #'
-#'@export
+#' @export
 
-prepare_irrigated_area <- function(param){
+prepare_irrigated_area <- function(param) {
   stopifnot(inherits(param, "mapspamc_par"))
   cat("\n\n=> Prepare irrigated area")
-  load_data(c("adm_map_r", "adm_list","ia_max", "ia_rank", "grid"), param, local = TRUE, mess = FALSE)
+  load_data(c("adm_map_r", "adm_list", "ia_max", "ia_rank", "grid"), param, local = TRUE, mess = FALSE)
 
   # Grid size
   grid_size <- calc_grid_size(grid)
@@ -38,7 +38,7 @@ prepare_irrigated_area <- function(param){
     dplyr::filter(!is.na(ia_rank))
 
   # Set adm_level
-  if(param$solve_level == 0) {
+  if (param$solve_level == 0) {
     adm_code_list <- unique(adm_list$adm0_code)
   } else {
     adm_code_list <- unique(adm_list$adm1_code)
@@ -47,4 +47,3 @@ prepare_irrigated_area <- function(param){
   # Save in line with solve level
   purrr::walk(adm_code_list, split_spatial, df, "ia", adm_map_r, param)
 }
-

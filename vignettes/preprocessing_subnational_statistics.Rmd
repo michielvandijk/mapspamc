@@ -27,13 +27,15 @@ library(magrittr)
 model_path <- "C:/Users/dijk158/Dropbox/mapspamc_mwi"
 
 # Set `mapspamc` parameters
-param <- mapspamc_par(model_path = model_path,
- iso3c = "MWI",
- year = 2010,
- res = "5min",
- adm_level = 1,
- solve_level = 0,
- model = "max_score")
+param <- mapspamc_par(
+  model_path = model_path,
+  iso3c = "MWI",
+  year = 2010,
+  res = "5min",
+  adm_level = 1,
+  solve_level = 0,
+  model = "max_score"
+)
 ```
 
 Subnational statistics on harvested area are a key input for `mapspamc`. Before they can be used the data need to be put in the right format, made consistent and aggregated (or split) to the crops and production systems that are used by `mapspamc`. Unfortunately, the level of detail (e.g. number of crops covered at the level 1 and 2 administrative unit) and quality (do lower levels of subnational data add up to higher levels?) of these statistics may differ considerably across countries. Cleaning, harmonizing and preparing the crop statistics is probably the most time consuming and difficult part of running `mapspamc`. 
@@ -102,7 +104,7 @@ The script below illustrates how to aggregate the raw statistics to the `mapspam
 stat <- stat %>%
   left_join(orig2crop) %>%
   group_by(crop, adm_code, adm_name, adm_level) %>%
-  summarize(value_ha = sum(value_ha, na.rm = F)) %>% 
+  summarize(value_ha = sum(value_ha, na.rm = F)) %>%
   ungroup()
 ```
 
@@ -117,7 +119,7 @@ In case data on harvested area is missing for a certain administrative unit, you
 # Put in preferred mapspam format, adding -999 for missing values
 stat_mapspam <- stat %>%
   pivot_wider(names_from = crop, value_from = value_ha, values_fill = -999) %>%
-  arrange(adm_code, adm_code, adm_level) 
+  arrange(adm_code, adm_code, adm_level)
 ```
 
 ### Data consistency
@@ -160,20 +162,23 @@ ha_df <- ha_df %>%
     fao %>%
       filter(crop %in% crop_add) %>%
       mutate(
-        fips = unique(ha_df$adm_code[ha_df$adm_level==0]),
+        fips = unique(ha_df$adm_code[ha_df$adm_level == 0]),
         adm_level = 0,
-        adm = unique(ha_df$adm_name[ha_df$adm_level==0])))
+        adm = unique(ha_df$adm_name[ha_df$adm_level == 0])
+      )
+  )
 
 # Calculate scaling factor
-fao_stat_sf <-bind_rows(
+fao_stat_sf <- bind_rows(
   fao %>%
     mutate(source = "fao"),
   ha_df %>%
     filter(adm_level == 0) %>%
-    mutate(source = "ha_df")) %>%
+    mutate(source = "ha_df")
+) %>%
   dplyr::select(crop, source, ha) %>%
   spread(source, ha) %>%
-  mutate(sf = fao/ha_df) %>%
+  mutate(sf = fao / ha_df) %>%
   dplyr::select(crop, sf)
 
 # rescale ha_df

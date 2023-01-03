@@ -25,7 +25,7 @@ library(kableExtra)
 sources <- read_excel("tables_chart/tables.xlsx", sheet = "tab_data_sources")
 
 sources %>%
-  kable(.,booktabs = TRUE, linesep = "", caption = "Data products in the mapspamc database")
+  kable(., booktabs = TRUE, linesep = "", caption = "Data products in the mapspamc database")
 ```
 
 

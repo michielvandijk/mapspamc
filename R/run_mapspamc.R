@@ -1,6 +1,6 @@
-#'@title Runs crop allocation algorithm at the set administrative unit level
+#' @title Runs crop allocation algorithm at the set administrative unit level
 #'
-#'@description Run the selected model (`min_entropy` or `max_score`) in GAMS
+#' @description Run the selected model (`min_entropy` or `max_score`) in GAMS
 #'  with a pre-selected solver (see details). If `model_sel = 1`, the model is
 #'  run for each individual administrative unit at level 1. If `model_sel = 0`
 #'  the model is run only once for the total country. Selecting `out = TRUE`
@@ -12,7 +12,7 @@
 #'  large, the computer might run out of memory and an error message will be
 #'  printed in the log file.
 #'
-#'@details Depending on the license, GAMS is installed with several solvers. For
+#' @details Depending on the license, GAMS is installed with several solvers. For
 #'  each type of problem a default solver is pre-selected. If `solver =
 #'  "default"`, the GAMS default options for linear (`max_score`) and non-linear
 #'  (`min_entropy`) problems are used to solve the models. To find out which
@@ -37,32 +37,28 @@
 #'  Interested users might want to take a look and, if necessary, modify the
 #'  code and run it directly in GAMS, separately from the `mapspamc` package.
 #'
-#'@inheritParams create_folders
-#'@param solver Name of the GAMS solver. If set to `"default"`, the GAMS default
+#' @inheritParams create_folders
+#' @param solver Name of the GAMS solver. If set to `"default"`, the GAMS default
 #'  solvers are selected, see details for more information.
-#'@param out logical; should the GAMS model log be send to the screen as output?
+#' @param out logical; should the GAMS model log be send to the screen as output?
 #'
-#'@examples
-#'\dontrun{
-#'run_mapspamc(param, solver = "IPOPT", out = FALSE)
-#'}
+#' @examples
+#' \dontrun{
+#' run_mapspamc(param, solver = "IPOPT", out = FALSE)
+#' }
 #'
-#'@export
+#' @export
 run_mapspamc <- function(param, solver = "default", out = TRUE) {
   stopifnot(inherits(param, "mapspamc_par"))
   stopifnot(is.logical(out))
   load_data("adm_list", param, local = TRUE, mess = FALSE)
 
   # Set adm_level
-  if(param$solve_level == 0) {
+  if (param$solve_level == 0) {
     ac <- unique(adm_list$adm0_code)
   } else {
     ac <- unique(adm_list$adm1_code)
   }
 
   purrr::walk(ac, run_gams_adm_level, param, solver = solver, out = out)
-
 }
-
-
-

@@ -32,7 +32,7 @@ library(kableExtra)
 synergy <- read_excel("tables_chart/tables.xlsx", sheet = "tab_synergy_cl")
 
 synergy %>%
-  kable(.,booktabs = TRUE, linesep = "", caption = "Ranking table for 2015 synergy cropland map")
+  kable(., booktabs = TRUE, linesep = "", caption = "Ranking table for 2015 synergy cropland map")
 ```
 
 If the user is interested in creating a more recent synergy cropland map (e.g. for around 2020), we recommend using the following combination of cropland products, which are available in the mapspamc database: ESRI (2020), GLAD (2019), COPERNICUS (2019) and ESACCI (2020), and modify the 2015 ranking table accordingly. Alternatively, and if available, the user could add a national land use product and create a ranking with five different inputs that goes up to 32.

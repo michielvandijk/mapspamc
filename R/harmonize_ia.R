@@ -1,6 +1,5 @@
 # Function to add irrigation information
 harmonize_ia <- function(df, adm_code, param, ia_slackp, ia_slackn) {
-
   # Rank irrigated grid cells till sum of cl under irrigation is at least equal
   # to the area of irrigated crops. We add the maximum of ia_slackn * grid_sell area or
   # a percentage of the total irrigated area (ia_slackp) to ensure this.
@@ -9,22 +8,24 @@ harmonize_ia <- function(df, adm_code, param, ia_slackp, ia_slackn) {
     tidyr::gather(crop, pa, -adm_code, -adm_name, -adm_level, -system)
 
   pa_I_tot <- sum(pa_ps$pa[pa_ps$system == "I"], na.rm = T)
-  slack <- max(ia_slackn * max(df$grid_size), pa_I_tot*ia_slackp)
-  pa_I_tot = pa_I_tot + slack
+  slack <- max(ia_slackn * max(df$grid_size), pa_I_tot * ia_slackp)
+  pa_I_tot <- pa_I_tot + slack
 
   cl_ia <- df %>%
     dplyr::select(gridID, grid_size, cl, cl_max) %>%
     dplyr::left_join(ia %>%
-                       dplyr::select(gridID, ia_max, ia_rank), by = "gridID") %>%
+      dplyr::select(gridID, ia_max, ia_rank), by = "gridID") %>%
     dplyr::filter(!is.na(ia_rank)) %>%
     dplyr::arrange(ia_rank, desc(cl)) %>%
-    dplyr::mutate(ir_tot = pa_I_tot,
-           ia1 = pmin(cl, ia_max, na.rm = T),
-           ia2 = pmax(cl, ia_max, na.rm = T),
-           ia3 = pmax(cl_max, ia_max, na.rm = T),
-           ia1_cum = cumsum(ia1),
-           ia2_cum = cumsum(ia2),
-           ia3_cum = cumsum(ia3))
+    dplyr::mutate(
+      ir_tot = pa_I_tot,
+      ia1 = pmin(cl, ia_max, na.rm = T),
+      ia2 = pmax(cl, ia_max, na.rm = T),
+      ia3 = pmax(cl_max, ia_max, na.rm = T),
+      ia1_cum = cumsum(ia1),
+      ia2_cum = cumsum(ia2),
+      ia3_cum = cumsum(ia3)
+    )
 
   if (max(cl_ia$ia1_cum) >= pa_I_tot) {
     cat("\nIrrigated area is sufficient")
@@ -44,8 +45,10 @@ harmonize_ia <- function(df, adm_code, param, ia_slackp, ia_slackn) {
           dplyr::filter(ia3_cum <= pa_I_tot) %>%
           dplyr::mutate(ia = ia3)
       } else {
-        cat("\nThere is not enough irrigated area, which will result in slack.",
-            "\nCl_max is assumed to be irrigated")
+        cat(
+          "\nThere is not enough irrigated area, which will result in slack.",
+          "\nCl_max is assumed to be irrigated"
+        )
         cl_ia <- cl_ia %>%
           dplyr::filter(ia3_cum <= pa_I_tot) %>%
           dplyr::mutate(ia = ia3)
@@ -56,9 +59,10 @@ harmonize_ia <- function(df, adm_code, param, ia_slackp, ia_slackn) {
   # Update cl and rank
   df <- df %>%
     dplyr::left_join(cl_ia %>%
-                       dplyr::select(gridID, ia, ia_max), by = "gridID") %>%
-    dplyr::mutate(cl = ifelse(!is.na(ia), ia, cl),
-                  cl_rank = ifelse(!is.na(ia), 0,  cl_rank))
+      dplyr::select(gridID, ia, ia_max), by = "gridID") %>%
+    dplyr::mutate(
+      cl = ifelse(!is.na(ia), ia, cl),
+      cl_rank = ifelse(!is.na(ia), 0, cl_rank)
+    )
   return(df)
 }
-

@@ -1,32 +1,31 @@
-#'@title Creates country grid
+#' @title Creates country grid
 #'
-#'@description
-#'Creates the spatial grid that is used by `mapspamc` to allocate physical area shares
-#'for each crop and system. The border of the country is used as mask to
-#'determine the grid and each grid cell is given a gridID number.
+#' @description
+#' Creates the spatial grid that is used by `mapspamc` to allocate physical area shares
+#' for each crop and system. The border of the country is used as mask to
+#' determine the grid and each grid cell is given a gridID number.
 #'
-#'@details
-#'For technical reasons, gridID values are set before the raster is masked with
-#'the country border, which means they are unique but non consecutive. Note that
-#'grids at a resolution of 30 arcsec can become very large and might make some
-#'time to create. The file is saved in `/processed_data/maps/{resolution}/grid`
+#' @details
+#' For technical reasons, gridID values are set before the raster is masked with
+#' the country border, which means they are unique but non consecutive. Note that
+#' grids at a resolution of 30 arcsec can become very large and might make some
+#' time to create. The file is saved in `/processed_data/maps/{resolution}/grid`
 #'
-#'@inheritParams create_folders
+#' @inheritParams create_folders
 #'
-#'@examples
-#'\dontrun{
-#'create_grid(param)
-#'}
+#' @examples
+#' \dontrun{
+#' create_grid(param)
+#' }
 #'
-#'@export
-create_grid <- function(param = NULL){
-
+#' @export
+create_grid <- function(param = NULL) {
   load_data("adm_map", param, mess = FALSE, local = TRUE)
   stopifnot(inherits(param, "mapspamc_par"))
-  if(param$res == "5min") {
+  if (param$res == "5min") {
     grid_fact <- 12
     cat("\n=> Resolution is", param$res)
-  } else if (param$res == "30sec"){
+  } else if (param$res == "30sec") {
     grid_fact <- 120
     cat("\n=> Resolution is", param$res)
   }
@@ -46,5 +45,6 @@ create_grid <- function(param = NULL){
   temp_path <- file.path(param$model_path, glue::glue("processed_data/maps/grid/{param$res}"))
   dir.create(temp_path, showWarnings = F, recursive = T)
   terra::writeRaster(grid, file.path(temp_path, glue::glue("grid_{param$res}_{param$year}_{param$iso3c}.tif")),
-              overwrite = T)
+    overwrite = T
+  )
 }

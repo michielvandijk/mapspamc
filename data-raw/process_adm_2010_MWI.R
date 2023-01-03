@@ -10,7 +10,7 @@
 # ========================================================================================
 
 # Load pacman for p_load
-if(!require(pacman)) install.packages("pacman")
+if (!require(pacman)) install.packages("pacman")
 library(pacman)
 
 # Load key packages
@@ -24,7 +24,7 @@ p_load(countrycode, sf, usethis)
 db_version <- "v0.0.1"
 
 # Set path
-if(Sys.info()["user"] == "dijk158") {
+if (Sys.info()["user"] == "dijk158") {
   proj_path <- "C:/Users/dijk158/OneDrive - Wageningen University & Research/data/mapspamc_db"
   db_path <- file.path(proj_path, glue("{db_version}"))
 }
@@ -57,4 +57,3 @@ plot(adm$geometry)
 # ========================================================================================
 
 use_data(adm_map_raw)
-
