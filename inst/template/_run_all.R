@@ -39,13 +39,15 @@ source(here::here("02_2_pre_processing_spatial_data/02_select_travel_time.r"))
 source(here::here("02_2_pre_processing_spatial_data/03_select_urban_extent.r"))
 source(here::here("02_2_pre_processing_spatial_data/04_select_worldpop.r"))
 
-# Steps below need to be selected manually.
-#source(here::here("02_3_pre_processing_cropland/select_copernicus.r"))
-#source(here::here("02_3_pre_processing_cropland/select_esacci.r"))
-#source(here::here("02_3_pre_processing_cropland/select_esri.r"))
-#source(here::here("02_3_pre_processing_cropland/select_glad.r"))
+# Steps below need to be selected manually, depending on the year for which a synergy cropland map
+# needs to be created. Make sure to adjust the year in the scripts to select the right maps.
+source(here::here("02_3_pre_processing_cropland/select_copernicus.r"))
+source(here::here("02_3_pre_processing_cropland/select_esacci.r"))
+source(here::here("02_3_pre_processing_cropland/select_esri.r"))
+source(here::here("02_3_pre_processing_cropland/select_modis.r"))
+source(here::here("02_3_pre_processing_cropland/select_glad.r"))
 source(here::here("02_3_pre_processing_cropland/select_sasam.r"))
-#source(here::here("02_3_pre_processing_cropland/create_synergy_cropland_map.r"))
+source(here::here("02_3_pre_processing_cropland/create_synergy_cropland_map.r"))
 
 source(here::here("02_4_pre_processing_irrigated_area/01_select_gia.r"))
 source(here::here("02_4_pre_processing_irrigated_area/02_select_gmia.r"))
