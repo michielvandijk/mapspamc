@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mapspamc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.1</span>
       </span>
     </div>
 
@@ -79,7 +79,7 @@
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Run mapspamc</a>
       <ul class="dropdown-menu" role="menu">
 <li>
-          <a href="../articles/design.html">0. Design and process flow</a>
+          <a href="../articles/design.html">Design and process flow</a>
         </li>
         <li>
           <a href="../articles/model_setup.html">1. Model setup</a>
@@ -103,7 +103,7 @@
           <a href="../articles/run_model.html">4. Run model</a>
         </li>
         <li>
-          <a href="../articles/post_processing.html">5. Post-processing</a>
+          <a href="../articles/postprocessing.html">5. Post-processing</a>
         </li>
         <li>
           <a href="../articles/model_validation.html">6. Model validation</a>
@@ -149,19 +149,415 @@
 
     
     
-<p>A key feature of <code>mapspamc</code> is to allocate the crop statistics to areas identified as cropland on a map - the cropland extent. As described in the section on <a href="inputdata.html">Input data</a>, we use a so-called synergy cropland map to account for the uncertainty in the location of cropland. The synergy cropland map combines different cropland products to construct one map that presents the mean and maximum available crop area per grid cell as well as a ranking that measures the agreement between the various cropland products. A ranking of 1 means that all sources agree there is cropland in a grid cell, while higher rankings signals more disagreement. The highest ranking depends on the number of cropland products that are compared.</p>
-<p><span class="citation">(<strong>TODO?</strong>)</span> add illustration how to make a synergy cropland map. To create the cropland extent, we followed a comparable approach as was used to construct the global synergy cropland map for 2010. Only three global products with cropland information were available for 2000: GLC2000, ESA-CCI-LC and GlobeLand30. We combined the three maps to create the median, maximum and score maps for 2010. We considered the following order of increasing importance when creating the scoring table: (1) ESA-CCI-LC, (2) GlobeLand30, (3) 2010 cropland extent and (4) GLC2000. The ESA-CGI-LC receives the highest score because it is the only product with consistent information for both 2000 and 2010. GlobeLand30 is second because it has a much higher resolution (30x30 meter) than GLC2000 1x1 kilometer), which can be considered somewhat outdated. Grid cells that show cropland in all four layers receive the highest score.</p>
-<p>For 2010, we can make use of SASAM, the global synergy map that was prepared for SPAM2010 <span class="citation">(Lu et al. 2020)</span>.</p>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-Lu2020" class="csl-entry">
-Lu, Miao, Wenbin Wu, Liangzhi You, Linda See, Steffen Fritz, Qiangyi Yu, Yanbing Wei, Di Chen, Peng Yang, and Bing Xue. 2020. <span>“<span class="nocase">A cultivated planet in 2010: 1. the global synergy cropland map</span>.”</span> <em>Earth System Science Data</em>. <a href="https://doi.org/doi.org/10.5194/essd-2020-12" class="external-link">https://doi.org/doi.org/10.5194/essd-2020-12</a>.
-</div>
+<p>A key feature of <code>mapspamc</code> is to allocate the crop
+statistics to areas identified as cropland on a map - the cropland
+extent. As described in the section on <a href="inputdata.html">Input
+data</a>, we use a so-called synergy cropland map to account for the
+uncertainty in the location of cropland. The synergy cropland map
+combines different cropland products to construct a single cropland map
+that presents the mean and maximum available crop area per grid cell as
+well as a ranking that measures the agreement between the various
+cropland products for each grid cell. A ranking of 1 means that all
+sources agree there is cropland in a grid cell, while a higher rank
+signals disagreement.</p>
+<p>The package contains a script to create a synergy cropland map using
+global land use products that are included in the maspamc database:
+COPERNICUS, ESACCI, ESRI, GLAD and MODIS (see the database documentation
+for details). The script is located in the
+<code>02_3_pre_processing_cropland</code> folder. Before the synergy
+cropland map can be created the user needs to clip target country from
+the global datasets and ensure the maps have the right format
+(i.e. desired extent, resolution and coordinate reference system).
+Scripts to do this for each global land use product are provided in the
+same folder.</p>
+<p>For the Malawi example, we can make use of an existing global synergy
+cropland map (SASAM) that was prepared for SPAM2010, which can be
+selected by running <code>select_sasam.R</code>. For the Ethiopia
+country example we used information from four datasets that represent
+global cropland around the period 2015: GLAD, COPERNICUS, ESACCI and
+MODIS. The user needs to run <code>select_*.R</code> first to process
+the global maps. The script <code>create_synergy_cropland_map.R</code>
+combines the selected land use maps and creates a country synergy
+cropland map.</p>
+<p>In order to create the synergy map, a ranking table is needed that
+indicates, which (combination) of the inputs maps is regarded as the
+most reliable. In case all the global cropland maps signal a grid cell
+contains cropland the ranking is 1 (highest and most reliable). For all
+other combinations the user needs to prepare a ranking table. The table
+for Ethiopia is added to the mapspamc
+database(<code>synergy_cropland_table/synergy_cropland_table_2015.xlsx</code>)
+and contains a ranking from 1 to 16 (see below) because it is based on
+four maps. For Ethiopia, we decided on the following order of increasing
+importance when creating the scoring table: (1) GLAD, (2) COPERNICUS,
+(3) ESACCI and (4) MODIS. GLAD receives the highest score because it has
+the highest original resolution (30 meter) and is therefore assumed to
+be the most accurate, followed by COPERNICUS (100 meter), ESACCI (300
+meter) and MODIS (500 meter).</p>
+<table class="table">
+<caption>
+Ranking table for 2015 synergy cropland map
+</caption>
+<thead><tr>
+<th style="text-align:right;">
+agreement
+</th>
+<th style="text-align:right;">
+rank
+</th>
+<th style="text-align:right;">
+glad
+</th>
+<th style="text-align:right;">
+copernicus
+</th>
+<th style="text-align:right;">
+esacci
+</th>
+<th style="text-align:right;">
+modis
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+<p>If the user is interested in creating a more recent synergy cropland
+map (e.g. for around 2020), we recommend using the following combination
+of cropland products, which are available in the mapspamc database: ESRI
+(2020), GLAD (2019), COPERNICUS (2019) and ESACCI (2020), and modify the
+2015 ranking table accordingly. Alternatively, and if available, the
+user could add a national land use product and create a ranking with
+five different inputs that goes up to 32.</p>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-      </div>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
+</div>
 
 </div>
 
@@ -174,7 +570,7 @@ Lu, Miao, Wenbin Wu, Liangzhi You, Linda See, Steffen Fritz, Qiangyi Yu, Yanbing
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

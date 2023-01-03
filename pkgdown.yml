@@ -1,5 +1,5 @@
-pandoc: 2.14.2
-pkgdown: 2.0.6
+pandoc: 2.19.2
+pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   appendix: appendix.html
@@ -18,7 +18,7 @@ articles:
   preprocessing_spatial_data: preprocessing_spatial_data.html
   preprocessing_subnational_statistics: preprocessing_subnational_statistics.html
   run_model: run_model.html
-last_built: 2022-10-22T23:19Z
+last_built: 2023-01-03T10:39Z
 urls:
   reference: https://michielvandijk.github.io/mapspamc/reference
   article: https://michielvandijk.github.io/mapspamc/articles

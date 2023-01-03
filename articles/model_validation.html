@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mapspamc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.1</span>
       </span>
     </div>
 
@@ -79,7 +79,7 @@
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Run mapspamc</a>
       <ul class="dropdown-menu" role="menu">
 <li>
-          <a href="../articles/design.html">0. Design and process flow</a>
+          <a href="../articles/design.html">Design and process flow</a>
         </li>
         <li>
           <a href="../articles/model_setup.html">1. Model setup</a>
@@ -103,7 +103,7 @@
           <a href="../articles/run_model.html">4. Run model</a>
         </li>
         <li>
-          <a href="../articles/post_processing.html">5. Post-processing</a>
+          <a href="../articles/postprocessing.html">5. Post-processing</a>
         </li>
         <li>
           <a href="../articles/model_validation.html">6. Model validation</a>
@@ -149,10 +149,110 @@
 
     
     
-<div class="section level2">
-<h2 id="model-validation">Model validation<a class="anchor" aria-label="anchor" href="#model-validation"></a>
+<p>Technical validation of a model is important to check whether it is
+reliable and can produce credible results <span class="citation">(Vliet
+et al. 2016)</span>. The most common approach to evaluate a model is to
+compare model outcomes with actual observations. This approach is not
+easy in case of <code>mapspamc</code> as all (subnational) crop
+statistics are used as input by the model. Previous studies have
+compared SPAM output with level 3 administrative unit statistics <span class="citation">(You and Wood 2006)</span> and satellite imagery <span class="citation">(Joglekar, Wood-Sichra, and Pardey 2019)</span> but
+such data is often not available, in particularly for developing
+countries. As an alternative, <span class="citation">Yu et al.
+(2020)</span> proposed an approach in which the model is run with level
+1 administrative unit constraints only (i.e. level 2 subnational
+information is not used as input) after which the results are compared
+with the available level 2 administrative unit statistics. The reasoning
+for this is that if the model is able to adequately predict the location
+of crops using coarse administrative-unit constraints, similar
+performance can be expected when additional fine-grained subnational
+statistics are used to constrain the model.</p>
+<p>The folder <code>06_model_validation</code> contains scripts that
+implement the validation approach used by <span class="citation">Yu et
+al. (2020)</span>. In <code>01_alternative_model_setup.R</code>, the
+parameters are set to solve the model using level 1 subnational
+information only. By default the same parameters are used as set for the
+main model (e.g. <code>min_entropy</code> or <code>max_score</code>,
+<code>year</code> and <code>res</code>). The only difference is that
+<code>adm_level</code> is set to 1. Note that if only level 1
+administrative unit statistics are available, the models will be the
+same and there is no added value in running the validation scripts.</p>
+<p>There is no need for the user to adjust the parameters in
+<code>01_alternative_model_setup.R</code>. This script is sourced when
+implementing <code>02_prepare_and_run_alternative_model.R</code>, which
+runs the alternative model, which is used as benchmark for the
+validation. As the input data is the same as for the main model, all
+data pre-processing steps will be skipped.</p>
+<p>After the alternative model is completed, the user can run
+<code>03_model_validation.R</code>, which compares the results of the
+alternative model with level 2 subnational statistics. In the first part
+of the script the grid-level harvested area results are aggregated to
+derive level 2 administrative unit totals.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Aggregate gridded output to adm level of model specified by param</span></span>
+<span><span class="va">results_alt_ag</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/aggregate_to_adm.html">aggregate_to_adm</a></span><span class="op">(</span><span class="va">param</span>, <span class="va">alt_param</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code></pre></div>
+<p>In the remainder of the script, the model output is compared with the
+subnational crop statistics. The figure below shows the results for the
+Malawi <code>min_entropy</code>. For 14 out 29 crops level 2
+administrative unit statistics are available (but note that for teas and
+sugc, there are only a few observations, which makes statistical
+comparison impossible). The predictions are relatively good for maize
+(R<sup>2</sup>=0.77) and groundnuts (R<sup>2</sup>=0.75), while a poor
+fit was found for rice (R<sup>2</sup>=0.2) and cassava
+(R<sup>2</sup>=0.33). The values for the crops with the best fit are
+comparable to those presented by <span class="citation">Yu et al.
+(2020)</span>, who reported an R<sup>2</sup> of 0.66-0.94 for maize,
+cotton and rice in Brazil.</p>
+<div class="figure" style="text-align: center">
+<img src="tables_chart/mwi_validation1.png" alt="Comparison of level 1 administrative unit constrained model aggregated to level 2 with subnational statistics for the min_entropy model" width="80%"><p class="caption">
+Comparison of level 1 administrative unit constrained model aggregated
+to level 2 with subnational statistics for the min_entropy model
+</p>
+</div>
+<p>Another approach to validate the model is to compare the subnational
+statistics with subnational aggregated results of the main model. There
+should be near perfect correlation between both datasets as the model
+uses the subnational statistics as a constraint to allocate crop area.
+Slight deviations are the result of slack, which is added to the model
+to allow for some flexibility and prevents the model from becoming
+infeasible (see <a href="appendix.html">Appendix</a>).</p>
+<div class="figure" style="text-align: center">
+<img src="tables_chart/mwi_validation2.png" alt="Comparison of level 2 administrative unit constrained model results aggregated to level 2 with subnational statistics for the min_entropy model" width="80%"><p class="caption">
+Comparison of level 2 administrative unit constrained model results
+aggregated to level 2 with subnational statistics for the min_entropy
+model
+</p>
+</div>
+<div class="section level2 unnumbered">
+<h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<p>To add</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Joglekar2019" class="csl-entry">
+Joglekar, Alison K. B., Ulrike Wood-Sichra, and Philip G. Pardey. 2019.
+<span>“<span class="nocase">Pixelating crop production: Consequences of
+methodological choices</span>.”</span> Edited by Krishna Prasad Vadrevu.
+<em>PLOS ONE</em> 14 (2): e0212281. <a href="https://doi.org/10.1371/journal.pone.0212281" class="external-link">https://doi.org/10.1371/journal.pone.0212281</a>.
+</div>
+<div id="ref-VanVliet2016" class="csl-entry">
+Vliet, Jasper van, Arnold K. Bregt, Daniel G. Brown, Hedwig van Delden,
+Scott Heckbert, and Peter H. Verburg. 2016. <span>“<span class="nocase">A review of current calibration and validation practices
+in land-change modeling</span>.”</span> <em>Environmental Modelling
+<span>&amp;</span> Software</em> 82 (August): 174–82. <a href="https://doi.org/10.1016/J.ENVSOFT.2016.04.017" class="external-link">https://doi.org/10.1016/J.ENVSOFT.2016.04.017</a>.
+</div>
+<div id="ref-You2006" class="csl-entry">
+You, Liangzhi, and Stanley Wood. 2006. <span>“<span class="nocase">An
+entropy approach to spatial disaggregation of agricultural
+production</span>.”</span> <em>Agricultural Systems</em> 90 (1): 329–47.
+<a href="https://doi.org/10.1016/j.agsy.2006.01.008" class="external-link">https://doi.org/10.1016/j.agsy.2006.01.008</a>.
+</div>
+<div id="ref-Yu2020" class="csl-entry">
+Yu, Qiangyi, Liangzhi You, Ulrike Wood-Sichra, Yating Ru, Alison K. B.
+Joglekar, Steffen Fritz, Wei Xiong, Miao Lu, Wenbin Wu, and Peng Yang.
+2020. <span>“<span class="nocase">A cultivated planet in 2010 – Part 2:
+The global gridded agricultural-production maps</span>.”</span>
+<em>Earth System Science Data</em> 12 (4): 3545–72. <a href="https://doi.org/10.5194/essd-12-3545-2020" class="external-link">https://doi.org/10.5194/essd-12-3545-2020</a>.
+</div>
+</div>
 </div>
   </div>
 
@@ -173,7 +273,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mapspamc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.1</span>
       </span>
     </div>
 
@@ -79,7 +79,7 @@
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Run mapspamc</a>
       <ul class="dropdown-menu" role="menu">
 <li>
-          <a href="../articles/design.html">0. Design and process flow</a>
+          <a href="../articles/design.html">Design and process flow</a>
         </li>
         <li>
           <a href="../articles/model_setup.html">1. Model setup</a>
@@ -103,7 +103,7 @@
           <a href="../articles/run_model.html">4. Run model</a>
         </li>
         <li>
-          <a href="../articles/post_processing.html">5. Post-processing</a>
+          <a href="../articles/postprocessing.html">5. Post-processing</a>
         </li>
         <li>
           <a href="../articles/model_validation.html">6. Model validation</a>
@@ -149,17 +149,43 @@
 
     
     
-<p>Similar to the synergy cropland map, we combine two global irrigated area maps (GIA and GMIA) to create a synergy irrigated area product. Scripts are provided in the <code>02_4_pre_processing_irrigated_area</code> folder to process the two maps. The <code>03_create_synergy_irrigated_area_map.r</code> script describes the process to create the synergy irrigated area components that are needed by <code>mapspamc</code>. The procedure is slightly different than that used to create a the synergy cropland map because we only have two sources of information, which also have a different resolution. Most problematic is the GMIA, which has a relatively course resolution of 5 arc minutes. This posseses a problem when running the model at 30 arc seconds as we do not know which of 100 30 arc seconds grid cells in the 5 arc minutes cells are irrigated. Another limitation is that even the GIA, the other global irrigated area product, which has a resolution of 30 arc seconds only indicates if there is irrigation in a grid cell. It does not present the actual area of irrigated cropland.</p>
-<p>To address these issues, we use the following procedure to prepare the irrigated area cropland. First, we process the GMIA and GIA so that they present the share of irrigated area within a grid cell, which can be compared at any spatial resolution. Next we stack the GMIA and GIA information and set very small shares (&lt;0.01) to zero. This small values are an anomaly as the are sometimes created when reprojecting the maps to a finer or coarser resolution and can safely be removed.</p>
+<p>Similar to the synergy cropland map, we combine two global irrigated
+area maps (GIA and GMIA) to create a synergy irrigated area product -
+for more information see the mapspamc database documentation. Scripts
+are provided in the <code>02_4_pre_processing_irrigated_area</code>
+folder to process the two maps. The
+<code>03_create_synergy_irrigated_area_map.R</code> script describes the
+process to create the synergy irrigated area components that are needed
+by <code>mapspamc</code>. The procedure is slightly different than that
+used to create a the synergy cropland map because we only have two
+sources of information, which also have different resolutions. Most
+problematic is the GMIA, which has a relatively coarse resolution of 5
+arc minutes. This causes a problem when running the model at 30 arc
+seconds as we do not know which of 100 30 arc seconds grid cells that
+are located in a single 5 arc minutes grid cell, are irrigated. Another
+limitation is that even the GIA, the other global irrigated area
+product, with a resolution of 30 arc seconds, only indicates whether a
+grid cell is irrigated. It does not present information on the actual
+area of cropland that is irrigated.</p>
+<p>In order to combine the GMIA and GIA data, we processed both maps so
+that they present the share of irrigated area within a grid cell
+(<code>select_*.R</code> scripts). To create the synergy cropland map,
+we use the following procedure: (1) We stack the GMIA and GIA
+information and remove grid cells with very small shares (&lt;0.01).
+These small values are sometimes created when reprojecting the maps to a
+finer or coarser resolution and can safely be removed; (2) We take the
+take the maximum of the GMIA and GIA irrigated area share; (3) We add a
+rank from 1 (highest share) to 10 (lowest share) using equal intervals
+of 0.1 irrigated area share; (4) We rank the cells from 1 to 10 and; (5)
+We calculate the irrigated area in ha.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ir_df</span> <span class="op">&lt;-</span>   <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu">rasterToPoints</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/stack.html" class="external-link">stack</a></span><span class="op">(</span><span class="va">grid</span>, <span class="va">grid_size</span>, <span class="va">gmia</span>, <span class="va">gia</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<code class="sourceCode R"><span><span class="va">ir_df</span> <span class="op">&lt;-</span>   <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">grid</span>, <span class="va">grid_size</span>, <span class="va">gmia</span>, <span class="va">gia</span><span class="op">)</span>, xy <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">gridID</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">x</span>, <span class="op">-</span><span class="va">y</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">mutate</span><span class="op">(</span>gia <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">gia</span> <span class="op">&lt;</span> <span class="fl">0.01</span>, <span class="fl">0</span>, <span class="va">gia</span><span class="op">)</span>,</span>
-<span>         gmia <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">gmia</span> <span class="op">&lt;</span> <span class="fl">0.01</span>, <span class="fl">0</span>, <span class="va">gmia</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>To rank the irrigated grid cells, we first take the maximum of the GMIA and GIA irrigated area share, use this to calculate the total grid level irrigated area and then rank the grid cells from 1 to 10 where 1 refers to preferred grid cells. This approach ensures that the grid cells with the largest irrigated area always receive a higher ranking, no matter the spatial resolution. This is important because when the resolution of the model is 5 arc minutes, we prefer GMIA over GIA unless the latter presents a very large irrigated area share when aggregated to the 5 arc minute grid as well. Similarly, when the resolution is 30 arc seconds, we prefer GIA over GMIA. At the same time, the ranking ensures that the potential irrigated area is expanded with the GMIA grid cells that have the highest irrigated area share.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ir_df</span> <span class="op">&lt;-</span> <span class="va">ir_df</span> <span class="op">%&gt;%</span></span>
+<span>         gmia <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">gmia</span> <span class="op">&lt;</span> <span class="fl">0.01</span>, <span class="fl">0</span>, <span class="va">gmia</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ir_df</span> <span class="op">&lt;-</span> <span class="va">ir_df</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>ir_max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">pmax</a></span><span class="op">(</span><span class="va">gmia</span>, <span class="va">gia</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>,</span>
 <span>                ir_rank <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html" class="external-link">cut</a></span><span class="op">(</span><span class="va">ir_max</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.1</span><span class="op">)</span>,</span>
 <span>                              include.lowest <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>,</span>
@@ -167,23 +193,12 @@
 <span>                ir_max <span class="op">=</span> <span class="va">ir_max</span> <span class="op">*</span> <span class="va">grid_size</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">ir_rank</span><span class="op">)</span>, <span class="va">ir_max</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">gmia</span>, <span class="op">-</span><span class="va">gia</span>, <span class="op">-</span><span class="va">grid_size</span><span class="op">)</span></span></code></pre></div>
-<p>In a next step the maps for maximum irrigated area (see code example below) and the ranking are created.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ir_max_map</span> <span class="op">&lt;-</span> <span class="va">ir_df</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">grid_df</span>,<span class="va">.</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">ir_max</span><span class="op">)</span></span>
-<span><span class="va">ir_max_map</span> <span class="op">&lt;-</span> <span class="fu">rasterFromXYZ</span><span class="op">(</span><span class="va">ir_max_map</span><span class="op">)</span></span>
-<span><span class="fu">crs</span><span class="op">(</span><span class="va">ir_max_map</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu">crs</span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">crs</span><span class="op">)</span></span></code></pre></div>
-<p>Finally the maps are saved for further processing. Please do not change the folder location or the names. This will result in errors as the files cannot be loaded by follow up scripts.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">temp_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">mapspamc_path</span>, <span class="fu">glue</span><span class="op">(</span><span class="st">"processed_data/maps/irrigated_area/{param$res}"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="va">temp_path</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">writeRaster</span><span class="op">(</span><span class="va">ir_max_map</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_path</span>,</span>
-<span>                                  <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"ia_max_{param$res}_{param$year}_{param$iso3c}.tif"</span><span class="op">)</span><span class="op">)</span>,overwrite <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">writeRaster</span><span class="op">(</span><span class="va">ir_rank_map</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_path</span>, </span>
-<span>                                  <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"ia_rank_{param$res}_{param$year}_{param$iso3c}.tif"</span><span class="op">)</span><span class="op">)</span>,overwrite <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
+<p>By ranking on irrigated area share, GIA (share is 1) is always
+preferred over GMIA when a resolution of 30 arc seconds is selected by
+the user. In case a resolution of 5 arc minutes is used, GMIA and GIA
+grid cells with a large share of irrigated area receive a higher rank,
+which is also desirable. In the remainder of the script, the maps for
+maximum irrigated area and ranking are created.</p>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -201,7 +216,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">mapspamc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.1</span>
       </span>
     </div>
 
@@ -79,7 +79,7 @@
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Run mapspamc</a>
       <ul class="dropdown-menu" role="menu">
 <li>
-          <a href="articles/design.html">0. Design and process flow</a>
+          <a href="articles/design.html">Design and process flow</a>
         </li>
         <li>
           <a href="articles/model_setup.html">1. Model setup</a>
@@ -103,7 +103,7 @@
           <a href="articles/run_model.html">4. Run model</a>
         </li>
         <li>
-          <a href="articles/post_processing.html">5. Post-processing</a>
+          <a href="articles/postprocessing.html">5. Post-processing</a>
         </li>
         <li>
           <a href="articles/model_validation.html">6. Model validation</a>
@@ -142,8 +142,9 @@
 <div class="page-header"><h1 id="mapspamc">mapspamc<a class="anchor" aria-label="anchor" href="#mapspamc"></a>
 </h1></div>
 <!-- badges: start -->
+
 <p>The aim of the <a href="https://github.com/michielvandijk/mapspamc" class="external-link"><code>mapspamc</code> R package</a> is to facilitate the creation of country level crop distribution maps. The model builds on the global version of the <a href="http://www.mapspam.info" class="external-link">Spatial Production Allocation model (SPAM)</a> (You and Wood 2006; You, Wood, and Wood-Sichra 2009; You et al. 2014; Yu et al. 2020), which uses a cross-entropy optimization approach to ‘pixelate’ national and subnational crop statistics on a spatial grid at a resolution of 5 arc minutes (~ 10 x 10 km). <code>mapspamc</code> provides the necessary infrastructure to run SPAM at the country level and makes it possible to incorporate national sources of information and potentially create maps at a higher resolution of 30 arc seconds (~ 1 x 1 km)(Dijk et al. 2022).</p>
-<p>The articles in the Background section provide general information on approaches to create <a href="articles/crop_distribution_maps.html">crop distribution maps</a>, the <a href="articles/model_description.html">model</a>, <a href="articles/input_data.html">input data</a> and an <a href="articles/appendix.html">appendix</a> with additional information on specific topics.</p>
+<p>The articles in the Background section provide general information on approaches to create <a href="articles/crop_distribution_maps.html">crop distribution maps</a>, the <a href="articles/model_description.html">model</a>, <a href="articles/input_data.html">input data</a>, <a href="articles/country_examples.html">country examples</a> and an <a href="articles/appendix.html">appendix</a> with additional information on specific topics.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -156,7 +157,7 @@
 <div class="section level2">
 <h2 id="preparation">Preparation<a class="anchor" aria-label="anchor" href="#preparation"></a>
 </h2>
-<p>It takes some preparation before the crop distribution maps can be generated. Most important and probably most time consuming is the collection of input data. <code>mapspamc</code> requires a large variety of input data, which can be grouped under three headers: (1) national crop statistics, (2) data to construct the priors/fitness scores and (3) data to determine the spatial constraints. The availability of data strongly affects the structure of the model, how it will be solved and how long it takes to solve. We highly recommend to start collecting input data before running the model. The articles in the Preparation section give an overview of the <a href="articles/input_data.html">input data</a> that are required by the package and show were to download several <a href="articles/country_examples.html">country examples</a>.</p>
+<p>It takes some preparation before the crop distribution maps can be generated. Most important and probably most time consuming is the collection of input data. <code>mapspamc</code> requires a large variety of input data, which can be grouped under three headers: (1) national crop statistics, (2) data to construct the priors/fitness scores and (3) data to determine the spatial constraints. The availability of data strongly affects the structure of the model, how it will be solved and how long it takes to solve. We highly recommend to start collecting input data before running the model. The articles in the Background section give an overview of the <a href="articles/input_data.html">input data</a> that are required by the package and show were to download several <a href="articles/country_examples.html">country examples</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="run-mapspamc">Run <code>mapspamc</code>
@@ -164,6 +165,7 @@
 </h2>
 <p>Running <code>mapspamc</code> can be divided into six major steps which are split into nine smaller steps in the Run mapspamc section.</p>
 <ul>
+<li><a href="articles/design.html">Design and process flow</a></li>
 <li><a href="articles/model_setup.html">1. Model setup</a></li>
 <li><a href="articles/preprocessing_subnational_statistics.html">2.1. Pre-processing - Subnational statistics</a></li>
 <li><a href="articles/preprocessing_spatial_data.html">2.2. Pre-processing - Spatial data</a></li>
@@ -179,11 +181,21 @@
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-VanDijk2022b" class="csl-entry">Dijk, Michiel van, Ulrike Wood-Sichra, Yating Ru, Amanda Palazzo, Petr Havlik, and Liangzhi You. 2022. “<span class="nocase">Generating multi-period crop distribution maps for Southern Africa using a data fusion approach</span>.”</div>
-<div id="ref-You2006" class="csl-entry">You, Liangzhi, and Stanley Wood. 2006. “<span class="nocase">An entropy approach to spatial disaggregation of agricultural production</span>.” <em>Agricultural Systems</em> 90 (1): 329–47. <a href="https://doi.org/10.1016/j.agsy.2006.01.008" class="external-link uri">https://doi.org/10.1016/j.agsy.2006.01.008</a>.</div>
-<div id="ref-You2009" class="csl-entry">You, Liangzhi, Stanley Wood, and Ulrike Wood-Sichra. 2009. “<span class="nocase">Generating plausible crop distribution maps for Sub-Saharan Africa using a spatially disaggregated data fusion and optimization approach</span>.” <em>Agricultural Systems</em> 99 (2): 126–40. <a href="https://doi.org/10.1016/j.agsy.2008.11.003" class="external-link uri">https://doi.org/10.1016/j.agsy.2008.11.003</a>.</div>
-<div id="ref-You2014a" class="csl-entry">You, Liangzhi, Stanley Wood, Ulrike Wood-Sichra, and Wenbin Wu. 2014. “<span class="nocase">Generating global crop distribution maps: From census to grid</span>.” <em>Agricultural Systems</em> 127: 53–60. <a href="https://doi.org/10.1016/j.agsy.2014.01.002" class="external-link uri">https://doi.org/10.1016/j.agsy.2014.01.002</a>.</div>
-<div id="ref-Yu2020" class="csl-entry">Yu, Qiangyi, Liangzhi You, Ulrike Wood-Sichra, Yating Ru, Alison K. B. Joglekar, Steffen Fritz, Wei Xiong, Miao Lu, Wenbin Wu, and Peng Yang. 2020. “<span class="nocase">A cultivated planet in 2010 – Part 2: The global gridded agricultural-production maps</span>.” <em>Earth System Science Data</em> 12 (4): 3545–72. <a href="https://doi.org/10.5194/essd-12-3545-2020" class="external-link uri">https://doi.org/10.5194/essd-12-3545-2020</a>.</div>
+<div id="ref-VanDijk2022b" class="csl-entry">
+Dijk, Michiel van, Ulrike Wood-Sichra, Yating Ru, Amanda Palazzo, Petr Havlik, and Liangzhi You. 2022. “<span class="nocase">Generating multi-period crop distribution maps for Southern Africa using a data fusion approach</span>.”
+</div>
+<div id="ref-You2006" class="csl-entry">
+You, Liangzhi, and Stanley Wood. 2006. “<span class="nocase">An entropy approach to spatial disaggregation of agricultural production</span>.” <em>Agricultural Systems</em> 90 (1): 329–47. <a href="https://doi.org/10.1016/j.agsy.2006.01.008" class="external-link uri">https://doi.org/10.1016/j.agsy.2006.01.008</a>.
+</div>
+<div id="ref-You2009" class="csl-entry">
+You, Liangzhi, Stanley Wood, and Ulrike Wood-Sichra. 2009. “<span class="nocase">Generating plausible crop distribution maps for Sub-Saharan Africa using a spatially disaggregated data fusion and optimization approach</span>.” <em>Agricultural Systems</em> 99 (2): 126–40. <a href="https://doi.org/10.1016/j.agsy.2008.11.003" class="external-link uri">https://doi.org/10.1016/j.agsy.2008.11.003</a>.
+</div>
+<div id="ref-You2014a" class="csl-entry">
+You, Liangzhi, Stanley Wood, Ulrike Wood-Sichra, and Wenbin Wu. 2014. “<span class="nocase">Generating global crop distribution maps: From census to grid</span>.” <em>Agricultural Systems</em> 127: 53–60. <a href="https://doi.org/10.1016/j.agsy.2014.01.002" class="external-link uri">https://doi.org/10.1016/j.agsy.2014.01.002</a>.
+</div>
+<div id="ref-Yu2020" class="csl-entry">
+Yu, Qiangyi, Liangzhi You, Ulrike Wood-Sichra, Yating Ru, Alison K. B. Joglekar, Steffen Fritz, Wei Xiong, Miao Lu, Wenbin Wu, and Peng Yang. 2020. “<span class="nocase">A cultivated planet in 2010 – Part 2: The global gridded agricultural-production maps</span>.” <em>Earth System Science Data</em> 12 (4): 3545–72. <a href="https://doi.org/10.5194/essd-12-3545-2020" class="external-link uri">https://doi.org/10.5194/essd-12-3545-2020</a>.
+</div>
 </div>
 </div>
 </div>
@@ -239,7 +251,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
