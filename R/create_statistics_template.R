@@ -22,8 +22,9 @@
 #'@inheritParams create_folders
 #'
 #'@examples
+#'\dontrun{
 #'create_statistics_template(type = "ha", param)
-#'
+#'}
 #'@export
 create_statistics_template <- function(type, param) {
   stopifnot(inherits(param, "mapspamc_par"))

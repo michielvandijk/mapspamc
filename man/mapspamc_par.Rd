@@ -46,6 +46,9 @@ level and first level administrative unit - default)}
 \item{model}{character that specifies the type of model that is run. Accepted
 inputs are "max_score" and "min_entropy". See package documentation for more
 information.}
+
+\item{gams_path}{character that specifies the location of GAMS (i.e. the folder with
+gamside.exe)}
 }
 \value{
 mapspamc_par object

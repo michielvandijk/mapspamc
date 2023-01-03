@@ -36,6 +36,7 @@ while the dimensions of the ps and cs templates (which are identical) are determ
 by the solve level parameter.
 }
 \examples{
+\dontrun{
 create_statistics_template(type = "ha", param)
-
+}
 }

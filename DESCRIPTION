@@ -33,7 +33,6 @@ Imports:
     countrycode,
     magrittr,
     knitr,
-    readxl,
     sf,
     mapview,
     scales,
@@ -41,8 +40,11 @@ Imports:
     exactextractr,
     leafsync,
     terra,
+    purrr,
+    readr
 Suggests: 
     kableExtra,
+    readxl,
     rmarkdown,
     spelling
 Language: en-US
