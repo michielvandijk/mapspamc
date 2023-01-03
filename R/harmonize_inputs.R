@@ -16,7 +16,9 @@
 #' physical area statistics to irrigated area extent.
 #'
 #' @examples
+#' \dontrun{
 #' harmonize_inputs(param, cl_slackp = 0.05, cl_slackn = 5, ia_slackp = 0.05, ia_slackn = 5)
+#' }
 #'
 #' @importFrom magrittr %>%
 #' @export
