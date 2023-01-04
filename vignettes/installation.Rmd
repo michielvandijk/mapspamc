@@ -80,7 +80,7 @@ When the model is run at the highest resolution of 30 arc seconds, the dimension
 
 ## Input data
 
-To support easy implementation of the package, `mapspamc` is accompanied by a [public data repository](https://doi.org/10.5281/zenodo.7031917) (referred to as the mapspamc_db) that contains a large number of global maps that are publicly available. Detailed information on the database can be found in the [input_data]((articles/input_data.html) section and in the database documentation.
+To support easy implementation of the package, `mapspamc` is accompanied by a [public data repository](https://doi.org/10.5281/zenodo.7031917) (referred to as the mapspamc_db) that contains a large number of global maps that are publicly available. Detailed information on the database can be found in the [input_data](articles/input_data.html) section and in the database documentation.
 
 
 ## References
