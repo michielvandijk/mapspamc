@@ -24,7 +24,9 @@ statistics on a spatial grid at a resolution of 5 arc minutes (\~ 10 x
 10 km). `mapspamc` provides the necessary infrastructure to run SPAM at
 the country level and makes it possible to incorporate national sources
 of information and potentially create maps at a higher resolution of 30
-arc seconds (\~ 1 x 1 km) (Dijk et al. 2022).
+arc seconds (\~ 1 x 1 km) (Dijk et al. 2022). More information can be
+found on the [package
+website](https://michielvandijk.github.io/mapspamc/).
 
 ## Installation
 
