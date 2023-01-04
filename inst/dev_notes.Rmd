@@ -11,12 +11,6 @@ output: html_document
 # gdxrrd
 - package now has website on github
 
-# Raster
-- remove all raster links, eg. view function still based on raster
-
-# Add citation
-https://www.r-bloggers.com/2021/11/cffr-create-a-citation-cff-file-for-your-r-package/?utm_source=phpList&utm_medium=email&utm_campaign=R-bloggers-daily&utm_content=HTML
-
 # Artificial adm calculations
 - need to do a check if data is inconsistent when calculating artifiical adms.
 - EGY old file is an example, eg. EG24, where total maize ha in adm2 > adm1 total, while two adm2 have NAs...
@@ -36,10 +30,6 @@ Only ggplot now but need to check what is really necessary
 # Doi badge to paper and sticker
 https://github.com/GuangchuangYu/badger
 https://github.com/GuangchuangYu/hexSticker
-
-# Solver
-- ALlow possibility to use other solver than MOSEK
-- Perhaps run GAMS over https://www.gams.com/latest/docs/S_KESTREL.html
 
 # create spam folders
 - creates two folders in raw_path, adm and subnational statistics, do we want this?
