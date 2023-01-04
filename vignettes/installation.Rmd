@@ -78,5 +78,9 @@ The dimensions of `mapspamc` models are determined by the number of grid cells, 
 
 When the model is run at the highest resolution of 30 arc seconds, the dimensions quickly tend to become very large. Excessively large models will result in memory problems or very long processing times on a standard desktop machine. We successfully managed to run 30 arc seconds single country models for small to medium size African countries, such as Malawi, Zambia and Kenya on a Windows 10 desktop with 16 gigabyte memory but we were unable to run the model for Ethiopia, which is a much larger country. To produce crop distribution maps for large countries, we provide the possibility to split the data and solve the model for each level 1 administrative unit separately. The main disadvantage of this approach is that it is not allowed to have missing crop statistics (e.g. total area of maize) at the level 1 administrative unit. In practice, level 1 administrative crop information is not always available and therefore has to be imputed. We recommend testing models at a resolution of 5 arc minutes and only proceed with running at 30 arc seconds resolution if really needed. 
 
+## Input data
+
+To support easy implementation of the package, `mapspamc` is accompanied by a [public data repository](https://doi.org/10.5281/zenodo.7031917) (referred to as the mapspamc_db) that contains a large number of global maps that are publicly available. Detailed information on the database can be found in the [input_data]((articles/input_data.html) section and in the database documentation.
+
 
 ## References
