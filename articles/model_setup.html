@@ -449,16 +449,15 @@ you can simply give each polygon the same name (e.g. ADM_A_B) and code
 <span><span class="co">#&gt; Bounding box:  xmin: 32.67395 ymin: -14.60495 xmax: 35.2957 ymax: -9.49193</span></span>
 <span><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 7</span></span></span>
-<span><span class="co">#&gt;   adm0_name adm0_code adm1_n…¹ adm1_…² adm2_…³ adm2_…⁴                  geometry</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;POLYGON [°]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Malawi    MWI       Area un… MI01    Area u… MI01001 ((34.07573 -9.526601, 34…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Malawi    MWI       Central… MI02    Dedza   MI02001 ((34.27983 -13.86093, 34…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Malawi    MWI       Central… MI02    Dowa    MI02002 ((33.70179 -13.19747, 33…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Malawi    MWI       Central… MI02    Kasungu MI02003 ((33.58521 -12.44411, 33…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Malawi    MWI       Central… MI02    Lilong… MI02004 ((33.40644 -13.48576, 33…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Malawi    MWI       Central… MI02    Mchinji MI02005 ((33.03184 -13.35057, 33…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with abbreviated variable names ¹​adm1_name, ²​adm1_code, ³​adm2_name,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​adm2_code</span></span></span>
+<span><span class="co">#&gt;   adm0_name adm0_code adm1_name                    adm1_code adm2_name adm2_code</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Malawi    MWI       Area under National Adminis… MI01      Area und… MI01001  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Malawi    MWI       Central Region               MI02      Dedza     MI02001  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Malawi    MWI       Central Region               MI02      Dowa      MI02002  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Malawi    MWI       Central Region               MI02      Kasungu   MI02003  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Malawi    MWI       Central Region               MI02      Lilongwe  MI02004  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Malawi    MWI       Central Region               MI02      Mchinji   MI02005  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: geometry &lt;POLYGON [°]&gt;</span></span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">adm_map</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "adm0_name" "adm0_code" "adm1_name" "adm1_code" "adm2_name" "adm2_code"</span></span>
 <span><span class="co">#&gt; [7] "geometry"</span></span></code></pre></div>
