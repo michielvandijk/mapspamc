@@ -51,9 +51,8 @@ rm(input, output, r_area)
 
 # PROCESS RANK ---------------------------------------------------------------------------
 # Warp and mask
-# Use r = "mode" to select the probability that occurs most often as probability is a categorical variable (1-32)
 input <- file.path(param$db_path,  glue("sasam/cl_rank.tif"))
-output <- align_raster(input, grid, adm_map, method = "mode")
+output <- align_raster(input, grid, adm_map, method = "bilinear")
 
 # Maps are in shares of area. We multiply by grid size to create an area map.
 plot(output)
