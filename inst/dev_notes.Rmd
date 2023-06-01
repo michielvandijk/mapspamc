@@ -38,6 +38,9 @@ https://github.com/GuangchuangYu/hexSticker
 If data is zero, it cannot be written to a GAMS file. Added rough code to filter out set and data related to subsistence 
 but this check should be done for all. Most likely GAMS will not be able to read the file in case of fitness model as required data (e.g when subsistence is fully missing) is not present.
 
+Joe used adm_level = 1 but with adm2 data, resulting duplicated grid ID in adm_map_r because of joing on adm1 instead of 2. We can add a warning that if adm_level2 is selected, adm2 data cannot be present in the map when rasterizing!
+
+
 # Small adms
 - Compare polygon size with statistics and single out those where area > polygon size which seems unrealistic (apart from multi harvests)
 - Create function that compares ADMs in adm_r with ADMs in statistics and signals when some of them drop out because they are too small.
