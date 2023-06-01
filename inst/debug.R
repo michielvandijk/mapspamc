@@ -26,23 +26,24 @@ options(digits=4) # limit display to four digits
 
 
 # SETUP MAPSPAMC -------------------------------------------------------------------------
-model_path <- "c:/temp/mapspamc_test"
+model_path <- "C:/Users/dijk158/Dropbox/spam3_KHM"
 
 # Creates a database folder with the name mapspamc_db in c:/temp
-db_path <- "c:/temp"
+db_path <- "C:/Users/dijk158/Dropbox/SPAMC_CHINA"
 
 # Sets the location of the version of GAMS that will be used to solve the model
 gams_path <- "C:/MyPrograms/GAMS/40"
 
+
 # Set mapspamc parameters for the min_entropy_5min_adm_level_2_solve_level_0 model
 param <- mapspamc_par(
   model_path = model_path,
-  #db_path = db_path,
+  db_path = db_path,
   gams_path = gams_path,
-  iso3c = "MWI",
-  year = 2010,
+  iso3c = "KHM",
+  year = 2020,
   res = "5min",
-  adm_level = 2,
+  adm_level = 1,
   solve_level = 0,
   model = "min_entropy")
 
@@ -51,45 +52,16 @@ param <- mapspamc_par(
 #   model_path = model_path,
 #   db_path = db_path,
 #   gams_path = gams_path,
-#   iso3c = "ETH",
-#   year = 2015,
+#   iso3c = "MWI",
+#   year = 2010,
 #   res = "30sec",
 #   adm_level = 2,
-#   solve_level = 1,
+#   solve_level = 0,
 #   model = "max_score")
 
 
 # Show parameters
 print(param)
 
-# Create folder structure in the mapspamc_path
-create_folders(param)
 
 
-# PREPARE PHYSICAL AREA ------------------------------------------------------------------
-prepare_physical_area(param)
-
-
-# PREPARE CROPLAND -----------------------------------------------------------------------
-prepare_cropland(param)
-
-
-# PREPARE IRRIGATED AREA -----------------------------------------------------------------
-prepare_irrigated_area(param)
-
-
-# HARMONIZE INPUT DATA -------------------------------------------------------------------
-harmonize_inputs(param)
-
-
-# PREPARE SCORE --------------------------------------------------------------------------
-prepare_priors_and_scores(param)
-
-
-# COMBINE MODEL INPUTS -------------------------------------------------------------------
-combine_inputs(param)
-
-
-combine_results(param)
-rm(adm_map_r
-   , grid)
