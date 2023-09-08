@@ -84,6 +84,7 @@ $gdxin %gdx_input%
 $loaddc i j s k j_s
 $loaddc n l m
 $loaddc adm_area cl crop_area scalef ir_crop ir_area rur_pop_share scores
+$gdxin
 
 system_grid(i,j) = yes;
 

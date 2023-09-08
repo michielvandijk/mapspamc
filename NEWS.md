@@ -9,3 +9,5 @@
 
 
 # mapspamc v0.0.1
+
+* added $gdxin to GAMS scripts to close the GDX file

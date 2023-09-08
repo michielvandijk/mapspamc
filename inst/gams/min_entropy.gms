@@ -81,6 +81,7 @@ $gdxin %gdx_input%
 $loaddc i j s k
 $loaddc n l m
 $loaddc adm_area cl crop_area scalef ir_crop ir_area priors
+$gdxin
 
 system_grid(i,j) = yes;
 
