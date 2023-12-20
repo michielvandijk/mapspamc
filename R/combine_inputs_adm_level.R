@@ -82,8 +82,11 @@ combine_inputs_adm_level <- function(ac, param) {
     dplyr::filter(gridID %in% unique(cl_harm$gridID)) %>%
     dplyr::select(gridID, ia)
 
-  ir_area_gdx <- para_gdx(ir_area, c("gridID"), "ir_area", "Irrigated area per grid cell")
-
+  if (nrow(ir_area) == 0) {
+    ir_area_gdx <- numeric(0)
+  } else {
+    ir_area_gdx <- para_gdx(ir_area, c("gridID"), "ir_area", "Irrigated area per grid cell")
+  }
 
   # ir_crop(j): Total irrigated area per crop system (j)
   ir_crop <- pa_ps %>%
@@ -93,7 +96,11 @@ combine_inputs_adm_level <- function(ac, param) {
     dplyr::ungroup() %>%
     dplyr::select(crop_system, pa)
 
-  ir_crop_gdx <- para_gdx(ir_crop, c("crop_system"), "ir_crop", "Total irrigated area per crop")
+  if (nrow(ir_crop) == 0) {
+    ir_crop_gdx <- numeric(0)
+  } else {
+    ir_crop_gdx <- para_gdx(ir_crop, c("crop_system"), "ir_crop", "Total irrigated area per crop")
+  }
 
   # prior(i,j): prior per grid cell and crop_system
   priors <- priors %>%

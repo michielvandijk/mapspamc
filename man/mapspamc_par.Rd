@@ -78,8 +78,10 @@ country specific information from several datasets.
 }
 \examples{
 \dontrun{
-mapspamc_par(model_path = "C:/temp/mapspamc_mwi",
-iso3c = "MWI", year = 2010, res = "5min", adm_level = 1,
-solve_level = 0, model = "max_score", gams_path = "C:/GAMS")
+mapspamc_par(
+  model_path = "C:/temp/mapspamc_mwi",
+  iso3c = "MWI", year = 2010, res = "5min", adm_level = 1,
+  solve_level = 0, model = "max_score", gams_path = "C:/GAMS"
+)
 }
 }

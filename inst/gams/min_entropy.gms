@@ -81,6 +81,7 @@ $gdxin %gdx_input%
 $loaddc i j s k
 $loaddc n l m
 $loaddc adm_area cl crop_area scalef ir_crop ir_area priors
+$gdxin
 
 system_grid(i,j) = yes;
 
@@ -205,10 +206,16 @@ parameters entropy_l entropy;
 entropy_l = entropy.l
 display entropy_l;
 
-* Abort if min_entropy does not result in solution
-if (min_ent.modelstat > 2,
-    abort$1 "min_entropy was not solved!"
+* Warning when the solution is feasible but not optimal
+if (min_ent.modelstat = 7,
+  display "min_entropy was solved but solution not optimal";
 );
+
+* Abort if min_entropy does not result in solution.
+if(min_ent.modelstat > 2 and (min_ent.modelstat <> 7),
+  abort$1 "min_entropy was not solved!"
+);
+
 
 
 *******************************************************************************

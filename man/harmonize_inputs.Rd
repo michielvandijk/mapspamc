@@ -36,6 +36,8 @@ Function that compares and harmonizes the subnational physical area with gridded
 location and extend of cropland and irrigated area.
 }
 \examples{
+\dontrun{
 harmonize_inputs(param, cl_slackp = 0.05, cl_slackn = 5, ia_slackp = 0.05, ia_slackn = 5)
+}
 
 }

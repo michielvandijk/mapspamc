@@ -24,5 +24,6 @@ easily loaded into R. The file is saved in the \code{processed_data/results} fol
 \examples{
 \dontrun{
 combine_results(param)
-}#'
+#'
+}
 }
