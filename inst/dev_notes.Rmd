@@ -5,6 +5,20 @@ date: "03/04/2020"
 output: html_document
 ---
 
+
+# Error
+There will be errors when there are no irrigated crop as in this case ir_crop_gdx in combine_inputs will result in NA values that are not allowed in the GAMS file.
+
+# Error
+harmonize_inputs - split_harmonized_inputs - select_grid_cells - rank_cl
+In case for a certain adm2, pa is very low - even lower than the available cropland in the first grid, there will be an error because no grid cell is selected, while the first grid cell should be selected. An extra rule is needed that adds a at least the grid cell with the highest rank.
+
+# Error 
+When there is no irrigation in a country (or adm1 if model_solve = 1),  crop_area_gdx and/or crop_ir_gdx will be empty in combine_inputs_adm_level, resulting in an error => added if else statements in combine_inputs_adm_level. However GAMS needs positive values for ir_crop so this gives an error, need to update the GAMS code for these cases.
+
+# make ffunction visible
+run_gams_adm_level() can be very useful to run a single adm1 model for large countries => rename into run_model_adm_level, document and export so it can be accessed as function.
+
 # Package protection
 - Do not allow people to change master
 
