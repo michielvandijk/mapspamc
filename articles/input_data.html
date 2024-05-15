@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Input data • mapspamc</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -164,247 +164,115 @@ number of global maps that are publicly available. The table below shows
 the global data products that are included in the database. They are
 briefly discussed below.</p>
 <table class="table">
-<caption>
-Data products in the mapspamc database
-</caption>
-<thead><tr>
-<th style="text-align:left;">
-Description
-</th>
-<th style="text-align:left;">
-Included
-</th>
-<th style="text-align:left;">
-Scale
-</th>
-<th style="text-align:left;">
-Source
-</th>
+<caption>Data products in the mapspamc database</caption>
+<colgroup>
+<col width="31%">
+<col width="18%">
+<col width="5%">
+<col width="44%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Description</th>
+<th align="left">Included</th>
+<th align="left">Scale</th>
+<th align="left">Source</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Shapefile with location of administrative units
-</td>
-<td style="text-align:left;">
-<ul><li></ul>
-</td>
-<td style="text-align:left;">
-National
-</td>
-<td style="text-align:left;">
-National statistics and Yu et al. (2020)
-</td>
+<tr class="odd">
+<td align="left">Shapefile with location of administrative units</td>
+<td align="left">-</td>
+<td align="left">National</td>
+<td align="left">National statistics and Yu et al. (2020)</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Subnational crop statistics
-</td>
-<td style="text-align:left;">
-<ul><li></ul>
-</td>
-<td style="text-align:left;">
-National
-</td>
-<td style="text-align:left;">
-National statistics and Yu et al. (2020)
-</td>
+<tr class="even">
+<td align="left">Subnational crop statistics</td>
+<td align="left">-</td>
+<td align="left">National</td>
+<td align="left">National statistics and Yu et al. (2020)</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-National crop and price statistics
-</td>
-<td style="text-align:left;">
-1961-2020
-</td>
-<td style="text-align:left;">
-Global
-</td>
-<td style="text-align:left;">
-fao.org/faostat/en
-</td>
+<tr class="odd">
+<td align="left">National crop and price statistics</td>
+<td align="left">1961-2020</td>
+<td align="left">Global</td>
+<td align="left">fao.org/faostat/en</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Land cover map
-</td>
-<td style="text-align:left;">
-2015, 2019
-</td>
-<td style="text-align:left;">
-Global
-</td>
-<td style="text-align:left;">
-land.copernicus.eu/global/products/lc
-</td>
+<tr class="even">
+<td align="left">Land cover map</td>
+<td align="left">2015, 2019</td>
+<td align="left">Global</td>
+<td align="left">land.copernicus.eu/global/products/lc</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Land cover map
-</td>
-<td style="text-align:left;">
-2000, 2005, 2010, 2015, 2020
-</td>
-<td style="text-align:left;">
-Global
-</td>
-<td style="text-align:left;">
-esa-landcover-cci.org
-</td>
+<tr class="odd">
+<td align="left">Land cover map</td>
+<td align="left">2000, 2005, 2010, 2015, 2020</td>
+<td align="left">Global</td>
+<td align="left">esa-landcover-cci.org</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Land cover map
-</td>
-<td style="text-align:left;">
-2020
-</td>
-<td style="text-align:left;">
-Global
-</td>
-<td style="text-align:left;">
-livingatlas.arcgis.com/landcover
-</td>
+<tr class="even">
+<td align="left">Land cover map</td>
+<td align="left">2020</td>
+<td align="left">Global</td>
+<td align="left">livingatlas.arcgis.com/landcover</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Land cover map
-</td>
-<td style="text-align:left;">
-2003, 2007, 2011, 2015, 2019
-</td>
-<td style="text-align:left;">
-Global
-</td>
-<td style="text-align:left;">
-glad.umd.edu/dataset/croplands
-</td>
+<tr class="odd">
+<td align="left">Land cover map</td>
+<td align="left">2003, 2007, 2011, 2015, 2019</td>
+<td align="left">Global</td>
+<td align="left">glad.umd.edu/dataset/croplands</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Land cover map
-</td>
-<td style="text-align:left;">
-2015
-</td>
-<td style="text-align:left;">
-Global
-</td>
-<td style="text-align:left;">
-lpdaac.usgs.gov/products/mcd12q1v006/
-</td>
+<tr class="even">
+<td align="left">Land cover map</td>
+<td align="left">2015</td>
+<td align="left">Global</td>
+<td align="left">lpdaac.usgs.gov/products/mcd12q1v006/</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Synergy cropland map
-</td>
-<td style="text-align:left;">
-2010
-</td>
-<td style="text-align:left;">
-Global
-</td>
-<td style="text-align:left;">
-Lu et al. (2020)
-</td>
+<tr class="odd">
+<td align="left">Synergy cropland map</td>
+<td align="left">2010</td>
+<td align="left">Global</td>
+<td align="left">Lu et al. (2020)</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Table to rank cropland products
-</td>
-<td style="text-align:left;">
-2015
-</td>
-<td style="text-align:left;">
-Global
-</td>
-<td style="text-align:left;">
-authors
-</td>
+<tr class="even">
+<td align="left">Table to rank cropland products</td>
+<td align="left">2015</td>
+<td align="left">Global</td>
+<td align="left">authors</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Irrigated area map
-</td>
-<td style="text-align:left;">
-2010
-</td>
-<td style="text-align:left;">
-Global
-</td>
-<td style="text-align:left;">
-Meier et al. (2018)
-</td>
+<tr class="odd">
+<td align="left">Irrigated area map</td>
+<td align="left">2010</td>
+<td align="left">Global</td>
+<td align="left">Meier et al. (2018)</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Irrigated area map
-</td>
-<td style="text-align:left;">
-2005
-</td>
-<td style="text-align:left;">
-Global
-</td>
-<td style="text-align:left;">
-fao.org/aquastat/en/geospatial-information/global-maps-irrigated-areas
-</td>
+<tr class="even">
+<td align="left">Irrigated area map</td>
+<td align="left">2005</td>
+<td align="left">Global</td>
+<td align="left">fao.org/aquastat/en/geospatial-information/global-maps-irrigated-areas</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Biophysical suitability and potential yield maps
-</td>
-<td style="text-align:left;">
-2000
-</td>
-<td style="text-align:left;">
-Global
-</td>
-<td style="text-align:left;">
-IIASA and FAO (2012)
-</td>
+<tr class="odd">
+<td align="left">Biophysical suitability and potential yield maps</td>
+<td align="left">2000</td>
+<td align="left">Global</td>
+<td align="left">IIASA and FAO (2012)</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Travel time map
-</td>
-<td style="text-align:left;">
-2015
-</td>
-<td style="text-align:left;">
-Global
-</td>
-<td style="text-align:left;">
-malariaatlas.org/research-project/accessibility-to-cities
-</td>
+<tr class="even">
+<td align="left">Travel time map</td>
+<td align="left">2015</td>
+<td align="left">Global</td>
+<td align="left">malariaatlas.org/research-project/accessibility-to-cities</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Population maps
-</td>
-<td style="text-align:left;">
-2010, 2015, 2020
-</td>
-<td style="text-align:left;">
-Global
-</td>
-<td style="text-align:left;">
-worldpop.org
-</td>
+<tr class="odd">
+<td align="left">Population maps</td>
+<td align="left">2010, 2015, 2020</td>
+<td align="left">Global</td>
+<td align="left">worldpop.org</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Urban area map
-</td>
-<td style="text-align:left;">
-2010, 2015, 2020
-</td>
-<td style="text-align:left;">
-Global
-</td>
-<td style="text-align:left;">
-ghsl.jrc.ec.europa.eu
-</td>
+<tr class="even">
+<td align="left">Urban area map</td>
+<td align="left">2010, 2015, 2020</td>
+<td align="left">Global</td>
+<td align="left">ghsl.jrc.ec.europa.eu</td>
 </tr>
 </tbody>
 </table>
@@ -576,7 +444,7 @@ Joglekar, and You 2016)</span> and multiplied the potential yield from
 <div class="section level2 unnumbered">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-FAO2019" class="csl-entry">
 FAO. 2019. <span>“<span>FAOSTAT</span>.”</span> <a href="http://www.fao.org/faostat" class="external-link">http://www.fao.org/faostat</a>.
 </div>
@@ -672,7 +540,7 @@ update of mapspamc_db<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
       </footer>
