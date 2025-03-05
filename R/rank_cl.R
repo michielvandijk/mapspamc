@@ -1,9 +1,9 @@
 # FUnction to rank grid cells at each main and nested adm level comparing with
 # pa_adm_tot.
-rank_cl <- function(df, adm_lvl, adm_code, param, cl_slackp, cl_slackn) {
+rank_cl <- function(df, adm_lvl, ac, param, cl_slackp, cl_slackn) {
   # Rank cropland cells till sum is at least equal to the statistics.  We add
   # the minimum of 5 grid_sell area or slack percentage to ensure this.
-  pa_adm_tot <- purrr::map_df(0:param$adm_level, calculate_pa_tot, adm_code, param)
+  pa_adm_tot <- purrr::map_df(0:param$adm_level, calculate_pa_tot, ac, param)
   rn <- paste0("adm", adm_lvl, "_code")
 
   # Rank adm to match lu
