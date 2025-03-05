@@ -15,7 +15,7 @@ rank_cl <- function(df, adm_lvl, ac, param, cl_slackp, cl_slackn) {
     dplyr::left_join(pa_adm_tot %>%
       dplyr::filter(adm_level == adm_lvl, !is.na(pa), pa != 0) %>%
       dplyr::select(adm_code, adm_level, adm_name, pa), by = "adm_code") %>%
-    dplyr::mutate(slack = max(pa * cl_slackp, min(cl_slackn * max(df$grid_size)))) %>%
+    dplyr::mutate(slack = max(pa * cl_slackp, max(cl_slackn * max(df$grid_size)))) %>%
     dplyr::filter(adm_cum <= pa + slack) %>%
     dplyr::ungroup() %>%
     dplyr::select(gridID, adm_level, adm_code, adm_name)
