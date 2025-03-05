@@ -67,3 +67,7 @@ alt_param <- mapspamc_par(
 
 # Show parameters
 print(alt_param)
+
+harmonize_inputs(param, cl_slackn = 1000, cl_slackp = 0.5)
+
+load(param, "cl_harm")
