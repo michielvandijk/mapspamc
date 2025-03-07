@@ -44,30 +44,16 @@ param <- mapspamc_par(
   year = 2020,
   res = "5min",
   adm_level = 2,
-  solve_level = 0,
+  solve_level = 1,
   model = "min_entropy")
 
 # Create folder structure in the mapspamc_path
 create_folders(param)
 
 
-
-# SETUP ALTERNATIVE MODEL ----------------------------------------------------------------
-# Set mapspamc parameters for an alternative model that only uses adm1_level statistics
-alt_param <- mapspamc_par(
-  model_path = model_path,
-  db_path = db_path,
-  gams_path = gams_path,
-  iso3c = param$iso3c,
-  year = param$year,
-  res = param$resolution,
-  adm_level = 1,
-  solve_level = param$solve_level,
-  model = param$model)
-
-# Show parameters
-print(alt_param)
-
 harmonize_inputs(param, cl_slackn = 1000, cl_slackp = 0.5)
+
+cl_slackn = 0
+cl_slackp = 0.5
 
 load(param, "cl_harm")
