@@ -5,11 +5,6 @@
 #' Contact:  michiel.vandijk@wur.nl
 #'========================================================================================
 
-# NOTE -----------------------------------------------------------------------------------
-# This script below is sourced by all the other scripts in the data repository.
-# In this way, you only have to set the mapspamc parameters once.
-# It also ensures that the necessary packages (see below) are loaded.
-
 # SETUP R --------------------------------------------------------------------------------
 # Install and load pacman package that automatically installs R packages if not available
 if(!require(pacman)) install.packages("pacman")
@@ -31,22 +26,23 @@ options(digits=4) # limit display to four digits
 # Creates a model folder structure in c:/temp/ with the name 'mapspamc_mwi'.
 # the user can replace mwi with the country code of the case-study country or
 # choose a new name
-model_path <- "c:/temp/mapspamc_aus"
+model_path <- "C:/Users/dijk158/OneDrive - Wageningen University & Research/data/mapspamc_iso3c/mapspamc_zaf"
 
 # Creates a database folder with the name mapspamc_db in c:/temp
 db_path <- "c:/temp"
 
 # Sets the location of the version of GAMS that will be used to solve the model
-#gams_path <- "C:/GAMS/41"
+
 gams_path <- "C:/MyPrograms/GAMS/40"
+#gams_path <- "C:/GAMS/41"
 
 # Set mapspamc parameters for the min_entropy_5min_adm_level_2_solve_level_0 model
 param <- mapspamc_par(
   model_path = model_path,
   db_path = db_path,
   gams_path = gams_path,
-  iso3c = "AUS",
-  year = 2000,
+  iso3c = "ZAF",
+  year = 2020,
   res = "5min",
   adm_level = 2,
   solve_level = 0,
@@ -60,6 +56,7 @@ print(param)
 create_folders(param)
 
 
+harmonize_inputs(param, cl_slackn = 1000, cl_slackp = 0.5)
 
 # PREPARE PHYSICAL AREA ------------------------------------------------------------------
 prepare_physical_area(param)
@@ -82,3 +79,8 @@ prepare_priors_and_scores(param)
 
 # COMBINE MODEL INPUTS -------------------------------------------------------------------
 combine_inputs(param)
+
+cl_slackn = 0
+cl_slackp = 0.5
+
+load(param, "cl_harm")
