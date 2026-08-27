@@ -10,9 +10,15 @@
 
 # mapspamc v0.0.1
 
-* added $gdxin to GAMS scripts to close the GDX file
+* Added $gdxin to GAMS scripts to close the GDX file
 
 
 # mapspamc v0.0.2
 
-* added a line of code in min_entropy.gms and max_score.gms to allow for modelstat = 7, feasible but not optimal solutions.
+* Added a line of code in min_entropy.gms and max_score.gms to allow for modelstat = 7, feasible but not optimal solutions.
+
+
+# mapspamc v0.0.3
+
+* Fixed a coding error in the GMS file.
+* Removed several redundant files.
