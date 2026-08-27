@@ -224,9 +224,14 @@ parameter sum_score_l 'sum of weighted score';
 sum_score_l = sum_score.l;
 display sum_score_l;
 
-* Abort if max_score does not result in solution.
-if(max_score.modelstat > 2,
-    abort$1 "max_score was not solved!";
+* Warning when the solution is feasible but not optimal
+if (max_score.modelstat = 7,
+  display "max_score was solved but solution not optimal";
+);
+
+* Abort if min_entropy does not result in solution.
+if(max_score.modelstat > 2 and (max_score.modelstat <> 7),
+  abort$1 "max_score was not solved!"
 );
 
 
