@@ -3,11 +3,6 @@
 * Development version
 
 
-# mapspamc 0.0.1
-
-* Version submitted to journal 
-
-
 # mapspamc v0.0.1
 
 * Added $gdxin to GAMS scripts to close the GDX file
