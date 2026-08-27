@@ -1,0 +1,217 @@
+# 3. Model preparation
+
+After all the input data has been processed, they need to be harmonized
+and combined into a single file thatis used as input for one of the
+downscaling algorithms. The sections below briefly describe the main
+functions in `mapspamc` to do this. Almost all functions require only
+one input `param`, an object with the `mapspamc` parameters. Note that
+‘under the hood’ of these functions a lot of other processes are
+triggered, which automatically load the data that was created in
+previous steps, perform consistency checks, reformat data from spatial
+to data table format and, where needed, run algorithms to harmonize the
+various inputs. This means that some of the functions might take some
+time to run, in particular if the resolution is set to 30 arc second,
+which considerably increases the size of the model. All the functions
+send a message to the screen when they have finished so the user knows
+what is happening.
+
+All the intermediate data output is saved in the
+`processed_data/intermediate_output` folder. In case the user has set
+`solve_level = 1`, the various functions split the data into
+administrative level 1 chunks, which are saved in subfolders using the
+level 1 administrative unit code as name of the folder. If
+`solve_level = 0`, only one subfolder, with the country’s iso3c code as
+name, will be created.
+
+## Prepare physical area
+
+[`prepare_physical_area()`](https://michielvandijk.github.io/mapspamc/reference/prepare_physical_area.md)
+combines the three agricultural statistics input files (harvested area,
+production system shares and cropping intensity) to calculate the
+physical cropping area for all administrative units.
+
+``` r
+
+prepare_physical_area(param)
+```
+
+## Prepare cropland
+
+The function
+[`prepare_cropland()`](https://michielvandijk.github.io/mapspamc/reference/prepare_cropland.md)
+combines the three synergy cropland components (medium and maximum
+cropland and cropland ranking maps) into a data table and stores this in
+a file.
+
+``` r
+
+prepare_cropland(param)
+```
+
+## Prepare irrigated area
+
+[`prepare_irrigated_area()`](https://michielvandijk.github.io/mapspamc/reference/prepare_irrigated_area.md)
+is similar to the function that prepares the cropland as it combines the
+synergy irrigated area maps (maximum irrigated area and ranking maps)
+into one file.
+
+``` r
+
+prepare_irrigated_area(param)
+```
+
+## Harmonize inputs
+
+Before the algorithms in `mapspamc` can be solved, it is essential to
+harmonize the physical are information, which is derived from national
+and subnational statistics, with the synergy cropland and irrigated area
+maps, which are based on remote sensing information and other spatially
+explicit data sources. As this data is coming from different sources,
+they will are not always fully consistent. This would not be a problem
+if the cropland exent would be larger than the physical crop area,
+meaning there would be enough space to allocate the statistics on the
+cropland map. Similarly if the total irrigated area in the irrigated
+area map would be larger than the physical area of the irrigated
+production systems the data would fit on the map. Unfortunately, often
+this is not the case and, without adjustments, the downscaling
+algorithms would be impossible to solve. In practice, we use ‘slack
+variables’ to ensure the model always solves (see
+[Appendix](https://michielvandijk.github.io/mapspamc/articles/appendix.md)).
+However, large slacks in the solution signal serious inconsistencies and
+therefore we check for inconsistencies and adjust the data already in
+the model preparation stage.
+
+[`harmonize_inputs()`](https://michielvandijk.github.io/mapspamc/reference/harmonize_inputs.md)
+uses a number of steps to harmonize the various data sources:
+
+- **Compare and harmonize Cropland and statistics.** As a starting point
+  the available cropland is set to the medium cropland values from the
+  synergy cropland map. For each individual subnational unit (if data is
+  not missing) and starting with the most detailed level in the data,
+  the total available (medium) cropland underlying the unit is compared
+  with the physical area from the statistics that need to be allocated.
+  If the statistics ‘fit’ no adjustments are made. If they do not not
+  fit, the administrative unit cropland is expanded by switching to the
+  maximum cropland value from the synergy cropland map. Subsequently,
+  the cropland area and physical area statistics are compared again and
+  a warning is issued when there still is not enough cropland to
+  allocate the statistics, meaning the the model will automatically
+  introduce slacks to ensure it can be solved. In a next iteration, the
+  cropland and physical area statistics of the units in the subsequent
+  administrative level are harmonized taking into account the expansion
+  of cropland in the previous iteration. This continues till the
+  cropland and physical area statistics at the national level are
+  compared and harmonized.
+
+In the end, the user has to decide if the slacks are acceptable or not.
+In our opinion small slacks (measured as share of total or
+administrative unit physical crop area) are no problem to deal with
+inconsistencies. However it slacks become very large we recommend
+scrutinizing the statistics and where possible make adjustments. Large
+slack often results from data entry errors or too rigid cropping
+intensity values. We provide some advise on how to deal with slack in
+the
+[Appendix](https://michielvandijk.github.io/mapspamc/articles/appendix.md).
+
+- **Compare and harmonize irrigated area and statistics** In the next
+  step, the irrigated area from the synergy irrigated area map and the
+  irrigated physical area statistics are compared and harmonized. We
+  start by ranking all irrigated grid cells from the most (rank 1) to
+  the least (rank 10) reliable. Next, for each grid cell, we set the
+  irrigated area to the minimum of the cropland area (taken from the
+  previous harmonization step) and the irrigated area from the synergy
+  irrigated area map. The grid cells are subsequently aggregated till
+  the accumulated area is slightly larger than the irrigated physical
+  area statistics. If the physical area turns out to be larger than the
+  total irrigated cropland, a new iteration is started in which the
+  irrigated area per grid cell is increased by taking the maximum of the
+  cropland area and the irrigated area. If this is still not sufficient,
+  the irrigated area is further enlarged by taking the maximum of the
+  maximum cropland area and the irrigated area for each grid cell. It
+  this is still not sufficient a warning is issued that solving the
+  model will introduce slack. Finally, the grid cell ranking from the
+  synergy cropland is adjusted to factor in all the selected irrigated
+  area cells.
+
+- **Select grid cells to match with statistics** In the final
+  harmonization step the cropland and irrigation extent are compared
+  with the crop statistics. Similar to the previous step, the grid cells
+  are ranked and the cropland is aggregated stating with the most
+  preferred grid cells (now also including the irrigated area grid
+  cells) till the total area is slightly larger than the physical area
+  from the (sub)national statistics. This is consequentially done for
+  each individual administrative unit starting with the most detailed
+  level and ending at the national level. This process makes sure that
+  the cropland and irrigated area extent is reduced to include only the
+  most reliable grid cells, while at the same time it ensures that the
+  cells are still large enough to fit the physical crop area statistics,
+  including the irrigated area. The final cropland and irrigated area
+  extent consist of the union of grid cells that are selected at each
+  (sub)national administrative unit level processing step.
+
+``` r
+
+harmonize_inputs(param)
+```
+
+## Prepare priors and scores
+
+[`prepare_priors_and_scores()`](https://michielvandijk.github.io/mapspamc/reference/prepare_priors_and_scores.md)
+creates the priors and the scores for each grid cell. For convenience,
+the function will always create data tables with priors and scores even
+though only one is needed because the user only wants to run
+`min_entropy`, which requires the priors, or `max_score`, which requires
+the scores. In this way, the user can easily test different algorithms,
+without going through the data pre-processing steps.
+
+Note that the function might take some time to run as it implements
+three consecutive processes. First, the biophysical suitability and
+potential yield maps for all production system and crop combinations are
+loaded and only grid cells that overlap with the cropland extent from
+the previous step are selected, after which all data is merged into one
+table and saved. This process also checks if the maps do not only
+contain zero values and, where needed, replaces the map by a substitute
+crop. This is important because it occasionally happens that the
+biophysical suitability and potential yield maps indicate zero
+suitability for a specific crop although the statistics suggest the crop
+is produced in the country. If we would not correct for this, most
+scores and priors for this crop would be zero, resulting in an
+‘uninformed’ allocation of the crop, meaning it can be placed anywhere
+as long as the the constraints are satisfied and the objective function
+(minimization of cross-entropy or maximization of fitness score) is
+optimized. In case all the substitute crops have zero values, a warning
+is issued. We prepared a list of substitute crops that is stored in the
+`mappings/replace_gaez.sv` file. You can modify the list to add other
+substitute crops if you think these are more appropriate. The only
+requirement is that selected crop must be in the list of SPAM crops that
+is stored in `mappings/crop.csv`. The second and third process create
+data files with the priors and scores using the biophysical suitability
+and potential yield, among others, as input data.
+
+``` r
+
+prepare_priors_and_scores(param)
+```
+
+## Combine inputs
+
+Finally, all the inputs, including the harmonized cropland extent,
+irrigated area extent and statistics, and the priors/scores are combined
+in one GAMS gdx file, which is used as input to solve the downscaling
+algorithm in GAMS. The file contains a number of sets and parameter
+tables that define the model. Sets describe the dimensions of the model,
+while parameters contain the data along these dimensions. As part of the
+process to combine all the inputs, and if relevant, artificial
+administrative units are created that represent the combination of all
+administrative units per crop for which subnational statistics are
+missing. These units are added to the list of administrative units from
+the subnational statistics. The names of these units, stored in the
+`adm_area` parameter table, start with the name of the lower level
+administrative unit which nests the units with missing data, followed by
+`ART` and the level for which data is missing and ending with the crop
+for which data is not available.
+
+``` r
+
+combine_inputs(param)
+```

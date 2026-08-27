@@ -1,0 +1,155 @@
+# Installation
+
+To run `mapspamc`, several software packages need to be installed.
+Below, we provide a brief description on how to install the software.
+Note that GAMS is a commercial product, which requires a licence. Also
+note that the scripts and implementation of the model have been
+developed, implemented and tested using a Windows environment. As all
+the software is cross platform it should be possible to run `mapspamc`
+on Mac and Linux but this was not tested.
+
+## Installing R and RStudio
+
+All the pre- and post-processing of the data is done in R (R Core Team
+2022). R is a free and open source software environment for statistical
+computing and graphics supported by the R Foundation for Statistical
+Computing. To run `mapspamc` one needs to install R and RStudio, a
+graphical user interface for R. Both pieces of software are available
+for various operating systems. The package was developed and tested with
+R version 4.2.1. If you are not familiar with R, please have a look at
+the online book [R for Data Science](https://r4ds.had.co.nz) by Hadley
+Wickham and Garrett Grolemund, which is probably the best book to get
+started.
+
+1.  [Download and install R](https://cran.r-project.org/)
+2.  [Download and install
+    Rstudio](https://rstudio.com/products/rstudio/download/).
+
+## Installing GAMS
+
+The downscaling algorithms in `mapspamc` are solved using the [General
+Algebraic Modeling System](https://www.gams.com/) (GAMS), which is
+modelling system and language designed for mathematical optimization.
+The GAMS system and solvers can be downloaded from the GAMS website.
+Unfortunately, one needs a GAMS Base Module licence plus additional
+IPOPT and CPLEX solver licence to run `mapspamc`.
+
+- [Download and install GAMS](https://www.gams.com/download)
+
+## R packages
+
+### Installing `mapspamc`
+
+R packages are pieces of bundled R code, frequently including scripts
+from other languages (e.g. C or C++) to speed up calculations or
+interface with other software (e.g. GAMS). Packages can be easily
+installed by using the command
+[`install.packages()`](https://rdrr.io/r/utils/install.packages.html) in
+R or by clicking on the **package** tab in RStudio. Nearly all packages
+are directly downloaded from CRAN, the R package repository.
+
+To install `mapspamc`, which is not on CRAN, one first has to install
+the **remotes** package:
+
+``` r
+
+install.packages("remotes")
+library(remotes)
+remotes::install_github("michielvandijk/mapspamc")
+```
+
+### Essential packages
+
+Several R packages are required to run `mapspamc` scripts:
+
+- To interface between R and GAMS the gdxrrw package is required.
+  Unfortunately, this package is not available on CRAN and therefore has
+  to be installed manually. The package can be found
+  [here](https://github.com/GAMS-dev/gdxrrw), which also presents
+  instructions on how to install the package. Several functions in
+  `mapspamc` use gdxrrw to read and save GAMS gdx files and check
+  whether the package and GAMS are installed.
+
+- [tidyverse](https://cran.r-project.org/web/packages/tidyverse/index.html)
+  (Wickham et al. 2019) is the name for a set of packages that work in
+  harmony to facilitate data preparation and processing, most
+  importantly dplyr, purrr, tidyr and ggplot2. Some of them are used by
+  `mapspamc` and will be installed automatically when the package is
+  installed for the first time and were not installed before.
+
+- [sf package](https://cran.r-project.org/web/packages/sf/index.html)
+  (Pebesma 2018) is a package to process spatial data in vector
+  (polygon) format.
+
+- [terra
+  package](https://cran.r-project.org/web/packages/raster/index.html)
+  (Hijmans 2022) is a package to process spatial data in raster format.
+
+## Additional software
+
+Although not strictly necessary to use `mapspamc`, We recommend
+installing the following additional software:
+
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+  is software to version your code. RStudio and git can be easily linked
+  to version code.
+
+- [QGIS](https://qgis.org/en/site/) a free and open-source
+  cross-platform desktop geographic information system application that
+  supports viewing, editing, and analysis of geospatial data. It is
+  convenient to quickly inspect vector and raster maps.
+
+## Hardware
+
+The dimensions of `mapspamc` models are determined by the number of grid
+cells, administrative regions, crops and production systems. Of these
+four elements, the number of grid cells is the main factor determining
+the size of the model although the other dimensions (in combination with
+the number of grid cells) also play a role. The total number of grid
+cells is related to (1) the cropland extent and, hence, the size of the
+country and (2) the resolution of the model, e.g. 5 arc minutes or 30
+arc seconds.
+
+When the model is run at the highest resolution of 30 arc seconds, the
+dimensions quickly tend to become very large. Excessively large models
+will result in memory problems or very long processing times on a
+standard desktop machine. We successfully managed to run 30 arc seconds
+single country models for small to medium size African countries, such
+as Malawi, Zambia and Kenya on a Windows 10 desktop with 16 gigabyte
+memory but we were unable to run the model for Ethiopia, which is a much
+larger country. To produce crop distribution maps for large countries,
+we provide the possibility to split the data and solve the model for
+each level 1 administrative unit separately. The main disadvantage of
+this approach is that it is not allowed to have missing crop statistics
+(e.g. total area of maize) at the level 1 administrative unit. In
+practice, level 1 administrative crop information is not always
+available and therefore has to be imputed. We recommend testing models
+at a resolution of 5 arc minutes and only proceed with running at 30 arc
+seconds resolution if really needed.
+
+## Input data
+
+To support easy implementation of the package, `mapspamc` is accompanied
+by a [public data repository](https://doi.org/10.5281/zenodo.7031917)
+(referred to as the mapspamc_db) that contains a large number of global
+maps that are publicly available. Detailed information on the database
+can be found in the
+[input_data](https://michielvandijk.github.io/mapspamc/articles/input_data.md)
+section and in the database documentation.
+
+## References
+
+Hijmans, Robert J. 2022. *Terra: Spatial data analysis*.
+<https://cran.r-project.org/package=terra>.
+
+Pebesma, Edzer. 2018. “Simple Features for R: Standardized Support for
+Spatial Vector Data.” *The R Journal* 10 (1): 439.
+<https://doi.org/10.32614/RJ-2018-009>.
+
+R Core Team. 2022. *R: A Language and Environment for Statistical
+Computing*. R Foundation for Statistical Computing.
+<https://www.r-project.org/>.
+
+Wickham, Hadley, Mara Averick, Jennifer Bryan, et al. 2019. “Welcome to
+the Tidyverse.” *Journal of Open Source Software* 4 (43): 1686.
+<https://doi.org/10.21105/joss.01686>.

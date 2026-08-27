@@ -1,0 +1,62 @@
+# 2.4. Pre-processing - irrigated area
+
+Similar to the synergy cropland map, we combine two global irrigated
+area maps (GIA and GMIA) to create a synergy irrigated area product -
+for more information see the mapspamc database documentation. Scripts
+are provided in the `02_4_pre_processing_irrigated_area` folder to
+process the two maps. The `03_create_synergy_irrigated_area_map.R`
+script describes the process to create the synergy irrigated area
+components that are needed by `mapspamc`. The procedure is slightly
+different than that used to create a the synergy cropland map because we
+only have two sources of information, which also have different
+resolutions. Most problematic is the GMIA, which has a relatively coarse
+resolution of 5 arc minutes. This causes a problem when running the
+model at 30 arc seconds as we do not know which of 100 30 arc seconds
+grid cells that are located in a single 5 arc minutes grid cell, are
+irrigated. Another limitation is that even the GIA, the other global
+irrigated area product, with a resolution of 30 arc seconds, only
+indicates whether a grid cell is irrigated. It does not present
+information on the actual area of cropland that is irrigated.
+
+In order to combine the GMIA and GIA data, we processed both maps so
+that they present the share of irrigated area within a grid cell
+(`select_*.R` scripts). To create the synergy cropland map, we use the
+following procedure: (1) We stack the GMIA and GIA information and
+remove grid cells with very small shares (\<0.01). These small values
+are sometimes created when reprojecting the maps to a finer or coarser
+resolution and can safely be removed; (2) We take the take the maximum
+of the GMIA and GIA irrigated area share; (3) We add a rank from 1
+(highest share) to 10 (lowest share) using equal intervals of 0.1
+irrigated area share; (4) We rank the cells from 1 to 10 and; (5) We
+calculate the irrigated area in ha.
+
+``` r
+
+ir_df <- as.data.frame(c(grid, grid_size, gmia, gia), xy = TRUE) %>%
+  filter(!is.na(gridID)) %>%
+  dplyr::select(-x, -y) %>%
+  mutate(
+    gia = ifelse(gia < 0.01, 0, gia),
+    gmia = ifelse(gmia < 0.01, 0, gmia)
+  )
+
+ir_df <- ir_df %>%
+  dplyr::mutate(
+    ir_max = pmax(gmia, gia, na.rm = T),
+    ir_rank = cut(ir_max,
+      labels = c(1:10), breaks = seq(0, 1, 0.1),
+      include.lowest = T
+    ),
+    ir_rank = dense_rank(desc(ir_rank)),
+    ir_max = ir_max * grid_size
+  ) %>%
+  filter(!is.na(ir_rank), ir_max > 0) %>%
+  dplyr::select(-gmia, -gia, -grid_size)
+```
+
+By ranking on irrigated area share, GIA (share is 1) is always preferred
+over GMIA when a resolution of 30 arc seconds is selected by the user.
+In case a resolution of 5 arc minutes is used, GMIA and GIA grid cells
+with a large share of irrigated area receive a higher rank, which is
+also desirable. In the remainder of the script, the maps for maximum
+irrigated area and ranking are created.

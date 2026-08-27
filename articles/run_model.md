@@ -1,0 +1,48 @@
+# 4. Running the model
+
+`run_mapspamc` runs the selected model (`min_entropy` or `max_score`) in
+GAMS. If `model_sel = 1`, the model is run for each individual
+administrative unit at level 1. If `model_sel = 0` the model is run only
+once for the total country. Selecting `out = TRUE` (default setting),
+the model log will be sent to the screen after the model run is
+finished. The log is a text file, which names starts with `model_log_`
+and is saved in the `processed_data/intermediate_output` folder. Note
+that, depending on the size of the country and the selected resolution,
+the model might take a lot of time to run. If the model is very large,
+there is a risk the user’s computer runs out of memory and an error
+message will be printed in the model log.
+
+``` r
+
+run_mapspamc(param)
+```
+
+`mapspamc` results are saved into one (`solve_level = 0`) or multiple
+(`solve_level = 1`) gdx files after
+[`run_mapspamc()`](https://michielvandijk.github.io/mapspamc/reference/run_mapspamc.md)
+is executed.
+[`combine_results()`](https://michielvandijk.github.io/mapspamc/reference/combine_results.md)
+combines the file(s) into a single rds file that can be loaded into R
+for further processing. The file is saved in the
+`processed_data/results` folder.
+
+``` r
+
+combine_results(param)
+```
+
+Finally, the user can inspect the results using the
+[`view_results()`](https://michielvandijk.github.io/mapspamc/reference/view_results.md)
+function, which only works after
+[`combine_results()`](https://michielvandijk.github.io/mapspamc/reference/combine_results.md)
+is run. This function produces a grid that compares the crop
+distribution maps (harvested or physical area) for a selected crop,
+using a different panel for each farming system. The maps are
+interactive and the user can zoom in for closer inspection and select
+different background maps. The plots are shown in the default browser,
+unless specified otherwise.
+
+``` r
+
+view_results("rice", var = "ha", param)
+```

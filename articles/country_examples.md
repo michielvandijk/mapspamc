@@ -1,0 +1,34 @@
+# Country examples
+
+`mapspamc` is accompanied by several country examples to illustrate the
+workings of the package. The examples provide fully developed scripts to
+run `mapspamc` from start to finish and may serve as a starting point or
+even template for users, who want to prepare their own country
+case-studies. The examples are stored in Github repositories using the
+following naming convention: github.com/michielvandijk/mapspamc_iso3c,
+where ‘iso3c’ is the [ISO 3166-1 alpha-3
+letter](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) country code
+in lowercase. At the moment two examples are provided:
+[mapspamc_mwi](https://github.com/michielvandijk/mapspamc_mwi) for
+Malawi and
+[mapspamc_eth](https://github.com/michielvandijk/mapspamc_eth) for
+Ethiopia. We hope that users will add their work as additional examples.
+
+## Preparing the country examples
+
+- Install all required
+  [software](https://michielvandijk.github.io/mapspamc/articles/installation.md).
+- If you use Github, go to the GitHub country example repository and
+  click on ‘fork’ to copy the repository to your personal Github
+  account. Then use Github, Git and RStudio to create a branch on your
+  machine. If you do not use Github, click on ‘Code’ and download the
+  repository as a zip file and open the project with RStudio.
+- Update the location of the mapspamc model and the mapspamc database in
+  the 01_model_setup.r script so it matches with the locations on your
+  machine.
+- Copy the [mapspamc
+  database](https://michielvandijk.github.io/mapspamc/articles/@ADD) to
+  the set location on your machine.
+
+The articles in the Running `mapspamc` section will guide you through
+the various steps to build the model, using the Malawi example.
