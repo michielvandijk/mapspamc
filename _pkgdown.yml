@@ -4,10 +4,6 @@ home:
 
 url: https://michielvandijk.github.io/mapspamc/
 
-template:
-  bootstrap: 5
-  bootswatch: lux
-
 navbar:
   structure:
     left:
