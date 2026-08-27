@@ -193,7 +193,7 @@ s_alloc_slack(i,j)$j_s(j)..
 *******************************************************************************
 
 * Initial values
-adm_slack.l(k,s,sign) = 0.0 ;
+adm_slack.l(k,s,sign) = 0.0;
 ir_slack.l(i) = 0;
 cl_slack.l(i) = 0;
 alloc.l(i,j) = 0;
@@ -220,9 +220,10 @@ max_score.holdfixed = 1;
 solve max_score using lp maximize sum_score;
 
 * check sum_score
-parameters sum_score_l sum of weighted score;
-sum_score_l = sum_score.l
-display sum_score_l;
+parameters
+  sum_score_l sum of weighted score;
+  sum_score_l = sum_score.l;
+  display sum_score_l;
 
 * Warning when the solution is feasible but not optimal
 if (min_ent.modelstat = 7,
